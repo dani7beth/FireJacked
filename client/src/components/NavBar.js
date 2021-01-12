@@ -10,35 +10,35 @@ export default (props) => {
     if (authenticated) {
       return (
         <>
-          <Menu.Item name="logout" onClick={() => handleLogout(history)} />
+          <li name="logout" onClick={() => handleLogout(history)}> Logout</li>
         </>
       );
     } else {
       return (
         <>
           <Link to="/login">
-            <Menu.Item id="login" name="login">
+            <li id="login" name="login">
               Login
-            </Menu.Item>
+            </li>
           </Link>
           <Link to="/register">
-            <Menu.Item id="Register" name="register">
+            <li id="Register" name="register">
               Register
-            </Menu.Item>
+            </li>
           </Link>
         </>
       );
     }
   };
   return (
-    <Menu>
+    <ul style={{margin: 0, padding: 0,listStyleType: "none"}}>
       <Link to="/">
-        <Menu.Item>Home</Menu.Item>
+        <li>Home</li>
       </Link>
-      <Link to="/things">
-        <Menu.Item>Things</Menu.Item>
+      <Link to="/exercises">
+        <li>Exercises</li>
       </Link>
-      <Menu.Menu position="right">{rightNavItems()}</Menu.Menu>
-    </Menu>
+      <ul style={{margin: 0, padding: 0,listStyleType: "none"}}>{rightNavItems()}</ul>
+    </ul>
   );
 };

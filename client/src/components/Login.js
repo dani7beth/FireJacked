@@ -3,7 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export default (props) => {
   //init email and password for login
-  const [email, setEmail] = useState("test@test.com");
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState("123456");
   //call the handlelogin function
   const { handleLogin } = useContext(AuthContext);
