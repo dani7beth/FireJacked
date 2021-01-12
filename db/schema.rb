@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_235002) do
+ActiveRecord::Schema.define(version: 2021_01_12_145230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,52 @@ ActiveRecord::Schema.define(version: 2021_01_11_235002) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_admins_on_uid_and_provider", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.bigint "admin_id", null: false
+    t.bigint "submission_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_comments_on_admin_id"
+    t.index ["submission_id"], name: "index_comments_on_submission_id"
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.string "how_to_video"
+    t.string "category"
+    t.string "activity"
+    t.bigint "admin_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_exercises_on_admin_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.string "name"
+    t.string "measurement"
+    t.integer "reps"
+    t.string "timeframe"
+    t.integer "sets"
+    t.bigint "exercise_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "index_levels_on_exercise_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.boolean "completed"
+    t.string "name"
+    t.string "video_upload"
+    t.bigint "level_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["level_id"], name: "index_submissions_on_level_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "things", force: :cascade do |t|
@@ -76,4 +122,10 @@ ActiveRecord::Schema.define(version: 2021_01_11_235002) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "comments", "admins"
+  add_foreign_key "comments", "submissions"
+  add_foreign_key "exercises", "admins"
+  add_foreign_key "levels", "exercises"
+  add_foreign_key "submissions", "levels"
+  add_foreign_key "submissions", "users"
 end
