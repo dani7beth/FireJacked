@@ -1,4 +1,4 @@
-class DeviseTokenAuthCreateadmins < ActiveRecord::Migration[6.0]
+class DeviseTokenAuthCreateAdmins < ActiveRecord::Migration[6.0]
   def change
     
     create_table(:admins) do |t|
