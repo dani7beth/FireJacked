@@ -41,7 +41,7 @@ export default (props) => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <div basic textAlign="center">
+        <div>
           <button type="submit">register</button>
         </div>
       </form>

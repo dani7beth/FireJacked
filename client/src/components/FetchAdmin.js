@@ -2,21 +2,21 @@ import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
-const FetchUser = (props) => {
+const FetchAdmin = (props) => {
   const [loaded, setLoaded] = useState(false);
-  const { userAuthenticated, setUser } = useContext(AuthContext);
+  const { adminAuthenticated, setAdmin } = useContext(AuthContext);
 
   useEffect(() => {
-    checkUser();
+    checkAdmin();
   }, []);
 
-  const checkUser = async () => {
-    if (userAuthenticated || !localStorage.getItem("access-token")) {
+  const checkAdmin = async () => {
+    if (adminAuthenticated || !localStorage.getItem("access-token")) {
       setLoaded(true);
       return;
     }
     try {
-      const res = await Axios.get("/api/auth/validate_token");
+      const res = await Axios.get("/api/admin_auth/validate_token");
       setUser(res.data.data);
     } catch (err) {
       console.log(err.response);
@@ -27,4 +27,4 @@ const FetchUser = (props) => {
   };
   return loaded ? props.children : null;
 };
-export default FetchUser;
+export default FetchAdmin;

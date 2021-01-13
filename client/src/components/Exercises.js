@@ -18,13 +18,9 @@ const Exercises = () => {
       });
   };
 
-  {/* 
-      addExercise = (res) => {
-        console.log('hello')
-        const res = exercise
-        exercise(setExercise)
-      }
-  */}
+    // const addExercise = () => {
+    //     console.log('hello')
+    //   }
 
   useEffect(() => {
     getExercises();
@@ -39,10 +35,12 @@ const Exercises = () => {
   return (
     <>
       <h1>Exercises</h1>
-      <button><ExerciseForm/>add exercise</button>
+      <button>add exercise</button>
       {renderExercises()}
     </>
   );
 };
+
+// <ExerciseForm addExercise={addExercise}/>
 
 export default Exercises;

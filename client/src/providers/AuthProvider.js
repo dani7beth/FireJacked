@@ -7,7 +7,11 @@ export const AuthConsumer = AuthContext.Consumer;
 
 export class AuthProvider extends React.Component {
   // init state
-  state = { user: null };
+  state = { 
+    user: null,
+    admin: null
+   };
+
 
   //handlers for different states in user auth
 
@@ -24,9 +28,8 @@ export class AuthProvider extends React.Component {
       });
   };
 
-  //login
-  handleLogin = (user, history) => {
-    
+  //user login
+  handleUserLogin = (user, history) => {
     Axios.post("/api/auth/sign_in", user)
       .then((res) => {
         this.setState({ user: res.data.data });
@@ -34,16 +37,40 @@ export class AuthProvider extends React.Component {
         history.push("/");
       })
       .catch((err) => {
-        alert('Error in login');
+        alert("Error loggin in user");
+      });
+  };
+
+  //admin login
+  handleAdminLogin = (admin, history) => {
+    Axios.post("/api/admin_auth/sign_in", admin)
+      .then((res) => {
+        this.setState({ admin: res.data.data });
+        console.log(this.state.admin);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log("Error logging in admin");
       });
   };
 
   //logout
-  handleLogout = (history) => {
+  handleUserLogout = (history) => {
     Axios.delete("/api/auth/sign_out")
       .then((res) => {
         this.setState({ user: null });
         history.push("/login");
+      })
+      .catch((err) => {
+        alert(`Error in Logout`);
+      });
+  };
+
+  handleAdminLogout = (history) => {
+    Axios.delete("/api/admin_auth/sign_out")
+      .then((res) => {
+        this.setState({ admin: null });
+        history.push("/admin-login");
       })
       .catch((err) => {
         alert(`Error in Logout`);
@@ -55,11 +82,15 @@ export class AuthProvider extends React.Component {
       <AuthContext.Provider
         value={{
           ...this.state,
-          authenticated: this.state.user !== null,
+          userAuthenticated: this.state.user !== null,
+          adminAuthenticated: this.state.admin !== null,
           handleRegister: this.handleRegister,
-          handleLogin: this.handleLogin,
-          handleLogout: this.handleLogout,
+          handleUserLogin: this.handleUserLogin,
+          handleUserLogout: this.handleUserLogout,
+          handleAdminLogin: this.handleAdminLogin,
+          handleAdminLogout: this.handleAdminLogout,
           setUser: (user) => this.setState({ user }),
+          setAdmin: (admin) => this.setState({ admin }),
         }}
       >
         {this.props.children}
