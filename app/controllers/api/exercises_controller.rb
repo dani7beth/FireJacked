@@ -1,11 +1,16 @@
 class Api::ExercisesController < ApplicationController
   # before_action :authenticate_admin!, only: [:create, :update, :destroy, ]
-  before_action :set_admin, only: [:create, :update, :destroy, :show]
+  before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
   before_action :set_exercise, only: [:update, :destroy, :show]
 
   def index
-    render json: Exercise.all
+    render json: @admin.exercises.all
   end
+
+  # def all_exercises
+  #   @admin
+  #   render json: Exercise.all
+  # end
 
   def show
     render json: @exercise
