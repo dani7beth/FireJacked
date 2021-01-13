@@ -10,7 +10,8 @@ export default (props) => {
   const { handleRegister } = useContext(AuthContext);
 
   //handle submit form
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (password === confirmPassword) {
       handleRegister({ email, password }, props.history);
     }else{

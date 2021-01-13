@@ -9,7 +9,8 @@ export default (props) => {
   const { handleLogin } = useContext(AuthContext);
 
   //handle form submition
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     handleLogin({ email, password }, props.history);
   };
 
