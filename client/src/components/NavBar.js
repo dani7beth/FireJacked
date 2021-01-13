@@ -4,21 +4,31 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export default (props) => {
   const history = useHistory();
-  const { authenticated, handleLogout } = useContext(AuthContext);
+  const { userAuthenticated, adminAuthenticated, handleUserLogout, handleAdminLogout } = useContext(AuthContext);
 
   const rightNavItems = () => {
-    if (authenticated) {
+    if (userAuthenticated) {
       return (
         <>
-          <li name="logout" onClick={() => handleLogout(history)}> Logout</li>
+          <li name="logout" onClick={() => handleUserLogout(history)}> Logout</li>
         </>
       );
-    } else {
+    }
+    else if (adminAuthenticated){
+      return (
+        <li name='logout' onClick={()=> handleAdminLogout(history)}>Logout</li>
+      )
+    }else {
       return (
         <>
           <Link to="/login">
             <li id="login" name="login">
               Login
+            </li>
+          </Link>
+          <Link to="/admin-login">
+            <li id="adminLogin" name="AdminLogin">
+              Admin Login
             </li>
           </Link>
           <Link to="/register">
