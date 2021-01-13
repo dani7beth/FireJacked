@@ -35,7 +35,7 @@ const Exercises = () => {
   return (
     <>
       <h1>Exercises</h1>
-      <button><ExerciseForm addExercise={addExercise}/>add exercise</button>
+      <button><ExerciseForm />add exercise</button>
       {renderExercises()}
     </>
   );
