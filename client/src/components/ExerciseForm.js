@@ -10,7 +10,7 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
 
 
 
-  const [exercise,setExercise] =useState(
+  const [exercise,setExercise] = useState(
     exercise ? {
       name: exercise.name,
       image: exercise.image,
@@ -26,19 +26,6 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
       activity:'',
     }
   )
-
-  {/*  
-      I     
-      const onChange = (e) => {
-        e.preventDefault();
-        e.target.value(exercise)??
-      }
-
-      maybe you pass 'exercise' to const onChange and then do 
-    
-  */}
-
-  
 
   // const addExercise = () => {
   //   Axios.post('api/exercises', exercise )
