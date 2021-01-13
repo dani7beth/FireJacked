@@ -20,7 +20,7 @@ export class AuthProvider extends React.Component {
         history.push("/");
       })
       .catch((err) => {
-        alert(`Error in Registration: ${err.response.data}`);
+        alert(`Error in Registration`);
       });
   };
 
@@ -29,14 +29,12 @@ export class AuthProvider extends React.Component {
     
     Axios.post("/api/auth/sign_in", user)
       .then((res) => {
-        debugger;
         this.setState({ user: res.data.data });
         console.log(this.state.user);
         history.push("/");
       })
       .catch((err) => {
-        debugger;
-        alert(err.response.data);
+        alert('Error in login');
       });
   };
 
@@ -48,7 +46,7 @@ export class AuthProvider extends React.Component {
         history.push("/login");
       })
       .catch((err) => {
-        alert(`Error in Logout: ${err.response.data}`);
+        alert(`Error in Logout`);
       });
   };
 

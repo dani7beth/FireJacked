@@ -1,33 +1,36 @@
 import Axios from "axios";
+import ExerciseForm from "./ExerciseForm";
+import { useState, } from 'react';
 
 const Exercise = ({ exerciseProp }) => {
-  // const [ exercise,setExercise] = useState()
-  // const [ showEditForm, setShowEditForm] = useState()
+  // const [ exercise, setExercise] = useState()
+  const [ showEditForm, setShowEditForm] = useState(false)
 
   // const editExercise = (res) => {
   //   const newExercise = res;
-  //   if(newExercise == exerciseProp.id)return setExercise(newExercise)
+  //   if(newExercise == exerciseProp.id) return setExercise(newExercise)
   //   else return exerciseProp
   // }
 
-  const showEditForm = () => {
-
+  const showEditFormToggle = () => {
+    setShowEditForm(!showEditForm)
   }
 
   const deleteExercise = () => {
     Axios.delete(`/api/exercises/${exerciseProp.id}`)
-    .then((res)=>{
-      console.log(res.data);
-    })
-    .catch((err)=>{
-      console.log("Error in delete exercise");
-    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error in delete exercise");
+      })
   }
 
   return (
     <>
       <h1>{exerciseProp.name}</h1>
-      <button onClick={showEditForm}>Edit Toggle for </button>
+      { showEditForm && <ExerciseForm />}
+      <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
       <button onClick={deleteExercise}>Delete</button>
     </>
   )
