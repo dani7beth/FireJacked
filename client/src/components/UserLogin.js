@@ -1,23 +1,24 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
-export default (props) => {
+const UserLogin = (props) => {
   //init email and password for login
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("123456");
   //call the handlelogin function
-  const { handleLogin } = useContext(AuthContext);
+  const { handleUserLogin } = useContext(AuthContext);
 
   //handle form submition
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password }, props.history);
+    handleUserLogin({ email, password }, props.history);
   };
 
   return (
     <>
       <div>
-        <h1 as="h1" textAlign="center">
+        <h1>
           Login
         </h1>
         <form onSubmit={handleSubmit}>
@@ -33,11 +34,13 @@ export default (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div textAlign="center">
+          <div>
             <button type="submit">login</button>
           </div>
         </form>
+        <Link to='/admin-login'>Admin Login</Link>
       </div>
     </>
   );
 };
+export default UserLogin;
