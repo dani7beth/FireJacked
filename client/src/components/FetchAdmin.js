@@ -17,7 +17,7 @@ const FetchAdmin = (props) => {
     }
     try {
       const res = await Axios.get("/api/admin_auth/validate_token");
-      setUser(res.data.data);
+      setAdmin(res.data.data);
     } catch (err) {
       console.log(err.response);
       console.log("invalid token");

@@ -29,7 +29,7 @@ const Exercise = ({ exerciseProp }) => {
   return (
     <>
       <h1>{exerciseProp.name}</h1>
-      { showEditForm && <ExerciseForm />}
+      { showEditForm && <ExerciseForm exerciseProp={exerciseProp}/>}
       <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
       <button onClick={deleteExercise}>Delete</button>
     </>

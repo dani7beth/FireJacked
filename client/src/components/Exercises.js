@@ -18,9 +18,17 @@ const Exercises = () => {
       });
   };
 
-    // const addExercise = () => {
-    //     console.log('hello')
-    //   }
+  const addExercise = (exercise) => {
+    debugger;
+    axios.post(`/api/admins/${1}/exercises`, exercise )
+    .then((res)=>{
+      console.log(exercise)
+      setExercises([exercise, ...exercises])
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  };
 
   useEffect(() => {
     getExercises();
@@ -35,7 +43,7 @@ const Exercises = () => {
   return (
     <>
       <h1>Exercises</h1>
-      <button><ExerciseForm addExercise={addExercise}/>add exercise</button>
+      <ExerciseForm addExercise={addExercise}/>
       {renderExercises()}
     </>
   );

@@ -8,8 +8,8 @@ class Api::ExercisesController < ApplicationController
   end
 
   def create 
-   exercise = @admin.new(exercise_params)
-    if @exercise.save
+   exercise = @admin.exercises.new(exercise_params)
+    if exercise.save
       render json: exercise
     else
       render json: {errors: exercise.errors}, status: 422
