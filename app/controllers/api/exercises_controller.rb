@@ -1,15 +1,19 @@
 class Api::ExercisesController < ApplicationController
-  before_action :authenticate_admin!, only: [:create, :update, :destroy]
-  before_action :set_admin, only: [:create, :update, :destroy]
-  before_action :set_exercise, only: [:update, :destroy]
+  # before_action :authenticate_admin!, only: [:create, :update, :destroy, ]
+  before_action :set_admin, only: [:create, :update, :destroy, :show]
+  before_action :set_exercise, only: [:update, :destroy, :show]
 
   def index
     render json: Exercise.all
   end
 
+  def show
+    render json: @exercise
+  end
+
   def create 
-   exercise = @admin.new(exercise_params)
-    if @exercise.save
+   exercise = @admin.exercises.new(exercise_params)
+    if exercise.save
       render json: exercise
     else
       render json: {errors: exercise.errors}, status: 422
@@ -31,9 +35,10 @@ class Api::ExercisesController < ApplicationController
     params.require(:exercise).permit(:name, :image, :how_to_video, :category, :activity)
   end
   def set_exercise
-    @exercise = Exercise.find(params[:id])
+    @exercise = @admin.exercises.find(params[:id])
   end
   def set_admin
     @admin = Admin.find(params[:admin_id])
+    # @admin = current_admin
   end
 end
