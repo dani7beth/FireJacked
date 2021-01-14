@@ -38,7 +38,7 @@ const UserLogin = (props) => {
             <button type="submit">login</button>
           </div>
         </form>
-        <Link to='/admin-login'>Admin Login</Link>
+        <Link to='/admin_login'>Admin Login</Link>
       </div>
     </>
   );
