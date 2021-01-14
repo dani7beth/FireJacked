@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'api/auth'
-
+  as :user do
+    resources :submissions
+  end
 
   mount_devise_token_auth_for 'Admin', at: 'api/admin_auth'
   as :admin do
@@ -16,9 +18,9 @@ Rails.application.routes.draw do
     resources :levels do
       resources :submissions
     end
-    resources :users do
-      resources :submissions
-    end
+    # resources :users do
+      
+    # end
     # resources :admins do
      
     # end
