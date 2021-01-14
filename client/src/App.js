@@ -9,6 +9,7 @@ import Register from "./components/Register";
 import FetchUser from "./components/FetchUser";
 import FetchAdmin from './components/FetchAdmin'
 import Exercises from "./components/Exercises";
+import AdminDash from "./components/AdminDash";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={UserLogin} />
           <Route exact path="/admin-login" component={AdminLogin} />
+          <Route exact path='/admin_dash' component={AdminDash} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/exercises" component={Exercises} />
           <Route component={NoMatch} />

@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
 const Home = () => {
   return (
     <>
       <h1>
-        home
+        Home
       </h1>
     </>
   );
