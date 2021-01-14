@@ -7,7 +7,6 @@ export default (props) => {
   const { userAuthenticated, adminAuthenticated, handleUserLogout, handleAdminLogout } = useContext(AuthContext);
 
   const rightNavItems = () => {
-    debugger;
     if (userAuthenticated) {
       return (
         <>

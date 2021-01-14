@@ -10,9 +10,9 @@ const FetchUserAdmin = (props) => {
     if (userAuthenticated || adminAuthenticated || !localStorage.getItem("access-token")) {
       setLoaded(true);
       return;}
-    if (localStorage.getItem('token-type') == 'admin'){
+    if (localStorage.getItem('member-type') == 'admin'){
       checkAdmin();}
-    if (localStorage.getItem('token-type') == 'user'){
+    if (localStorage.getItem('member-type') == 'user'){
       checkUser()
     }
   }, []);

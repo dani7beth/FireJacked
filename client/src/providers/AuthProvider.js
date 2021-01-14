@@ -32,11 +32,11 @@ export class AuthProvider extends React.Component {
   handleUserLogin = (user, history) => {
     Axios.post("/api/auth/sign_in", user)
       .then((res) => {
-        this.handleAdminLogout()
+        // this.handleAdminLogout()
         this.setState({ user: res.data.data });
         console.log(this.state.user);
-        localStorage.setItem('token-type','user')
-        history.push("/");
+        localStorage.setItem('member-type','user')
+        history.push("/user_dash");
       })
       .catch((err) => {
         alert("Error loggin in user");
@@ -47,10 +47,10 @@ export class AuthProvider extends React.Component {
   handleAdminLogin = (admin, history) => {
     Axios.post("/api/admin_auth/sign_in", admin)
       .then((res) => {
-        this.handleUserLogout()
+        // this.handleUserLogout()
         this.setState({ admin: res.data.data });
         console.log(this.state.admin);
-        localStorage.setItem('token-type','admin')
+        localStorage.setItem('member-type','admin')
         history.push("/admin_dash");
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ export class AuthProvider extends React.Component {
     Axios.delete("/api/auth/sign_out")
       .then((res) => {
         this.setState({ user: null });
-        localStorage.removeItem('token-type')
+        localStorage.removeItem('member-type')
         history.push("/login");
       })
       .catch((err) => {
@@ -75,8 +75,8 @@ export class AuthProvider extends React.Component {
     Axios.delete("/api/admin_auth/sign_out")
       .then((res) => {
         this.setState({ admin: null });
-        localStorage.removeItem('token-type')
-        history.push("/admin-login");
+        localStorage.removeItem('member-type')
+        history.push("/admin_login");
       })
       .catch((err) => {
         alert(`Error in Logout`);

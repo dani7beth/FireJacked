@@ -6,12 +6,15 @@ import ExerciseForm from '../components/ExerciseForm';
 
 const AdminApp = () => {
   return (
+    <>
     <Switch>
       <Route exact path="/admin_dash" component={AdminDash} />
       <Route exact path='/admin_login' component={AdminLogin} />
       <Route exact path='/add_exercise' component={ExerciseForm} />
       <Route path={AdminNoMatch} />
     </Switch>
+    <h1>admin</h1>
+    </>
   );
 };
 export default AdminApp;
