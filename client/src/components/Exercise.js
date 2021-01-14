@@ -1,5 +1,7 @@
 import ExerciseForm from "./ExerciseForm";
 import { useState, } from 'react';
+import Levels from "./Levels";
+import { Link } from 'reactor-router-dom'
 
 const Exercise = ({ exerciseProp, deleteExercise}) => {
   const [ exercise, setExercise] = useState()
@@ -16,12 +18,13 @@ const Exercise = ({ exerciseProp, deleteExercise}) => {
   }
  
   return (
-    <>
-      <h1>{exerciseProp.name}</h1>
-      { showEditForm && <ExerciseForm showEditFormToggle={showEditFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
-      <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
-      <button onClick={()=> deleteExercise(exerciseProp.id)}>Delete</button>
-    </>
+    <div link_to='/levels'>
+        <h1>{exerciseProp.name}</h1>
+        { showEditForm && <ExerciseForm showEditFormToggle={showEditFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
+        <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
+        <button onClick={()=> deleteExercise(exerciseProp.id)}>Delete</button>
+        {/* <Levels exercise={exercise}/> */}
+    </div>
   )
 }
 export default Exercise;

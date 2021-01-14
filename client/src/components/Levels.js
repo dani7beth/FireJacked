@@ -15,6 +15,17 @@ const Levels = (exercise) => {
       });
   };
 
+  // const getLevels = (match) => {
+  //     axios
+  //     .get(`/api/exercises/${match.params.id}/levels`)
+  //     .then((response) => {
+  //       setLevels(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
   const addLevel = (exercise, level) => {
     axios.post(`/api/exercises/${exercise.id}/levels`, level )
     .then((res)=>{
