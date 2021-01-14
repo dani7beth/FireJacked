@@ -3,11 +3,9 @@ class Api::LevelsController < ApplicationController
     before_action :set_exercise, only: [:create, :update, :destroy, :show, :index]
     before_action :set_level, only: [:update, :destroy, :show]
 
-  
     def index
       render json: @exercise.levels.all
     end
-  
   
     def show
       render json: @level
@@ -44,6 +42,5 @@ class Api::LevelsController < ApplicationController
     def set_exercise
       @exercise = Exercise.find(params[:exercise_id])
     end
-
 
 end
