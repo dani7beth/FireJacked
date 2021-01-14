@@ -50,12 +50,8 @@ export class AuthProvider extends React.Component {
         this.handleUserLogout()
         this.setState({ admin: res.data.data });
         console.log(this.state.admin);
-<<<<<<< HEAD
-        history.push("/admin_dash");
-=======
         localStorage.setItem('token-type','admin')
-        history.push("/");
->>>>>>> a9aeccdd3908aac9a1cc8b00a212f3ec524737e6
+        history.push("/admin_dash");
       })
       .catch((err) => {
         console.log("Error logging in admin");
