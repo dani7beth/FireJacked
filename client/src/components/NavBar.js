@@ -26,11 +26,7 @@ export default (props) => {
               Login
             </li>
           </Link>
-          <Link to="/admin-login">
-            <li id="adminLogin" name="AdminLogin">
-              Admin Login
-            </li>
-          </Link>
+          
           <Link to="/register">
             <li id="Register" name="register">
               Register
