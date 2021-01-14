@@ -6,9 +6,6 @@ import NoMatch from '../components/NoMatch';
 const LoginSplash = () => {
   return (
     <>
-      <h1>
-        Sign in or Register
-      </h1>
       <Switch>
         <Route exact path='/' component={UserLogin} />
         <Route exact path='/login' component={UserLogin} />
