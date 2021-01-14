@@ -7,12 +7,14 @@ import UserLogin from "./components/UserLogin";
 import AdminLogin from "./components/AdminLogin";
 import Register from "./components/Register";
 import FetchUser from "./components/FetchUser";
+import FetchAdmin from './components/FetchAdmin'
 import Exercises from "./components/Exercises";
 
 function App() {
   return (
     <>
       <NavBar />
+      <FetchAdmin>
       <FetchUser>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -23,6 +25,7 @@ function App() {
           <Route component={NoMatch} />
         </Switch>
       </FetchUser>
+      </FetchAdmin>
     </>
   );
 }

@@ -1,5 +1,5 @@
 class Api::ExercisesController < ApplicationController
-  before_action :authenticate_admin!, only: [:create, :update, :destroy, ]
+  before_action :authenticate_admin!
   # before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
   before_action :set_exercise, only: [:update, :destroy, :show]
 

@@ -43,6 +43,7 @@ export class AuthProvider extends React.Component {
 
   //admin login
   handleAdminLogin = (admin, history) => {
+    debugger;
     Axios.post("/api/admin_auth/sign_in", admin)
       .then((res) => {
         this.setState({ admin: res.data.data });
