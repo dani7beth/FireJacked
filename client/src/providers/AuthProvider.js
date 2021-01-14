@@ -32,8 +32,10 @@ export class AuthProvider extends React.Component {
   handleUserLogin = (user, history) => {
     Axios.post("/api/auth/sign_in", user)
       .then((res) => {
+        this.handleAdminLogout()
         this.setState({ user: res.data.data });
         console.log(this.state.user);
+        localStorage.setItem('token-type','user')
         history.push("/");
       })
       .catch((err) => {
@@ -45,9 +47,15 @@ export class AuthProvider extends React.Component {
   handleAdminLogin = (admin, history) => {
     Axios.post("/api/admin_auth/sign_in", admin)
       .then((res) => {
+        this.handleUserLogout()
         this.setState({ admin: res.data.data });
         console.log(this.state.admin);
+<<<<<<< HEAD
         history.push("/admin_dash");
+=======
+        localStorage.setItem('token-type','admin')
+        history.push("/");
+>>>>>>> a9aeccdd3908aac9a1cc8b00a212f3ec524737e6
       })
       .catch((err) => {
         console.log("Error logging in admin");
@@ -59,6 +67,7 @@ export class AuthProvider extends React.Component {
     Axios.delete("/api/auth/sign_out")
       .then((res) => {
         this.setState({ user: null });
+        localStorage.removeItem('token-type')
         history.push("/login");
       })
       .catch((err) => {
@@ -70,6 +79,7 @@ export class AuthProvider extends React.Component {
     Axios.delete("/api/admin_auth/sign_out")
       .then((res) => {
         this.setState({ admin: null });
+        localStorage.removeItem('token-type')
         history.push("/admin-login");
       })
       .catch((err) => {
