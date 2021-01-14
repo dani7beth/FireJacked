@@ -33,11 +33,23 @@ const Exercises = () => {
     getExercises();
   }, []);
 
+  const deleteExercise = (id) => {
+    axios.delete(`/api/exercises/${id}`)
+      .then((res) => {
+        setExercises(exercises.filter((exercise)=> exercise.id !== id))
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error in delete exercise");
+      })
+  }
+
   const renderExercises = () => {
     return exercises.map((exercise) => (
-      <Exercise key={exercise.id} exerciseProp={exercise} exercisesProp={exercises}/>
+      <Exercise key={exercise.id} exerciseProp={exercise} deleteExercise={deleteExercise}/>
     ))
   }
+  
 
   return (
     <>
