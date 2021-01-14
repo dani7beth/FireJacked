@@ -1,41 +1,48 @@
 class Api::SubmissionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
-  before_action :set_exercise, only: [:update, :destroy, :show]
+  # before_action :set_test_user
+  before_action :set_submission, only: [:update, :destroy, :show]
+  
 
   def index
     render json: current_user.submissions.all
   end
 
   def show
-    render json: @exercise
+    render json: @submission
   end
 
   def create 
-   exercise = @admin.exercises.new(exercise_params)
-    if exercise.save
-      render json: exercise
+   submission = current_user.submissions.new(submission_params)
+    if submission.save
+      render json: submission
     else
-      render json: {errors: exercise.errors}, status: 422
+      render json: {errors: submission.errors}, status: 422
     end
   end
 
   def update
-    @exercise.update(exercise_params)
-    render json: @exercise
+    @submission.update(submission_params)
+    render json: @submission
   end
 
   def destroy
-    @exercise.destroy
-    render json: @exercise
+    @submission.destroy
+    render json: @submission
   end
 
   private
   def submission_params
-    params.require(:submission).permit(:completed, :name, :video_upload)
+    params.require(:submission).permit(:completed, :name, :video_upload, :level_id)
   end
+
   def set_submission
-    @exercise = @admin.exercises.find(params[:id])
+    @submission = current_user.submissions.find(params[:id])
   end
+
+  # def set_test_user 
+  #   current_user = User.first
+  # end
+
 
 end
