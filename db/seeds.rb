@@ -22,7 +22,7 @@ end
     password: '123456')
     puts "created user email: #{user.email}"
     3.times do 
-      submit = user.submissions.create(completed:false, name: "squats", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+      submit = user.submissions.create(completed:false, name: "squats", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: rand(1..15))
       # 2.times do 
       #   submit.comments.create(admin_id:rand(0..4), body:"Nice!")
       # end
