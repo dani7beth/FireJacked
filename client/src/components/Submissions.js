@@ -8,11 +8,11 @@ const Submissions = () => {
 
   const [submissions, setSubmissions] = useState([]);
 
-  const {id} = useParams();
+  // const {id} = useParams();
 
-  const getSubmissions = () => {
+  const getSubmissions = (match) => {
     Axios
-      .get(`/api/levels/${id}/submissions`)
+      .get(`/api/levels/${match.params.id}/submissions`)
       .then((response) => {
         console.log(response.data)
         setSubmissions(response.data)
@@ -22,9 +22,9 @@ const Submissions = () => {
       }
   )}
 
-  const addSubmission = (submission) => {
+  const addSubmission = (match, submission) => {
     Axios
-      .post(`/api/levels/${id}/submissions`, submission)
+      .post(`/api/levels/${match.params.id}/submissions`, submission)
       .then((res) => {
         console.log(submission)
         setSubmissions(submission, ...submissions)

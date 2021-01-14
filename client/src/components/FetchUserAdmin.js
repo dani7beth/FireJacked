@@ -7,12 +7,13 @@ const FetchUserAdmin = (props) => {
   const { userAuthenticated, setUser, adminAuthenticated, setAdmin } = useContext(AuthContext);
 
   useEffect(() => {
+    
     if (userAuthenticated || adminAuthenticated || !localStorage.getItem("access-token")) {
       setLoaded(true);
       return;}
-    if (localStorage.getItem('member-type') == 'admin'){
+    if (localStorage.getItem('member-type') === 'admin'){
       checkAdmin();}
-    if (localStorage.getItem('member-type') == 'user'){
+    if (localStorage.getItem('member-type') === 'user'){
       checkUser()
     }
   }, []);

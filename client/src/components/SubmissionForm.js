@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from 'react-router-dom';
 
-const SubmissionForm = ({submissionProp, addSubmission}) =>{
+const SubmissionForm = ({submissionProp, addSubmission}) => {
   const [name, setName] = useState('');
   const [completed, setCompleted] = useState(false);
   const [videoUpload, setVideoUpload] = useState('');
@@ -21,7 +21,7 @@ const SubmissionForm = ({submissionProp, addSubmission}) =>{
     }
   )
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   // const {id} = useParams();
 
@@ -42,8 +42,8 @@ const SubmissionForm = ({submissionProp, addSubmission}) =>{
 
       // we might need to pass level down as a prop in order to acces that id.
 
-  const editCalledSubmission = (id) => {
-    Axios.put(`/api/levels/${id}/submission/${submission.id}`, submission)
+  const editCalledSubmission = (match) => {
+    Axios.put(`/api/levels/${match.params.id}/submission/${submission.id}`, submission)
       .then((res) => {
         console.log(res.data)
         editSubmission(res.data)
@@ -74,7 +74,7 @@ const SubmissionForm = ({submissionProp, addSubmission}) =>{
       <br/>
       <button type='submit'>submit</button>
     </form>
-    <h1>user id is {user.id}</h1>
+    {/* <h1>user id is {user.id}</h1> */}
     </>
   )
 }
