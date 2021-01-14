@@ -39,7 +39,8 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
 
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     if (exerciseProp) {
       editExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
     }
