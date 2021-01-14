@@ -8,7 +8,7 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
   const [category, setCategory] = useState('');
   const [activity, setActivity] = useState('');
 
-  const [exercise] = useState(
+  const [exercise, setExercise] = useState(
     exerciseProp ? {
       name: exerciseProp.name,
       image: exerciseProp.image,
@@ -50,15 +50,15 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
   return (
     <form onSubmit={handleSubmit}>
       <p>Name</p>
-      <input name="name" value={name} onChange={(e) => setName(e.target.value)} />
+      <input name="name" value={exercise.name} onChange={(e) => setExercise(e.target.value)} />
       <p>Image</p>
-      <input name="image" value={image} onChange={(e) => setImage(e.target.value)} />
+      <input name="image" value={exercise.image} onChange={(e) => setExercise(e.target.value)} />
       <p>How To Video</p>
-      <input name="howToVideo" value={howToVideo} onChange={(e) => setHowToVideo(e.target.value)} />
+      <input name="howToVideo" value={exercise.howToVideo} onChange={(e) => setExercise(e.target.value)} />
       <p>Category</p>
-      <input name="category" value={category} onChange={(e) => setCategory(e.target.value)} />
+      <input name="category" value={exercise.category} onChange={(e) => setExercise(e.target.value)} />
       <p>Activity</p>
-      <input name="activity" value={activity} onChange={(e) => setActivity(e.target.value)} />
+      <input name="activity" value={exercise.activity} onChange={(e) => setExercise(e.target.value)} />
       <br />
       <button type='submit'>submit</button>
     </form>
