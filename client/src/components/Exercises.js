@@ -17,7 +17,9 @@ const Exercises = () => {
       });
   };
 
+  
   const addExercise = (exercise) => {
+    debugger;
     axios.post(`/api/exercises`, exercise )
     .then((res)=>{
       console.log(exercise)

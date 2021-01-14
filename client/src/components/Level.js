@@ -21,7 +21,6 @@ const Level = ({ levelProp, deleteLevel}) => {
       { showEditLevelForm && <LevelForm showEditLevelFormToggle={showEditLevelFormToggle} editLevel={editLevel} levelProp={levelProp}/>}
       <button onClick={showEditLevelFormToggle}>{showEditLevelForm ? "Close Form" : "Show Form"}</button>
       <button onClick={()=> deleteLevel(levelProp.id)}>Delete</button>
-      <Submission />
     </>
   )
 }

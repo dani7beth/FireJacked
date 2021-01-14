@@ -1,7 +1,6 @@
 import ExerciseForm from "./ExerciseForm";
 import { useState, } from 'react';
 import Levels from "./Levels";
-import { Link } from 'reactor-router-dom'
 
 const Exercise = ({ exerciseProp, deleteExercise}) => {
   const [ exercise, setExercise] = useState()
