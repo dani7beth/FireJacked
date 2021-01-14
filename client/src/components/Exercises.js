@@ -10,7 +10,6 @@ const Exercises = () => {
     axios
       .get("/api/exercises")
       .then((response) => {
-        console.log(response.data);
         setExercises(response.data);
       })
       .catch((error) => {
@@ -32,7 +31,7 @@ const Exercises = () => {
   useEffect(() => {
     getExercises();
   }, []);
-
+    
   const deleteExercise = (id) => {
     axios.delete(`/api/exercises/${id}`)
       .then((res) => {
@@ -50,7 +49,6 @@ const Exercises = () => {
     ))
   }
   
-
   return (
     <>
       <h1>Exercises</h1>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Axios from 'axios';
 
-const ExerciseForm = ({exerciseProp,addExercise}) =>{
+const ExerciseForm = ({exerciseProp, addExercise, editExercise}) =>{
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [howToVideo, setHowToVideo] = useState('');
@@ -25,10 +25,9 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
     }
   )
 
-
-
-  const editExercise = () => {
-    Axios.put(`/api/exercises/${exercise.id}`, exercise)
+  const editCallExercise = () => {
+    debugger;
+    Axios.put(`/api/exercises/${exerciseProp.id}`, exercise)
       .then((res) => {
         console.log(res.data)
         editExercise(res.data)
@@ -36,10 +35,12 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
       .catch((err) => {
         console.log(err)
       })
-
   }
 
-  const handleSubmit = () => {
+  
+  const handleSubmit = (e) => {
+    e.prevent.default();
+    debugger;
     if (exerciseProp) {
       editExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
     }
@@ -52,13 +53,13 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
       <p>Name</p>
       <input name="name" value={exercise.name} onChange={(e) => setExercise(e.target.value)} />
       <p>Image</p>
-      <input name="image" value={exercise.image} onChange={(e) => setExercise(e.target.value)} />
+      <input name="image" value={exercise.image} onChange={(e) => setImage(e.target.value)} />
       <p>How To Video</p>
-      <input name="howToVideo" value={exercise.howToVideo} onChange={(e) => setExercise(e.target.value)} />
+      <input name="howToVideo" value={exercise.howToVideo} onChange={(e) => setHowToVideo(e.target.value)} />
       <p>Category</p>
-      <input name="category" value={exercise.category} onChange={(e) => setExercise(e.target.value)} />
+      <input name="category" value={exercise.category} onChange={(e) => setCategory(e.target.value)} />
       <p>Activity</p>
-      <input name="activity" value={exercise.activity} onChange={(e) => setExercise(e.target.value)} />
+      <input name="activity" value={exercise.activity} onChange={(e) => setActivity(e.target.value)} />
       <br />
       <button type='submit'>submit</button>
     </form>
