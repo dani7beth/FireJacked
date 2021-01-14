@@ -6,27 +6,43 @@ import AdminApp from "./user/UserApp";
 import LoginSplash from "./Demo/LoginSplash";
 import { useContext } from "react";
 import { AuthContext } from "./providers/AuthProvider";
+import UserLogin from "./user/UserLogin";
+import AdminLogin from "./admin/AdminLogin";
+import NoMatch from './components/NoMatch';
+import AdminDash from "./admin/AdminDash";
+import ExerciseForm from "./components/ExerciseForm"
+import UserDash from "./user/UserDash";
+import { Route, Switch } from "react-router-dom";
+import Exercises from "./components/Exercises"
 
 function App() {
-  const { user, admin } = useContext(AuthContext);
+  // const { user, admin } = useContext(AuthContext);
 
-  const getApp = () => {
-    if (user) {
-      return <UserApp />;
-    }
-    if (admin) {
-      return <AdminApp />;
-    } else {
-      return <LoginSplash />;
-    }
-  };
+  // const getApp = () => {
+  //   if (user) {
+  //     return <UserApp />;
+  //   }
+  //   if (admin) {
+  //     return <AdminApp />;
+  //   } else {
+  //     return <LoginSplash />;
+  //   }
+  // };
 
   return (
     <>
+      <NavBar />
       <FetchUserAdmin>
-        <NavBar />
-
-        {getApp()}
+        <Switch>
+          <Route exact path='/' component={UserLogin} />
+          <Route exact path='/login' component={UserLogin} />
+          <Route exact path='/admin_login' component={AdminLogin} />
+          <Route exact path="/admin_dash" component={AdminDash} />
+          <Route exact path="/exercises" component={Exercises} />
+          <Route exact path="/add_exercise" component={ExerciseForm} />
+          <Route exact path="/user_dash" component={UserDash} />
+          <Route component={NoMatch} />
+        </Switch>
       </FetchUserAdmin>
     </>
   );
