@@ -19,8 +19,7 @@ const Exercises = () => {
   };
 
   const addExercise = (exercise) => {
-    debugger;
-    axios.post(`/api/admins/${1}/exercises`, exercise )
+    axios.post(`/api/exercises`, exercise )
     .then((res)=>{
       console.log(exercise)
       setExercises([exercise, ...exercises])
