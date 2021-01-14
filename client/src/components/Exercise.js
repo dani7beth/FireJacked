@@ -2,7 +2,7 @@ import Axios from "axios";
 import ExerciseForm from "./ExerciseForm";
 import { useState, } from 'react';
 
-const Exercise = ({ exerciseProp }) => {
+const Exercise = ({ exerciseProp , exercisesProp}) => {
   // const [ exercise, setExercise] = useState()
   const [ showEditForm, setShowEditForm] = useState(false)
 
@@ -19,6 +19,7 @@ const Exercise = ({ exerciseProp }) => {
   const deleteExercise = () => {
     Axios.delete(`/api/exercises/${exerciseProp.id}`)
       .then((res) => {
+        exercisesProp.filter((exercise) => exercise.id !== exerciseProp.id)
         console.log(res.data);
       })
       .catch((err) => {
@@ -26,12 +27,13 @@ const Exercise = ({ exerciseProp }) => {
       })
   }
 
+ 
   return (
     <>
       <h1>{exerciseProp.name}</h1>
       { showEditForm && <ExerciseForm exerciseProp={exerciseProp}/>}
       <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
-      <button onClick={deleteExercise}>Delete</button>
+      <button onClick={()=> deleteExercise()}>Delete</button>
     </>
   )
 }

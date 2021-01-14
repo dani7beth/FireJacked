@@ -8,7 +8,7 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
   const [category, setCategory] = useState('');
   const [activity, setActivity] = useState('');
 
-  const [exercise,setExercise] = useState(
+  const [exercise] = useState(
     exerciseProp ? {
       name: exerciseProp.name,
       image: exerciseProp.image,

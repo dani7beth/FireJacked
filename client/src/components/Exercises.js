@@ -35,7 +35,7 @@ const Exercises = () => {
 
   const renderExercises = () => {
     return exercises.map((exercise) => (
-      <Exercise key={exercise.id} exerciseProp={exercise} />
+      <Exercise key={exercise.id} exerciseProp={exercise} exercisesProp={exercises}/>
     ))
   }
 
