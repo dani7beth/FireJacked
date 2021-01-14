@@ -1,15 +1,11 @@
 class Api::SubmissionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
   before_action :set_exercise, only: [:update, :destroy, :show]
 
   def index
-    render json: @admin.exercises.all
+    render json: current_user.submissions.all
   end
-
-  # def all_exercises
-  #   @admin
-  #   render json: Exercise.all
-  # end
 
   def show
     render json: @exercise
@@ -35,14 +31,11 @@ class Api::SubmissionsController < ApplicationController
   end
 
   private
-  def exercise_params
-    params.require(:exercise).permit(:name, :image, :how_to_video, :category, :activity)
+  def submission_params
+    params.require(:submission).permit(:completed, :name, :video_upload)
   end
-  def set_exercise
+  def set_submission
     @exercise = @admin.exercises.find(params[:id])
   end
-  def set_admin
-    # @admin = Admin.find(params[:admin_id])
-    @admin = current_admin
-  end
+
 end
