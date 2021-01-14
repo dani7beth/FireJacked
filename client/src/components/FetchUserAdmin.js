@@ -2,7 +2,7 @@ import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
-const FetchUser = (props) => {
+const FetchUserAdmin = (props) => {
   const [loaded, setLoaded] = useState(false);
   const { userAuthenticated, setUser } = useContext(AuthContext);
 
@@ -27,4 +27,4 @@ const FetchUser = (props) => {
   };
   return loaded ? props.children : null;
 };
-export default FetchUser;
+export default FetchUserAdmin;
