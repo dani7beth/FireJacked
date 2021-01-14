@@ -18,7 +18,7 @@ const Exercise = ({ exerciseProp, deleteExercise}) => {
   return (
     <>
       <h1>{exerciseProp.name}</h1>
-      { showEditForm && <ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp}/>}
+      { showEditForm && <ExerciseForm showEditFormToggle={showEditFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
       <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
       <button onClick={()=> deleteExercise(exerciseProp.id)}>Delete</button>
     </>

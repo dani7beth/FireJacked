@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Axios from 'axios';
 
-const ExerciseForm = ({exerciseProp, addExercise, editExercise}) =>{
+const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormToggle}) =>{
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [howToVideo, setHowToVideo] = useState('');
@@ -31,18 +31,18 @@ const ExerciseForm = ({exerciseProp, addExercise, editExercise}) =>{
       .then((res) => {
         console.log(res.data)
         editExercise(res.data)
+        showEditFormToggle();
       })
       .catch((err) => {
         console.log(err)
       })
   }
-
   
   const handleSubmit = (e) => {
     e.prevent.default();
     debugger;
     if (exerciseProp) {
-      editExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
+      editCallExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
     }
     else {
       addExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
