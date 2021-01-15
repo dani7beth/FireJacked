@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Axios from 'axios';
-import { AuthContext } from "AuthProvider"
+import { AuthContext, } from "../providers/AuthProvider"
 
 const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormToggle}) =>{
 //  const [name, setName] = useState('');
