@@ -10,7 +10,6 @@ const Exercises = () => {
     axios
       .get("/api/exercises")
       .then((response) => {
-        console.log(response.data);
         setExercises(response.data);
       })
       .catch((error) => {
@@ -18,21 +17,12 @@ const Exercises = () => {
       });
   };
 
-  const addExercise = (exercise) => {
-    axios.post(`/api/exercises`, exercise )
-    .then((res)=>{
-      console.log(exercise)
-      setExercises([exercise, ...exercises])
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  };
+  
 
   useEffect(() => {
     getExercises();
   }, []);
-
+    
   const deleteExercise = (id) => {
     axios.delete(`/api/exercises/${id}`)
       .then((res) => {
@@ -49,8 +39,12 @@ const Exercises = () => {
       <Exercise key={exercise.id} exerciseProp={exercise} deleteExercise={deleteExercise}/>
     ))
   }
-  
 
+
+  const addExercise = (exercise) => {
+    setExercises([exercise, ...exercises])
+};
+  
   return (
     <>
       <h1>Exercises</h1>
