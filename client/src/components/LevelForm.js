@@ -21,7 +21,6 @@ const LevelForm = ({ levelProp, addLevel, editLevel, showEditFormToggle}) =>{
   )
 
   const editCallLevel = () => {
-    debugger;
     Axios.put(`/api/levels/${levelProp.id}`, level)
       .then((res) => {
         console.log(res.data)
@@ -33,14 +32,12 @@ const LevelForm = ({ levelProp, addLevel, editLevel, showEditFormToggle}) =>{
       })
   }
   
-  
   const handleChange = (e) => {
     setLevel({...level, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = (e) => {
     e.prevent.default();
-    debugger;
     if (levelProp) {
       editCallLevel();
     }
