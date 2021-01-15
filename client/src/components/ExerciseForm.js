@@ -5,7 +5,7 @@ import { AuthContext, } from "../providers/AuthProvider"
 const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormToggle}) =>{
 //  const [name, setName] = useState('');
 //  const [image, setImage] = useState('');
-//  const [howToVideo, setHowToVideo] = useState('');
+//  const [how_to_video, sethow_to_video] = useState('');
 //  const [category, setCategory] = useState('');
 //  const [activity, setActivity] = useState('');
 //
@@ -15,14 +15,14 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
     exerciseProp ? {
       name: exerciseProp.name,
       image: exerciseProp.image,
-      howToVideo: exerciseProp.howToVideo,
+      how_to_video: exerciseProp.how_to_video,
       category: exerciseProp.category,
       activity: exerciseProp.activity,
     }:
     {
       name:'',
       image:'',
-      howToVideo:'',
+      how_to_video:'',
       category:'',
       activity:'',
     }
@@ -73,7 +73,7 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
       <p>Image</p>
       <input name="image" value={exercise.image} onChange={handleChange} />
       <p>How To Video</p>
-      <input name="howToVideo" value={exercise.howToVideo} onChange={handleChange} />
+      <input name="how_to_video" value={exercise.how_to_video} onChange={handleChange} />
       <p>Category</p>
       <input name="category" value={exercise.category} onChange={handleChange} />
       <p>Activity</p>
