@@ -41,6 +41,8 @@ function App() {
           <Route exact path="/exercises" component={Exercises} />
           <Route exact path="/add_exercise" component={ExerciseForm} />
           <Route exact path="/user_dash" component={UserDash} />
+          {/* <Route exact path="/exercise" component={ShowExercise} /> */}
+          
           <Route component={NoMatch} />
         </Switch>
       </FetchUserAdmin>
@@ -49,3 +51,22 @@ function App() {
 }
 
 export default App;
+
+
+{/* 
+      sign-in ..  here is where we get the user_id
+      the user clicks on exercises, and it goes to /api/all_exercises
+      each exercise will be like a card -- a link to that specific exercise's show page.
+      In that page (maybe a seperate component/page called 'showExercise')
+      in that page by default you'll have THAT exercise's ID. Then you'll click on a level
+      which takes you to THAT level's show page, from that page, you can do your next api call to submissions for THAT level
+      and THEN finally when you click on "submit" that'll automagically take you to THAT level's submission form. 
+
+      which, through this path, I think it alleviates the need to pass down any id's
+
+
+      maybe a more accurate name for Exercise.js is ExerciseIndex.js.  Then for we can make an ExerciseShow.js  component, which is
+      where'd you go when you click on an individual exercise.
+
+*/}
+
