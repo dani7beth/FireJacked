@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import Axios from 'axios';
+import axios from 'axios';
 import { AuthContext, } from "../providers/AuthProvider"
 
 const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormToggle}) =>{
@@ -29,16 +29,28 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
   )
 
   const editCallExercise = () => {
-    Axios.put(`/api/exercises/${exerciseProp.id}`, exercise)
+    axios.put(`/api/exercises/${exerciseProp.id}`, exercise)
       .then((res) => {
         console.log(res.data)
         editExercise(res.data)
-        showEditFormToggle();
       })
       .catch((err) => {
         console.log(err)
       })
   }
+
+
+  const addCallExercise = () => {
+    debugger;
+    axios.post(`/api/exercises`, exercise )
+    .then((res)=>{
+      console.log(exercise)
+      addExercise(res.data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  };
 
   
   const handleChange = (e) => {
@@ -51,7 +63,7 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
       editCallExercise();
     }
     else {
-      addExercise();
+      addCallExercise();
     }
   }
   return (
