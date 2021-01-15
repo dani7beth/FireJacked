@@ -42,24 +42,24 @@ const ExerciseForm = ({exerciseProp,addExercise}) =>{
   const handleSubmit = (e) => {
     e.preventDefault()
     if (exerciseProp) {
-      editExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
+      editExercise({name: exercise.name, image: exercise.image, howToVideo: exercise.howToVideo, category: exercise.category, activity: exercise.activity});
     }
     else {
-      addExercise({name: name, image: image, howToVideo: howToVideo, category: category, activity: activity});
+      addExercise({name: exercise.name, image: exercise.image, howToVideo: exercise.howToVideo, category: exercise.category, activity: exercise.activity});
     }
   }
   return (
     <form onSubmit={handleSubmit}>
       <p>Name</p>
-      <input name="name" value={exercise.name} onChange={(e) => setExercise(e.target.value)} />
+      <input name="name" value={exercise.name} onChange={(e) => setExercise({name: e.target.value})} />
       <p>Image</p>
-      <input name="image" value={exercise.image} onChange={(e) => setExercise(e.target.value)} />
+      <input name="image" value={exercise.image} onChange={(e) => setExercise({image: e.target.value})} />
       <p>How To Video</p>
-      <input name="howToVideo" value={exercise.howToVideo} onChange={(e) => setExercise(e.target.value)} />
+      <input name="howToVideo" value={exercise.howToVideo} onChange={(e) => setExercise({howToVideo: e.target.value})} />
       <p>Category</p>
-      <input name="category" value={exercise.category} onChange={(e) => setExercise(e.target.value)} />
+      <input name="category" value={exercise.category} onChange={(e) => setExercise({category: e.target.value})} />
       <p>Activity</p>
-      <input name="activity" value={exercise.activity} onChange={(e) => setExercise(e.target.value)} />
+      <input name="activity" value={exercise.activity} onChange={(e) => setExercise({activity: e.target.value})} />
       <br />
       <button type='submit'>submit</button>
     </form>
