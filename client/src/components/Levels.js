@@ -3,12 +3,13 @@ import axios from "axios";
 import Level from "./Level";
 import LevelForm from "./LevelForm";
 
-const Levels = (exercise) => {
+const Levels = (props) => {
   const [levels, setLevels] = useState([]);
+  const exerciseID = props.match.params.id;
 
-  const getLevels = (exercise) => {
+  const getLevels = () => {
     axios
-      .get(`/api/exercises/${exercise.id}/levels`)
+      .get(`/api/exercises/${exerciseID}/levels`)
       .then((response) => {
         setLevels(response.data);
       })
@@ -17,34 +18,13 @@ const Levels = (exercise) => {
       });
   };
 
-  // const getLevels = (match) => {
-  //     axios
-  //     .get(`/api/exercises/${match.params.id}/levels`)
-  //     .then((response) => {
-  //       setLevels(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  const addLevel = (exercise, level) => {
-    axios.post(`/api/exercises/${exercise.id}/levels`, level )
-    .then((res)=>{
-      console.log(level)
-      setLevels([level, ...levels])
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  };
-
   useEffect(() => {
     getLevels();
   }, []);
-    
+  
+
   const deleteLevel = (id) => {
-    axios.delete(`/api/exercises/${exercise.id}/levels/${id}`)
+    axios.delete(`/api/exercises/${exerciseID}/levels/${id}`)
       .then((res) => {
         setLevels(levels.filter((level)=> level.id !== id))
         console.log(res.data);
@@ -54,16 +34,20 @@ const Levels = (exercise) => {
       })
   }
 
+  const addLevel = (level) =>{
+    setLevels([...levels, level]);
+  }
+
   const renderLevels = () => {
     return levels.map((level) => (
-      <Level key={level.id} levelProp={level} deleteLevel={deleteLevel}/>
+      <Level key={level.id} levelProp={level} deleteLevel={deleteLevel} exerciseID={exerciseID}/>
     ))
   }
   
   return (
     <>
       <h1>levels</h1>
-      <LevelForm addLevel={addLevel}/>
+      <LevelForm exerciseID={exerciseID} addLevel={addLevel}/> 
       {renderLevels()}
     </>
   );
