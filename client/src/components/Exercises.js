@@ -17,8 +17,6 @@ const Exercises = () => {
       });
   };
 
-  
-
   useEffect(() => {
     getExercises();
   }, []);
@@ -39,7 +37,6 @@ const Exercises = () => {
       <Exercise key={exercise.id} exerciseProp={exercise} deleteExercise={deleteExercise}/>
     ))
   }
-
 
   const addExercise = (exercise) => {
     setExercises([exercise, ...exercises])
