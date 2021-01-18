@@ -14,6 +14,9 @@ import ExerciseForm from "./components/ExerciseForm"
 import UserDash from "./user/UserDash";
 import { Route, Switch } from "react-router-dom";
 import Exercises from "./components/Exercises"
+import AllExercises from "./components/AllExcercises";
+import ShowExercise from "./components/ShowExercise";
+import SubmissionForm from "./components/SubmissionForm";
 
 function App() {
   // const { user, admin } = useContext(AuthContext);
@@ -40,6 +43,9 @@ function App() {
           <Route exact path="/admin_dash" component={AdminDash} />
           <Route exact path="/exercises" component={Exercises} />
           <Route exact path="/add_exercise" component={ExerciseForm} />
+          <Route exact path="/all_exercises" component={AllExercises} />
+          <Route exact path="/showexercise/:exercise_id" component={ShowExercise} />
+          <Route exact path="/submissions/:level_id" component={SubmissionForm} />
           <Route exact path="/user_dash" component={UserDash} />
           <Route component={NoMatch} />
         </Switch>

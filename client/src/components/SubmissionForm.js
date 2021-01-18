@@ -47,7 +47,7 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
     Axios.put(`/api/levels/${id}/submission/${submission.id}`, submission)
       .then((res) => {
         console.log(res.data)
-        editSubmission(res.data)
+        setSubmission(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -55,7 +55,7 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault
+    e.preventDefault();
     if (submissionProp) {
       editCalledSubmission({name: name, completed: completed, videoUpload: videoUpload});
     }
@@ -96,4 +96,4 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
 
 */}
 
-export default ExerciseForm; 
+export default SubmissionForm; 
