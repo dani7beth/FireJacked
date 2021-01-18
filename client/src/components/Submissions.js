@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import React, { useState } from 'react';
 import Submission from './Submission';
 import SubmissionForm from './SubmissionForm';
 import { useParams } from 'react-router-dom';
@@ -8,11 +8,11 @@ const Submissions = () => {
 
   const [submissions, setSubmissions] = useState([]);
 
-  // const {id} = useParams();
+  const {id} = useParams();
 
-  const getSubmissions = (match) => {
+  const getSubmissions = () => {
     Axios
-      .get(`/api/levels/${match.params.id}/submissions`)
+      .get(`/api/levels/${id}/submissions`)
       .then((response) => {
         console.log(response.data)
         setSubmissions(response.data)

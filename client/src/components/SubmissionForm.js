@@ -23,7 +23,8 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
 
   // const { user } = useContext(AuthContext);
 
-  // const {id} = useParams();
+  const {id} = useParams();
+  // I can also do match.params.id, but I hvae to pass match at the top of this whole function??
 
       {/* 
           Okay here are some notes about the crud actions and api calls.
@@ -42,8 +43,8 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
 
       // we might need to pass level down as a prop in order to acces that id.
 
-  const editCalledSubmission = (match) => {
-    Axios.put(`/api/levels/${match.params.id}/submission/${submission.id}`, submission)
+  const editCalledSubmission = () => {
+    Axios.put(`/api/levels/${id}/submission/${submission.id}`, submission)
       .then((res) => {
         console.log(res.data)
         editSubmission(res.data)
