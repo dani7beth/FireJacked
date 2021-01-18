@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Axios from 'axios';
+import axios from 'axios';
 
-const LevelForm = ({ levelProp, addLevel, editLevel, showEditFormToggle}) =>{
+const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, setToggle}) =>{
 
   const [level, setLevel] = useState(
     levelProp ? {
@@ -21,42 +21,53 @@ const LevelForm = ({ levelProp, addLevel, editLevel, showEditFormToggle}) =>{
   )
 
   const editCallLevel = () => {
-    Axios.put(`/api/levels/${levelProp.id}`, level)
+    axios.put(`/api/exercises/${exerciseID}/levels/${levelProp.id}`, level)
       .then((res) => {
         console.log(res.data)
         editLevel(res.data)
-        showEditFormToggle();
+        setToggle();
       })
       .catch((err) => {
         console.log(err)
       })
   }
+
+  const addCallLevel = () => {
+    axios.post(`/api/exercises/${exerciseID}/levels`, level )
+    .then((res)=>{
+      console.log(level)
+      addLevel(res.data);
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  };
   
   const handleChange = (e) => {
     setLevel({...level, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = (e) => {
-    e.prevent.default();
+    e.preventDefault();
     if (levelProp) {
       editCallLevel();
     }
     else {
-      addLevel();
+      addCallLevel();
     }
   }
   return (
     <form onSubmit={handleSubmit}>
       <p>Name</p>
-      <input name="name" value={level.name} onChange={(e) => setLevel(handleChange)} />
+      <input name="name" value={level.name} onChange={handleChange} />
       <p>Measurement</p>
-      <input name="measurement" value={level.measurement} onChange={(e) => setLevel(handleChange)} />
+      <input name="measurement" value={level.measurement} onChange={handleChange} />
       <p>Reps</p>
-      <input name="reps" value={level.reps} onChange={(e) => setLevel(handleChange)} />
+      <input name="reps" value={level.reps} onChange={handleChange} />
       <p>Time Frame</p>
-      <input name="timeframe" value={level.timeframe} onChange={(e) => setLevel(handleChange)} />
+      <input name="timeframe" value={level.timeframe} onChange={handleChange} />
       <p>Sets</p>
-      <input name="sets" value={level.sets} onChange={(e) => setLevel(handleChange)} />
+      <input name="sets" value={level.sets} onChange={handleChange} />
       <br />
       <button type='submit'>submit</button>
     </form>
