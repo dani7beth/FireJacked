@@ -44,11 +44,16 @@ export default (props) => {
             Login
           </li>
         </Link>
-        {/* <Link to="/register">
+        <Link to="/register">
           <li id="Register" name="register">
             Register
           </li>
-        </Link> */}
+        </Link> 
+        <Link to="/admin_register">
+          <li id="AdminRegister" name="adminRegister">
+            Admin Register
+          </li>
+        </Link> 
       </ul>
   );
 };

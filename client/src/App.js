@@ -21,6 +21,7 @@ import Submissions from "./components/Submissions";
 import Levels from './components/Levels';
 import SubmissionsAdmin from "./components/SubmissionsAdmin";
 import SubmissionsFormAdmin from "./components/SubmissionsFormAdmin";
+import AdminRegister from "./components/AdminRegister";
 
 function App() {
   // const { user, admin } = useContext(AuthContext);
@@ -54,6 +55,7 @@ function App() {
           <Route exact path='/exercise/:id/levels' component={Levels} />
           <Route exact path='/admin-submissions' component={SubmissionsAdmin}/>
           <Route exact path='/admin-submissions/:submission_id' component={SubmissionsFormAdmin}/>
+          <Route exact path='/admin_register' component={AdminRegister}/>
         
           <Route component={NoMatch} />
         </Switch>
