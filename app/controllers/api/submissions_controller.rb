@@ -1,7 +1,7 @@
 class Api::SubmissionsController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_test_user
-  before_action :set_level
+  # before_action :set_level
   before_action :set_submission, only: [:update, :destroy, :show]
 
   def basic_upload
@@ -20,7 +20,7 @@ class Api::SubmissionsController < ApplicationController
   end  
 
   def index
-    render json: @level.submissions.all
+    render json: current_user.submissions.all
   end
 
   def show
@@ -28,7 +28,7 @@ class Api::SubmissionsController < ApplicationController
   end
 
   def create 
-   submission = @level.submissions.new(submission_params)
+   submission = current_user.submissions.new(submission_params)
     if submission.save
       render json: submission
     else
@@ -48,15 +48,15 @@ class Api::SubmissionsController < ApplicationController
 
   private
   def submission_params
-    params.require(:submission).permit(:completed, :name, :video_upload, :user_id)
+    params.require(:submission).permit(:completed, :name, :video_upload, :level_id)
   end
 
-  def set_level
-    @level = Level.find(params[:level_id])
-  end
+  # def set_level
+  #   @level = Level.find(params[:level_id])
+  # end
 
   def set_submission
-    @submission = @level.submissions.find(params[:id])
+    @submission = current_user.submissions.find(params[:id])
   end
 
   # def set_test_user 
