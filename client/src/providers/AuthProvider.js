@@ -51,7 +51,7 @@ export class AuthProvider extends React.Component {
         this.setState({ admin: res.data.data });
         console.log(this.state.admin);
         localStorage.setItem('member-type','admin')
-        history.push("/admin_dash");
+        history.push("/admin_dash/");
       })
       .catch((err) => {
         console.log("Error logging in admin");
@@ -97,7 +97,8 @@ export class AuthProvider extends React.Component {
           handleAdminLogout: this.handleAdminLogout,
           setUser: (user) => this.setState({ user }),
           setAdmin: (admin) => this.setState({ admin }),
-          user: this.user
+          user: this.state.user,
+          admin: this.state.admin
         }}
       >
         {this.props.children}

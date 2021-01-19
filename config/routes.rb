@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get "all_exercises", to: "exercises#all_exercises"
     resources :exercises do
       resources :levels do
-        # resources :submissions do 
+        # resources :submissions do
         #   resources :comments
         # end
       end
@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     resources :submissions do 
       resources :comments
     end
-    resources :comments
+    # resources :comments
   end
 end
