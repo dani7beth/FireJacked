@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         #   resources :comments
         # end
       end
-      post 'upload_image', to: 'exercises#basic_upload'
+      # post 'upload_image', to: 'exercises#basic_upload'
     end
     resources :levels do
       resources :submissions

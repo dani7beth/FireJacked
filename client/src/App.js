@@ -21,6 +21,7 @@ import Submissions from "./components/Submissions";
 import Levels from './components/Levels';
 import SubmissionsAdmin from "./components/SubmissionsAdmin";
 import SubmissionsFormAdmin from "./components/SubmissionsFormAdmin";
+import UserRegister from "./user/UserRegister";
 
 function App() {
   // const { user, admin } = useContext(AuthContext);
@@ -43,6 +44,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={UserLogin} />
           <Route exact path='/login' component={UserLogin} />
+          <Route exact path='/user_register' component={UserRegister} />
           <Route exact path='/admin_login' component={AdminLogin} />
           <Route exact path="/admin_dash/" component={AdminDash} />
           <Route exact path="/exercises" component={Exercises} />
