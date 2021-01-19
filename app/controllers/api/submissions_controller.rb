@@ -3,7 +3,21 @@ class Api::SubmissionsController < ApplicationController
   # before_action :set_test_user
   before_action :set_level
   before_action :set_submission, only: [:update, :destroy, :show]
-  
+
+  def basic_upload
+    file = params[:file]
+    if file
+      begin
+        # ext = File.extname(file.tempfile)
+        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+        # user.image = cloud_image['secure_url']
+        render json: { yo: "worked", file: file, cloud_image: cloud_image }
+      rescue => e
+        render json: { errors: e }, status: 422
+        return
+      end
+    end
+  end  
 
   def index
     render json: @level.submissions.all

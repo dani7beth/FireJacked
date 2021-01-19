@@ -1,6 +1,9 @@
-import { useState, useContext } from "react";
+import React from 'react';
+import { useState, useContext, useCallback } from "react";
 import axios from 'axios';
 import { AuthContext, } from "../providers/AuthProvider"
+import Uploader from "./Uploader";
+import {useDropzone} from 'react-dropzone';
 
 const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormToggle}) =>{
 //  const [name, setName] = useState('');
@@ -10,7 +13,7 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
 //  const [activity, setActivity] = useState('');
 //
   const Auth = useContext(AuthContext);
-
+  const [image, setImage] = useState(null);
   const [exercise, setExercise] = useState(
     exerciseProp ? {
       name: exerciseProp.name,
@@ -40,11 +43,10 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
   }
 
 
-  const addCallExercise = () => {
-    debugger;
-    axios.post(`/api/exercises`, exercise )
+  const addCallExercise = (data) => {
+    axios.post(`/api/exercises`, data)
     .then((res)=>{
-      console.log(exercise)
+      // console.log(data)
       addExercise(res.data)
     })
     .catch((err)=>{
@@ -57,21 +59,54 @@ const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormTog
     setExercise({...exercise, [e.target.name]: e.target.value})
   }
 
+  const onDrop = useCallback((acceptedFiles) =>{
+    setImage(acceptedFiles[0]);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    if(image == null){
+      alert('cant be blank');
+      return;
+    }
+    let data = new FormData();
+    console.log(image);
+    data.append('image', image);
+    data.append('name', exercise.name)
+    data.append('how_to_video', exercise.how_to_video)
+    data.append('category', exercise.category)
+    data.append('activity', exercise.activity)
     if (exerciseProp) {
       editCallExercise();
     }
     else {
-      addCallExercise();
+      addCallExercise(data);
     }
   }
+  const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({onDrop});
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
   return (
     <form onSubmit={handleSubmit}>
       <p>Name</p>
       <input name="name" value={exercise.name} onChange={handleChange} />
       <p>Image</p>
-      <input name="image" value={exercise.image} onChange={handleChange} />
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
+      </div>
+      <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+      {/* <input name="image" value={exercise.image} onChange={handleChange} /> */}
       <p>How To Video</p>
       <input name="how_to_video" value={exercise.how_to_video} onChange={handleChange} />
       <p>Category</p>
