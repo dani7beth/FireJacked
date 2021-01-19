@@ -21,7 +21,7 @@ export class AuthProvider extends React.Component {
       .then((res) => {
         this.setState({ user: res.data.data });
         console.log(res);
-        history.push("/");
+        history.push("/user_dash");
       })
       .catch((err) => {
         alert(`Error in Registration`);
@@ -34,7 +34,7 @@ export class AuthProvider extends React.Component {
       .then((res) => {
         this.setState({ admin: res.data.data });
         console.log(res);
-        history.push("/");
+        history.push("/admin_dash");
       })
       .catch((err) => {
         alert(`Error in Registration`);

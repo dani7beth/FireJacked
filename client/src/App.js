@@ -16,7 +16,7 @@ import Levels from './components/Levels';
 import SubmissionsAdmin from "./components/SubmissionsAdmin";
 import SubmissionsFormAdmin from "./components/SubmissionsFormAdmin";
 import UserRegister from "./user/UserRegister";
-import AdminRegister from "./components/AdminRegister";
+import AdminRegister from "./admin/AdminRegister";
 
 function App() {
 
