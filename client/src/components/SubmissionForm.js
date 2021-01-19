@@ -25,30 +25,6 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
       level_id: parseInt(level_id)
     }
   )
-        // use this for populating the editForm
-
-
-
-  
-
-  
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (submissionProp) {
-  //     editCalledSubmission(submissionProp.id, {name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
-  //   }
-  //   else {
-  //     addSubmission({name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
-  //     // setSubmission({
-  //     //   name: '',
-  //     //   completed: false,
-  //     //   videoUpload: ''
-  //     // })
-  //       // how to make the form empty after I submit it??
-  //   }
-  //   // hide form
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -84,21 +60,5 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
     </>
   )
 }
-
-{/*
-        <p>Completed (only trainers can change this!) </p>
-        <input type='checkbox' name="completed" value={completed} onChange={(e) => setCompleted(!completed)} />
-
-            Do I need to do this toggle differntly? Maybe instead of onChange its this
-
-        <input type='checkbox' name="completed" value={completed} onClick=toggleCompleted() />
-        
-            with this function
-
-        const ToggleCompleted = () => {
-          setCompleted(!completed);
-        };
-
-*/}
 
 export default SubmissionForm; 
