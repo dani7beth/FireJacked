@@ -47,6 +47,9 @@ export default (props) => {
       <Link to="/all_exercises">
         <li>All Exercises</li>
       </Link>
+      <Link to="/admin-submissions">
+        <li>Admin submissions</li>
+      </Link>
       <ul style={{margin: 0, padding: 0,listStyleType: "none"}}>{rightNavItems()}</ul>
     </ul>
   );
