@@ -1,6 +1,7 @@
 import ExerciseForm from "./ExerciseForm";
 import { useState, } from 'react';
 import Levels from "./Levels";
+import {Link} from 'react-router-dom';
 
 const Exercise = ({ exerciseProp, deleteExercise}) => {
   const [ exercise, setExercise] = useState()
@@ -17,12 +18,13 @@ const Exercise = ({ exerciseProp, deleteExercise}) => {
   }
  
   return (
-    <div link_to='/levels'>
-        <h1>{exerciseProp.name}</h1>
+    <div>
+        <Link to={`/exercise/${exerciseProp.id}/levels`}><h1>{exerciseProp.name}</h1></Link>
+        <img src={exerciseProp.image} />
         { showEditForm && <ExerciseForm showEditFormToggle={showEditFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
         <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
         <button onClick={()=> deleteExercise(exerciseProp.id)}>Delete</button>
-        {/* <Levels exercise={exercise}/> */}
+        {/* <Levels exercise={exerciseProp}/> */}
     </div>
   )
 }

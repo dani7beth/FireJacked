@@ -17,8 +17,6 @@ const Exercises = () => {
       });
   };
 
-  
-
   useEffect(() => {
     getExercises();
   }, []);
@@ -40,7 +38,6 @@ const Exercises = () => {
     ))
   }
 
-
   const addExercise = (exercise) => {
     setExercises([exercise, ...exercises])
 };
@@ -53,5 +50,7 @@ const Exercises = () => {
     </>
   );
 };
+
+// <ExerciseForm addExercise={addExercise}/>
 
 export default Exercises;
