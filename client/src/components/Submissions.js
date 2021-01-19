@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Submission from './Submission';
 import SubmissionForm from './SubmissionForm';
 import { useParams } from 'react-router-dom';
@@ -7,48 +7,62 @@ import Axios from 'axios';
 const Submissions = () => {
 
   const [submissions, setSubmissions] = useState([]);
+  const [submission, setSubmission] = useState({});
 
-  const {id} = useParams();
+  useEffect(() => {
+    getSubmissions();  
+  },[]);
 
-  const getSubmissions = () => {
-    Axios
-      .get(`/api/levels/${id}/submissions`)
-      .then((response) => {
+  const {level_id} = useParams();
+
+  const getSubmissions = async () => {
+    try{
+      let response = await Axios.get(`/api/levels/${level_id}/submissions`)
         console.log(response.data)
         setSubmissions(response.data)
+    }
+    catch(err) {
+      console.log(err)
+    }
+}
+
+
+  const addSubmission = (submission) => {
+    Axios
+      .post(`/api/levels/${level_id}/submissions`, submission)
+      .then((res) => {
+        console.log(submission)
+        setSubmissions([submission, ...submissions])
       })
       .catch((err) => {
         console.log(err)
-      }
-  )}
+      })
+  }
 
-  const addSubmission = (match, submission) => {
-    Axios
-      .post(`/api/levels/${match.params.id}/submissions`, submission)
+
+
+  const editCalledSubmission = (id, submissionObject) => {
+    Axios.put(`/api/levels/${level_id}/submission/${id}`, submissionObject)
       .then((res) => {
-        console.log(submission)
-        setSubmissions(submission, ...submissions)
+        console.log(res.data)
+        setSubmission(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }
   
-  useEffect (() => {
-    getSubmissions();
-  }, []);
+  
 
   const renderSubmissions = () => {
-    return submissions.map((submission) => (
-      // <h1>{submission.name}</h1>
-      <Submission key={submission.id} submissionProp={submission} />
-    ))
+    return submissions.map((submission) => <Submission key={submission.id} submissionProp={submission} editCalledSubmission={editCalledSubmission} />)
   }
 
   return (
     <>
-      <h1>submissions here</h1>
-       <SubmissionForm addSubmission={addSubmission}/>
+      <h1>Make a new submission</h1>
+       <SubmissionForm addSubmission={addSubmission} />
+       <h3>Here are all your submissions!</h3>
       {renderSubmissions()}
     </>
   )

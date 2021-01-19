@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from 'react-router-dom';
 
-const SubmissionForm = ({submissionProp, addSubmission}) => {
+const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) => {
   const [name, setName] = useState('');
   const [completed, setCompleted] = useState(false);
   const [videoUpload, setVideoUpload] = useState('');
@@ -11,19 +11,21 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
   const [submission, setSubmission] = useState(
     submissionProp ? {
       name: submissionProp.name,
-      completed: submissionProp.image,
-      videoUpload: submissionProp.howToVideo
+      completed: submissionProp.completed,
+      videoUpload: submissionProp.videoUpload
     }:
     {
       name: '',
-      completed: '',
+      completed: false,
       videoUpload: ''
     }
   )
 
-  // const { user } = useContext(AuthContext);
 
-  const {id} = useParams();
+
+  const { id } = useContext(AuthContext);
+
+  const {level_id} = useParams();
   // I can also do match.params.id, but I hvae to pass match at the top of this whole function??
 
       {/* 
@@ -43,24 +45,20 @@ const SubmissionForm = ({submissionProp, addSubmission}) => {
 
       // we might need to pass level down as a prop in order to acces that id.
 
-  const editCalledSubmission = () => {
-    Axios.put(`/api/levels/${id}/submission/${submission.id}`, submission)
-      .then((res) => {
-        console.log(res.data)
-        setSubmission(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (submissionProp) {
-      editCalledSubmission({name: name, completed: completed, videoUpload: videoUpload});
+      editCalledSubmission(submissionProp.id, {name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
     }
     else {
-      addSubmission({name: name, completed: completed, videoUpload: videoUpload});
+      addSubmission({name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+      setSubmission({
+        name: '',
+        completed: false,
+        videoUpload: ''
+      })
     }
     // hide form
   }

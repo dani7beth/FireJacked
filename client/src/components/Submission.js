@@ -2,7 +2,8 @@
 import SubmissionForm from './SubmissionForm';
 import { useState } from "react";
 
-const Submission = (submissionProp) => {
+const Submission = ({submissionProp, editCalledSubmission}) => {
+
 
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -16,12 +17,12 @@ const Submission = (submissionProp) => {
     <>
       <div>
         <h1>{submissionProp.name}</h1>
-        <h1>{submissionProp.complete}</h1>
+        <h1>{submissionProp.complete ? 'true' : 'false'}</h1>
         <h1>{submissionProp.videoUpload}</h1>
         {/* alright I think this works because you somehow connect showEditform to SubmissionForm with
             this little command thing down here (the &&). Then you define this prop here too. */}
-        { showEditForm && <SubmissionForm sumbissionProp={sumbissionProp} /> }
-        <button onClick={showEditFormToggle()}>(do a ternary here) Edit</button>
+        { showEditForm && <SubmissionForm submissionProp={submissionProp} editCalledSubmission={editCalledSubmission} /> }
+        <button onClick={showEditFormToggle}>{showEditForm ? "Hide" : "Show"}</button>
       </div>
     </>
   )
