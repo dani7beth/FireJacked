@@ -17,7 +17,14 @@ end
 
 5.times do |j|
   user = User.create(
-    name: Faker::Name.name, 
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    weight: rand(100..300),
+    height: rand(163..199),
+    gender: Faker::Gender.binary_type,
+    about: Faker::Movies::PrincessBride.quote,
+    age: rand(18..65),
+    image: 'https://picsum.photos/200',
     email: "user#{j}@test.com", 
     password: '123456')
     puts "created user email: #{user.email}"
