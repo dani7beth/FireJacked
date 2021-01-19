@@ -3,7 +3,7 @@ require 'faker'
 
 #admins 
 5.times do |i|
-admin = Admin.create(name:"admin#{i}", email: "admin#{i}@test.com", password:"123456")
+admin = Admin.create(name:"admin#{i}", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin#{i}@test.com", password:"123456")
     puts "created email: #{admin.email}"
     3.times do
         exercise = admin.exercises.create(name:'Shrek shredder 4000', image:"https://fakeimg.pl/300/", how_to_video:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", category: "Upper body", activity:Faker::Verb.simple_present)
@@ -17,7 +17,14 @@ end
 
 5.times do |j|
   user = User.create(
-    name: Faker::Name.name, 
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    weight: rand(100..300),
+    height: rand(163..199),
+    gender: Faker::Gender.binary_type,
+    about: Faker::Movies::PrincessBride.quote,
+    age: rand(18..65),
+    image: 'https://picsum.photos/200',
     email: "user#{j}@test.com", 
     password: '123456')
     puts "created user email: #{user.email}"
