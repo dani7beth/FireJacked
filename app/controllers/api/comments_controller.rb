@@ -5,7 +5,8 @@ class Api::CommentsController < ApplicationController
   
 
   def index
-    render json: current_admin.comments.all
+    comments = current_admin.comments.find(params([:submission_id]))
+    render json: comments
   end
 
   def show
