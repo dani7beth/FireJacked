@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import Axios from "axios"
 import { useParams } from "react-router-dom"
+import Comment from "./Comment"
 
 const Comments = ({submission_id}) => {
   // const { submission_id } = useParams()
 
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState([])
-  const [editComment, setEditComment] = useState(false)
+  
 
   useEffect(()=>{
     getComments()
@@ -42,6 +43,38 @@ const Comments = ({submission_id}) => {
 
   }
 
+  const editSingleComment = async (id, object) => {
+    try {
+      // debugger
+      let res = await Axios.put(`/api/submissions/${submission_id}/comments/${id}`,object)
+      console.log(res.data)
+      let newComments = comments.map(c => c.id !== id ? c : res.data)
+      setComments(newComments)
+    } catch (error) {
+      console.log(error)
+      return (
+        <h1>It would appear there has been a grave error. </h1>
+      )
+    }
+
+  }
+
+  const removeComment = async(id) => {
+    try {
+      // debugger
+      let res = await Axios.delete(`/api/submissions/${submission_id}/comments/${id}`)
+      console.log(res.data)
+      let newComments = comments.filter(c => c.id !== id)
+      setComments(newComments)
+    } catch (error) {
+      console.log(error)
+      return (
+        <h1>It would appear there has been a grave error. </h1>
+      )
+    }
+  }
+
+
 
 
   return (
@@ -51,7 +84,7 @@ const Comments = ({submission_id}) => {
       <input type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
       <button type="submit">+</button>
     </form>
-    {comments.map(c => editComment ? <input/> : <p onClick={()=>setEditComment(!editComment)}>{c.body}</p>)}
+    {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
     </>
 
   )
