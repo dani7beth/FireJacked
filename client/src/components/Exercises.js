@@ -51,4 +51,6 @@ const Exercises = () => {
   );
 };
 
+// <ExerciseForm addExercise={addExercise}/>
+
 export default Exercises;

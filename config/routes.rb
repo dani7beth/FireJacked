@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 
   namespace :api do
+    get "all_exercises", to: "exercises#all_exercises"
     resources :exercises do
       resources :levels
     end
