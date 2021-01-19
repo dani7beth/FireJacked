@@ -6,51 +6,60 @@ export default (props) => {
   const history = useHistory();
   const { userAuthenticated, adminAuthenticated, handleUserLogout, handleAdminLogout } = useContext(AuthContext);
 
-  const rightNavItems = () => {
-    if (userAuthenticated) {
-      return (
-        <>
-          <li name="logout" onClick={() => handleUserLogout(history)}> Logout</li>
-        </>
-      );
-    }
-    else if (adminAuthenticated){
-      return (
-        <li name='logout' onClick={()=> handleAdminLogout(history)}>Logout</li>
-      )
-    }else {
-      return (
-        <>
-          <Link to="/login">
-            <li id="login" name="login">
-              Login
-            </li>
-          </Link>
-          
-          <Link to="/register">
-            <li id="Register" name="register">
-              Register
-            </li>
-          </Link>
-        </>
-      );
-    }
-  };
-  return (
-    <ul style={{margin: 0, padding: 0,listStyleType: "none"}}>
-      <Link to="/">
-        <li>Home</li>
+
+  const userNavBar = () => {
+    return (
+      <>
+      <li name="logout" onClick={() => handleUserLogout(history)}> Logout</li>
+      <Link to="/all_exercises">
+        <li>All Exercises</li>
+      </Link>
+      </>
+    )
+  }
+
+  const adminNavBar = () => {
+    return (
+      <>
+      
+      <Link to="/admin-submissions">
+        <li>Admin submissions</li>
       </Link>
       <Link to="/exercises">
         <li>Exercises</li>
       </Link>
-      <Link to="/all_exercises">
-        <li>All Exercises</li>
-      </Link>
-      <Link to="/admin-submissions">
-        <li>Admin submissions</li>
-      </Link>
-      <ul style={{margin: 0, padding: 0,listStyleType: "none"}}>{rightNavItems()}</ul>
-    </ul>
+      <li name='logout' onClick={()=> handleAdminLogout(history)}>Logout</li>
+      </>
+    )
+  }
+
+  const noLogin = () => {
+    return (
+      <ul style={{margin: 0, padding: 0,listStyleType: "none"}}>
+        <Link to="/">
+          <li>Home</li>
+        </Link>
+        <Link to="/login">
+          <li id="login" name="login">
+            Login
+          </li>
+        </Link>
+        {/* <Link to="/register">
+          <li id="Register" name="register">
+            Register
+          </li>
+        </Link> */}
+      </ul>
   );
 };
+
+
+if (userAuthenticated){
+  return userNavBar()
+}
+if (adminAuthenticated){
+  return adminNavBar()
+}
+return noLogin()
+
+}

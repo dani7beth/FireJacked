@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Axios from "axios"
+import Comments from "./Comments"
 
 const SubmissionsFormAdmin = () => {
 
@@ -55,6 +56,7 @@ const SubmissionsFormAdmin = () => {
   <input type="checkbox" defaultChecked={submission.completed} onChange={()=> setChecked(submission.completed ? false : true)}/>
   <button type="submit">Submit</button>
   </form>
+  <Comments submission_id = {submission_id}/>
 
   </>
 

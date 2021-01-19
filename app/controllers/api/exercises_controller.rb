@@ -20,7 +20,7 @@ class Api::ExercisesController < ApplicationController
   end  
 
   def index
-    render json: @current_admin.exercises.all
+    render json: current_admin.exercises.all
   end
 
   def all_exercises
@@ -32,7 +32,7 @@ class Api::ExercisesController < ApplicationController
   end
 
   def create 
-   exercise = @current_admin.exercises.new(exercise_params)
+   exercise = current_admin.exercises.new(exercise_params)
     if exercise.save
       render json: exercise
     else
@@ -55,7 +55,7 @@ class Api::ExercisesController < ApplicationController
     params.permit(:name, :image, :how_to_video, :category, :activity)
   end
   def set_exercise
-    @exercise = @current_admin.exercises.find(params[:id])
+    @exercise = current_admin.exercises.find(params[:id])
   end
   # def set_admin
   #   # @admin = Admin.find(params[:admin_id])
