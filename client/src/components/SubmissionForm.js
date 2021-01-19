@@ -4,72 +4,79 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from 'react-router-dom';
 
 const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) => {
-  const [name, setName] = useState('');
-  const [completed, setCompleted] = useState(false);
-  const [videoUpload, setVideoUpload] = useState('');
+  // const [name, setName] = useState('');
+  // const [completed, setCompleted] = useState(false);
+  // const [videoUpload, setVideoUpload] = useState('');
+
+  const {level_id} = useParams();
+  const { id } = useContext(AuthContext);
 
   const [submission, setSubmission] = useState(
     submissionProp ? {
       name: submissionProp.name,
       completed: submissionProp.completed,
-      videoUpload: submissionProp.videoUpload
+      videoUpload: submissionProp.videoUpload,
+      level_id: level_id
     }:
     {
       name: '',
       completed: false,
-      videoUpload: ''
+      videoUpload: '',
+      level_id: parseInt(level_id)
     }
   )
+        // use this for populating the editForm
 
 
-
-  const { id } = useContext(AuthContext);
-
-  const {level_id} = useParams();
-  // I can also do match.params.id, but I hvae to pass match at the top of this whole function??
-
-      {/* 
-          Okay here are some notes about the crud actions and api calls.
-          - We need to make it so ONLY Admins can toggle !completed
-          - There are two routes to get to submission:
-            /levels/id/submission, or /users/id/submission.
-            We can go through either levels or users. So what if we use the 'levels' route 
-            for things like adding, editing, etc. And then the 'users' route for an index
-            where you can have a user see all of their own submissions.
-
-            I think it could maybe work this way because the flow of the app will be
-            sign in -> go find exercises -> choose a specific LEVEL -> make a submission.
-              OR
-            sign in -> go to user's info (like their programs, etc) -> then 'see all submissions'
-      */}
-
-      // we might need to pass level down as a prop in order to acces that id.
 
   
 
+  
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (submissionProp) {
+  //     editCalledSubmission(submissionProp.id, {name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+  //   }
+  //   else {
+  //     addSubmission({name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+  //     // setSubmission({
+  //     //   name: '',
+  //     //   completed: false,
+  //     //   videoUpload: ''
+  //     // })
+  //       // how to make the form empty after I submit it??
+  //   }
+  //   // hide form
+  // }
+
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (submissionProp) {
-      editCalledSubmission(submissionProp.id, {name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+      editCalledSubmission(submissionProp.id, {name: submission.name, completed: submission.completed, video_upload: submission.videoUpload, level_id: level_id});
     }
     else {
-      addSubmission({name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+      addSubmission(submission);
       setSubmission({
         name: '',
         completed: false,
-        videoUpload: ''
+        videoUpload: '',
+        level_id: level_id
       })
     }
-    // hide form
+  }
+
+  const handleChange = (e) => {
+    setSubmission({...submission, [e.target.name]: e.target.value})
   }
 
   return (
     <>
     <form onSubmit={handleSubmit}>
       <p>Name</p>
-      <input name="name" value={name} onChange={(e) => setName(e.target.value)} />
+      <input name="name" value={submission.name} onChange={handleChange} />
       <p>Video</p>
-      <input name="videoUpload" value={videoUpload} onChange={(e) => setVideoUpload(e.target.value)} />
+      <input name="videoUpload" value={submission.videoUpload} onChange={handleChange} />
       <br/>
       <button type='submit'>submit</button>
     </form>
