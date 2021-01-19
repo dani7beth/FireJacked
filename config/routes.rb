@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     get "all_submissions", to: "admins#all_submissions"
     get "all_exercises", to: "exercises#all_exercises"
     resources :exercises do
-      resources :levels
+      resources :levels do
+        # resources :submissions do
+        #   resources :comments
+        # end
+      end
       post 'upload_image', to: 'exercises#basic_upload'
     end
     resources :levels do
@@ -18,6 +22,6 @@ Rails.application.routes.draw do
     resources :submissions do 
       resources :comments
     end
-    resources :comments
+    # resources :comments
   end
 end
