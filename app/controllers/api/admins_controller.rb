@@ -1,4 +1,6 @@
 class Api::AdminsController < ApplicationController
+  before_action :authenticate_admin!
+
   def all_submissions
     render json: Submission.all
   end
