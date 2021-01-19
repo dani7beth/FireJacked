@@ -28,7 +28,8 @@ const SubmissionsFormAdmin = () => {
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       // debugger
       let res = await Axios.put(`/api/update_submission/${submission_id}/${submission.user_id}`,{
@@ -38,7 +39,12 @@ const SubmissionsFormAdmin = () => {
         level_id:submission.level_id
       })
       console.log(res.data)
-      setSubmission(res.data)
+      setSubmission({
+        name:submission.name, 
+        video_upload:submission.video_upload, 
+        completed:res.data, 
+        level_id:submission.level_id
+      })
     } catch (error) {
       console.log(error)
       return (
