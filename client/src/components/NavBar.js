@@ -55,6 +55,11 @@ export default (props) => {
         <Link to="/user_register">
           <li>Register</li>
         </Link>
+        <Link to="/admin_register">
+          <li id="AdminRegister" name="adminRegister">
+            Admin Register
+          </li>
+        </Link> 
       </ul>
     );
   };
