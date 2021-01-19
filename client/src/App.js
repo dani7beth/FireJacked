@@ -18,6 +18,7 @@ import AllExercises from "./components/AllExcercises";
 import ShowExercise from "./components/ShowExercise";
 import SubmissionForm from "./components/SubmissionForm";
 import Submissions from "./components/Submissions";
+import Levels from './components/Levels';
 
 function App() {
   // const { user, admin } = useContext(AuthContext);
@@ -48,6 +49,9 @@ function App() {
           <Route exact path="/showexercise/:exercise_id" component={ShowExercise} />
           <Route exact path="/submissions/:level_id" component={Submissions} />
           <Route exact path="/user_dash" component={UserDash} />
+          <Route exact path='/exercise/:id/levels' component={Levels} />
+          {/* <Route exact path="/exercise" component={ShowExercise} /> */}
+          
           <Route component={NoMatch} />
         </Switch>
       </FetchUserAdmin>
@@ -56,3 +60,4 @@ function App() {
 }
 
 export default App;
+
