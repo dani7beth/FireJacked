@@ -21,7 +21,20 @@ export class AuthProvider extends React.Component {
       .then((res) => {
         this.setState({ user: res.data.data });
         console.log(res);
-        history.push("/");
+        history.push("/user_dash");
+      })
+      .catch((err) => {
+        alert(`Error in Registration`);
+      });
+  };
+
+  handleAdminRegister = (admin, history) => {
+    debugger;
+    Axios.post("/api/admin_auth/", admin)
+      .then((res) => {
+        this.setState({ admin: res.data.data });
+        console.log(res);
+        history.push("/admin_dash");
       })
       .catch((err) => {
         alert(`Error in Registration`);
@@ -91,6 +104,7 @@ export class AuthProvider extends React.Component {
           userAuthenticated: this.state.user !== null,
           adminAuthenticated: this.state.admin !== null,
           handleRegister: this.handleRegister,
+          handleAdminRegister: this.handleAdminRegister,
           handleUserLogin: this.handleUserLogin,
           handleUserLogout: this.handleUserLogout,
           handleAdminLogin: this.handleAdminLogin,

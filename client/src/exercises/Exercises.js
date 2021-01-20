@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Exercise from './Exercise'
+import Exercise from './Exercise';
 import ExerciseForm from './ExerciseForm';
 
 const Exercises = () => {

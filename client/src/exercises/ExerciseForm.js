@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useContext, useCallback } from "react";
 import axios from 'axios';
 import { AuthContext, } from "../providers/AuthProvider"
-import Uploader from "./Uploader";
 import {useDropzone} from 'react-dropzone';
 
 const ExerciseForm = ({ exerciseProp, addExercise, editExercise, showEditFormToggle}) =>{

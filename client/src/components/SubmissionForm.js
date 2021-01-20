@@ -1,7 +1,9 @@
-import { useContext, useReducer, useState, } from "react";
+import { useContext, useReducer, useState, useCallback } from "react";
 import Axios from 'axios';
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from 'react-router-dom';
+// import Uploader from "./Uploader";
+// import {useDropzone} from 'react-dropzone';
 
 const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) => {
   // const [name, setName] = useState('');
@@ -26,6 +28,12 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
     }
   )
 
+
+
+  const { id } = useContext(AuthContext);
+
+  const {level_id} = useParams();
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     if (submissionProp) {
@@ -45,7 +53,12 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
   const handleChange = (e) => {
     setSubmission({...submission, [e.target.name]: e.target.value})
   }
-
+  // const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({onDrop});
+  // const files = acceptedFiles.map(file => (
+  //  <li key={file.path}>
+  //    {file.path} - {file.size} bytes
+  //  </li>
+  // ));
   return (
     <>
     <form onSubmit={handleSubmit}>
