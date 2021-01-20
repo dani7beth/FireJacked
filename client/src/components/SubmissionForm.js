@@ -27,12 +27,6 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
       level_id: parseInt(level_id)
     }
   )
-
-
-
-  // const { id } = useContext(AuthContext);
-
-  const {level_id} = useParams();
   
   const handleSubmit = (e) => {
     e.preventDefault()
