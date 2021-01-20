@@ -30,7 +30,7 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
 
 
 
-  const { id } = useContext(AuthContext);
+  // const { id } = useContext(AuthContext);
 
   const {level_id} = useParams();
   
