@@ -28,7 +28,7 @@ const AllExercises = () => {
       return (
       
         <div>
-          <Link key={exercise.id} to={`showexercise/${exercise.id}/admin/${exercise.admin_id}`}>
+          <Link key={exercise.id} to={`showexercise/${exercise.id}`}>
             <h1>{exercise.activity}</h1>
           </Link>
           <p>{exercise.description}</p>
