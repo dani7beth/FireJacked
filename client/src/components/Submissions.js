@@ -42,29 +42,49 @@ const Submissions = () => {
 
 
   const editCalledSubmission = (id, submissionObject) => {
-    Axios.put(`/api/levels/${level_id}/submission/${id}`, submissionObject)
+    Axios.put(`/api/levels/${level_id}/submissions/${id}`, submissionObject)
       .then((res) => {
         console.log(res.data)
-        setSubmission(res.data)
+        let newSubmissions = submissions.map((s) => s.id !== id ? s : res.data)
+        setSubmissions(newSubmissions)
       })
       .catch((err) => {
         console.log(err)
+      })
+  }
+
+  const deleteSubmission = (id) => {
+    Axios.delete(`/api/levels/${level_id}/submissions/${id}`)
+      .then((res) => {
+        setSubmissions(submissions.filter((submission)=> submission.id !== id))
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
   
   
 
   const renderSubmissions = () => {
-    return submissions.map((submission) => <Submission key={submission.id} submissionProp={submission} editCalledSubmission={editCalledSubmission} />)
+    return (
+      submissions.map((submission) => 
+          <Submission 
+            key={submission.id} 
+            submissionProp={submission} 
+            editCalledSubmission={editCalledSubmission} 
+            deleteSubmission={deleteSubmission}
+        />)
+    )
   }
 
   return (
     <>
-      <h1>Make a new submission</h1>
+      <h2>Make a new submission</h2>
        <SubmissionForm addSubmission={addSubmission} />
-       <h3>Here are all your submissions!</h3>
+       <h1>Here are all your submissions!</h1>
       {renderSubmissions()}
-    </>
+    </>  
   )
 };
 
