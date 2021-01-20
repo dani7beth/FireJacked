@@ -7,7 +7,7 @@ const Comments = ({submission_id}) => {
   // const { submission_id } = useParams()
 
   const [comments, setComments] = useState([])
-  const [comment, setComment] = useState([])
+  const [comment, setComment] = useState("")
   
 
   useEffect(()=>{
@@ -28,12 +28,14 @@ const Comments = ({submission_id}) => {
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       // debugger
       let res = await Axios.post(`/api/submissions/${submission_id}/comments`,{body:comment, submission_id:submission_id})
       console.log(res.data)
       setComments([res.data,...comments])
+      setComment("")
     } catch (error) {
       console.log(error)
       return (
@@ -66,6 +68,7 @@ const Comments = ({submission_id}) => {
       console.log(res.data)
       let newComments = comments.filter(c => c.id !== id)
       setComments(newComments)
+      
     } catch (error) {
       console.log(error)
       return (
@@ -81,7 +84,7 @@ const Comments = ({submission_id}) => {
     <>
     <h1>Comments</h1>
     <form onSubmit={handleSubmit}>
-      <input type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
+      <input value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
       <button type="submit">+</button>
     </form>
     {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
