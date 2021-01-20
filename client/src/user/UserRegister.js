@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Form, Button } from "react-bootstrap";
+import {useDropzone} from 'react-dropzone';
+
 
 export default (props) => {
   //init register values
@@ -14,12 +16,19 @@ export default (props) => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [about, setAbout] = useState("");
+  const [image, setImage] = useState(null);
 
   const { handleRegister } = useContext(AuthContext);
 
   //handle submit form
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (image == null) {
+      alert("cant be blank");
+      return;
+    }
+    // let data = new FormData();
+    console.log(image);
     if (password === confirmPassword) {
       handleRegister(
         {
@@ -41,6 +50,15 @@ export default (props) => {
     }
   };
 
+  const onDrop = useCallback((acceptedFiles) => {
+    setImage(acceptedFiles[0]);
+  }, []);
+  const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({onDrop});
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
   return (
     <>
       <h1 as="h1">Register</h1>
@@ -88,6 +106,19 @@ export default (props) => {
             value={about}
             onChange={(e) => setAbout(e.target.value)}
           />
+          <Form.Label>Image</Form.Label>
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <p>Drop the files here ...</p>
+            ) : (
+              <p>Drag 'n' drop some files here, or click to select files</p>
+            )}
+          </div>
+          <aside>
+            <h4>Files</h4>
+            <ul>{files}</ul>
+          </aside>
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"

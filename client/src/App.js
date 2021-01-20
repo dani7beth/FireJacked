@@ -5,12 +5,12 @@ import UserLogin from "./user/UserLogin";
 import AdminLogin from "./admin/AdminLogin";
 import NoMatch from './components/NoMatch';
 import AdminDash from "./admin/AdminDash";
-import ExerciseForm from "./components/ExerciseForm"
 import UserDash from "./user/UserDash";
+import ExerciseForm from './exercises/ExerciseForm';
 import { Route, Switch } from "react-router-dom";
-import Exercises from "./components/Exercises"
-import AllExercises from "./components/AllExcercises";
-import ShowExercise from "./components/ShowExercise";
+import Exercises from "./exercises/Exercises"
+import AllExercises from "./exercises/AllExcercises";
+import ShowExercise from './exercises/ShowExercise';
 import Submissions from "./components/Submissions";
 import Levels from './components/Levels';
 import SubmissionsAdmin from "./components/SubmissionsAdmin";

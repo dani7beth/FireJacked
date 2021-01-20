@@ -1,7 +1,9 @@
-import { useContext, useReducer, useState, } from "react";
+import { useContext, useReducer, useState, useCallback } from "react";
 import Axios from 'axios';
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from 'react-router-dom';
+// import Uploader from "./Uploader";
+// import {useDropzone} from 'react-dropzone';
 
 const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) => {
   const [name, setName] = useState('');
@@ -43,17 +45,19 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
             sign in -> go to user's info (like their programs, etc) -> then 'see all submissions'
       */}
 
-      // we might need to pass level down as a prop in order to acces that id.
+  // we might need to pass level down as a prop in order to acces that id.
 
-  
+//   const onDrop = useCallback((acceptedFiles) => {
+//     setImage(acceptedFiles[0]);
+//   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (submissionProp) {
-      editCalledSubmission(submissionProp.id, {name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+      editCalledSubmission(submissionProp.id, { name: name, completed: completed, videoUpload: videoUpload, level_id: level_id });
     }
     else {
-      addSubmission({name: name, completed: completed, videoUpload: videoUpload, level_id:level_id});
+      addSubmission({ name: name, completed: completed, videoUpload: videoUpload, level_id: level_id });
       setSubmission({
         name: '',
         completed: false,
@@ -62,18 +66,35 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
     }
     // hide form
   }
-
+  // const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({onDrop});
+  // const files = acceptedFiles.map(file => (
+  //  <li key={file.path}>
+  //    {file.path} - {file.size} bytes
+  //  </li>
+  // ));
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <p>Name</p>
-      <input name="name" value={name} onChange={(e) => setName(e.target.value)} />
-      <p>Video</p>
-      <input name="videoUpload" value={videoUpload} onChange={(e) => setVideoUpload(e.target.value)} />
-      <br/>
-      <button type='submit'>submit</button>
-    </form>
-    {/* <h1>user id is {user.id}</h1> */}
+      <form onSubmit={handleSubmit}>
+        <p>Name</p>
+        <input name="name" value={name} onChange={(e) => setName(e.target.value)} />
+        {/*<p>Video</p>
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+              <p>Drag 'n' drop some files here, or click to select files</p>
+            )}
+        </div>
+        <aside>
+          <h4>Files</h4>
+          <ul>{files}</ul>
+        </aside>*/}
+        <input name="videoUpload" value={videoUpload} onChange={(e) => setVideoUpload(e.target.value)} />
+        <br />
+        <button type='submit'>submit</button>
+      </form>
+      {/* <h1>user id is {user.id}</h1> */}
     </>
   )
 }

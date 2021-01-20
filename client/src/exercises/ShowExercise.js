@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import ShowLevel from "./ShowLevel";
+import ShowLevel from '../components/ShowLevel';
 
 
 const ShowExercise = () => {
