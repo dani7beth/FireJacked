@@ -5,7 +5,9 @@ class Api::CommentsController < ApplicationController
   
 
   def index
-    render json: current_admin.comments.all
+    # binding.pry
+    submission = Submission.find(params[:submission_id]).id
+    render json: current_admin.comments.where(submission_id:submission)
   end
 
   def show

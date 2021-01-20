@@ -6,7 +6,8 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
   const [editComment, setEditComment] = useState(false)
   const [newBody, setNewBody] = useState(body)
 
-  const handleSubmit=()=>{
+  const handleSubmit=(e)=>{
+    e.preventDefault()
     editSingleComment(id, {body:newBody, submission_id:submission_id})
     setEditComment(!editComment)
   }
