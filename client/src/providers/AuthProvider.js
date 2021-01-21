@@ -29,7 +29,7 @@ export class AuthProvider extends React.Component {
   };
 
   handleAdminRegister = (admin, history) => {
-    debugger;
+    // debugger;
     Axios.post("/api/admin_auth/", admin)
       .then((res) => {
         this.setState({ admin: res.data.data });
