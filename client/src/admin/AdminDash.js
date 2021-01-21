@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext, } from "../providers/AuthProvider"
+import UpdateAdmin from "./UpdateAdmin";
 
 const AdminDash = () =>{
   const {admin} = useContext(AuthContext);
@@ -9,6 +10,7 @@ const AdminDash = () =>{
     if (admin) {
       return (
         <>
+          <UpdateAdmin />
           <h1>Welcome {admin.first_name} {admin.last_name}</h1>
           <p>Your email: {admin.email}</p>
           <p>Your phone number: {admin.phone}</p>
