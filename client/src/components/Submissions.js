@@ -3,11 +3,16 @@ import Submission from './Submission';
 import SubmissionForm from './SubmissionForm';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
+import { Button, Modal } from 'react-bootstrap';
 
 const Submissions = () => {
 
   const [submissions, setSubmissions] = useState([]);
   const [submission, setSubmission] = useState({});
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
 
   useEffect(() => {
     getSubmissions();  
@@ -31,8 +36,8 @@ const Submissions = () => {
     Axios
       .post(`/api/levels/${level_id}/submissions`, submission)
       .then((res) => {
-        console.log(submission)
-        setSubmissions([submission, ...submissions])
+        console.log(res.data)
+        setSubmissions([res.data, ...submissions])
       })
       .catch((err) => {
         console.log(err)
@@ -80,9 +85,19 @@ const Submissions = () => {
 
   return (
     <>
-      <h2>Make a new submission</h2>
-       <SubmissionForm addSubmission={addSubmission} />
-       <h1>Here are all your submissions!</h1>
+      <Button variant="primary" onClick={handleShow}>
+        Make a submission
+      </Button>
+      <Modal show={show} onHide={handleHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><SubmissionForm addSubmission={addSubmission} handleHide={handleHide} /></Modal.Body>
+        <Modal.Footer>
+        </Modal.Footer>
+      </Modal>
+       <h1>{submissions.length === 0 ? 'Please add a submission' : 'Here are your submissions'}</h1>
+       <hr />
       {renderSubmissions()}
     </>  
   )

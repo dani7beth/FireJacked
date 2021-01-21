@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 
@@ -8,7 +9,7 @@ return (
     <h1>{name}</h1>
     <p>{completed ? "Completed" : "Not completed"}</p>
     <Link to={`/admin-submissions/${id}`}>
-      <button>Verify</button>
+      <Button>Verify</Button>
     </Link>
   </div>
     
