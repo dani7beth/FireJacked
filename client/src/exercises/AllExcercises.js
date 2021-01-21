@@ -26,9 +26,14 @@ const AllExercises = () => {
   const renderAllExercises = () => {
     return exercises.map((exercise) => {
       return (
-      <Link to={`showexercise/${exercise.id}`}>
-        <h1>{exercise.name}</h1>
-      </Link>
+      
+        <div>
+          <Link key={exercise.id} to={`showexercise/${exercise.id}`}>
+            <h1>{exercise.activity}</h1>
+          </Link>
+          <p>{exercise.description}</p>
+        </div>
+      
       )
     })
   }
