@@ -18,7 +18,7 @@ const Exercise = ({ exerciseProp, deleteExercise}) => {
  
   return (
     <div>
-        <Link to={`/exercise/${exerciseProp.id}/levels`}><h1>{exerciseProp.name}</h1></Link>
+        <Link to={`/exercise/${exerciseProp.id}/levels`}><h1>{exerciseProp.activity}</h1></Link>
         <img src={exerciseProp.image} />
         { showEditForm && <ExerciseForm showEditFormToggle={showEditFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
         <button onClick={showEditFormToggle}>{showEditForm ? "Close Form" : "Show Form"}</button>
