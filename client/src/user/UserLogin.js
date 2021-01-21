@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const UserLogin = (props) => {
   //init email and password for login
@@ -35,7 +36,7 @@ const UserLogin = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div>
-            <button type="submit">login</button>
+            <Button type="submit">login</Button>
           </div>
         </form>
         <Link to='/admin_login'>Admin Login</Link>

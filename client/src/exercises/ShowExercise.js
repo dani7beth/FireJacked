@@ -49,7 +49,7 @@ const ShowExercise = () => {
 
   return (
     <>
-      <h1>All Levles for {exercise.activity}</h1>
+      <h1>All Levels for {exercise.activity}</h1>
       {renderLevels()}
     </>
     )
