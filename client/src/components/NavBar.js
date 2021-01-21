@@ -21,6 +21,9 @@ export default (props) => {
         <Link to="/all_exercises">
           <li>All Exercises</li>
         </Link>
+        <Link to="/user_dash">
+          <li>User Dashoboard</li>
+        </Link>
       </>
     );
   };

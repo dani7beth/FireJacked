@@ -14,23 +14,23 @@ const ExerciseForm = ({
   const [exercise, setExercise] = useState(
     exerciseProp
       ? {
-        name: exerciseProp.name,
-        image: exerciseProp.image,
-        how_to_video: exerciseProp.how_to_video,
-        category: exerciseProp.category,
-        activity: exerciseProp.activity,
-      }
+          name: exerciseProp.name,
+          image: exerciseProp.image,
+          how_to_video: exerciseProp.how_to_video,
+          category: exerciseProp.category,
+          activity: exerciseProp.activity,
+        }
       : {
-        name: "",
-        image: "",
-        how_to_video: "",
-        category: "",
-        activity: "",
-      }
+          name: "",
+          image: "",
+          how_to_video: "",
+          category: "",
+          activity: "",
+        }
   );
 
   const onDrop = useCallback((acceptedFiles) => {
-    setExercise({image: acceptedFiles[0]});
+    setExercise({ image: acceptedFiles[0] });
   }, []);
 
   const editCallExercise = () => {
@@ -46,15 +46,12 @@ const ExerciseForm = ({
   };
 
   const addCallExercise = async () => {
-    debugger
-
     if (exercise.image == null) {
       alert("cant be blank");
       return;
     }
 
     let imageData = new FormData();
-    
     imageData.append("image", exercise.image);
     imageData.append("name", exercise.name);
     imageData.append("how_to_video", exercise.how_to_video);
@@ -65,9 +62,8 @@ const ExerciseForm = ({
     try {
       let res = await axios.post(`/api/exercises`, imageData);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-
   };
 
   const handleChange = (e) => {
@@ -96,22 +92,22 @@ const ExerciseForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>Name</p>
-      <input name="name" value={exercise.name} onChange={handleChange} />
       <p>Image</p>
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
-            <p>Drag 'n' drop some files here, or click to select files</p>
-          )}
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
         <input name="image" value={exercise.image} onChange={handleChange} />
       </div>
       <aside>
         <h4>Files</h4>
         <ul>{files}</ul>
       </aside>
+      <p>Name</p>
+      <input name="name" value={exercise.name} onChange={handleChange} />
       <p>How To Video</p>
       <input
         name="how_to_video"

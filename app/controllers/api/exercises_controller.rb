@@ -1,7 +1,7 @@
 class Api::ExercisesController < ApplicationController
   before_action :authenticate_admin!, except: [:all_exercises, :show, :index, :create]
   # before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
-  before_action :set_exercise, only: [:update, :destroy, :show]
+  before_action :set_exercise, only: [:update, :destroy]
  
 
   def index
@@ -13,7 +13,7 @@ class Api::ExercisesController < ApplicationController
   end
 
   def show
-    render json: @exercise
+    render json: Exercise.find(params[:id])
   end
 
   def create 
