@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { Button } from "react-bootstrap";
 
-const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose, addModalHide }) =>{
+const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose, addModalHide, editLevels }) =>{
 
   const [level, setLevel] = useState(
     levelProp ? {
@@ -26,7 +26,7 @@ const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose
       .then((res) => {
         console.log(res.data)
         editLevel(res.data)
-        // setToggle();
+        editLevels(res.data)
       })
       .catch((err) => {
         console.log(err)

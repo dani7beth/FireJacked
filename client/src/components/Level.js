@@ -2,7 +2,7 @@ import LevelForm from "./LevelForm";
 import {Modal, Button} from 'react-bootstrap'
 import { useState, } from 'react';
 
-const Level = ({ levelProp, deleteLevel, exerciseID}) => {
+const Level = ({ levelProp, deleteLevel, exerciseID, editLevels}) => {
   const [ level, setLevel] = useState()
 
   const [show, setShow] = useState(false);
@@ -21,6 +21,7 @@ const Level = ({ levelProp, deleteLevel, exerciseID}) => {
     if(newLevel === levelProp.id) return setLevel(newLevel)
     else return levelProp
   }
+
  
   return (
     <>
@@ -32,7 +33,7 @@ const Level = ({ levelProp, deleteLevel, exerciseID}) => {
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>
         </Modal.Header>
-        <Modal.Body><LevelForm handleEditClose={handleEditClose} editLevel={editLevel} levelProp={levelProp} exerciseID={exerciseID}/></Modal.Body>
+        <Modal.Body><LevelForm handleEditClose={handleEditClose} editLevel={editLevel} levelProp={levelProp} exerciseID={exerciseID} editLevels={editLevels} /></Modal.Body>
         <Modal.Footer>
         </Modal.Footer>
       </Modal>

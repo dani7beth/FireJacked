@@ -39,9 +39,16 @@ const Levels = (props) => {
     setLevels([...levels, level]);
   }
 
+  const editLevels = (level) => {
+    let newLevels = levels.map((l)=>{
+      return l.id === level.id ? level : l;
+    })
+    setLevels(newLevels);
+  }
+
   const renderLevels = () => {
     return levels.map((level) => (
-      <Level key={level.id} levelProp={level} deleteLevel={deleteLevel} exerciseID={exerciseID}/>
+      <Level key={level.id} levelProp={level} deleteLevel={deleteLevel} exerciseID={exerciseID} editLevels={editLevels} />
     ))
   }
 
