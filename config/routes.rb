@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get "all_submissions", to: "admins#all_submissions"
     get "all_exercises", to: "exercises#all_exercises"
     get "categories", to: "users#categories"
+    get "user_stats", to: "users#user_submissions"
     resources :users
     resources :exercises do
       resources :levels do

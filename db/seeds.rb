@@ -3,8 +3,9 @@ require 'faker'
 
 #admins 
 
-admin = Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456")
-    puts "created email: #{admin.email}"
+Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456")
+admin = Admin.find(1)
+puts "created email: #{admin.email}"
     exercise1=admin.exercises.create(name: "", description: " ", category: "Barbell Strength/Power", activity: "Deadlift", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
     exercise2=admin.exercises.create(name: "", description: " ", category: "Barbell Strength/Power", activity: "Back Squat", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
     exercise3=admin.exercises.create(name: "", description: " ", category: "Barbell Strength/Power", activity: "Bench Press", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
@@ -86,7 +87,7 @@ admin = Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name
 #users
 
 5.times do |j|
-  user = User.create(
+  User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     weight: rand(100..300),
@@ -97,12 +98,10 @@ admin = Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name
     image: 'https://picsum.photos/200',
     email: "user#{j}@test.com", 
     password: '123456')
+  user = User.find(j+1)
     puts "created user email: #{user.email}"
-    3.times do 
-      submit = user.submissions.create(completed:false, name: "squats", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: rand(1..15))
-      # 2.times do 
-      #   submit.comments.create(admin_id:rand(0..4), body:"Nice!")
-      # end
+    20.times do 
+      submit = user.submissions.create(completed:Faker::Boolean.boolean(true_ratio: 0.8), name: "", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: rand(1...57))
     end
 end
 
