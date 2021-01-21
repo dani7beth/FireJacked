@@ -1,14 +1,25 @@
 import { Link } from "react-router-dom"
+import { AuthContext } from "../providers/AuthProvider";
+import { useContext } from "react";
 
-const ShowLevel = ({name, measurement, reps, timeframe, sets, id}) => {
+const ShowLevel = ({name, measurement, reps, timeframe, sets, metric, multiplier, id}) => {
 
+  const { user } = useContext(AuthContext)
+
+  let outcome = multiplier * user.weight
+  let minute = Math.floor(timeframe/60)
+  let seconds = timeframe%60 < 10 ? "0" + timeframe%60 : timeframe%60
+  let duration = minute + ":" + seconds
+
+  
   return(
     <div>
-      <h1>{name}</h1>
-      <p>{measurement}</p>
-      <p>{reps}</p>
-      <p>{timeframe}</p>
-      <p>{sets}</p>
+      <h1>Level Name: {name}</h1>
+      <p> {measurement ==="Bodyweight" ? `${outcome} ${metric}` : ""}</p>
+      <p> Timeframe: {duration}</p>
+      <p> Reps: {reps}</p>
+      <p> Sets: {sets}</p>
+      
         <Link to={`/submissions/${id}`}>
           <button>Submission</button>
         </Link>

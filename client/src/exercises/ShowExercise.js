@@ -6,8 +6,26 @@ import ShowLevel from '../components/ShowLevel';
 
 const ShowExercise = () => {
   const [levels, setLevels] = useState([])
+  const [exercise, setExercise] = useState({})
 
   const { exercise_id } = useParams()
+
+  useEffect(() => {
+    getLevels();
+    getExercise()
+  }, []);
+
+  const getExercise = async () => {
+    try {
+      // debugger
+      let res = await Axios.get(`/api/exercises/${exercise_id}`)
+      console.log(res.data)
+      setExercise(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   const getLevels = () => {
     Axios
@@ -21,9 +39,7 @@ const ShowExercise = () => {
       }
   )}
 
-  useEffect(() => {
-    getLevels();
-  }, []);
+  
 
   const renderLevels = () => {
     return levels.map((level) => {
@@ -33,7 +49,7 @@ const ShowExercise = () => {
 
   return (
     <>
-      <h1>levels</h1>
+      <h1>All Levles for {exercise.activity}</h1>
       {renderLevels()}
     </>
     )
