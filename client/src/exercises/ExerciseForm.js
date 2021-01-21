@@ -151,7 +151,7 @@ const ExerciseForm = ({
         />
         <br />
         <Button variant='primary' type="submit">submit</Button>
-        <Button variant='danger' onClick={handleHide}>cancel</Button>
+        <Button variant='danger' onClick={whichClose}>cancel</Button>
       </form>
         
     </>
