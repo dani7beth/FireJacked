@@ -22,16 +22,16 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
 
 
 
- 
+
   return (
     <div>
-        <Link to={`/exercise/${exerciseProp.id}/levels`}><h1>{exerciseProp.activity}</h1></Link>
-        <img src={exerciseProp.image} style={{height:'300px', width:'200px'}}/>
-        {/* { showDeleteForm && <ExerciseForm showDeleteFormToggle={showDeleteFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
+      <Link to={`/exercise/${exerciseProp.id}/levels`}><h1>{exerciseProp.activity}</h1></Link>
+      <img src={exerciseProp.image} style={{height:'300px', width:'200px'}}/>
+      {/* { showDeleteForm && <ExerciseForm showDeleteFormToggle={showDeleteFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
         <button onClick={showDeleteFormToggle}>{showDeleteForm ? "Close Form" : "Show Form"}</button>
         <button onClick={()=> deleteExercise(exerciseProp.id)}>Delete</button> */}
-        {/* <Levels exercise={exerciseProp}/> */}
-        <Button variant="primary" onClick={handleEditShow}>
+      {/* <Levels exercise={exerciseProp}/> */}
+      <Button variant="primary" onClick={handleEditShow}>
         Edit
       </Button>
       <Modal show={showEdit} onHide={handleEditHide}>
@@ -41,7 +41,7 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
         <Modal.Body><ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp} handleEditHide={handleEditHide} editExercises={editExercises} /></Modal.Body>
       </Modal>
 
-        <Button variant="danger" onClick={handleDeleteShow}>
+      <Button variant="danger" onClick={handleDeleteShow}>
         Delete
       </Button>
       <Modal show={showDelete} onHide={handleDeleteHide}>
