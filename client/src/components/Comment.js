@@ -19,24 +19,9 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
     editSingleComment(id, {body:newBody, submission_id:submission_id})
     handleEditClose();
   }
-  
-  // if (editComment){
-  //   return(
-  //     <div>
-  //         <form onSubmit={handleSubmit}>
-  //           <input value ={newBody} onChange={(e)=>setNewBody(e.target.value)}/> 
-  //         </form>
-          
-  //     </div>
-  //   )}
-
-
-    
 
     return(
       <>
-        {/* <h4 onClick={()=>setEditComment(!editComment)}>{body}</h4> */}
-        {/* <button onClick={()=>removeComment(id)}>Delete</button> */}
         <div>
             <h4>{body}</h4>
              <Button variant="primary" size='sm' onClick={handleEditShow}>

@@ -83,11 +83,6 @@ const Comments = ({submission_id}) => {
     }
   }
 
-{/* <form onSubmit={handleSubmit}>
-      <textarea value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
-      <button type="submit">+</button>
-    </form> */}
-
 
   return (
     <>

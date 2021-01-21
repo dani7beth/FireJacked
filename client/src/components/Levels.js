@@ -62,7 +62,6 @@ const Levels = (props) => {
         <Modal.Body><LevelForm exerciseID={exerciseID} addLevel={addLevel} addModalHide={addModalHide} /></Modal.Body>
       </Modal>
       <h1>levels</h1>
-      {/* <LevelForm exerciseID={exerciseID} addLevel={addLevel}/>  */}
       {renderLevels()}
     </>
   );

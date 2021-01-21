@@ -4,7 +4,6 @@ import { useState, } from 'react';
 
 const Level = ({ levelProp, deleteLevel, exerciseID}) => {
   const [ level, setLevel] = useState()
-  // const [ toggle, setToggle] = useState(false)
 
   const [show, setShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
@@ -26,9 +25,6 @@ const Level = ({ levelProp, deleteLevel, exerciseID}) => {
   return (
     <>
       <h1>{levelProp.name}</h1>
-      {/* { toggle && <LevelForm  setToggle={setToggle} editLevel={editLevel} levelProp={levelProp} exerciseID={exerciseID}/>}
-      <button onClick={() => setToggle(!toggle)}>{toggle? "Close Form" : "Show Form"}</button> */}
-
       <Button variant="primary" onClick={handleEditShow}>
         Edit
       </Button>
@@ -38,12 +34,6 @@ const Level = ({ levelProp, deleteLevel, exerciseID}) => {
         </Modal.Header>
         <Modal.Body><LevelForm handleEditClose={handleEditClose} editLevel={editLevel} levelProp={levelProp} exerciseID={exerciseID}/></Modal.Body>
         <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleEditClose}>
-            Cancel
-          </Button> */}
-          {/* <Button variant="danger" onClick={()=> howToEdit() } >
-            Submit changes
-          </Button> */}
         </Modal.Footer>
       </Modal>
 
