@@ -2,10 +2,11 @@ import { useContext, useReducer, useState, useCallback } from "react";
 import Axios from 'axios';
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from 'react-router-dom';
+import { Button } from "react-bootstrap";
 // import Uploader from "./Uploader";
 // import {useDropzone} from 'react-dropzone';
 
-const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) => {
+const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission, handleHide, handleEditHide}) => {
   // const [name, setName] = useState('');
   // const [completed, setCompleted] = useState(false);
   // const [videoUpload, setVideoUpload] = useState('');
@@ -42,6 +43,7 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
         level_id: level_id
       })
     }
+      whichHide();
   }
 
   const handleChange = (e) => {
@@ -53,6 +55,14 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
   //    {file.path} - {file.size} bytes
   //  </li>
   // ));
+
+  const whichHide = () => {
+    if(submissionProp){
+      handleEditHide();
+    } else {
+      handleHide();
+    }
+  }
   return (
     <>
     <form onSubmit={handleSubmit}>
@@ -61,7 +71,8 @@ const SubmissionForm = ({submissionProp, addSubmission, editCalledSubmission}) =
       <p>Video</p>
       <input name="videoUpload" value={submission.videoUpload} onChange={handleChange} />
       <br/>
-      <button type='submit'>submit</button>
+      <Button type='submit'>submit</Button>
+      <Button variant='danger' onClick={whichHide} >cancel</Button>
     </form>
     {/* <h1>user id is {user.id}</h1> */}
     </>
