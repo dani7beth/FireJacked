@@ -41,6 +41,11 @@ export class AuthProvider extends React.Component {
       });
   };
 
+  handleUserEdit = () => {
+    console.log('handleUserEdit function was called!')
+    // do axios.put here with correct info
+  }
+
   //user login
   handleUserLogin = (user, history) => {
     Axios.post("/api/auth/sign_in", user)
