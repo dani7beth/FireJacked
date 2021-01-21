@@ -37,8 +37,19 @@ const ExerciseForm = ({
   }, []);
 
   const editCallExercise = () => {
+    debugger;
+    if (exercise.image == null) {
+      alert("cant be blank");
+      return;
+    }
+    let imageData = new FormData();
+    imageData.append("image", exercise.image);
+    imageData.append("name", exercise.name);
+    imageData.append("how_to_video", exercise.how_to_video);
+    imageData.append("category", exercise.category);
+    imageData.append("activity", exercise.activity);
     axios
-      .put(`/api/exercises/${exerciseProp.id}`, exercise)
+      .put(`/api/exercises/${exerciseProp.id}`, imageData)
       .then((res) => {
         console.log(res.data);
         editExercise(res.data);
@@ -151,7 +162,7 @@ const ExerciseForm = ({
         />
         <br />
         <Button variant='primary' type="submit">submit</Button>
-        <Button variant='danger' onClick={handleHide}>cancel</Button>
+        <Button variant='danger' onClick={whichClose}>cancel</Button>
       </form>
         
     </>
