@@ -18,7 +18,7 @@ class Api::ExercisesController < ApplicationController
 
   def create 
     # exercise = current_admin.exercises.new(exercise_params)
-    file = params[:file]
+    file = params[:image]
     if file
       begin
         # ext = File.extname(file.tempfile)
