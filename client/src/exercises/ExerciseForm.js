@@ -111,10 +111,6 @@ const ExerciseForm = ({
         )}
         <input name="image" value={exercise.image} onChange={handleChange} />
       </div>
-      <aside>
-        <h4>Files</h4>
-        <ul>{files}</ul>
-      </aside>
       <p>Name</p>
       <input name="name" value={exercise.name} onChange={handleChange} />
       <p>How To Video</p>
