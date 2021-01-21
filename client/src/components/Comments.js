@@ -84,7 +84,7 @@ const Comments = ({submission_id}) => {
     <>
     <h1>Comments</h1>
     <form onSubmit={handleSubmit}>
-      <input value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
+      <textarea value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
       <button type="submit">+</button>
     </form>
     {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}

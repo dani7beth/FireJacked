@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Level from "./Level";
 import LevelForm from "./LevelForm";
+import { Button, Modal } from "react-bootstrap";
 
 const Levels = (props) => {
   const [levels, setLevels] = useState([]);
@@ -43,11 +44,25 @@ const Levels = (props) => {
       <Level key={level.id} levelProp={level} deleteLevel={deleteLevel} exerciseID={exerciseID}/>
     ))
   }
+
+  const [addModal, setAddModal] = useState(false);
+
+  const addModalShow = () => setAddModal(true);
+  const addModalHide = () => setAddModal(false);
   
   return (
     <>
+      <Button variant="primary" onClick={addModalShow}>
+        Add a new level
+      </Button>
+      <Modal show={addModal} onHide={addModalHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter new level info here</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><LevelForm exerciseID={exerciseID} addLevel={addLevel} addModalHide={addModalHide} /></Modal.Body>
+      </Modal>
       <h1>levels</h1>
-      <LevelForm exerciseID={exerciseID} addLevel={addLevel}/> 
+      {/* <LevelForm exerciseID={exerciseID} addLevel={addLevel}/>  */}
       {renderLevels()}
     </>
   );
