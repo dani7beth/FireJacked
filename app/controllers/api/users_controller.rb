@@ -8,4 +8,9 @@ class Api::UsersController < ApplicationController
     render json: User.user_submissions(User.first().id)
   end
 
+  before_action :authenticate_user!
+
+  def update_user
+    
+  end
 end

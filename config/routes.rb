@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get "categories", to: "users#categories"
     get "user_stats", to: "users#user_submissions"
     resources :users
+    resources :admins
     resources :exercises do
       resources :levels do
         # resources :submissions do
