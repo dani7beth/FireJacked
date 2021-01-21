@@ -1,7 +1,6 @@
-import { useCallback, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Form, Button } from "react-bootstrap";
-import { useDropzone } from "react-dropzone";
 
 export default (props) => {
 
