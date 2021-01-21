@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     get "single_submission/:submission_id", to: "admins#single_submission"
     get "all_submissions", to: "admins#all_submissions"
     get "all_exercises", to: "exercises#all_exercises"
+    put "update_admin", to: "admins#update_admin"
     resources :users
+    resources :admins
     resources :exercises do
       resources :levels do
         # resources :submissions do

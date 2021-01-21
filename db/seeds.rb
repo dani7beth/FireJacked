@@ -3,7 +3,7 @@ require 'faker'
 
 #admins 
 
-admin = Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456")
+admin = Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456", image:"https://picsum.photos/200/300.jpg")
     puts "created email: #{admin.email}"
     exercise1=admin.exercises.create(name: "", description: " ", category: "Barbell Strength/Power", activity: "Deadlift", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
     exercise2=admin.exercises.create(name: "", description: " ", category: "Barbell Strength/Power", activity: "Back Squat", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
