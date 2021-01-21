@@ -20,7 +20,7 @@ class Api::SubmissionsController < ApplicationController
   end  
 
   def index
-    level = current_user.levels.find(params[:level_id])
+    level = Level.find(params[:level_id])
     render json: level.submissions
   end
 
