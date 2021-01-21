@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext } from "react";
+import { Button } from "react-bootstrap";
 
 const ShowLevel = ({name, measurement, reps, timeframe, sets, metric, multiplier, id}) => {
 
@@ -14,6 +15,7 @@ const ShowLevel = ({name, measurement, reps, timeframe, sets, metric, multiplier
   
   return(
     <div>
+      <hr />
       <h1>Level Name: {name}</h1>
       <p> {measurement ==="Bodyweight" ? `${outcome} ${metric}` : ""}</p>
       <p> Timeframe: {duration}</p>
@@ -21,8 +23,9 @@ const ShowLevel = ({name, measurement, reps, timeframe, sets, metric, multiplier
       <p> Sets: {sets}</p>
       
         <Link to={`/submissions/${id}`}>
-          <button>Submission</button>
+          <Button>Submission</Button>
         </Link>
+        <hr />
     </div>
   )
 

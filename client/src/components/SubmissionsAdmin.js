@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
 import SubmissionAdmin from "./SubmissionAdmin"
+import { Button } from "react-bootstrap"
 const SubmissionsAdmin = () => {
 
   const [submissions, setSubmissions] = useState([])
@@ -37,7 +38,7 @@ const SubmissionsAdmin = () => {
   return (
     <>
     <h1>Select a Submssion</h1>
-    <button onClick={() => setFilter(!filter)}>Click to Filter Out completed</button>
+    <Button variant='secondary' onClick={() => setFilter(!filter)}>Click to Filter Out completed</Button>
     {renderSubmissions()}
     </>
   )

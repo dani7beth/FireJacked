@@ -3,12 +3,15 @@ import { useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import { useDropzone } from "react-dropzone";
+import { Button } from "react-bootstrap";
 
 const ExerciseForm = ({
   exerciseProp,
   addExercise,
   editExercise,
-  showEditFormToggle,
+  handleHide,
+  handleEditHide,
+  editExercises
 }) => {
   const Auth = useContext(AuthContext);
   const [exercise, setExercise] = useState(
@@ -39,6 +42,7 @@ const ExerciseForm = ({
       .then((res) => {
         console.log(res.data);
         editExercise(res.data);
+        editExercises(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +64,7 @@ const ExerciseForm = ({
 
     console.log(imageData);
     try {
-      debugger;
+      // debugger;
       let res = await axios.post(`/api/exercises`, imageData);
       addExercise(res.data);
     } catch (err) {
@@ -86,6 +90,7 @@ const ExerciseForm = ({
         activity: "",
       });
     }
+      whichClose();
   };
   const {
     getRootProps,
@@ -99,40 +104,57 @@ const ExerciseForm = ({
     </li>
   ));
 
+  const whichClose = () => {
+    if(exerciseProp) {
+      handleEditHide();
+    } else {
+      handleHide();
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Image</p>
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        )}
-        <input name="image" value={exercise.image} onChange={handleChange} />
-      </div>
-      <p>Name</p>
-      <input name="name" value={exercise.name} onChange={handleChange} />
-      <p>How To Video</p>
-      <input
-        name="how_to_video"
-        value={exercise.how_to_video}
-        onChange={handleChange}
-      />
-      <p>Category</p>
-      <input
-        name="category"
-        value={exercise.category}
-        onChange={handleChange}
-      />
-      <p>Activity</p>
-      <input
-        name="activity"
-        value={exercise.activity}
-        onChange={handleChange}
-      />
-      <button type="submit">submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <p>Image</p>
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag 'n' drop some files here, or click to select files</p>
+          )}
+          <input name="image" value={exercise.image} onChange={handleChange} />
+        </div>
+        <aside>
+          <h4>Files</h4>
+          <ul>{files}</ul>
+        </aside>
+        <p>Name</p>
+        <input name="name" value={exercise.name} onChange={handleChange} />
+        <p>How To Video</p>
+        <input
+          name="how_to_video"
+          value={exercise.how_to_video}
+          onChange={handleChange}
+        />
+        <p>Category</p>
+        <input
+          name="category"
+          value={exercise.category}
+          onChange={handleChange}
+        />
+        <p>Activity</p>
+        <input
+          name="activity"
+          value={exercise.activity}
+          onChange={handleChange}
+        />
+        <br />
+        <Button variant='primary' type="submit">submit</Button>
+        <Button variant='danger' onClick={handleHide}>cancel</Button>
+      </form>
+        
+    </>
   );
 };
 

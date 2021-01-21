@@ -56,7 +56,7 @@ const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose
     else {
       addCallLevel();
     }
-    // whichClose(); I can't test this cuz something broke when I pulled.. but this should make the form auto-close upon submitting
+      whichClose();
   }
 
   const whichClose = () => {
