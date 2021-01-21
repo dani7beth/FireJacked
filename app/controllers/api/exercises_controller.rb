@@ -51,6 +51,7 @@ class Api::ExercisesController < ApplicationController
         return
       end 
     end
+    render json: @exercise
   end
 
 

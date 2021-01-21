@@ -3,21 +3,7 @@ class Api::SubmissionsController < ApplicationController
   # before_action :set_test_user
   before_action :set_level
   before_action :set_submission, only: [:update, :destroy, :show]
-
-  def basic_upload
-    file = params[:file]
-    if file
-      begin
-        # ext = File.extname(file.tempfile)
-        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
-        # user.image = cloud_image['secure_url']
-        render json: { yo: "worked", file: file, cloud_image: cloud_image }
-      rescue => e
-        render json: { errors: e }, status: 422
-        return
-      end
-    end
-  end  
+ 
 
   def index
     level = Level.find(params[:level_id])
@@ -33,7 +19,16 @@ class Api::SubmissionsController < ApplicationController
   end
 
   def create 
-   submission = current_user.submissions.new(submission_params)
+    file = params[:video_upload]
+    if file
+      begin
+        cloud_video = Cloudinary::Uploader.upload_large(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+        submission = current_user.submissions.new(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id:[:level_id])
+      rescue => e
+        render json: {errors: e}, status: 422
+        return
+      end
+    end
     if submission.save
       render json: submission
     else
@@ -42,7 +37,16 @@ class Api::SubmissionsController < ApplicationController
   end
 
   def update
-    @submission.update(submission_params)
+    file = params[:image]
+    if file
+      begin
+        cloud_video = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+        submission = current_user.submissions.update(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id:[:level_id])
+      rescue => e
+        render json: {errors: e}, status: 422
+        return
+      end
+    end
     render json: @submission
   end
 
