@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import {useContext} from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext, } from "../providers/AuthProvider"
 
 const UserDash = () =>{
@@ -10,16 +11,7 @@ const UserDash = () =>{
       return (
         <>
         <h1>Welcome {user.first_name} {user.last_name}</h1>
-        <div>
-          <h3>User Info</h3>
-          <img src={user.image} />
-          <p>about: {user.about}</p>
-          <p>email: {user.email}</p>
-          <p>age: {user.age}</p>
-          <p>gender: {user.gender}</p>
-          <p>Height: {user.height}cm</p>
-          <p>Weight: {user.weight}lb</p>
-        </div>
+        <Link to='/edit_profile'>Edit Profile</Link>
         </>
       )
     }

@@ -18,6 +18,7 @@ import SubmissionsFormAdmin from "./components/SubmissionsFormAdmin";
 import UserRegister from "./user/UserRegister";
 import AdminRegister from "./admin/AdminRegister";
 import AdminUpdate from "./admin/AdminUpdate";
+import UserEditForm from "./user/UserEditForm";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/showexercise/:exercise_id" component={ShowExercise} />
           <Route exact path="/submissions/:level_id" component={Submissions} />
           <Route exact path="/user_dash" component={UserDash} />
+          <Route exact path='/edit_profile' component={UserEditForm} />
           <Route exact path='/exercise/:id/levels' component={Levels} />
           <Route exact path='/admin-submissions' component={SubmissionsAdmin}/>
           <Route exact path='/admin-submissions/:submission_id' component={SubmissionsFormAdmin}/>

@@ -1,5 +1,5 @@
 class Api::ExercisesController < ApplicationController
-  before_action :authenticate_admin!, except: [:all_exercises, :show, :index, :create]
+  before_action :authenticate_admin!, except: [:all_exercises, :show, :index, :create, :update]
   # before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
   before_action :set_exercise, only: [:update, :destroy]
  
@@ -30,6 +30,7 @@ class Api::ExercisesController < ApplicationController
         return
       end
     end
+    
 
     if exercise.save
       render json: exercise
@@ -40,9 +41,18 @@ class Api::ExercisesController < ApplicationController
   end
 
   def update
-    @exercise.update(exercise_params)
-    render json: @exercise
+    file = params[:image]
+    if file
+      begin
+      cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+      @exercise.update(image: cloud_image['secure_url'], name: params[:name], how_to_video: params[:how_to_video], category: params[:category], activity: params[:activity])
+      rescue => e
+        render json: {errors: e}, status: 422
+        return
+      end 
+    end
   end
+
 
   def destroy
     @exercise.destroy
