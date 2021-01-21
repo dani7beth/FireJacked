@@ -10,7 +10,6 @@ const ShowLevel = ({name, measurement, reps, timeframe, sets, metric, multiplier
   let minute = Math.floor(timeframe/60)
   let seconds = timeframe%60 < 10 ? "0" + timeframe%60 : timeframe%60
   let duration = minute + ":" + seconds
-
   
   return(
     <div>
