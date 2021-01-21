@@ -60,7 +60,9 @@ const ExerciseForm = ({
 
     console.log(imageData);
     try {
+      debugger;
       let res = await axios.post(`/api/exercises`, imageData);
+      addExercise(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -76,6 +78,13 @@ const ExerciseForm = ({
       editCallExercise();
     } else {
       addCallExercise();
+      setExercise({
+        name: "",
+        image: "",
+        how_to_video: "",
+        category: "",
+        activity: "",
+      });
     }
   };
   const {

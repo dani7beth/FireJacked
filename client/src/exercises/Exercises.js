@@ -39,7 +39,7 @@ const Exercises = () => {
   }
 
   const addExercise = (exercise) => {
-    setExercises([exercise, ...exercises])
+    setExercises([...exercises, exercise])
 };
   
   return (
