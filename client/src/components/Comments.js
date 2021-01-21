@@ -2,12 +2,17 @@ import { useEffect, useState } from "react"
 import Axios from "axios"
 import { useParams } from "react-router-dom"
 import Comment from "./Comment"
+import { Button, Modal } from "react-bootstrap"
 
 const Comments = ({submission_id}) => {
   // const { submission_id } = useParams()
 
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState("")
+  const [addShow, setAddShow] = useState(false);
+
+  const handleAddClose = () => setAddShow(false);
+  const handleAddShow = () => setAddShow(true);
   
 
   useEffect(()=>{
@@ -36,6 +41,7 @@ const Comments = ({submission_id}) => {
       console.log(res.data)
       setComments([res.data,...comments])
       setComment("")
+      handleAddClose();
     } catch (error) {
       console.log(error)
       return (
@@ -77,16 +83,33 @@ const Comments = ({submission_id}) => {
     }
   }
 
-
+{/* <form onSubmit={handleSubmit}>
+      <textarea value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
+      <button type="submit">+</button>
+    </form> */}
 
 
   return (
     <>
     <h1>Comments</h1>
-    <form onSubmit={handleSubmit}>
-      <textarea value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>
-      <button type="submit">+</button>
-    </form>
+          <Button variant="primary" size='sm' onClick={handleAddShow}>
+            Add comment
+          </Button>
+          <Modal show={addShow} onHide={handleAddClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>What would you like to say?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <div>
+                  <form onSubmit={handleSubmit}>
+                  <textarea value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>  
+                  <br />
+                  <Button type='submit' variant='primary' size='sm'>submit changes</Button>
+                  <Button variant="secondary" size='sm' onClick={handleAddClose}>Go back</Button>
+                </form>
+            </div>
+            </Modal.Body>
+          </Modal>
     {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
     </>
 

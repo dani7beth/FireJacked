@@ -17,7 +17,7 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
   const handleSubmit=(e)=>{
     e.preventDefault()
     editSingleComment(id, {body:newBody, submission_id:submission_id})
-    // setEditComment(!editComment)
+    handleEditClose();
   }
   
   // if (editComment){
@@ -51,8 +51,8 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
                 <form onSubmit={handleSubmit}>
                   <textarea value={newBody} onChange={(e)=>setNewBody(e.target.value)}/> 
                   <br />
-                  <Button type='submit' variant='primary'>submit changes</Button>
-                  <Button variant="secondary" onClick={handleEditClose}>Go back</Button>
+                  <Button type='submit' variant='primary' size='sm'>submit changes</Button>
+                  <Button variant="secondary" size='sm' onClick={handleEditClose}>Go back</Button>
                 </form>
             </div>
             </Modal.Body>
@@ -72,10 +72,10 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
             </Modal.Header>
             <Modal.Body>Are you sure you want to Delete?</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="secondary" size='sm' onClick={handleClose}>
                 No
               </Button>
-              <Button variant="danger" onClick={()=> removeComment(id)}>
+              <Button variant="danger" size='sm' onClick={()=> removeComment(id)}>
                 Yes, delete.
               </Button>
             </Modal.Footer>
