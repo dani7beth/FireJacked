@@ -1,8 +1,10 @@
 class Api::AdminsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_page
 
   def all_submissions
-    render json: Submission.all
+    submissions = Submission.page(@page).all
+    render json: {data: Submission.page(@page).all, total_pages: submissions.total_pages}
   end
 
   def single_submission
@@ -22,6 +24,10 @@ class Api::AdminsController < ApplicationController
   private
   def submission_params
     params.permit(:completed, :name, :video_upload, :level_id)
+  end
+
+  def set_page
+    @page = params[:page] || 1
   end
 
 end

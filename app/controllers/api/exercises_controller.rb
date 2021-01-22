@@ -2,14 +2,18 @@ class Api::ExercisesController < ApplicationController
   before_action :authenticate_admin!, except: [:all_exercises, :show, :index, :create, :update]
   # before_action :set_admin, only: [:create, :update, :destroy, :show, :index]
   before_action :set_exercise, only: [:update, :destroy]
+  before_action :set_page
+
  
 
   def index
-    render json: current_admin.exercises.all
+    exercises = current_admin.exercises.page(@page).all
+    render json: {data: current_admin.exercises.page(@page).all, total_pages: exercises.total_pages}
   end
 
   def all_exercises
-    render json: Exercise.all
+    all_exercises = Exercise.page(@page).all
+    render json: {data: Exercise.page(@page).all, total_pages: all_exercises.total_pages}
   end
 
   def show
@@ -66,6 +70,10 @@ class Api::ExercisesController < ApplicationController
   end
   def set_exercise
     @exercise = current_admin.exercises.find(params[:id])
+  end
+
+  def set_page
+    @page = params[:page] || 1
   end
   # def set_admin
   #   # @admin = Admin.find(params[:admin_id])
