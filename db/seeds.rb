@@ -25,6 +25,9 @@ puts "created email: #{admin.email}"
     exercise17=admin.exercises.create(name: "", description: " ", category: "Power/Strength Endurance", activity: "MAX REP KB Swing @ 50% BW", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
     exercise18=admin.exercises.create(name: "", description: " ", category: "Power Endurance", activity: "BW CAL ROW", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
     exercise19=admin.exercises.create(name: "", description: " ", category: "GYM Endurance", activity: "60 Min Row", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
+    100.times do 
+      exercise20=admin.exercises.create(name: "", description: " ", category: "GYM Endurance", activity: "Extra Activity to Show how infinitie Scroll works", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
+    end
 
     exercise1.levels.create(name: "Initiated", multiplier:2, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
     exercise1.levels.create(name: "Committed", multiplier:2.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
