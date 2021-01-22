@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 // import InfiniteScroll from 'react-infinite-scroller';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Button from 'react-bootstrap/Button';
+import styled from 'styled-components'
+
+
 
 const AllExercises = () => {
 
@@ -70,35 +73,43 @@ const AllExercises = () => {
   //     </>
   //   )
   // }
+  
+  const height = 700
+
+  const Box = styled.div`
+  height: ${height}px;
+  width: 80%;
+  border: solid;
+  overflow:auto;
+  background:#f0f8ff;
+  margin:auto
+`
 
   return (
     <>
       <h1>Choose an exercise</h1>
-      <InfiniteScroll
-          dataLength={exercises.length}
-          next={()=>loadMore()}
-          hasMore={exercises.length + 1 < totalPages * 10 ? true : false }
-          loader={<h4>Loading...</h4>}
-          // height={400}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>End of Exercises</b>
-            </p>
-          }
-        >
-      {renderAllExercises()}
-      </InfiniteScroll>
+      <Box>
+        <InfiniteScroll
+            dataLength={exercises.length}
+            next={()=>loadMore()}
+            hasMore={exercises.length + 1 < totalPages * 10 ? true : false }
+            loader={<h4>Loading...</h4>}
+            height={height}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>End of Exercises</b>
+              </p>
+            }
+          >
+        {renderAllExercises()}
+        </InfiniteScroll>
+      </Box>
     </>
   )
+
+  
 
 }
 
 export default AllExercises
 
-{/* <InfiniteScroll
-pageStart={page}
-loadMore={()=>loadMore()}
-hasMore={false}
-useWindow={false}
->
-</InfiniteScroll> */}

@@ -51,7 +51,18 @@ const SubmissionsAdmin = () => {
 
     return submissions.map(s => <SubmissionAdmin key={s.id}{...s}/>)
   }
+  const height = 700
 
+  const Box = styled.div`
+  height: ${height}px;
+  width: 80%;
+  border: solid;
+  overflow:auto;
+  background:#f0f8ff;
+  margin:auto;
+  margin-top:50px;
+  padding:10px
+  `
   return (
     <>
     <h1>Select a Submssion</h1>
@@ -62,7 +73,7 @@ const SubmissionsAdmin = () => {
       next={()=>loadMore()}
       hasMore={submissions.length + 1 < totalPages * 10 ? true : false }
       loader={<h4>Loading...</h4>}
-      height={500}
+      height={height}
       endMessage={
         <p style={{ textAlign: "center" }}>
           <b>End of Submissions</b>
@@ -80,11 +91,3 @@ const SubmissionsAdmin = () => {
 }
 
 export default SubmissionsAdmin
-
-const Box = styled.div`
-  height: 500px;
-  width: 400px;
-  border: solid;
-  overflow:auto;
-  background:#fff;
-`
