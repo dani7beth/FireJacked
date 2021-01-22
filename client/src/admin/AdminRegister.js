@@ -1,4 +1,4 @@
-import { Form, } from 'react-bootstrap';
+import { Form, Button, } from 'react-bootstrap';
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -27,60 +27,53 @@ export default (props) => {
   return (
     <>
       <h1 as="h1">Register</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          label="Email"
-          name="email"
-          value={email}
-          placeholder='Email'
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          label="First Name"
-          name="firstName"
-          value={firstName}
-          placeholder='First Name'
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          label="Last Name"
-          name="lastName"
-          value={lastName}
-          placeholder='Last Name'
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <input
-          label="Phone Number"
-          name="phone"
-          value={phone}
-          placeholder='Phone'
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <input
-          label="Speciality"
-          name="speciality"
-          value={speciality}
-          placeholder='Speciality'
-          onChange={(e) => setSpeciality(e.target.value)}
-        />
-        <input
-          label="Password"
-          name="password"
-          value={password}
-          placeholder='Password'
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          label="Confirm Password"
-          name="confirmpassword"
-          value={confirmPassword}
-          placeholder='Confirm Password'
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <div>
-          <button type="submit">register</button>
-        </div>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <Form.Label>Speciality</Form.Label>
+          <Form.Control
+            type="text"
+            value={speciality}
+            onChange={(e) => setSpeciality(e.target.value)}
+          />
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button variant='primary' type="submit">Register</Button>
+        </Form.Group>
+      </Form>
     </>
   );
 };
