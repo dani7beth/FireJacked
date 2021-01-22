@@ -1,5 +1,5 @@
 import { useContext, useReducer, useState, useCallback } from "react";
-import Axios from "axios";
+import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -30,6 +30,25 @@ const SubmissionForm = ({
           level_id: parseInt(level_id),
         }
   );
+  
+  const addCallSubmission = async () =>{
+    if (submission.video_upload == null){
+      alert('cant be blank');
+      return;
+    }
+    let videoData = new FormData();
+      videoData.append("video_upload", submission.video_upload);
+      videoData.append("name", submission.name);
+      videoData.append("level_id", submission.level_id);
+
+    try{
+      debugger;
+      let res = axios.put(`/api/levels/${level_id}/submissions`, videoData);
+      addSubmission(res.data);
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   const onDrop = useCallback((acceptedFiles) => {
     setSubmission({ video_upload: acceptedFiles[0] });
@@ -45,17 +64,7 @@ const SubmissionForm = ({
         level_id: level_id,
       });
     } else {
-      if (submission.video_upload == null) {
-        alert("cant be blank");
-        return;
-      }
-      let videoData = new FormData();
-      videoData.append("video_upload", submission.video_upload);
-      videoData.append("name", submission.name);
-      videoData.append("level_id", submission.level_id);
-
-      addSubmission(videoData);
-
+      addCallSubmission();
       setSubmission({
         name: "",
         completed: false,

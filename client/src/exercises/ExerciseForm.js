@@ -11,7 +11,7 @@ const ExerciseForm = ({
   editExercise,
   handleHide,
   handleEditHide,
-  editExercises
+  editExercises,
 }) => {
   const Auth = useContext(AuthContext);
   const [exercise, setExercise] = useState(
@@ -36,7 +36,7 @@ const ExerciseForm = ({
     setExercise({ image: acceptedFiles[0] });
   }, []);
 
-  const editCallExercise = () => {
+  const editCallExercise = async () => {
     debugger;
     if (exercise.image == null) {
       alert("cant be blank");
@@ -48,16 +48,14 @@ const ExerciseForm = ({
     imageData.append("how_to_video", exercise.how_to_video);
     imageData.append("category", exercise.category);
     imageData.append("activity", exercise.activity);
-    axios
-      .put(`/api/exercises/${exerciseProp.id}`, imageData)
-      .then((res) => {
-        console.log(res.data);
-        editExercise(res.data);
-        editExercises(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      let res = await axios.put(`/api/exercises/${exerciseProp.id}`, imageData);
+      editExercise(res.data);
+      editExercises(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const addCallExercise = async () => {
@@ -101,7 +99,7 @@ const ExerciseForm = ({
         activity: "",
       });
     }
-      whichClose();
+    whichClose();
   };
   const {
     getRootProps,
@@ -116,12 +114,12 @@ const ExerciseForm = ({
   ));
 
   const whichClose = () => {
-    if(exerciseProp) {
+    if (exerciseProp) {
       handleEditHide();
     } else {
       handleHide();
     }
-  }
+  };
 
   return (
     <>
@@ -161,10 +159,13 @@ const ExerciseForm = ({
           onChange={handleChange}
         />
         <br />
-        <Button variant='primary' type="submit">submit</Button>
-        <Button variant='danger' onClick={whichClose}>cancel</Button>
+        <Button variant="primary" type="submit">
+          submit
+        </Button>
+        <Button variant="danger" onClick={whichClose}>
+          cancel
+        </Button>
       </form>
-        
     </>
   );
 };
