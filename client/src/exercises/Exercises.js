@@ -3,29 +3,47 @@ import axios from "axios";
 import Exercise from './Exercise';
 import ExerciseForm from './ExerciseForm';
 import { Button, Modal } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
+import styled from 'styled-components'
+import { Box } from "../components/Styles";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
   const [show, setShow] = useState(false);
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
+
+  useEffect(() => {
+    getExercises();
+  }, []);
 
   const getExercises = () => {
     axios
       .get("/api/exercises")
       .then((response) => {
-        setExercises(response.data);
+        console.log(response.data)
+        setExercises(response.data.data);
+        setTotalPages(response.data.total_pages)
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    getExercises();
-  }, []);
-    
+  const loadMore = async () => {
+    const pageX = page + 1
+    try {
+      let res = await axios.get(`/api/exercises?page=${pageX}`)
+      setExercises([...exercises, ...res.data.data])
+      setPage(pageX)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const deleteExercise = (id) => {
     axios.delete(`/api/exercises/${id}`)
       .then((res) => {
@@ -49,9 +67,10 @@ const Exercises = () => {
   }
 
   const addExercise = (exercise) => {
-    setExercises([...exercises, exercise])
+    setExercises([exercise, ...exercises])
     console.log(exercise);
 };
+  
   
   return (
     <>
@@ -66,7 +85,22 @@ const Exercises = () => {
         </Modal.Header>
         <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
       </Modal>
-      {renderExercises()}
+      <Box>
+        <InfiniteScroll
+            dataLength={exercises.length}
+            next={()=>loadMore()}
+            hasMore={exercises.length + 1 < totalPages * 10 ? true : false }
+            loader={<h4>Loading...</h4>}
+            height={700}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>End of Exercises</b>
+              </p>
+            }
+          >
+        {renderExercises()}
+        </InfiniteScroll>
+      </Box>
     </>
   );
 };
@@ -74,3 +108,4 @@ const Exercises = () => {
 // <ExerciseForm addExercise={addExercise}/>
 
 export default Exercises;
+

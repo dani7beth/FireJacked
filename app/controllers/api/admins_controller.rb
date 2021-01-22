@@ -1,8 +1,14 @@
 class Api::AdminsController < ApplicationController
+<<<<<<< HEAD
   before_action :authenticate_admin!, only: [:update_admin, :update_admin_info]
+=======
+  before_action :authenticate_admin!
+  before_action :set_page
+>>>>>>> 4228bada14e62efb57a27fad3f31511cddef8020
 
   def all_submissions
-    render json: Submission.all
+    submissions = Submission.page(@page).all
+    render json: {data: Submission.page(@page).all, total_pages: submissions.total_pages}
   end
 
   def single_submission
@@ -46,6 +52,7 @@ class Api::AdminsController < ApplicationController
     params.permit(:completed, :name, :video_upload, :level_id)
   end
 
+<<<<<<< HEAD
   def admin_params
     params.permit(:image)
   end
@@ -56,6 +63,10 @@ class Api::AdminsController < ApplicationController
 
   def set_admin
     @admin = current_admin
+=======
+  def set_page
+    @page = params[:page] || 1
+>>>>>>> 4228bada14e62efb57a27fad3f31511cddef8020
   end
 
 end
