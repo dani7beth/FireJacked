@@ -6,7 +6,6 @@ const AdminForm = ({handleHide, editAdmin}) => {
   const { admin, updateAdminInfo, } = useContext(AuthContext)
   const [adminInfo, setAdminInfo] = useState(admin)
 
-
   const handleChange = (e) => {
     setAdminInfo({ ...adminInfo, [e.target.name]: e.target.value });
   };

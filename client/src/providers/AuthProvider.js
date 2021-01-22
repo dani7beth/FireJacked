@@ -112,6 +112,16 @@ export class AuthProvider extends React.Component {
   });
 }
 
+// updateAdminImage = (image) => {
+//   Axios.put(`/api/update_admin_image/`, image)
+//   .then((res)=>{
+//     console.log(res.data);
+//    this.setState.image= res.data
+//   }).catch((err) => {
+//     console.log(err);
+//   });
+// }
+
   render() {
     return (
       <AuthContext.Provider

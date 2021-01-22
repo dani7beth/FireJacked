@@ -32,8 +32,8 @@ class Api::AdminsController < ApplicationController
     if file
       begin
       cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
-      @admin.update(image: cloud_image['secure_url'])
-        render json: @admin[:image]
+      @current_admin.update(image: cloud_image['secure_url'])
+        render json: @current_admin[:image]
       rescue => e
         render json: {errors: e}, status: 422
         return
@@ -51,9 +51,9 @@ class Api::AdminsController < ApplicationController
     params.permit(:completed, :name, :video_upload, :level_id)
   end
 
-  def admin_image_params
-    params.permit(:image)
-  end
+  # def admin_image_params
+  #   params.require(:admin).permit(:image)
+  # end
 
   def admin_params
     params.require(:admin).permit(:first_name, :last_name, :email, :phone, :speciality)

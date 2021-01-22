@@ -18,23 +18,10 @@ const AdminDash = () =>{
         // pass close as a prop
 
   console.log(admin);
-  
-  const updateAdminInfo = (adminInfo) => {
-    axios.put('/api/update_admin_info', adminInfo)
-    .then((res)=>{
-      console.log(res.data);
-      let newAdmin = res.data
-      admin = newAdmin
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
-
 
   const updateAdminImage = () => {
     return 'hello'
   }
-
 
   const renderAdmin = () => {
     if (admin) {
