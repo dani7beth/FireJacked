@@ -25,7 +25,10 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
 
   return (
     <div>
-      <Link to={`/exercise/${exerciseProp.id}/levels`}><h1>{exerciseProp.activity}</h1></Link>
+      <Link to={`/exercise/${exerciseProp.id}/levels`}>
+        <h1>{exerciseProp.activity}</h1>
+        <p>{exerciseProp.id}</p>
+      </Link>
       <img src={exerciseProp.image} style={{height:'300px', width:'200px'}}/>
       {/* { showDeleteForm && <ExerciseForm showDeleteFormToggle={showDeleteFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
         <button onClick={showDeleteFormToggle}>{showDeleteForm ? "Close Form" : "Show Form"}</button>

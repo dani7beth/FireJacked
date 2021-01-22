@@ -7,7 +7,8 @@ class Api::ExercisesController < ApplicationController
  
 
   def index
-    render json: current_admin.exercises.all
+    exercises = current_admin.exercises.page(@page).all
+    render json: {data: current_admin.exercises.page(@page).all, total_pages: exercises.total_pages}
   end
 
   def all_exercises
