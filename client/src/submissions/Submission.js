@@ -21,11 +21,7 @@ const Submission = ({submissionProp, editCalledSubmission, deleteSubmission}) =>
         <h3>{submissionProp.name}</h3>
         <p>{submissionProp.complete ? 'completed' : 'not completed'}</p>
         <h1>{submissionProp.videoUpload}</h1>
-        {/* alright I think this works because you somehow connect showEditform to SubmissionForm with
-            this little command thing down here (the &&). Then you define this prop here too. */}
-        {/* { showEditForm &&  }
-        <button onClick={showEditFormToggle}>{showEditForm ? "Hide" : "Show"}</button>
-        <button onClick={()=>deleteSubmission(submissionProp.id)}>🗑️</button> */}
+        
         <Button variant="primary" onClick={handleEditShow}>
         Edit
       </Button>

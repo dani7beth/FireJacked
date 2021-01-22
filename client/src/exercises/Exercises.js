@@ -67,7 +67,7 @@ const Exercises = () => {
   }
 
   const addExercise = (exercise) => {
-    setExercises([...exercises, exercise])
+    setExercises([exercise, ...exercises])
     console.log(exercise);
 };
   
