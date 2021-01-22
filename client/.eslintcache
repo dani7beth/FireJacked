@@ -1,4 +1,1 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 3aa904fa200f45e120fe4b12a12585eacca6422d
+[{"/Users/danidona/Desktop/DPL/MAP/client/src/components/UserStats.js":"1"},{"size":2689,"mtime":1611274549527,"results":"2","hashOfConfig":"3"},{"filePath":"4","messages":"5","errorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},"1plf4jg","/Users/danidona/Desktop/DPL/MAP/client/src/components/UserStats.js",["6","7","8"],{"ruleId":"9","severity":1,"message":"10","line":7,"column":10,"nodeType":"11","messageId":"12","endLine":7,"endColumn":20},{"ruleId":"9","severity":1,"message":"13","line":7,"column":22,"nodeType":"11","messageId":"12","endLine":7,"endColumn":35},{"ruleId":"9","severity":1,"message":"14","line":13,"column":9,"nodeType":"11","messageId":"12","endLine":13,"endColumn":22},"no-unused-vars","'categories' is assigned a value but never used.","Identifier","unusedVar","'setCategories' is assigned a value but never used.","'getCategories' is assigned a value but never used."]

@@ -17,6 +17,7 @@ import SubmissionsAdmin from "./components/SubmissionsAdmin";
 import SubmissionsFormAdmin from "./components/SubmissionsFormAdmin";
 import UserRegister from "./user/UserRegister";
 import AdminRegister from "./admin/AdminRegister";
+import UserStats from "./components/UserStats";
 import AdminUpdate from "./admin/AdminUpdate";
 import UserEditForm from "./user/UserEditForm";
 
@@ -44,6 +45,7 @@ function App() {
           <Route exact path='/admin-submissions' component={SubmissionsAdmin}/>
           <Route exact path='/admin-submissions/:submission_id' component={SubmissionsFormAdmin}/>
           <Route exact path='/admin_register' component={AdminRegister}/>
+          <Route exact path='/user_stats' component={UserStats}/>
         
           <Route component={NoMatch} />
         </Switch>
