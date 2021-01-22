@@ -78,11 +78,6 @@ const UpdateAdmin = () => {
         </Form.Group>
         <Button variant='primary' type="submit">Submit</Button>
       </Form>
-      <h1>Update Admin info</h1>
-      <h1>Welcome {admin.first_name} {admin.last_name}</h1>
-      <p>Your email: {admin.email}</p>
-      <p>Your phone number: {admin.phone}</p>
-      <p>Your speciality: {admin.speciality}</p>
     </>
   );
 }
