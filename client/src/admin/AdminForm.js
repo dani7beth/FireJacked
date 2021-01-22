@@ -1,28 +1,20 @@
-import { useState } from "react"
-import React, { useState, useContext } from 'react';
-import axios from 'axios';
-import AuthProvider from '../providers/AuthProvider';
+import { useState, useContext } from 'react';
+import { AuthContext, AuthProvider } from '../providers/AuthProvider';
+import { Button, Form } from 'react-bootstrap';
+
+const AdminForm = ({handleHide, editAdmin}) => {
+  const { admin, updateAdminInfo, } = useContext(AuthContext)
+  const [adminInfo, setAdminInfo] = useState(admin)
 
 
-// this form is for the Admin's info, and the AdminUpdate.js can be for the cloudinary stuff.
-// I'll need to go in a make a new updateFunction in the admins_controller :) and I'll make this a modal
-
-const AdminForm = () => {
-  const { admin } = useContext(AuthProvider)
-
-  const [adminInfo, setAdminInfo] = useState({
-    first_name: admin.first_name,
-    last_name: admin.last_name,
-    email: admin.email,
-    phone: admin.phone,
-    speciality: admin.speciality
-  })
-
-  // make axios.put call
-
-  const handleSubmit = () => {
-    console.log('updateAdmin')
-    //editAdmin();
+  const handleChange = (e) => {
+    setAdminInfo({ ...adminInfo, [e.target.name]: e.target.value });
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateAdminInfo(adminInfo)
+    handleHide();
   }
 
   return (
@@ -61,12 +53,13 @@ const AdminForm = () => {
             onChange={handleChange} />
         </Form.Group>
         <Button variant='primary' type="submit">Submit</Button>
+        <Button variant='danger' onClick={handleHide}>Cancel</Button>
       </Form>
-      <h1>Update Admin info</h1>
+      {/* <h1>Update Admin info</h1>
       <h1>Welcome {admin.first_name} {admin.last_name}</h1>
       <p>Your email: {admin.email}</p>
       <p>Your phone number: {admin.phone}</p>
-      <p>Your speciality: {admin.speciality}</p>
+      <p>Your speciality: {admin.speciality}</p> */}
     </>
   )
 }

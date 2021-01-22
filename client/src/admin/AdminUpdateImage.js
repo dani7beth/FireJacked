@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 
-const UpdateAdmin = () => {
+const AdminUpdateImage = () => {
   const {admin, setAdmin} = useContext(AuthContext);
 
   const [adminInfo, setAdminInfo] = useState(
@@ -74,37 +74,6 @@ const UpdateAdmin = () => {
     <>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
-            name='first_name'
-            type='text'
-            value={adminInfo.first_name}
-            onChange={handleChange}/>
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            name='last_name'
-            type='text'
-            value={adminInfo.last_name}
-            onChange={handleChange}/>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            name='email'
-            type='text'
-            value={adminInfo.email}
-            onChange={handleChange}/>
-          <Form.Label>Phone</Form.Label>
-          <Form.Control
-            name='phone'
-            type='text'
-            value={adminInfo.phone}
-            onChange={handleChange}/>
-          <Form.Label>Speciality</Form.Label>
-          <Form.Control
-            name='speciality'
-            type='text'
-            value={adminInfo.speciality}
-            onChange={handleChange} />
-
           <p>Image</p>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
@@ -125,13 +94,8 @@ const UpdateAdmin = () => {
         </Form.Group>
         <Button variant='primary' type="submit">Submit</Button>
       </Form>
-      <h1>Update Admin info</h1>
-      <h1>Welcome {admin.first_name} {admin.last_name}</h1>
-      <p>Your email: {admin.email}</p>
-      <p>Your phone number: {admin.phone}</p>
-      <p>Your speciality: {admin.speciality}</p>
     </>
   );
 }
 
-export default UpdateAdmin;
+export default AdminUpdateImage;
