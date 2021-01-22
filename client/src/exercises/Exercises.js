@@ -5,6 +5,7 @@ import ExerciseForm from './ExerciseForm';
 import { Button, Modal } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
+import { Box } from "../components/Styles";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -70,16 +71,7 @@ const Exercises = () => {
     console.log(exercise);
 };
   
-  const height = 700
-
-  const Box = styled.div`
-  height: ${height}px;
-  width: 80%;
-  border: solid;
-  overflow:auto;
-  background:#f0f8ff;
-  margin:auto
-  `
+  
   return (
     <>
       <h1>Exercises</h1>
@@ -99,7 +91,7 @@ const Exercises = () => {
             next={()=>loadMore()}
             hasMore={exercises.length + 1 < totalPages * 10 ? true : false }
             loader={<h4>Loading...</h4>}
-            height={height}
+            height={700}
             endMessage={
               <p style={{ textAlign: "center" }}>
                 <b>End of Exercises</b>
