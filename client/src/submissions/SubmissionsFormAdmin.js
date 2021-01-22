@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Axios from "axios"
-import Comments from "./Comments"
+import Comments from "../components/Comments"
 import { Button } from "react-bootstrap"
 
 const SubmissionsFormAdmin = () => {

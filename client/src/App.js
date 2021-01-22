@@ -11,10 +11,10 @@ import { Route, Switch } from "react-router-dom";
 import Exercises from "./exercises/Exercises"
 import AllExercises from "./exercises/AllExcercises";
 import ShowExercise from './exercises/ShowExercise';
-import Submissions from "./components/Submissions";
+import Submissions from './submissions/Submissions'
 import Levels from './components/Levels';
-import SubmissionsAdmin from "./components/SubmissionsAdmin";
-import SubmissionsFormAdmin from "./components/SubmissionsFormAdmin";
+import SubmissionsAdmin from "./submissions/SubmissionsAdmin";
+import SubmissionsFormAdmin from "./submissions/SubmissionsFormAdmin";
 import UserRegister from "./user/UserRegister";
 import AdminRegister from "./admin/AdminRegister";
 import UserStats from "./components/UserStats";
