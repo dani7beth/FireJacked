@@ -3,8 +3,7 @@ import axios from "axios"
 import SubmissionAdmin from "./SubmissionAdmin"
 import { Button } from "react-bootstrap"
 import InfiniteScroll from "react-infinite-scroll-component"
-import styled from 'styled-components'
-import { Box } from "./Styles"
+import { Box } from '../components/Styles';
 
 const SubmissionsAdmin = () => {
 
