@@ -24,6 +24,9 @@ export default (props) => {
         <Link to="/user_dash">
           <li>User Dashoboard</li>
         </Link>
+        <Link to="/user_stats">
+          <li>User Stats</li>
+        </Link>
       </>
     );
   };

@@ -1,5 +1,5 @@
 class Api::AdminsController < ApplicationController
-  before_action :authenticate_admin!, only: [:update_admin]
+  before_action :authenticate_admin!, only: [:update_admin, :update_admin_info]
 
   def all_submissions
     render json: Submission.all
@@ -17,19 +17,17 @@ class Api::AdminsController < ApplicationController
     render json: x
   end
 
+  def update_admin_info
+    @admin.update(admin_info_params)
+    render json: @admin
+  end
+
   def update_admin
     file = params[:image]
     if file
       begin
       cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
-      @admin.update(
-        first_name: params[:first_name], 
-        last_name: params[:last_name], 
-        email: params[:email], 
-        phone: params[:phone],
-        speciality: params[:speciality],  
-        image: cloud_image['secure_url']
-                  )
+      @admin.update(image: cloud_image['secure_url'])
         render json: @admin
       rescue => e
         render json: {errors: e}, status: 422
@@ -49,7 +47,11 @@ class Api::AdminsController < ApplicationController
   end
 
   def admin_params
-    params.permit(:first_name, :last_name, :email, :phone, :speciality, :image)
+    params.permit(:image)
+  end
+
+  def admin_info_params
+    params.permit(:first_name, :last_name, :email, :phone, :speciality)
   end
 
   def set_admin

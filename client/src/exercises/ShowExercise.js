@@ -1,7 +1,9 @@
 import Axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import ShowLevel from '../components/ShowLevel';
+import { AuthContext } from "../providers/AuthProvider";
+
 
 
 const ShowExercise = () => {
@@ -9,6 +11,8 @@ const ShowExercise = () => {
   const [exercise, setExercise] = useState({})
 
   const { exercise_id } = useParams()
+
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     getLevels();
@@ -42,6 +46,15 @@ const ShowExercise = () => {
   
 
   const renderLevels = () => {
+
+    if (user.weight === null || user.weight === null){
+      return (
+        <>
+          <h1>Please enter your weight on your <a href="/user_dash">user dashboard</a> to view excercise levels that are based on weight.</h1>
+        </>
+      )
+    }
+
     return levels.map((level) => {
       return <ShowLevel key={level.id} {...level} />
     })

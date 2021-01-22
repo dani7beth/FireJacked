@@ -11,14 +11,14 @@ const AdminDash = () =>{
   const renderAdmin = () => {
     if (admin) {
       return (
-       <>
-        <Row >
-          <Col>
-            <Link to={"/admin_update/"}>Update Info</Link>
-            <h1>Welcome {admin.first_name} {admin.last_name}</h1>
-            <p>Your email: {admin.email}</p>
-            <p>Your phone number: {admin.phone}</p>
-            <p>Your speciality: {admin.speciality}</p>
+        <>
+          <Row >
+            <Col>
+              <Link to={"/admin_update/"}>Update Info</Link>
+              <h1>Welcome {admin.first_name} {admin.last_name}</h1>
+              <p>Your email: {admin.email}</p>
+              <p>Your phone number: {admin.phone}</p>
+              <p>Your speciality: {admin.speciality}</p>
             </Col>
             <Col>
               <Exercises />
@@ -33,7 +33,7 @@ const AdminDash = () =>{
   }
 
   return(
-    <>
+    <> 
       {renderAdmin()}
     </>
   )
