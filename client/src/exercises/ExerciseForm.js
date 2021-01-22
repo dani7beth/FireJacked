@@ -63,7 +63,7 @@ const ExerciseForm = ({
       alert("cant be blank");
       return;
     }
-
+    console.log(exercise);
     let imageData = new FormData();
     imageData.append("image", exercise.image);
     imageData.append("name", exercise.name);

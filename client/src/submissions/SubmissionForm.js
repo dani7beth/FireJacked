@@ -14,7 +14,7 @@ const SubmissionForm = ({
 }) => {
   const { level_id } = useParams();
   const { id } = useContext(AuthContext);
-
+  const[loading, setLoading] = useState(false);
   const [submission, setSubmission] = useState(
     submissionProp
       ? {
@@ -26,33 +26,38 @@ const SubmissionForm = ({
       : {
           name: "",
           completed: false,
-          video_upload: "",
+          video_upload: "test url video",
           level_id: parseInt(level_id),
         }
   );
-  
-  const addCallSubmission = async () =>{
-    if (submission.video_upload == null){
-      alert('cant be blank');
+  const onDrop = useCallback((acceptedFiles) => {
+    setSubmission({ ...submission, video_upload: acceptedFiles[0] });
+  }, []);
+
+  const addCallSubmission = async () => {
+    if (submission.video_upload == null) {
+      alert("cant be blank");
       return;
     }
+    console.log(submission)
     let videoData = new FormData();
-      videoData.append("video_upload", submission.video_upload);
-      videoData.append("name", submission.name);
-      videoData.append("level_id", submission.level_id);
-
-    try{
-      debugger;
-      let res = axios.put(`/api/levels/${level_id}/submissions`, videoData);
+    videoData.append('completed', submission.completed);
+    videoData.append("name", submission.name);
+    videoData.append("video_upload", submission.video_upload);
+    videoData.append("level_id", submission.level_id);
+    
+    try {
+      let res = await axios.post(`/api/levels/${level_id}/submissions`, videoData);
       addSubmission(res.data);
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  const onDrop = useCallback((acceptedFiles) => {
-    setSubmission({ video_upload: acceptedFiles[0] });
-  }, []);
+  const handleChange = (e) => {
+    setSubmission({ ...submission, [e.target.name]: e.target.value });
+    console.log(submission);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,6 +69,7 @@ const SubmissionForm = ({
         level_id: level_id,
       });
     } else {
+      console.log(submission);
       addCallSubmission();
       setSubmission({
         name: "",
@@ -73,10 +79,6 @@ const SubmissionForm = ({
       });
     }
     whichHide();
-  };
-
-  const handleChange = (e) => {
-    setSubmission({ ...submission, [e.target.name]: e.target.value });
   };
 
   const {
@@ -101,8 +103,6 @@ const SubmissionForm = ({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <p>Name</p>
-        <input name="name" value={submission.name} onChange={handleChange} />
         <p>Video</p>
         <div {...getRootProps()}>
           <input {...getInputProps()} />
@@ -111,17 +111,19 @@ const SubmissionForm = ({
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-          <input
+          {/* <input
             name="video_upload"
             value={submission.video_upload}
             onChange={handleChange}
-          />
+          /> */}
         </div>
         <aside>
           <h4>Files</h4>
           <ul>{files}</ul>
         </aside>
         <br />
+        <p>Name</p>
+        <input name="name" value={submission.name} onChange={handleChange} />
         <Button type="submit">submit</Button>
         <Button variant="danger" onClick={whichHide}>
           cancel
