@@ -10,3 +10,14 @@ margin:auto;
 margin-top:50px;
 padding:10px
 `
+
+export const BoxCustom = styled.div`
+height: 300px;
+width: 80%;
+border: solid;
+overflow:auto;
+background:#f0f8ff;
+margin:auto;
+margin-top:50px;
+padding:10px
+`
