@@ -111,11 +111,11 @@ const SubmissionForm = ({
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-          {/* <input
+          <input
             name="video_upload"
             value={submission.video_upload}
             onChange={handleChange}
-          /> */}
+          />
         </div>
         <aside>
           <h4>Files</h4>
