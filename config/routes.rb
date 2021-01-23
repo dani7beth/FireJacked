@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "all_exercises", to: "exercises#all_exercises"
     get "categories", to: "users#categories"
     get "user_stats", to: "users#user_submissions"
+    put 'update_user_image', to: "users#update_user_image"
     resources :users
     resources :admins
     resources :exercises do

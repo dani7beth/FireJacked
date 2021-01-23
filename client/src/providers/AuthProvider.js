@@ -107,6 +107,21 @@ export class AuthProvider extends React.Component {
       });
   };
 
+  
+   onDrop = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    // /api/update_user_image
+    Axios.put(`/api/update_user_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({image: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <AuthContext.Provider
@@ -121,6 +136,7 @@ export class AuthProvider extends React.Component {
           handleUserLogout: this.handleUserLogout,
           handleAdminLogin: this.handleAdminLogin,
           handleAdminLogout: this.handleAdminLogout,
+          onDrop: this.onDrop,
           setUser: (user) => this.setState({ user }),
           setAdmin: (admin) => this.setState({ admin }),
           user: this.state.user,
