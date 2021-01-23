@@ -36,7 +36,7 @@ const AdminDash = () =>{
                 </Modal.Header>
                 <Modal.Body><AdminUpdateImage handleImageHide={handleImageHide} updateAdminImage={updateAdminImage} /></Modal.Body>
               </Modal>
-              <div nClick={handleShow}>
+              <div>
                 <h1>Welcome {admin.first_name} {admin.last_name}</h1>
                 <p>Your email: {admin.email}</p>
                 <p>Your phone number: {admin.phone}</p>
