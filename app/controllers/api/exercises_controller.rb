@@ -12,8 +12,9 @@ class Api::ExercisesController < ApplicationController
   end
 
   def all_exercises
-    all_exercises = Exercise.page(@page).all
-    render json: {data: Exercise.page(@page).all, total_pages: all_exercises.total_pages}
+  
+    exercises = Exercise.page(@page).exercise_levels
+    render json: {data: Exercise.page(@page).exercise_levels, total_pages: exercises.total_pages, total_length: Exercise.exercise_levels.distinct.pluck(:exercise_id).length}
   end
 
   def show
