@@ -30,6 +30,7 @@ const AdminDash = () =>{
             </Col>
             <Col xs={2}>
               <img src={admin.image} onClick={handleImageShow} alt='Admin' />
+              <Button onClick={handleImageShow}>Update Image</Button>
               <Modal show={imageShow} onHide={handleImageHide}>
                 <Modal.Header closeButton>
                   <Modal.Title>Drag or drop a photo here</Modal.Title>
