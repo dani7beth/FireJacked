@@ -18,7 +18,6 @@ import SubmissionsFormAdmin from "./submissions/SubmissionsFormAdmin";
 import UserRegister from "./user/UserRegister";
 import AdminRegister from "./admin/AdminRegister";
 import UserStats from "./components/UserStats";
-import AdminUpdate from "./admin/AdminUpdate";
 import UserEditForm from "./user/UserEditForm";
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
           <Route exact path='/user_register' component={UserRegister} />
           <Route exact path='/admin_login' component={AdminLogin} />
           <Route exact path="/admin_dash/" component={AdminDash} />
-          <Route exact path="/admin_update/" component={AdminUpdate} />
           <Route exact path="/exercises" component={Exercises} />
           <Route exact path="/add_exercise" component={ExerciseForm} />
           <Route exact path="/all_exercises" component={AllExercises} />

@@ -107,6 +107,21 @@ export class AuthProvider extends React.Component {
       });
   };
 
+
+  updateAdminInfo = (admin) => {
+    Axios.put(`/api/admins/${admin.id}`, admin)
+      .then((res)=>{
+        console.log(res.data);
+        this.setState({admin: res.data});
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
+
+  updateAdminImage = () => {
+    return "Hello there!"
+  }
+
   render() {
     return (
       <AuthContext.Provider
@@ -121,6 +136,8 @@ export class AuthProvider extends React.Component {
           handleUserLogout: this.handleUserLogout,
           handleAdminLogin: this.handleAdminLogin,
           handleAdminLogout: this.handleAdminLogout,
+          updateAdminInfo: this.updateAdminInfo,
+          updateAdminImage: this.updateAdminImage,
           setUser: (user) => this.setState({ user }),
           setAdmin: (admin) => this.setState({ admin }),
           user: this.state.user,

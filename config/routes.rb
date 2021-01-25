@@ -8,16 +8,17 @@ Rails.application.routes.draw do
     get "single_submission/:submission_id", to: "admins#single_submission"
     get "all_submissions", to: "admins#all_submissions"
     get "all_exercises", to: "exercises#all_exercises"
+    put "update_admin_image", to: "admins#update_admin_image"
     get "categories", to: "users#categories"
     get "user_stats", to: "users#user_submissions"
     resources :users
     resources :admins
     resources :exercises do
-      resources :levels do
+      resources :levels #do
         # resources :submissions do
         #   resources :comments
         # end
-      end
+      # end
       # post 'upload_image', to: 'exercises#basic_upload'
     end
     resources :levels do
