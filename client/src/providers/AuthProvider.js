@@ -107,8 +107,8 @@ export class AuthProvider extends React.Component {
       });
   };
 
-  
-   onDrop = (file) => {
+
+  onDrop = (file) => {
     const data = new FormData();
     data.append("image", file[0]);
     // /api/update_user_image
@@ -122,6 +122,19 @@ export class AuthProvider extends React.Component {
       });
   };
 
+  onDropAdmin = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    Axios.put(`/api/update_admin_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({admin: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
   updateAdminInfo = (admin) => {
     Axios.put(`/api/admins/${admin.id}`, admin)
       .then((res)=>{
@@ -130,10 +143,6 @@ export class AuthProvider extends React.Component {
       }).catch((err) => {
         console.log(err);
       });
-  }
-
-  updateAdminImage = () => {
-    return "Hello there!"
   }
 
   render() {
@@ -151,8 +160,8 @@ export class AuthProvider extends React.Component {
           handleAdminLogin: this.handleAdminLogin,
           handleAdminLogout: this.handleAdminLogout,
           onDrop: this.onDrop,
+          onDropAdmin: this.onDropAdmin,
           updateAdminInfo: this.updateAdminInfo,
-          updateAdminImage: this.updateAdminImage,
           setUser: (user) => this.setState({ user }),
           setAdmin: (admin) => this.setState({ admin }),
           user: this.state.user,
