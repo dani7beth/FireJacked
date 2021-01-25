@@ -107,6 +107,7 @@ const ExerciseForm = ({
     isDragActive,
     acceptedFiles,
   } = useDropzone({ onDrop });
+
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
