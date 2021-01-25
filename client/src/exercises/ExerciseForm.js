@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
-import { useDropzone } from "react-dropzone";
+import Dropzone, { useDropzone } from "react-dropzone";
 import { Button } from "react-bootstrap";
 
 const ExerciseForm = ({
@@ -32,9 +32,17 @@ const ExerciseForm = ({
         }
   );
 
+  Dropzone.options = {
+    autoProcessQueue: false
+  }
+
   const onDrop = useCallback((acceptedFiles) => {
-    setExercise({ image: acceptedFiles[0] });
+      setExercise({image: acceptedFiles[0] })
   }, []);
+
+  const onDrop2 = useCallback((acceptedFiles)=>{
+    setExercise({how_to_video: acceptedFiles[0]})
+  })
 
   const editCallExercise = async () => {
     debugger;
@@ -101,12 +109,14 @@ const ExerciseForm = ({
     }
     whichClose();
   };
+
   const {
     getRootProps,
     getInputProps,
     isDragActive,
     acceptedFiles,
-  } = useDropzone({ onDrop });
+
+  } = useDropzone({ onDrop, onDrop2 });
 
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
@@ -142,11 +152,20 @@ const ExerciseForm = ({
         <p>Name</p>
         <input name="name" value={exercise.name} onChange={handleChange} />
         <p>How To Video</p>
-        <input
-          name="how_to_video"
-          value={exercise.how_to_video}
-          onChange={handleChange}
-        />
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag 'n' drop some files here, or click to select files</p>
+          )}
+          
+          <input name="how_to_video" value={exercise.how_to_video} onChange={handleChange} />
+        </div>
+        <aside>
+          <h4>Files</h4>
+          <ul>{files}</ul>
+        </aside>
         <p>Category</p>
         <input
           name="category"
