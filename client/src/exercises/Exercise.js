@@ -2,6 +2,7 @@ import ExerciseForm from "./ExerciseForm";
 import { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
+import Levels from "../components/Levels";
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
   const [ exercise, setExercise] = useState()
@@ -61,6 +62,7 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* <Levels /> */}
     </div>
   )
 }
