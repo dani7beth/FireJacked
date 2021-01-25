@@ -4,16 +4,18 @@ import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
 
-const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
+const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
   const [ exercise, setExercise] = useState()
   // const [ showDeleteForm, setshowDeleteForm] = useState(false)
   const [showDelete, setshowDelete] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showLevel, setShowLevel] = useState(true)
 
   const handleDeleteShow = () => setshowDelete(true);
   const handleDeleteHide = () => setshowDelete(false);
   const handleEditShow = () => setShowEdit(true);
   const handleEditHide = () => setShowEdit(false);
+  
 
   const editExercise = (res) => {
     const newExercise = res;
@@ -22,19 +24,21 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises }) => {
   }
 
 
-
-
   return (
     <div>
-      <Link to={`/exercise/${exerciseProp.id}/levels`}>
-        <h1>{exerciseProp.activity}</h1>
-        <p>{exerciseProp.id}</p>
-      </Link>
-      <img src={exerciseProp.image} style={{height:'300px', width:'200px'}}/>
-      {/* { showDeleteForm && <ExerciseForm showDeleteFormToggle={showDeleteFormToggle} editExercise={editExercise} exerciseProp={exerciseProp}/>}
-        <button onClick={showDeleteFormToggle}>{showDeleteForm ? "Close Form" : "Show Form"}</button>
-        <button onClick={()=> deleteExercise(exerciseProp.id)}>Delete</button> */}
-      {/* <Levels exercise={exerciseProp}/> */}
+      <span>
+        <Link to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
+          <h5>{exerciseProp.activity} - {exerciseProp.exercise_id}</h5>
+        </Link>
+        <button onClick={()=>setShowLevel(!showLevel)}>{showLevel ? "Expand" : "Collapse"}</button>
+      </span>
+      {showLevel ? "" : exerciseProp.levels.map((x) =>  {
+        return(
+          <p>{x.level_name}</p>
+        )
+      }
+      )}
+      
       <Button variant="primary" onClick={handleEditShow}>
         Edit
       </Button>
