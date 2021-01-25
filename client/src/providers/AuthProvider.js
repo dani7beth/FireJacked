@@ -41,9 +41,15 @@ export class AuthProvider extends React.Component {
       });
   };
 
-  handleUserEdit = () => {
-    console.log('handleUserEdit function was called!')
-    // do axios.put here with correct info
+  handleUserEdit = (user) => {
+    // /api/users/:id
+    Axios.put(`/api/users/${user.id}`, user)
+    .then((res)=>{
+      this.setState({user: res.data});
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   }
 
   //user login
@@ -129,6 +135,7 @@ export class AuthProvider extends React.Component {
           ...this.state,
           userAuthenticated: this.state.user !== null,
           adminAuthenticated: this.state.admin !== null,
+          handleUserEdit: this.handleUserEdit,
           handleRegister: this.handleRegister,
           handleAdminRegister: this.handleAdminRegister,
           handleUserLogin: this.handleUserLogin,

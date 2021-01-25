@@ -4,8 +4,9 @@ import { Form, Button } from "react-bootstrap";
 import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 
-const AdminUpdateImage = () => {
-  const {admin, setAdmin} = useContext(AuthContext);
+const AdminUpdateImage = ({handleImageHide}) => {
+  const { admin } = useContext(AuthContext);
+  const [adminImage, setAdminImage] = useState(admin.image)
 
   const [adminInfo, setAdminInfo] = useState(
     {
@@ -93,6 +94,7 @@ const AdminUpdateImage = () => {
             onChange={handleChange} />
         </Form.Group>
         <Button variant='primary' type="submit">Submit</Button>
+        <Button variant='danger' onClick={handleImageHide} >Close</Button>
       </Form>
     </>
   );
