@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get "user_stats", to: "users#user_submissions"
     put 'update_user_image', to: "users#update_user_image"
     put "update_admin_image", to: "admins#update_admin_image"
+    get "admin_index", to: "users#admin_index"
     resources :users
     resources :admins
     resources :exercises do
