@@ -107,6 +107,20 @@ export class AuthProvider extends React.Component {
       });
   };
 
+  
+   onDrop = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    // /api/update_user_image
+    Axios.put(`/api/update_user_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({image: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   updateAdminInfo = (admin) => {
     Axios.put(`/api/admins/${admin.id}`, admin)
@@ -136,6 +150,7 @@ export class AuthProvider extends React.Component {
           handleUserLogout: this.handleUserLogout,
           handleAdminLogin: this.handleAdminLogin,
           handleAdminLogout: this.handleAdminLogout,
+          onDrop: this.onDrop,
           updateAdminInfo: this.updateAdminInfo,
           updateAdminImage: this.updateAdminImage,
           setUser: (user) => this.setState({ user }),
