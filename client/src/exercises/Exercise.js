@@ -3,6 +3,7 @@ import { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
+import ShowExerciseAdmin from "./ShowExerciseAdmin";
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
   const [ exercise, setExercise] = useState()
@@ -22,7 +23,6 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
     if(newExercise === exerciseProp.id) return setExercise(newExercise)
     else return exerciseProp
   }
-
 
   return (
     <div>

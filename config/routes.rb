@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     put 'update_user_image', to: "users#update_user_image"
     put "update_admin_image", to: "admins#update_admin_image"
     get "admin_index", to: "users#admin_index"
+    get "exercise_subs", to: "submissions#exercise_subs"
     resources :users
     resources :admins
     resources :exercises do

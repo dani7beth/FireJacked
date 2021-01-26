@@ -1,7 +1,8 @@
 class Api::SubmissionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:exercise_subs]
+  before_action :authenticate_admin!, only: [:exercise_subs]
   # before_action :set_test_user
-  before_action :set_level, except: [:all_users_submissions]
+  before_action :set_level, except: [:all_users_submissions, :exercise_subs]
   before_action :set_submission, only: [:update, :destroy, :show]
  
 
@@ -13,6 +14,13 @@ class Api::SubmissionsController < ApplicationController
   def all_users_submissions
     render json: current_user.submissions.all
   end
+
+  def exercise_subs
+    sub_exercise = Exercise.find(params[:exercise_id])
+    # sub_exercise = Exercise.find(1)
+    @submissions = Submission.submissions_by_exercise(sub_exercise.id)
+    render json: @submissions
+  end 
 
   def show
     render json: @submission
@@ -56,6 +64,7 @@ class Api::SubmissionsController < ApplicationController
   end
 
   private
+
   def submission_params
     params.require(:submission).permit(:completed, :name, :video_upload, :level_id, :user_id)
   end
