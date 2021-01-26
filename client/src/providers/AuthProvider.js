@@ -162,6 +162,7 @@ export class AuthProvider extends React.Component {
           onDrop: this.onDrop,
           onDropAdmin: this.onDropAdmin,
           updateAdminInfo: this.updateAdminInfo,
+          updateAdminImage: this.updateAdminImage,
           setUser: (user) => this.setState({ user }),
           setAdmin: (admin) => this.setState({ admin }),
           user: this.state.user,

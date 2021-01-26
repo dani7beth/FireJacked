@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     put "update_admin_image", to: "admins#update_admin_image"
     get "categories", to: "users#categories"
     get "user_stats", to: "users#user_submissions"
+    get "users_submissions", to: "submissions#all_users_submissions"
     put 'update_user_image', to: "users#update_user_image"
     put "update_admin_image", to: "admins#update_admin_image"
     get "admin_index", to: "users#admin_index"
