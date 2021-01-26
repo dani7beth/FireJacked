@@ -115,11 +115,13 @@ const Exercises = () => {
   const deleteExercise = (id) => {
     axios.delete(`/api/exercises/${id}`)
       .then((res) => {
-        setExercises(exercises.filter((exercise)=> exercise.id !== id))
+        const newExercises = exercises.filter((exercise)=> exercise.exercise_id !== id)
+        setExercises(newExercises)
         console.log(res.data);
       })
       .catch((err) => {
         console.log("Error in delete exercise");
+        console.log(err)
       })
   }
 

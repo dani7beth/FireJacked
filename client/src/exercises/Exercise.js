@@ -58,10 +58,13 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this exercise?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleDeleteHide}>
+          <Button variant="secondary" onClick={()=>handleDeleteHide}>
             No
           </Button>
-          <Button variant="danger" onClick={()=> deleteExercise(exerciseProp.id)}>
+          <Button variant="danger" onClick={()=> {
+            deleteExercise(exerciseProp.exercise_id)
+            handleDeleteHide()
+            }}>
             Yes, delete.
           </Button>
         </Modal.Footer>
