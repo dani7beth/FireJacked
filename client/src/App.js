@@ -20,12 +20,14 @@ import AdminRegister from "./admin/AdminRegister";
 import UserStats from "./components/UserStats";
 import UserEditForm from "./user/UserEditForm";
 import ShowExerciseAdmin from "./exercises/ShowExerciseAdmin";
+import { Container } from "./components/Styles";
 
 function App() {
 
   return (
     <>
       <NavBar />
+      <Container>
       <FetchUserAdmin>
         <Switch>
           <Route exact path='/' component={UserLogin} />
@@ -46,11 +48,10 @@ function App() {
           <Route exact path='/admin_register' component={AdminRegister}/>
           <Route exact path='/user_stats' component={UserStats}/>
           <Route exact path="/show-exercises-for-admin/:exercise_id" component={ShowExerciseAdmin} />
-          
-        
           <Route component={NoMatch} />
         </Switch>
       </FetchUserAdmin>
+      </Container>
     </>
   );
 }
