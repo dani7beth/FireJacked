@@ -23,13 +23,13 @@ class Api::ExercisesController < ApplicationController
 
   def create 
     # exercise = current_admin.exercises.new(exercise_params)
-    file = params[:image]
+    file = params[:how_to_video]
     if file
       begin
         # ext = File.extname(file.tempfile)
-        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+        cloud_video = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :video)
         # user.image = cloud_image['secure_url']
-        exercise = current_admin.exercises.new(image: cloud_image['secure_url'], name: params[:name], how_to_video: params[:how_to_video], category: params[:category], activity: params[:activity])
+        exercise = current_admin.exercises.new(image: params[:image], name: params[:name], how_to_video: cloud_video['secure_url'], category: params[:category], activity: params[:activity])
       rescue => e
         render json: { errors: e }, status: 422
         return
