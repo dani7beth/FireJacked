@@ -18,8 +18,10 @@ const UserDash = () => {
 
   const editImage = () => {};
 
+
   const renderUserInfo = () => {
     if (user) {
+      
       return (
         <>
           <Row>
