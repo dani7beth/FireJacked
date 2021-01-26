@@ -32,8 +32,14 @@ const Submissions = () => {
     setSubmissions([submission, ...submissions]);
   };
 
-  const editCalledSubmission = (id, submissionObject) => {
-    Axios.put(`/api/levels/${level_id}/submissions/${id}`, submissionObject)
+  const editCalledSubmission = (id, submission) => {
+    let videoData = new FormData();
+    videoData.append("completed", submission.completed);
+    videoData.append("name", submission.name);
+    videoData.append("video_upload", submission.video_upload);
+    videoData.append("level_id", submission.level_id);
+
+    Axios.put(`/api/levels/${level_id}/submissions/${id}`, videoData)
       .then((res) => {
         console.log(res.data);
         let newSubmissions = submissions.map((s) =>
@@ -60,15 +66,14 @@ const Submissions = () => {
   };
 
   const renderSubmissions = () => {
-      return submissions.map((submission) => (
-        <Submission
-          key={submission.id}
-          submissionProp={submission}
-          editCalledSubmission={editCalledSubmission}
-          deleteSubmission={deleteSubmission}
-        />
-      ));
-    
+    return submissions.map((submission) => (
+      <Submission
+        key={submission.id}
+        submissionProp={submission}
+        editCalledSubmission={editCalledSubmission}
+        deleteSubmission={deleteSubmission}
+      />
+    ));
   };
 
   return (
