@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import AllExercises from "../exercises/AllExcercises";
 import UserEditForm from "./UserEditForm";
 import UserImageForm from "./UserImageForm";
+import TrainerIndex from "./TrainerIndex";
 
 const UserDash = () => {
   const { user } = useContext(AuthContext);
@@ -67,7 +68,7 @@ const UserDash = () => {
               <AllExercises />
             </Col>
             <Col xs={2}>
-              <h1> Connected traines function to diplay all of them</h1>
+              <TrainerIndex />
             </Col>
           </Row>
         </>

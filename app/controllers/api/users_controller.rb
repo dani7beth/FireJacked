@@ -1,6 +1,10 @@
 class Api::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:categories, :user_submissions,:update,:update_user_image]
 
+  def admin_index
+    render json: Admin.all
+  end
+
   def categories
     render json: Exercise.distinct.pluck(:category)
   end
