@@ -3,6 +3,7 @@ import { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
+import { LevelsBox } from "../components/Styles";
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
   const [ exercise, setExercise] = useState()
@@ -26,21 +27,13 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
 
   return (
     <div>
-      <span>
+      <LevelsBox>
         <Link to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
           <h5>{exerciseProp.activity} - {exerciseProp.exercise_id}</h5>
         </Link>
-        <button onClick={()=>setShowLevel(!showLevel)}>{showLevel ? "Expand" : "Collapse"}</button>
-      </span>
-      {showLevel ? "" : exerciseProp.levels.map((x) =>  {
-        return(
-          <p>{x.level_name}</p>
-        )
-      }
-      )}
-      
-      <Button variant="primary" onClick={handleEditShow}>
-        Edit
+
+        <Button variant="primary" onClick={handleEditShow}>
+        Edit Exercise
       </Button>
       <Modal show={showEdit} onHide={handleEditHide}>
         <Modal.Header closeButton>
@@ -50,7 +43,7 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
       </Modal>
 
       <Button variant="danger" onClick={handleDeleteShow}>
-        Delete
+        Delete Exercise
       </Button>
       <Modal show={showDelete} onHide={handleDeleteHide}>
         <Modal.Header closeButton>
@@ -69,7 +62,19 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
           </Button>
         </Modal.Footer>
       </Modal>
+      <br/>
+      <br/>
       {/* <Levels /> */}
+      <button onClick={()=>setShowLevel(!showLevel)}>{showLevel ? "Expand" : "Collapse"}</button>
+        <br/>
+        <br/>
+      {showLevel ? "" : <Levels exerciseID = {exerciseProp.exercise_id}/>}
+      
+
+      
+      
+      
+      </LevelsBox>
     </div>
   )
 }

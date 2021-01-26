@@ -21,3 +21,9 @@ margin:auto;
 margin-top:50px;
 padding:10px
 `
+
+export const LevelsBox = styled.div`
+border: solid;
+margin-top: 10px;
+min-height: 100px;
+`
