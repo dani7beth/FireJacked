@@ -7,6 +7,10 @@ class Api::AdminsController < ApplicationController
     render json: @admin
   end
 
+  def user_index
+    render json: User.all
+  end
+
   def all_submissions
     submissions = Submission.page(@page).all
     render json: {data: Submission.page(@page).all, total_pages: submissions.total_pages}
