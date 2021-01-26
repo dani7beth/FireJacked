@@ -65,7 +65,7 @@ const Exercises = () => {
   const loadMore = async () => {
     const pageX = page + 1
     try {
-      let res = await axios.get(`/api/all_exercises?page=${pageX}`)
+      let res = await axios.get(`/api/exercises?page=${pageX}`)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
       // setExercises([...exercises, ...res.data.data])
@@ -148,7 +148,7 @@ const editExercises = (exercise) => {
             dataLength={exercises.length}
             next={()=>loadMore()}
             hasMore={exercises.length === dataLength ? false : true }
-            loader={<h4>Loading...</h4>}
+  loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
             height={300}
             endMessage={
               <p style={{ textAlign: "center" }}>
