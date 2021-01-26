@@ -7,8 +7,8 @@ class Api::ExercisesController < ApplicationController
  
 
   def index
-    exercises = current_admin.exercises.page(@page).all
-    render json: {data: current_admin.exercises.page(@page).all, total_pages: exercises.total_pages}
+    exercises = current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id)
+    render json: {data: current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id), total_pages: exercises.total_pages, total_length: Exercise.exercise_levels.distinct.pluck(:exercise_id).length}
   end
 
   def all_exercises

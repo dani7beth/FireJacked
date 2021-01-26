@@ -8,15 +8,6 @@ import { useDropzone } from "react-dropzone";
 const UserImageForm = () => {
   const { user,onDrop } = useContext(AuthContext);
 
-  // const [user, setUser] = useState({
-  //   image: user.image,
-  // });
-
-  // const handleChange = () => {
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // };
-
-
   const handleSubmit = (e) => {
     e.preventDefault()
     onDrop(acceptedFiles)

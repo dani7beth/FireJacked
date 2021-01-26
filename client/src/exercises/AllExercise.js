@@ -19,9 +19,6 @@ const AllExercise = ({activity, exercise_id, level_name, levels }) => {
         </Link>
         )
       }
-      
-      
-      
       )}
     </>
   )

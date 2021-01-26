@@ -1,6 +1,8 @@
 import SubmissionForm from "./SubmissionForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import Axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Submission = ({
   submissionProp,
@@ -20,15 +22,15 @@ const Submission = ({
       <div>
         <h3>{submissionProp.name}</h3>
         <p>{submissionProp.complete ? "completed" : "not completed"}</p>
-        <div class="embed-responsive embed-responsive-16by9">
-          <video controls="true" class="embed-responsive-item">
+          <div class="embed-responsive embed-responsive-16by9">
+          <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
             <source src={submissionProp.video_upload} type="video/mp4" />
           </video>
         </div>
 
-        <Button variant="primary" onClick={handleEditShow}>
-          Edit
-        </Button>
+        <Button variant="primary" onClick={handleEditShow}>Edit</Button>
+        <Button variant="danger" onClick={handleDeleteShow}>Delete</Button>
+
         <Modal show={showEdit} onHide={handleEditHide}>
           <Modal.Header closeButton>
             <Modal.Title>Edit</Modal.Title>
@@ -42,10 +44,7 @@ const Submission = ({
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
         </Modal>
-
-        <Button variant="danger" onClick={handleDeleteShow}>
-          Delete
-        </Button>
+       
         <Modal show={showDelete} onHide={handleDeleteHide}>
           <Modal.Header closeButton>
             <Modal.Title>Delete this level</Modal.Title>

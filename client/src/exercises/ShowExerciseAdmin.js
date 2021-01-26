@@ -1,22 +1,19 @@
 import Axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { Carousel, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 
-
-const ShowExercise = () => {
+const ShowExerciseAdmin = () => {
   const [exercise, setExercise] = useState({})
   const [submissions, setSubmissions] = useState([])
-
   const { exercise_id } = useParams()
 
-  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     getExercise()
-    getAllSubmissions()
+    getAllSubmissions();
   }, []);
 
   const getExercise = async () => {
@@ -41,23 +38,16 @@ const ShowExercise = () => {
     })
   }
 
-  // set carousel limit to one at a time?
   const renderSubmissions = () => {
     return submissions.map((submission) => {
       return (
-          <Carousel.Item>
-            <video
-              className='d-block w-100'
-              src={submission.video_upload}
-              alt="Submission video"
-              style={{height:'450px', width:'500px'}}
-            />
-            <Carousel.Caption>
-              <p>created at: {submission.created_at}</p>
-              <p>updated at: {submission.updated_at}</p>
-              <p>{submission.completed ? 'approved' : 'not approved' }</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+        <>
+          <h1>
+            {submission.name}, 
+            {submission.completed ? 'completed' : 'not completed'}
+          </h1>
+          <p>'hello'</p>
+        </>
       )
     })
   }
@@ -84,11 +74,15 @@ const ShowExercise = () => {
           </div>
         </Col>
       </Row>
-      <Carousel>
-        {renderSubmissions()}
-      </Carousel>
+      <br/> <br/>
+      {renderSubmissions()}
+      {/* 
+        <Carousel>
+        submissionVideo
+        updated at, created at.
+        <Carousel/>
+      */}
     </>
   )
 }
-
-export default ShowExercise;
+export default ShowExerciseAdmin;

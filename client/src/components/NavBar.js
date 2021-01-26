@@ -22,7 +22,7 @@ export default (props) => {
           <li>All Exercises</li>
         </Link>
         <Link to="/user_dash">
-          <li>User Dashoboard</li>
+          <li>User Dashboard</li>
         </Link>
         <Link to="/user_stats">
           <li>User Stats</li>
@@ -35,10 +35,10 @@ export default (props) => {
     return (
       <>
         <Link to="/admin-submissions">
-          <li>Admin submissions</li>
+          <li>User Submissions</li>
         </Link>
-        <Link to="/exercises">
-          <li>Exercises</li>
+        <Link to="/admin_dash/">
+          <li>Admin Dashoboard</li>
         </Link>
         <li name="logout" onClick={() => handleAdminLogout(history)}>
           Logout
