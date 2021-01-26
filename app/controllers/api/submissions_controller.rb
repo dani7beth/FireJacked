@@ -1,7 +1,7 @@
 class Api::SubmissionsController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_test_user
-  before_action :set_level
+  before_action :set_level, except: [:all_users_submissions]
   before_action :set_submission, only: [:update, :destroy, :show]
  
 
@@ -10,9 +10,9 @@ class Api::SubmissionsController < ApplicationController
     render json: level.submissions
   end
 
-  # def all_submissions
-
-  # end
+  def all_users_submissions
+    render json: current_user.submissions.all
+  end
 
   def show
     render json: @submission

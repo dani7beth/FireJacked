@@ -22,7 +22,7 @@ export default (props) => {
           <li>All Exercises</li>
         </Link>
         <Link to="/user_dash">
-          <li>User Dashoboard</li>
+          <li>User Dashboard</li>
         </Link>
         <Link to="/user_stats">
           <li>User Stats</li>

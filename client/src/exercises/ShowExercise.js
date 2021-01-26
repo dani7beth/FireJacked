@@ -1,22 +1,22 @@
 import Axios from "axios";
 import { useEffect, useState, useContext } from "react";
+import { Carousel, Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import ShowLevel from '../components/ShowLevel';
 import { AuthContext } from "../providers/AuthProvider";
 
 
 
 const ShowExercise = () => {
-  const [levels, setLevels] = useState([])
   const [exercise, setExercise] = useState({})
+  const [submissions, setSubmissions] = useState([])
 
   const { exercise_id } = useParams()
 
   const { user } = useContext(AuthContext)
 
   useEffect(() => {
-    getLevels();
     getExercise()
+    getAllSubmissions()
   }, []);
 
   const getExercise = async () => {
@@ -30,42 +30,65 @@ const ShowExercise = () => {
     }
   }
 
+  const getAllSubmissions = () => {
+    Axios.get('/api/users_submissions')
+    .then((response) => {
+      console.log(response.data)
+      setSubmissions(response.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
-  const getLevels = () => {
-    Axios
-      .get(`/api/exercises/${exercise_id}/levels`)
-      .then((response) => {
-        console.log(response.data)
-        setLevels(response.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      }
-  )}
-
-  
-
-  const renderLevels = () => {
-
-    if (user.weight === null || user.weight === null){
+  // set carousel limit to one at a time?
+  const renderSubmissions = () => {
+    return submissions.map((submission) => {
       return (
-        <>
-          <h1>Please enter your weight on your <a href="/user_dash">user dashboard</a> to view excercise levels that are based on weight.</h1>
-        </>
+          <Carousel.Item>
+            <video
+              className='d-block w-100'
+              src={submission.video_upload}
+              alt="Submission video"
+              style={{height:'450px', width:'500px'}}
+            />
+            <Carousel.Caption>
+              <p>created at: {submission.created_at}</p>
+              <p>updated at: {submission.updated_at}</p>
+              <p>{submission.completed ? 'approved' : 'not approved' }</p>
+            </Carousel.Caption>
+          </Carousel.Item>
       )
-    }
-
-    return levels.map((level) => {
-      return <ShowLevel key={level.id} {...level} />
     })
   }
 
   return (
     <>
-      <h1>All Levels for {exercise.activity}</h1>
-      {renderLevels()}
+      <Row>
+        <Col paddingLeft="500px">
+          <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
+            <source src={exercise.how_to_video} type="video/mp4" />
+          </video>
+          <p>How to Video</p>
+        </Col>
+        <Col>
+          <h5>{exercise.category}</h5>
+          <h1>{exercise.activity}</h1>
+          <div>
+            <p>{exercise.description}</p>
+            <p>(DESCRIPTION)<br />
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum 
+              has been the industry's standard dummy text ever since the 1500s when an unknown printer 
+              took a galley of type and scrambled it to make a type specimen book it has?
+            </p>
+          </div>
+        </Col>
+      </Row>
+      <Carousel>
+        {renderSubmissions()}
+      </Carousel>
     </>
-    )
+  )
 }
 
 export default ShowExercise;
