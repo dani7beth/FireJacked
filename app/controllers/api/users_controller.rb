@@ -1,5 +1,9 @@
 class Api::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:categories, :user_submissions,:update]
+  before_action :authenticate_user!, except: [:categories, :user_submissions,:update,:update_user_image]
+
+  def admin_index
+    render json: Admin.all
+  end
 
   def categories
     render json: Exercise.distinct.pluck(:category)
@@ -9,8 +13,17 @@ class Api::UsersController < ApplicationController
     render json: User.user_submissions(User.first().id)
   end
 
-  def update_user
-    
+  def update_user_image
+    file = params[:image]
+    if file
+      begin
+      cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+      current_user[:image] = cloud_image['secure_url']
+      rescue => e
+        render json: {errors: e}, status: 422
+      end
+    end
+    render json: current_user
   end
 
   def update

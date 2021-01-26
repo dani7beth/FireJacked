@@ -108,6 +108,33 @@ export class AuthProvider extends React.Component {
   };
 
 
+  onDrop = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    // /api/update_user_image
+    Axios.put(`/api/update_user_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({image: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  onDropAdmin = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    Axios.put(`/api/update_admin_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({admin: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
   updateAdminInfo = (admin) => {
     Axios.put(`/api/admins/${admin.id}`, admin)
       .then((res)=>{
@@ -117,20 +144,6 @@ export class AuthProvider extends React.Component {
         console.log(err);
       });
   }
-
-  updateAdminImage = () => {
-    return "Hello there!"
-  }
-
-// updateAdminImage = (image) => {
-//   Axios.put(`/api/update_admin_image/`, image)
-//   .then((res)=>{
-//     console.log(res.data);
-//    this.setState.image= res.data
-//   }).catch((err) => {
-//     console.log(err);
-//   });
-// }
 
   render() {
     return (
@@ -146,6 +159,8 @@ export class AuthProvider extends React.Component {
           handleUserLogout: this.handleUserLogout,
           handleAdminLogin: this.handleAdminLogin,
           handleAdminLogout: this.handleAdminLogout,
+          onDrop: this.onDrop,
+          onDropAdmin: this.onDropAdmin,
           updateAdminInfo: this.updateAdminInfo,
           updateAdminImage: this.updateAdminImage,
           setUser: (user) => this.setState({ user }),

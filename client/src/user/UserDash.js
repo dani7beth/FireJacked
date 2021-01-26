@@ -1,18 +1,18 @@
-import Axios from "axios";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import { Row, Col, Modal, Button } from "react-bootstrap";
 import { AuthContext } from "../providers/AuthProvider";
 import AllExercises from "../exercises/AllExcercises";
 import UserEditForm from "./UserEditForm";
+import UserImageForm from "./UserImageForm";
+import TrainerIndex from "./TrainerIndex";
 
 const UserDash = () => {
   const { user } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [showImage, setImageShow] = useState(false);
 
-  const handleImageClose = () => setShow(false);
-  const handleImageShow = () => setShow(true);
+  const handleImageClose = () => setImageShow(false);
+  const handleImage = () => setImageShow(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -25,12 +25,12 @@ const UserDash = () => {
           <Row>
             <Col xs={2}>
               <img src={user.image} style={{ borderRadius: "50%" }} />
-              <Button onClick={handleImageShow}>Update Image</Button>
+              <Button onClick={handleImage}>Update Image</Button>
               <Modal show={showImage} onHide={handleImageClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Update your Picture </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>This is the Image edit drop zone</Modal.Body>
+                <Modal.Body><UserImageForm /></Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleImageClose}>
                     Cancel
@@ -68,7 +68,7 @@ const UserDash = () => {
               <AllExercises />
             </Col>
             <Col xs={2}>
-              <h1> Connected traines function to diplay all of them</h1>
+              <TrainerIndex />
             </Col>
           </Row>
         </>

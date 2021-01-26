@@ -5,7 +5,6 @@ import Exercises from '../exercises/Exercises';
 import AdminUpdate from './AdminUpdate';
 import AdminUpdateImage from './AdminUpdateImage';
 
-
 const AdminDash = () =>{
   const {admin, updateAdminInfo, updateAdminImage } = useContext(AuthContext);
   const [show, setShow] = useState(false);
@@ -13,9 +12,6 @@ const AdminDash = () =>{
 
   const handleImageShow = () => setImageShow(true);
   const handleImageHide = () => setImageShow(false);
-
-  console.log(admin);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -31,7 +27,7 @@ const AdminDash = () =>{
               <Exercises />
             </Col>
             <Col xs={2}>
-              <img src={admin.image} onClick={handleImageShow} alt='Admin' />
+              <img src={admin.image} style={{ borderRadius: "50%" }} />
               <Button onClick={handleImageShow}>Update Image</Button>
               <Modal show={imageShow} onHide={handleImageHide}>
                 <Modal.Header closeButton>
