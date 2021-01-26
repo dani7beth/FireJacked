@@ -30,7 +30,7 @@ const UserDash = () => {
                 <Modal.Header closeButton>
                   <Modal.Title>Update your Picture </Modal.Title>
                 </Modal.Header>
-                <Modal.Body><UserImageForm /></Modal.Body>
+                <Modal.Body><UserImageForm handleImageHide={handleImageClose} /></Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleImageClose}>
                     Cancel

@@ -115,7 +115,7 @@ export class AuthProvider extends React.Component {
     Axios.put(`/api/update_user_image`, data)
       .then((res) => {
         console.log(res.data);
-        this.setState({image: res.data});
+        this.setState({user: res.data});
       })
       .catch((err) => {
         console.log(err);
