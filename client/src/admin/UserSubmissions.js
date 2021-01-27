@@ -8,8 +8,11 @@ const UserSubmissions = () => {
   const { user_id } = useParams();
   
   useEffect(()=>{
-    getSubmissions()
-  }, []) 
+    if (user_id){
+      getSubmissions()
+    }
+    
+  }, [user_id]) 
 
   const getSubmissions = async () => {
     try {
@@ -23,6 +26,7 @@ const UserSubmissions = () => {
 
 
   const renderUserSubmissions = () => {
+    // debugger
     if (allSubmissions) {
       return allSubmissions.map((submission) => (
         <SingleSubmissionUser key={submission.id} submission={submission}/>
