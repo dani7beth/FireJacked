@@ -50,8 +50,8 @@ class Api::SubmissionsController < ApplicationController
 
   def update_status
     submission = @user.submissions.find(params[:submission_id])
-    x = submission.update(submission_params)
-    render json: x
+    submission.update(submission_params)
+    render json: submission
   end
 
   def update

@@ -32,11 +32,11 @@ const SingleSubmissionUser = ({submission}) =>{
   const handleSubmit = async (e) => {
     debugger
     e.preventDefault();
-    console.log(submission);
+    // console.log(submission);
     try {
       let res = await axios.put(`/api/update_submission_status/${submission.id}/${submission.user_id}`, submissionState);
-      console.log(submissionState)
-      console.log(res);
+      // console.log(submissionState) 
+      console.log(res.data);
       // setSubmissionState(res);
     } catch (error) {
       console.log(error)
