@@ -38,7 +38,7 @@ export default (props) => {
           <li>User Submissions</li>
         </Link>
         <Link to="/admin_dash/">
-          <li>Admin Dashoboard</li>
+          <li>Admin Dashboard</li>
         </Link>
         <li name="logout" onClick={() => handleAdminLogout(history)}>
           Logout
