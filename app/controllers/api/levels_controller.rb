@@ -1,14 +1,14 @@
 class Api::LevelsController < ApplicationController
     before_action :authenticate_admin!, except: [:index, :show]
-    before_action :set_exercise, only: [:create, :update, :destroy, :show, :index]
-    before_action :set_level, only: [:update, :destroy, :show]
+    before_action :set_exercise, only: [:create, :update, :destroy, :index]
+    before_action :set_level, only: [:update, :destroy]
 
     def index
       render json: @exercise.levels.all
     end
   
     def show
-      render json: @level
+      render json: Level.find(params[:id])
     end
   
     def create 
