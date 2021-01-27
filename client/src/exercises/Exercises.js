@@ -5,7 +5,7 @@ import ExerciseForm from './ExerciseForm';
 import { Button, Modal } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
-import { Box, BoxCustom } from "../components/Styles";
+import { BoxAdminExercises } from "../components/Styles";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -39,12 +39,14 @@ const Exercises = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setPage(1)
     getExercises(searchText)
     // renderExercisesWithLevels()
   }
 
   const loadMore = async () => {
     const pageX = page + 1
+    console.log(pageX)
     try {
       let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}`)
       let exercisesX = normalizeData(res.data.data)
@@ -131,22 +133,22 @@ const editExercises = (exercise) => {
           <button onClick={()=>setSearchText("")}>Clear Search</button>
       </form>
 
-      <BoxCustom>
+      <BoxAdminExercises>
         <InfiniteScroll
             dataLength={exercises.length}
             next={()=>loadMore()}
             hasMore={exercises.length === dataLength ? false : true }
-            // loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
-            height={300}
-            // endMessage={
-            //   <p style={{ textAlign: "center" }}>
-            //     <b>End of Exercises</b>
-            //   </p>
-            // }
+            loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
+            height={450}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>exercises.length = {exercises.length} dataLength= {dataLength}</b>
+              </p>
+            }
           >
         {renderExercisesWithLevels()}
         </InfiniteScroll>
-      </BoxCustom>
+      </BoxAdminExercises>
     </>
   );
 };
