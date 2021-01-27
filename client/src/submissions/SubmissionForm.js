@@ -2,7 +2,7 @@ import { useContext, useReducer, useState, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 
 const SubmissionForm = ({
@@ -102,16 +102,16 @@ const SubmissionForm = ({
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <p>Video</p>
         <div {...getRootProps()}>
-          <input {...getInputProps()} />
+          <Form.Control {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-          <input
+          <Form.Control
             name="video_upload"
             value={submission.video_upload}
             onChange={handleChange}
@@ -121,14 +121,13 @@ const SubmissionForm = ({
           <h4>Files</h4>
           <ul>{files}</ul>
         </aside>
-        <br />
-        <p>Name</p>
-        <input name="name" value={submission.name} onChange={handleChange} />
+        <Form.Label>Name</Form.Label>
+        <Form.Control name="name" value={submission.name} onChange={handleChange} />
         <Button type="submit">submit</Button>
         <Button variant="danger" onClick={whichHide}>
           cancel
         </Button>
-      </form>
+      </Form>
       {/* <h1>user id is {user.id}</h1> */}
     </>
   );

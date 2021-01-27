@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Row, Col, Modal, Button } from "react-bootstrap";
+import { Row, Col, Modal, Button, Alert } from "react-bootstrap";
 import { AuthContext } from "../providers/AuthProvider";
 import AllExercises from "../exercises/AllExcercises";
 import UserEditForm from "./UserEditForm";
@@ -16,23 +16,24 @@ const UserDash = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const editImage = () => {};
-
-
+  
   const renderUserInfo = () => {
     if (user) {
-      
       return (
         <>
+        {(user.first_name == null || user.last_name == null || user.height == null || user.weight == null || user.age == null) ?
+            <Alert variant='danger'>Fill out information</Alert> : ''}
           <Row>
             <Col xs={2}>
-              <img src={user.image} style={{ borderRadius: "50%" }} />
+              <img src={user.image} style={{ borderRadius: "50%", width: '200px' }} />
               <Button onClick={handleImage}>Update Image</Button>
               <Modal show={showImage} onHide={handleImageClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Update your Picture </Modal.Title>
                 </Modal.Header>
-                <Modal.Body><UserImageForm handleImageHide={handleImageClose} /></Modal.Body>
+                <Modal.Body>
+                  <UserImageForm handleImageHide={handleImageClose} />
+                </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleImageClose}>
                     Cancel
@@ -56,7 +57,7 @@ const UserDash = () => {
                     <Modal.Title>Edit </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <UserEditForm hide={handleClose}/>
+                    <UserEditForm hide={handleClose} />
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

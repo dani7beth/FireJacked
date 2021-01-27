@@ -28,7 +28,7 @@ const AdminDash = () =>{
               <Exercises />
             </Col>
             <Col xs={2}>
-              <img src={admin.image} style={{ borderRadius: "50%" }} />
+              <img src={admin.image} style={{ borderRadius: "50%", width: '200px' }} />
               <Button onClick={handleImageShow}>Update Image</Button>
               <Modal show={imageShow} onHide={handleImageHide}>
                 <Modal.Header closeButton>
