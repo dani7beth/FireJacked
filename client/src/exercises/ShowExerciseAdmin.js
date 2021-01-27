@@ -1,8 +1,7 @@
 import Axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import { useParams } from "react-router-dom";
 
 
 const ShowExerciseAdmin = () => {
@@ -17,8 +16,7 @@ const ShowExerciseAdmin = () => {
   }, []);
 
   const getExercise = async () => {
-    try {
-      // debugger
+    try { 
       let res = await Axios.get(`/api/exercises/${exercise_id}`)
       console.log(res.data)
       setExercise(res.data)
