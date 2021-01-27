@@ -44,6 +44,7 @@ const ShowExercise = () => {
   // set carousel limit to one at a time?
   const renderSubmissions = () => {
     return submissions.map((submission) => {
+      // Carousel.Item onClick >> showSubmission ??
       return (
           <Carousel.Item>
             <video
@@ -53,9 +54,7 @@ const ShowExercise = () => {
               style={{height:'450px', width:'500px'}}
             />
             <Carousel.Caption>
-              <p>created at: {submission.created_at}</p>
-              <p>updated at: {submission.updated_at}</p>
-              <p>{submission.completed ? 'approved' : 'not approved' }</p>
+              <p>{submission.created_at} - {submission.completed ? 'approved' : 'not approved' }</p>
             </Carousel.Caption>
           </Carousel.Item>
       )
@@ -81,6 +80,9 @@ const ShowExercise = () => {
               has been the industry's standard dummy text ever since the 1500s when an unknown printer 
               took a galley of type and scrambled it to make a type specimen book it has?
             </p>
+          </div>
+          <div>
+            <p>See History</p>
           </div>
         </Col>
       </Row>
