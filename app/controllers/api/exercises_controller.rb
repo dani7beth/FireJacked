@@ -8,8 +8,8 @@ class Api::ExercisesController < ApplicationController
 
   def index
     # binding.pry
-    exercises = current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id)
-    render json: {data: current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id), total_pages: exercises.total_pages, total_length: current_admin.exercises.exercise_levels_by_admin_distinct(current_admin.id).distinct.pluck(:id).length}
+    exercises = current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id, params[:SearchText])
+    render json: {data: current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id,params[:SearchText]), total_pages: exercises.total_pages, total_length: current_admin.exercises.exercise_levels_by_admin_distinct(current_admin.id).distinct.pluck(:id).length}
   end
 
   def all_exercises

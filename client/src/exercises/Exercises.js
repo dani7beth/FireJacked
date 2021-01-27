@@ -13,6 +13,7 @@ const Exercises = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
+  const [searchText, setSearchText] = useState("")
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
@@ -21,36 +22,10 @@ const Exercises = () => {
     getExercises();
   }, []);
 
-  // const getExercises = () => {
-  //   axios
-  //     .get("/api/exercises")
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       setExercises(response.data.data);
-  //       setTotalPages(response.data.total_pages)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const loadMore = async () => {
-  //   const pageX = page + 1
-  //   try {
-  //     let res = await axios.get(`/api/exercises?page=${pageX}`)
-  //     setExercises([...exercises, ...res.data.data])
-  //     setPage(pageX)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-
-
   const getExercises = async () => {
     // debugger
     try {
-      let res = await axios.get("/api/exercises")
+      let res = await axios.get(`/api/exercises/?SearchText=${searchText}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
@@ -99,14 +74,6 @@ const Exercises = () => {
         })
       }
 
-  
-  
-  // const renderExercises = () => {
-  //   return exercises.map((exercise) => (
-  //     <Exercise key={exercise.id} exerciseProp={exercise} deleteExercise={deleteExercise} editExercises={editExercises} />
-  //   ))
-  // }
-
   const addExercise = (exercise) => {
     setExercises([exercise, ...exercises])
     console.log(exercise);
@@ -135,7 +102,7 @@ const editExercises = (exercise) => {
   return (
     <>
       <h1>Exercises</h1>
-      {/* <ExerciseForm addExercise={addExercise} handleHide={handleHide} /> */}
+
       <Button variant="primary" onClick={handleShow}>
         Add a new exercise
       </Button>
@@ -145,6 +112,12 @@ const editExercises = (exercise) => {
         </Modal.Header>
         <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
       </Modal>
+      <br/>
+      <br/>
+      <form>
+        <input label = "Search for an Exercise" placeholder="Search Here" type="text" onChange={(e)=>setSearchText(e.target.value)}/>
+      </form>
+
       <BoxCustom>
         <InfiniteScroll
             dataLength={exercises.length}

@@ -39,7 +39,9 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
         <Modal.Header closeButton>
           <Modal.Title>Edit this exericise</Modal.Title>
         </Modal.Header>
-        <Modal.Body><ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp} handleEditHide={handleEditHide} editExercises={editExercises} /></Modal.Body>
+        <Modal.Body>
+          <ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp} handleEditHide={handleEditHide} editExercises={editExercises} />
+        </Modal.Body>
       </Modal>
 
       <Button variant="danger" onClick={handleDeleteShow}>
