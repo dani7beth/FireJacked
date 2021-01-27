@@ -1,6 +1,15 @@
 class Api::AdminsController < ApplicationController
   before_action :authenticate_admin!, only: [:update_admin_image, :update]
   before_action :set_page
+  before_action :set_admin, only: [:show]
+
+  def show
+    render json: @admin
+  end
+
+  def user_index
+    render json: User.all
+  end
 
   def all_submissions
     submissions = Submission.page(@page).all
@@ -59,6 +68,10 @@ class Api::AdminsController < ApplicationController
 
   def set_page
     @page = params[:page] || 1
+  end
+
+  def set_admin
+    @admin = Admin.find(params[:id])
   end
 
 end
