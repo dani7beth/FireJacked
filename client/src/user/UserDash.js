@@ -25,7 +25,7 @@ const UserDash = () => {
             <Alert variant='danger'>Fill out information</Alert> : ''}
           <Row>
             <Col xs={2}>
-              <img src={user.image} style={{ borderRadius: "50%" }} />
+              <img src={user.image} style={{ borderRadius: "50%", width: '200px' }} />
               <Button onClick={handleImage}>Update Image</Button>
               <Modal show={showImage} onHide={handleImageClose}>
                 <Modal.Header closeButton>
