@@ -22,10 +22,10 @@ const Exercises = () => {
     getExercises();
   }, []);
 
-  const getExercises = async () => {
+  const getExercises = async (searchText) => {
     // debugger
     try {
-      let res = await axios.get(`/api/exercises/?SearchText=${searchText}`)
+      let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
@@ -115,7 +115,12 @@ const editExercises = (exercise) => {
       <br/>
       <br/>
       <form>
-        <input label = "Search for an Exercise" placeholder="Search Here" type="text" onChange={(e)=>setSearchText(e.target.value)}/>
+        <input 
+          label = "Search for an Exercise" 
+          placeholder="Search Here" 
+          type="text" 
+          value={searchText} 
+          onChange={(e)=>getExercises(e.target.value)}/>
       </form>
 
       <BoxCustom>
