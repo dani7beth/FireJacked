@@ -32,7 +32,7 @@ class Api::LevelsController < ApplicationController
   
     private
     def level_params
-      params.require(:level).permit(:name, :measurement, :reps, :timeframe, :sets)
+      params.require(:level).permit(:name,:metric,:multiplier, :measurement, :reps, :timeframe, :sets)
     end
 
     def set_level

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { AuthContext } from "../providers/AuthProvider";
 
 const AdminLogin = (props) =>{
@@ -17,23 +18,20 @@ const [password, setPassword] = useState('');
         <h1>
           Admin Login
         </h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            label="Email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            label="Password"
+        <Form onSubmit={handleSubmit}>
+          <Form.Label>Email</Form.Label>
+            <Form.Control name='email' type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             name="password"
+            type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <div>
-            <button type="submit">login</button>
+            <Button type="submit">login</Button>
           </div>
-        </form>
+        </Form>
       </div>
     </>
   );
