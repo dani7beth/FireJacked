@@ -5,7 +5,7 @@ import ExerciseForm from './ExerciseForm';
 import { Button, Modal } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
-import { Box, BoxCustom } from "../components/Styles";
+import { BoxAdminExercises } from "../components/Styles";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -22,25 +22,33 @@ const Exercises = () => {
     getExercises();
   }, []);
 
-  const getExercises = async () => {
+  const getExercises = async (searchText) => {
     // debugger
     try {
-      let res = await axios.get(`/api/exercises/?SearchText=${searchText}`)
+      let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
-      setExercises([...exercises,...exercisesX])
+      // debugger
+      setExercises(exercisesX)
       setTotalPages(res.data.total_pages)
       setDataLength(res.data.total_length)
     } catch (error) {
       console.log(error)
     }
-
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setPage(1)
+    getExercises(searchText)
+    // renderExercisesWithLevels()
+  }
 
   const loadMore = async () => {
     const pageX = page + 1
+    console.log(pageX)
     try {
-      let res = await axios.get(`/api/exercises?page=${pageX}`)
+      let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}`)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
       // setExercises([...exercises, ...res.data.data])
@@ -114,26 +122,33 @@ const editExercises = (exercise) => {
       </Modal>
       <br/>
       <br/>
-      <form>
-        <input label = "Search for an Exercise" placeholder="Search Here" type="text" onChange={(e)=>setSearchText(e.target.value)}/>
+      <form onSubmit={handleSubmit}>
+        <input 
+          label = "Search for an Exercise" 
+          placeholder="Search Here" 
+          type="text" 
+          value={searchText} 
+          onChange={(e)=>setSearchText(e.target.value)}/>
+          <button type="submit">Search</button>
+          <button onClick={()=>setSearchText("")}>Clear Search</button>
       </form>
 
-      <BoxCustom>
+      <BoxAdminExercises>
         <InfiniteScroll
             dataLength={exercises.length}
             next={()=>loadMore()}
             hasMore={exercises.length === dataLength ? false : true }
-  loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
-            height={300}
+            loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
+            height={450}
             endMessage={
               <p style={{ textAlign: "center" }}>
-                <b>End of Exercises</b>
+                <b>exercises.length = {exercises.length} dataLength= {dataLength}</b>
               </p>
             }
           >
         {renderExercisesWithLevels()}
         </InfiniteScroll>
-      </BoxCustom>
+      </BoxAdminExercises>
     </>
   );
 };
