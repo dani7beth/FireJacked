@@ -21,6 +21,8 @@ import UserStats from "./components/UserStats";
 import UserEditForm from "./user/UserEditForm";
 import ShowExerciseAdmin from "./exercises/ShowExerciseAdmin";
 import { Container } from "./components/Styles";
+import Trainer from "./user/Trainer";
+import UserSubmissions from "./admin/UserSubmissions";
 
 function App() {
 
@@ -48,6 +50,8 @@ function App() {
           <Route exact path='/admin_register' component={AdminRegister}/>
           <Route exact path='/user_stats' component={UserStats}/>
           <Route exact path="/show-exercises-for-admin/:exercise_id" component={ShowExerciseAdmin} />
+          <Route exact path="/show_admin/:admin_id" component={Trainer} />
+          <Route exact path="/show_user_submissions/:user_id" component={UserSubmissions} />
           <Route component={NoMatch} />
         </Switch>
       </FetchUserAdmin>
