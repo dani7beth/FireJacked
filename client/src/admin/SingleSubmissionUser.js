@@ -1,5 +1,5 @@
 import { useEffect, useState, } from 'react';
-import { Button } from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap'
 import axios from 'axios';
 import Comments from '../components/Comments';
 
@@ -23,21 +23,39 @@ const SingleSubmissionUser = ({submission}) =>{
     }
   }, [level])
 
-  const handleStatus = async () => {
-    setSubmissionState({ completed: !submissionState.completed });
+  const handleChange = (e) =>{
+    setSubmissionState({
+      ...submissionState, [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    debugger
+    e.preventDefault();
+    console.log(submission);
     try {
-      let res = await axios.put(`/api/levels/${submissionState.level_id}/submissions/${submissionState.id}`, submissionState);
-      // this path will need to change to a custom route 
-      console.log(res.data);
+      let res = await axios.put(`/api/update_submission_status/${submission.id}/${submission.user_id}`, submissionState);
+      console.log(submissionState)
+      console.log(res);
+      // setSubmissionState(res);
     } catch (error) {
       console.log(error)
     }
   }
+  
+  // const handleStatus = async (e) => {
+  //   setSubmissionState({ status: e.target.value });
+  //   console.log(submission);
+  //   try {
+  //     let res = await axios.put(`/api/levels/${submission.level_id}/submissions/${submission.id}`, submissionState);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   const getLevel = async () => {
-    // debugger
     try {
-      
       let res = await axios.get(`/api/levels/${submission.level_id}`)
       setLevel(res.data)
       setLevelLoading(false)
@@ -68,11 +86,24 @@ const SingleSubmissionUser = ({submission}) =>{
       <h1>{submissionState.name}</h1>
       <h4>{level.name}</h4>
       <h4>{exercise.activity}</h4>
-      <p>{submissionState.completed ? 'not completed' : 'completed'}</p>
+      <p>{submissionState.status}</p>
       <video style={{ width: '400px', height: '300px' }} controls="true" class="embed-responsive-item">
         <source src={submissionState.video_upload} type="video/mp4" />
       </video>
-      <Button onClick={handleStatus}>Verify</Button>
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>Status</Form.Label>
+        <Form.Control as='select' 
+          name="status"
+          value ={submissionState.status}
+          onChange={handleChange}>
+          <option>Pending</option>
+          <option>Approved</option>
+          <option >Not Approved</option>
+        </Form.Control>
+        <Button type='submit'>Submit</Button>
+        
+      </Form>
+
 
       <button onClick={()=>setShowComments(!showComments)}>{showComments ? "Expand" : "Collapse"}</button>
         <br/>
