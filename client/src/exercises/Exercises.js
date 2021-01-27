@@ -5,7 +5,7 @@ import ExerciseForm from './ExerciseForm';
 import { Button, Modal } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
-import { Box, BoxCustom } from "../components/Styles";
+import { BoxAdminExercises } from "../components/Styles";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -13,6 +13,7 @@ const Exercises = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
+  const [searchText, setSearchText] = useState("")
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
@@ -21,51 +22,33 @@ const Exercises = () => {
     getExercises();
   }, []);
 
-  // const getExercises = () => {
-  //   axios
-  //     .get("/api/exercises")
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       setExercises(response.data.data);
-  //       setTotalPages(response.data.total_pages)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const loadMore = async () => {
-  //   const pageX = page + 1
-  //   try {
-  //     let res = await axios.get(`/api/exercises?page=${pageX}`)
-  //     setExercises([...exercises, ...res.data.data])
-  //     setPage(pageX)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-
-
-  const getExercises = async () => {
+  const getExercises = async (searchText) => {
     // debugger
     try {
-      let res = await axios.get("/api/exercises")
+      let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
-      setExercises([...exercises,...exercisesX])
+      // debugger
+      setExercises(exercisesX)
       setTotalPages(res.data.total_pages)
       setDataLength(res.data.total_length)
     } catch (error) {
       console.log(error)
     }
-
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setPage(1)
+    getExercises(searchText)
+    // renderExercisesWithLevels()
+  }
 
   const loadMore = async () => {
     const pageX = page + 1
+    console.log(pageX)
     try {
-      let res = await axios.get(`/api/all_exercises?page=${pageX}`)
+      let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}`)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
       // setExercises([...exercises, ...res.data.data])
@@ -99,14 +82,6 @@ const Exercises = () => {
         })
       }
 
-  
-  
-  // const renderExercises = () => {
-  //   return exercises.map((exercise) => (
-  //     <Exercise key={exercise.id} exerciseProp={exercise} deleteExercise={deleteExercise} editExercises={editExercises} />
-  //   ))
-  // }
-
   const addExercise = (exercise) => {
     setExercises([exercise, ...exercises])
     console.log(exercise);
@@ -115,11 +90,13 @@ const Exercises = () => {
   const deleteExercise = (id) => {
     axios.delete(`/api/exercises/${id}`)
       .then((res) => {
-        setExercises(exercises.filter((exercise)=> exercise.id !== id))
+        const newExercises = exercises.filter((exercise)=> exercise.exercise_id !== id)
+        setExercises(newExercises)
         console.log(res.data);
       })
       .catch((err) => {
         console.log("Error in delete exercise");
+        console.log(err)
       })
   }
 
@@ -133,7 +110,7 @@ const editExercises = (exercise) => {
   return (
     <>
       <h1>Exercises</h1>
-      {/* <ExerciseForm addExercise={addExercise} handleHide={handleHide} /> */}
+
       <Button variant="primary" onClick={handleShow}>
         Add a new exercise
       </Button>
@@ -143,22 +120,35 @@ const editExercises = (exercise) => {
         </Modal.Header>
         <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
       </Modal>
-      <BoxCustom>
+      <br/>
+      <br/>
+      <form onSubmit={handleSubmit}>
+        <input 
+          label = "Search for an Exercise" 
+          placeholder="Search Here" 
+          type="text" 
+          value={searchText} 
+          onChange={(e)=>setSearchText(e.target.value)}/>
+          <button type="submit">Search</button>
+          <button onClick={()=>setSearchText("")}>Clear Search</button>
+      </form>
+
+      <BoxAdminExercises>
         <InfiniteScroll
             dataLength={exercises.length}
             next={()=>loadMore()}
             hasMore={exercises.length === dataLength ? false : true }
-            loader={<h4>Loading...</h4>}
-            height={300}
+            loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
+            height={450}
             endMessage={
               <p style={{ textAlign: "center" }}>
-                <b>End of Exercises</b>
+                <b>exercises.length = {exercises.length} dataLength= {dataLength}</b>
               </p>
             }
           >
         {renderExercisesWithLevels()}
         </InfiniteScroll>
-      </BoxCustom>
+      </BoxAdminExercises>
     </>
   );
 };

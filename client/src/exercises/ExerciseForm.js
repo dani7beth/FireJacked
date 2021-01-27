@@ -79,6 +79,7 @@ const ExerciseForm = ({
       // debugger;
       let res = await axios.post(`/api/exercises`, imageData);
       addExercise(res.data);
+      console.log(res.data)
     } catch (err) {
       console.log(err);
     }

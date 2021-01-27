@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Trainer from "./Trainer";
+import { Link } from "react-router-dom";
 
 const TrainerIndex = () => {
   const [trainers, setTrainers] = useState([])
@@ -20,7 +22,12 @@ const TrainerIndex = () => {
   const renderTrainers = () => {
     return trainers.map((trainer) => {
       return (
-        <h1 key={trainer.id}>{trainer.first_name}</h1>
+        <>
+          <Link to={`show_admin/${trainer.id}`}>  
+            <h1 key={trainer.id}>{trainer.first_name} {trainer.last_name}</h1>
+          </Link>
+            <img src={trainer.image} alt="blank profile"/>
+        </>
       )
     })
   }
