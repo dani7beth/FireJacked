@@ -28,19 +28,25 @@ const Exercises = () => {
       let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
-      setExercises([...exercises,...exercisesX])
+      // debugger
+      setExercises(exercisesX)
       setTotalPages(res.data.total_pages)
       setDataLength(res.data.total_length)
     } catch (error) {
       console.log(error)
     }
-
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    getExercises(searchText)
+    // renderExercisesWithLevels()
+  }
 
   const loadMore = async () => {
     const pageX = page + 1
     try {
-      let res = await axios.get(`/api/exercises?page=${pageX}`)
+      let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}`)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
       // setExercises([...exercises, ...res.data.data])
@@ -114,13 +120,15 @@ const editExercises = (exercise) => {
       </Modal>
       <br/>
       <br/>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input 
           label = "Search for an Exercise" 
           placeholder="Search Here" 
           type="text" 
           value={searchText} 
-          onChange={(e)=>getExercises(e.target.value)}/>
+          onChange={(e)=>setSearchText(e.target.value)}/>
+          <button type="submit">Search</button>
+          <button onClick={()=>setSearchText("")}>Clear Search</button>
       </form>
 
       <BoxCustom>
@@ -128,13 +136,13 @@ const editExercises = (exercise) => {
             dataLength={exercises.length}
             next={()=>loadMore()}
             hasMore={exercises.length === dataLength ? false : true }
-  loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
+            // loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
             height={300}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>End of Exercises</b>
-              </p>
-            }
+            // endMessage={
+            //   <p style={{ textAlign: "center" }}>
+            //     <b>End of Exercises</b>
+            //   </p>
+            // }
           >
         {renderExercisesWithLevels()}
         </InfiniteScroll>
