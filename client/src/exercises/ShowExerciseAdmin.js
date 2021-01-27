@@ -25,8 +25,7 @@ const ShowExerciseAdmin = () => {
   }, []);
 
   const getExercise = async () => {
-    try {
-      // debugger
+    try { 
       let res = await Axios.get(`/api/exercises/${exercise_id}`)
       console.log(res.data)
       setExercise(res.data)

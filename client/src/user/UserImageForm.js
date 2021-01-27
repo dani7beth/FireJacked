@@ -1,17 +1,15 @@
-import { Form } from "react-bootstrap";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Button } from "react-bootstrap";
-import Axios from "axios";
 import { useDropzone } from "react-dropzone";
 
-const UserImageForm = () => {
+const UserImageForm = ({handleImageHide}) => {
   const { user,onDrop } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault()
     onDrop(acceptedFiles)
-    //hide  modal
+    handleImageHide();
   }
   const {
     getRootProps,

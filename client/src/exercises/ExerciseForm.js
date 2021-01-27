@@ -25,7 +25,7 @@ const ExerciseForm = ({
         }
       : {
           name: "",
-          image: "",
+          image: 'https://visualhunt.com/photos/1/dumbbells-in-row-in-fitness-studio.jpg?s=s',
           how_to_video: "",
           category: "",
           activity: "",
@@ -37,17 +37,12 @@ const ExerciseForm = ({
   }
 
   const onDrop = useCallback((acceptedFiles) => {
-      setExercise({image: acceptedFiles[0] })
+      setExercise({...exercise, how_to_video: acceptedFiles[0] })
   }, []);
 
-  const onDrop2 = useCallback((acceptedFiles)=>{
-    setExercise({how_to_video: acceptedFiles[0]})
-  })
-
   const editCallExercise = async () => {
-    debugger;
-    if (exercise.image == null) {
-      alert("cant be blank");
+    if(exercise.how_to_video == null){
+      alert('cant be blank');
       return;
     }
     let imageData = new FormData();
@@ -67,13 +62,13 @@ const ExerciseForm = ({
   };
 
   const addCallExercise = async () => {
-    if (exercise.image == null) {
+    if (exercise.how_to_video == null) {
       alert("cant be blank");
       return;
     }
     console.log(exercise);
     let imageData = new FormData();
-    imageData.append("image", exercise.image);
+    imageData.append('image', exercise.image);
     imageData.append("name", exercise.name);
     imageData.append("how_to_video", exercise.how_to_video);
     imageData.append("category", exercise.category);
@@ -101,7 +96,6 @@ const ExerciseForm = ({
       addCallExercise();
       setExercise({
         name: "",
-        image: "",
         how_to_video: "",
         category: "",
         activity: "",
@@ -116,7 +110,7 @@ const ExerciseForm = ({
     isDragActive,
     acceptedFiles,
 
-  } = useDropzone({ onDrop, onDrop2 });
+  } = useDropzone({ onDrop });
 
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
@@ -135,20 +129,6 @@ const ExerciseForm = ({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <p>Image</p>
-        <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p>Drop the files here ...</p>
-          ) : (
-            <p>Drag 'n' drop some files here, or click to select files</p>
-          )}
-          <input name="image" value={exercise.image} onChange={handleChange} />
-        </div>
-        <aside>
-          <h4>Files</h4>
-          <ul>{files}</ul>
-        </aside>
         <p>Name</p>
         <input name="name" value={exercise.name} onChange={handleChange} />
         <p>How To Video</p>
