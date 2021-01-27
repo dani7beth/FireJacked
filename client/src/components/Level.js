@@ -25,7 +25,7 @@ const Level = ({ levelProp, deleteLevel, exerciseID, editLevels}) => {
  
   return (
     <>
-      <h1>{levelProp.name}</h1>
+      <p>{levelProp.name}</p>
       <Button variant="primary" onClick={handleEditShow}>
         Edit
       </Button>

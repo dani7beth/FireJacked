@@ -4,15 +4,15 @@ import Level from "./Level";
 import LevelForm from "./LevelForm";
 import { Button, Modal } from "react-bootstrap";
 
-const Levels = (props) => {
+const Levels = ({exerciseID}) => {
   const [levels, setLevels] = useState([]);
-  const exerciseID = props.match.params.id;
 
   const getLevels = () => {
     axios
       .get(`/api/exercises/${exerciseID}/levels`)
       .then((response) => {
         setLevels(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -68,7 +68,6 @@ const Levels = (props) => {
         </Modal.Header>
         <Modal.Body><LevelForm exerciseID={exerciseID} addLevel={addLevel} addModalHide={addModalHide} /></Modal.Body>
       </Modal>
-      <h1>levels</h1>
       {renderLevels()}
     </>
   );
