@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 
 const UserImageForm = ({handleImageHide}) => {
@@ -18,10 +18,10 @@ const UserImageForm = ({handleImageHide}) => {
     acceptedFiles,
   } = useDropzone({ onDrop });
   return (
-    <form>
+    <Form>
       <p>Update User Picture</p>
       <div {...getRootProps()}>
-        <input {...getInputProps()} />
+        <Form.Control {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
@@ -29,7 +29,7 @@ const UserImageForm = ({handleImageHide}) => {
         )}
       </div>
       <Button onClick={handleSubmit}>Submit</Button>
-    </form>
+    </Form>
   );
 };
 export default UserImageForm;

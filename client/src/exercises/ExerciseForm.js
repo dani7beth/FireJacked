@@ -3,7 +3,7 @@ import { useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import Dropzone, { useDropzone } from "react-dropzone";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const ExerciseForm = ({
   exerciseProp,
@@ -129,44 +129,45 @@ const ExerciseForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <p>Name</p>
-        <input name="name" value={exercise.name} onChange={handleChange} />
-        <p>How To Video</p>
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>Name</Form.Label>
+        <Form.Control name="name" placeholder='Name of your exercise' value={exercise.name} onChange={handleChange} />
+        <Form.Label>How To Video</Form.Label>
         <div {...getRootProps()}>
-          <input {...getInputProps()} />
+          <Form.Control {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
           
-          <input name="how_to_video" value={exercise.how_to_video} onChange={handleChange} />
+          <Form.Control name="how_to_video" value={exercise.how_to_video} onChange={handleChange} />
         </div>
         <aside>
           <h4>Files</h4>
           <ul>{files}</ul>
         </aside>
-        <p>Category</p>
-        <input
+        <Form.Label>Category</Form.Label>
+        <Form.Control
           name="category"
+          placeholder='e.g. Barbell Strength/Power, Cardio-Respiratory Power, etc.'
           value={exercise.category}
           onChange={handleChange}
         />
-        <p>Activity</p>
-        <input
+        <Form.Label>Activity</Form.Label>
+        <Form.Control
           name="activity"
+          placeholder='e.g. Deadlift, BenchPress, etc.'
           value={exercise.activity}
           onChange={handleChange}
         />
-        <br />
         <Button variant="primary" type="submit">
           submit
         </Button>
         <Button variant="danger" onClick={whichClose}>
           cancel
         </Button>
-      </form>
+      </Form>
     </>
   );
 };

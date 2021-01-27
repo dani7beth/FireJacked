@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Axios from "axios"
 import { useParams } from "react-router-dom"
 import Comment from "./Comment"
-import { Button, Modal } from "react-bootstrap"
+import { Button, Form, Modal } from "react-bootstrap"
 
 const Comments = ({submission_id}) => {
   // const { submission_id } = useParams()
@@ -96,12 +96,11 @@ const Comments = ({submission_id}) => {
             </Modal.Header>
             <Modal.Body>
             <div>
-                  <form onSubmit={handleSubmit}>
-                  <textarea value = {comment} type = "textarea" onChange={(e)=>setComment(e.target.value)}/>  
-                  <br />
+                  <Form onSubmit={handleSubmit}>
+                  <Form.Control value={comment} as="textarea" onChange={(e)=>setComment(e.target.value)}/>  
                   <Button type='submit' variant='primary' size='sm'>submit changes</Button>
                   <Button variant="secondary" size='sm' onClick={handleAddClose}>Go back</Button>
-                </form>
+                </Form>
             </div>
             </Modal.Body>
           </Modal>

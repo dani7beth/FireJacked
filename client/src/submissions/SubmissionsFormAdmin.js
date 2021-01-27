@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Axios from "axios"
 import Comments from "../components/Comments"
-import { Button } from "react-bootstrap"
+import { Button, Form } from "react-bootstrap"
 
 const SubmissionsFormAdmin = () => {
 
@@ -60,10 +60,10 @@ const SubmissionsFormAdmin = () => {
   <h1>Submission Id: {submission_id}</h1>
   <h2>Name: {submission.name}</h2>
   <h2>video upload: {submission.video_upload}</h2>
-  <form onSubmit={handleSubmit}>
-  <input type="checkbox" defaultChecked={submission.completed} onChange={()=> setChecked(submission.completed ? false : true)}/>
+  <Form onSubmit={handleSubmit}>
+  <Form.Control type="checkbox" defaultChecked={submission.completed} onChange={()=> setChecked(submission.completed ? false : true)}/>
   <Button type="submit" size='sm'>Submit</Button>
-  </form>
+  </Form>
   <Comments submission_id = {submission_id}/>
 
   </>
