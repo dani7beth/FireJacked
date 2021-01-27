@@ -1,14 +1,18 @@
 class Api::SubmissionsController < ApplicationController
-  before_action :authenticate_user!, except: [:exercise_subs]
+  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user]
   before_action :authenticate_admin!, only: [:exercise_subs]
-  # before_action :set_test_user
-  before_action :set_level, except: [:all_users_submissions, :exercise_subs]
+  before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user]
   before_action :set_submission, only: [:update, :destroy, :show]
- 
+  before_action :set_user, only: [:all_submissions_of_user]
+  # before_action :set_test_user
 
   def index
     level = Level.find(params[:level_id])
     render json: level.submissions.where(user_id: current_user.id)
+  end
+
+  def all_submissions_of_user
+    render json: @user.submissions.all
   end
 
   def all_users_submissions
@@ -75,6 +79,10 @@ class Api::SubmissionsController < ApplicationController
 
   def set_submission
     @submission = current_user.submissions.find(params[:id])
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 
   # def set_test_user 
