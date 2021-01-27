@@ -4,6 +4,7 @@ import {Row, Col, Button, Modal} from "react-bootstrap"
 import Exercises from '../exercises/Exercises';
 import AdminUpdate from './AdminUpdate';
 import AdminUpdateImage from './AdminUpdateImage';
+import UsersIndex from "./UsersIndex";
 
 const AdminDash = () =>{
   const {admin, updateAdminInfo, updateAdminImage } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const AdminDash = () =>{
         <>
           <Row>
             <Col xs={2}>
-              <h1>This is where the Submition Review needs to go</h1>
+              <UsersIndex />
             </Col>
             <Col xs={8}>
               <Exercises />
