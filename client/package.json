@@ -17,7 +17,9 @@
     "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "redux": "^4.0.5",
     "styled-components": "^5.2.1",
+    "video-react": "^0.14.1",
     "web-vitals": "^0.2.4"
   },
   "proxy": "http://localhost:3001",

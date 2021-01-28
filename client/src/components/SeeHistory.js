@@ -12,9 +12,9 @@ const SeeHistory = () => {
   
 
 
-  const { exercise_id } = useParams()
+  const { exercise_id } = useParams();
 
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getExercise()
@@ -30,9 +30,9 @@ const SeeHistory = () => {
       setExercise(res.data)
       
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const userHistorySubmissions = () => {
     Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
@@ -51,7 +51,7 @@ const SeeHistory = () => {
   
 
   const renderSubmissions = () => {
-    return submissions.map((submission)=>{
+    return submissions.map((submission) => {
       return (
         <>
         <ShowLevel key={`submission-${submission.id}`} {...submission} submission = {submission} renderClickedSubmission={renderClickedSubmission}/>
@@ -61,7 +61,7 @@ const SeeHistory = () => {
   }
 
   const renderClickedSubmission = (newSubmission) => {
-    renderVideo(newSubmission);
+    // renderVideo(newSubmission);
     setSubmission(newSubmission)
   }
 
@@ -77,17 +77,28 @@ const SeeHistory = () => {
   }
 
   const renderInfo = () => {
-      return <h3>Id: {submission.id} | {submission.created_at} | {user.weight}lbs</h3>
-  }
+    return (
+      <h3>
+        Id: {submission.id} | {submission.created_at} | {user.weight}lbs
+      </h3>
+    );
+  };
 
   const saveTheRender = () => {
-    if(submissions.length === 0) {
-        return (
-          <>
-            <h1>Oops! Looks like you haven’t made any submissions for this exercise. Go make one and then come back!</h1>
-            <h1 style={{textAlign:'center'}}><a class='btn btn-primary'  href={`/showexercise/${exercise_id}`}>Go Back</a></h1>
-          </>
-        )
+    if (submissions.length === 0) {
+      return (
+        <>
+          <h1>
+            Oops! Looks like you haven’t made any submissions for this exercise.
+            Go make one and then come back!
+          </h1>
+          <h1 style={{ textAlign: "center" }}>
+            <a class="btn btn-primary" href={`/showexercise/${exercise_id}`}>
+              Go Back
+            </a>
+          </h1>
+        </>
+      );
     } else {
         return (
           <>
@@ -111,19 +122,19 @@ const SeeHistory = () => {
                         how do I make this border stick just around 'Pending' or whatever will be written there?
                         We should make so if it's completed it's green, pending, is orange, and failed is red.
                     */}
-                  </div>
-                  <div style={{border:'1px solid black'}}>
-                    <h5>History</h5>
-                      {renderSubmissions()}
-                    <p>infinite scroll?</p>
-                  </div>
-                </Col>
-              </Row>
-          </>
-        )
-      }
+              </div>
+              <div style={{ border: "1px solid black" }}>
+                <h5>History</h5>
+                {renderSubmissions()}
+                <p>infinite scroll?</p>
+              </div>
+            </Col>
+          </Row>
+        </>
+      );
     }
-    return saveTheRender()
-  }
+  };
+  return saveTheRender();
+};
 
 export default SeeHistory;
