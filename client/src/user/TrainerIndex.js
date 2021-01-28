@@ -24,9 +24,10 @@ const TrainerIndex = () => {
       return (
         <>
           <Link to={`show_admin/${trainer.id}`}>  
+          <img src={trainer.image} alt="blank profile" style={{ borderRadius: "50%", width: '200px' }} />
             <h1 key={trainer.id}>{trainer.first_name} {trainer.last_name}</h1>
           </Link>
-            <img src={trainer.image} alt="blank profile"/>
+            
         </>
       )
     })
