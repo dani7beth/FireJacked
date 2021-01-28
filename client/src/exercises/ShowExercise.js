@@ -82,7 +82,7 @@ const ShowExercise = () => {
             </p>
           </div>
           <div>
-            <p>See History</p>
+            <Link to={`/${exercise_id}/see_history`}>See History</Link>
           </div>
         </Col>
       </Row>
