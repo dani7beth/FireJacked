@@ -5,13 +5,13 @@ class Submission < ApplicationRecord
   has_many :admins, through: :comments
 
   def self.submissions_by_exercise(exercise_id)
-    select("submissions.ID as submission_id, 
+    select("submissions.id, 
             submissions.video_upload as video, 
             submissions.created_at as created_at,
             submissions.updated_at as updated_at,
-            levels.ID as level_id,
-            exercises.ID as exercise_id,
-            users.ID as user_id,
+            levels.id as level_id,
+            exercises.id as exercise_id,
+            users.id as user_id,
             users.first_name as user_first_name
           ")
         .joins("inner join levels on levels.id = submissions.level_id")
