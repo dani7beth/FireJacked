@@ -4,9 +4,9 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export default (props) => {
   //init register values
-  const [email, setEmail] = useState("test@test.com");
-  const [password, setPassword] = useState("123456");
-  const [confirmPassword, setConfirmPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
@@ -55,6 +55,7 @@ export default (props) => {
           />
           <Form.Label>Speciality</Form.Label>
           <Form.Control
+            placeholder='e.g. Crossfit, Weightlifting, Yoga, etc.'
             type="text"
             value={speciality}
             onChange={(e) => setSpeciality(e.target.value)}

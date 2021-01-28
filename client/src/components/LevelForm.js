@@ -1,23 +1,29 @@
 import { useState } from "react";
 import axios from 'axios';
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose, addModalHide, editLevels }) =>{
 
+  const [minutes, setMinutes] = useState(0)
+  const [seconds, setSeconds] = useState(0)
   const [level, setLevel] = useState(
     levelProp ? {
       name: levelProp.name,
+      metric: levelProp.metric,
+      multiplier: levelProp.multiplier,
       measurement: levelProp.measurement,
       reps: levelProp.reps,
       timeframe: levelProp.timeframe,
-      set: levelProp.set,
+      sets: levelProp.sets,
     }:
     {
       name:'',
+      metric: '',
+      multiplier: null,
       measurement:'',
-      reps:'',
-      timeframe:'',
-      set:'',
+      reps: null,
+      timeframe: null,
+      sets: null,
     }
   )
 
@@ -46,6 +52,8 @@ const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose
   
   const handleChange = (e) => {
     setLevel({...level, [e.target.name]: e.target.value})
+    console.log(e.target.name)
+    console.log(e.target.value)
   }
 
   const handleSubmit = (e) => {
@@ -67,24 +75,53 @@ const LevelForm = ({ levelProp, addLevel, exerciseID, editLevel, handleEditClose
     }
   }
 
+  // let minute = Math.floor(timeframe/60)
+  // let seconds = timeframe%60 < 10 ? "0" + timeframe%60 : timeframe%60
+  // let duration = minute + ":" + seconds
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <p>Name</p>
-        <input name="name" value={level.name} onChange={handleChange} />
-        <p>Measurement</p>
-        <input name="measurement" value={level.measurement} onChange={handleChange} />
-        <p>Reps</p>
-        <input name="reps" value={level.reps} onChange={handleChange} />
-        <p>Time Frame</p>
-        <input name="timeframe" value={level.timeframe} onChange={handleChange} />
-        <p>Sets</p>
-        <input name="sets" value={level.sets} onChange={handleChange} />
-        <br />
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>Name</Form.Label>
+        <Form.Control name="name" placeholder='Your level name' value={level.name} onChange={handleChange} />
+        <Form.Label>Multiplier</Form.Label>
+        <Form.Control name='multiplier' placeholder='e.g. 2.0, 1.75, etc.' type='number' value={level.multiplier} onChange={handleChange} />
+        <Form.Label>Metrics</Form.Label>
+        <Form.Control name='metric' placeholder='e.g. pounds, calories, etc.' value={level.metric} onChange={handleChange}/>
+        <Form.Label>Measurement</Form.Label>
+        <Form.Control name="measurement" placeholder='e.g. bodyweight' value={level.measurement} onChange={handleChange} />
+        <Form.Label>Reps</Form.Label>
+        <Form.Control name="reps" type='number' placeholder ='e.g. reps of 10' value={level.reps} onChange={handleChange} />
+        <Form.Label>Time Frame</Form.Label>
+        <Form.Control 
+          name="minutes" 
+          type='number' 
+          placeholder='e.g. 1 minute' 
+          value={Math.floor(level.timeframe/60)} 
+          onChange={(e)=> {
+            setLevel({...level, timeframe: parseInt(e.target.value)*60})
+            setMinutes(parseInt(e.target.value)*60)
+            }} /> <p>Minute</p>
+        <Form.Control 
+          name="seconds" 
+          type='number' 
+          placeholder='e.g. 30 Seconds' 
+          value={level.timeframe%60} 
+          onChange={(e)=> {
+            setLevel({...level, timeframe: parseInt(minutes) + parseInt(e.target.value)})
+            setSeconds(parseInt(e.target.value))
+            }} /> <p>Seconds</p>
+        {/* <p>Duration: {level.timeframe}</p> */}
+        <Form.Label>Sets</Form.Label>
+        <Form.Control name="sets" type='number' placeholder='e.g. 3 sets' value={level.sets} onChange={handleChange} />
         <Button variant='primary' type='submit'>submit</Button>  
         <Button variant='danger' onClick={whichClose}>cancel</Button>
-      </form>
+      </Form>
     </>
   )
 }
 export default LevelForm;
+
+
+// Math.floor(level.timeframe/60)
+// level.timeframe%60 < 10 ? "0" + level.timeframe%60 : level.timeframe%60

@@ -22,7 +22,7 @@ const AdminUpdateImage = ({handleImageHide}) => {
   } = useDropzone({ onDropAdmin });
 
   return (
-    <form>
+    <Form>
       <p>Update Admin Picture</p>
       <div {...getRootProps()}>
         <input {...getInputProps()} />
@@ -33,7 +33,7 @@ const AdminUpdateImage = ({handleImageHide}) => {
         )}
       </div>
       <Button onClick={handleSubmit}>Submit</Button>
-    </form>
+    </Form>
   );
 };
 

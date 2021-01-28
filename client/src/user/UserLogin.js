@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const UserLogin = (props) => {
   //init email and password for login
@@ -22,15 +22,16 @@ const UserLogin = (props) => {
         <h1>
           Login
         </h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            label="Email"
+        <Form onSubmit={handleSubmit}>
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            label="Password"
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type='password'
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -38,7 +39,7 @@ const UserLogin = (props) => {
           <div>
             <Button type="submit">login</Button>
           </div>
-        </form>
+        </Form>
         <Link to='/admin_login'>Admin Login</Link>
       </div>
     </>
