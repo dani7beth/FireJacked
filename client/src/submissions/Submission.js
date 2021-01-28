@@ -22,7 +22,7 @@ const Submission = ({
       <div>
         <h3>{submissionProp.name}</h3>
         <p>{submissionProp.complete ? "completed" : "not completed"}</p>
-          <div class="embed-responsive embed-responsive-16by9">
+          <div>
           <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
             <source src={submissionProp.video_upload} type="video/mp4" />
           </video>

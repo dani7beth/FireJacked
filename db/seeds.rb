@@ -1,4 +1,3 @@
-
 require 'faker'
 
 categories = ['Barbell Strength/Power', 'KettleBell Strength/Power', 'Cardio-Respiratory Power', 'Power/Strength Endurance', 'Power Endurance', 'GYM Endurance']

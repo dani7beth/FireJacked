@@ -3,73 +3,77 @@ import { useContext, useEffect, useReducer, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import { Player } from "video-react";
+import ShowLevel from "./ShowLevel";
 
 const SeeHistory = () => {
-  const [exercise, setExercise] = useState({});
-  const [submissions, setSubmissions] = useState([]);
-  const [submission, setSubmission] = useState([]);
+  const [exercise, setExercise] = useState({})
+  const [submissions, setSubmissions] = useState([])
+  const [submission, setSubmission] = useState([])
+  
+
 
   const { exercise_id } = useParams();
 
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    getExercise();
-    exerciseSubmissions();
+    getExercise()
+    userHistorySubmissions()
   }, []);
+
+ 
 
   const getExercise = async () => {
     try {
-      let res = await Axios.get(`/api/exercises/${exercise_id}`);
-      console.log(res.data);
-      setExercise(res.data);
+      let res = await Axios.get(`/api/exercises/${exercise_id}`)
+      console.log(res.data)
+      setExercise(res.data)
+      
     } catch (error) {
       console.log(error);
     }
   };
 
-  const exerciseSubmissions = () => {
-    Axios.get(`/api/exercise_subs/?exercise_id=${exercise_id}`)
-      .then((response) => {
-        console.log(response.data);
-        setSubmissions(response.data);
-        setSubmission(response.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const userHistorySubmissions = () => {
+    Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
+    .then((response) => {
+      console.log(`User ${user.id}'s submissions:`, response.data)
+      // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
+      setSubmissions(response.data)
+      setSubmission(response.data[0])
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  
 
   const renderSubmissions = () => {
     return submissions.map((submission) => {
       return (
-        <p
-          onClick={() => {
-            renderClickedSubmission(submission);
-          }}
-        >
-          {submission.created_at} | {exercise.activity} | lbs? | pending{" "}
-        </p>
-      );
-    });
-  };
+        <>
+        <ShowLevel key={`submission-${submission.id}`} {...submission} submission = {submission} renderClickedSubmission={renderClickedSubmission}/>
+        </>
+      )
+    })
+  }
 
   const renderClickedSubmission = (newSubmission) => {
-    setSubmission(newSubmission);
-    renderVideo(newSubmission);
-  };
+    // renderVideo(newSubmission);
+    setSubmission(newSubmission)
+  }
 
   const renderVideo = () => {
+    console.log(submission.id, ':', submission.video)
     return (
-      <video
-          className='d-block w-100'
-          src={submission.video}
-          alt="Submission video"
-          style={{height:'450px', width:'500px'}}
-      />
-    );
-  };
+      <div key={submission.video}>
+        <video style={{height:'450px', width:'500px'}} controls={true} class="embed-responsive-item">
+          <source src={submission.video} type="video/mp4" />
+        </video>
+      </div>
+    )
+  }
 
   const renderInfo = () => {
     return (
@@ -95,33 +99,23 @@ const SeeHistory = () => {
         </>
       );
     } else {
-      return (
-        <>
-          <a class="btn btn-light" href={`/showexercise/${exercise_id}`}>
-            Back
-          </a>
-          <Row>
-            <Col>
-              <h1>VIDEO</h1>
-              {renderVideo()}
-            </Col>
-            <Col>
-              <div>
-                <h1>{exercise.activity}</h1>
-                {/* <p>level?</p> */}
-              </div>
-              <div style={{ paddingBottom: "60px", paddingTop: "20px" }}>
-                {renderInfo()}
-                <h3
-                  style={{
-                    border: "2px solid orange",
-                    borderRadius: "20%",
-                    width: "110px",
-                  }}
-                >
-                  Pending
-                </h3>
-                {/* 
+        return (
+          <>
+            <a class='btn btn-light'  href={`/showexercise/${exercise_id}`}>Back</a>
+              <Row>
+                <Col>
+                  <h1>VIDEO</h1>
+                  {renderVideo()}
+                </Col>
+                <Col>
+                  <div>
+                    <h1>{exercise.activity}</h1>
+                    {/* <p>level?</p> */} 
+                  </div>
+                  <div style={{paddingBottom:'60px', paddingTop:'20px'}}>
+                    {renderInfo()}
+                    <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>{submission.status}</h3>
+                    {/* 
                         <h3 style={{border:'2px solid green', borderRadius:'20%', width:'110px'}}>Completed</h3>
                         <h3 style={{border:'2px solid red', borderRadius:'20%', width:'110px'}}>Failed</h3> 
                         how do I make this border stick just around 'Pending' or whatever will be written there?
