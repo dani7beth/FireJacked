@@ -2,20 +2,20 @@ import { useContext, useState, } from 'react';
 import { AuthContext, } from "../providers/AuthProvider";
 import { Form, Button, Col } from "react-bootstrap";
 
-const UpdateAdmin = ({handleClose}) => {
-  const {admin, updateAdminInfo} = useContext(AuthContext);
-  const [adminInfo, setAdminInfo] = useState(admin)
+const UpdateAdmin = ({ handleClose }) => {
+  const { admin, updateAdminInfo } = useContext(AuthContext);
+  const [adminInfo, setAdminInfo] = useState(admin);
 
   const handleChange = (e) => {
-    setAdminInfo({...adminInfo, [e.target.name]: e.target.value });
-  }
+    setAdminInfo({ ...adminInfo, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     updateAdminInfo(adminInfo);
     handleClose();
-  }
- 
+  };
+
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -66,6 +66,6 @@ const UpdateAdmin = ({handleClose}) => {
       </Form>
     </>
   );
-}
+};
 
 export default UpdateAdmin;

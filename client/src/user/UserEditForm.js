@@ -2,18 +2,15 @@ import React,{useState,useContext} from 'react'
 import { Form, Button, Col } from "react-bootstrap";
 import { AuthContext } from "../providers/AuthProvider";
 
-const UserEditForm = ({hide}) => {
-  const { user,handleUserEdit } = useContext(AuthContext);
-  const [userState,setUserState] = useState(user)
-  
-
+const UserEditForm = ({ hide }) => {
+  const { user, handleUserEdit } = useContext(AuthContext);
+  const [userState, setUserState] = useState(user);
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      handleUserEdit(userState);
-      hide();
-  }
-  
+    e.preventDefault();
+    handleUserEdit(userState);
+    hide();
+  };
 
   const handleChange = (e) => {
     setUserState({ ...userState, [e.target.name]: e.target.value });
@@ -74,7 +71,7 @@ const UserEditForm = ({hide}) => {
           />
         </Form.Group>
       </Form.Row>
-      
+
       <Form.Label>Height</Form.Label>
       <Form.Control
         name="height"
