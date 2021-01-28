@@ -63,7 +63,7 @@ class Api::AdminsController < ApplicationController
   # end
 
   def admin_params
-    params.require(:admin).permit(:first_name, :last_name, :email, :phone, :speciality, :image)
+    params.require(:admin).permit(:first_name, :last_name, :email, :phone, :speciality, :image, :user_id)
   end
 
   def set_page

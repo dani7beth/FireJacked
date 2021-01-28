@@ -19,12 +19,14 @@ const SubmissionForm = ({
     submissionProp
       ? {
           name: submissionProp.name,
+          status: submissionProp.status,
           completed: submissionProp.completed,
           video_upload: submissionProp.video_upload,
           level_id: level_id,
         }
       : {
           name: "",
+          status: 'Pending',
           completed: false,
           video_upload: "test url video",
           level_id: parseInt(level_id),
@@ -42,6 +44,7 @@ const SubmissionForm = ({
     console.log(submission)
     let videoData = new FormData();
     videoData.append('completed', submission.completed);
+    videoData.append('status', submission.status);
     videoData.append("name", submission.name);
     videoData.append("video_upload", submission.video_upload);
     videoData.append("level_id", submission.level_id);
@@ -64,6 +67,7 @@ const SubmissionForm = ({
     if (submissionProp) {
       editCalledSubmission(submissionProp.id, {
         name: submission.name,
+        status: submission.status,
         completed: submission.completed,
         video_upload: submission.video_upload,
         level_id: level_id,
@@ -73,6 +77,7 @@ const SubmissionForm = ({
       addCallSubmission();
       setSubmission({
         name: "",
+        status: 'Pending',
         completed: false,
         video_upload: "",
         level_id: level_id,

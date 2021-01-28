@@ -1,9 +1,9 @@
 class Api::SubmissionsController < ApplicationController
-  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user]
-  before_action :authenticate_admin!, only: [:exercise_subs]
-  before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user]
+  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user, :update_status, :update]
+  before_action :authenticate_admin!, only: [:exercise_subs, :update]
+  before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user, :update_status]
   before_action :set_submission, only: [:update, :destroy, :show]
-  before_action :set_user, only: [:all_submissions_of_user]
+  before_action :set_user, only: [:all_submissions_of_user, :update_status]
   # before_action :set_test_user
 
   def index
@@ -48,12 +48,18 @@ class Api::SubmissionsController < ApplicationController
     end
   end
 
+  def update_status
+    submission = @user.submissions.find(params[:submission_id])
+    submission.update(submission_params)
+    render json: submission
+  end
+
   def update
     file = params[:video_upload]
     if file
       begin
         cloud_video = Cloudinary::Uploader.upload_large(file, public_id: file.original_filename, secure: true, resource_type: :video)
-       submission = @submission.update(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id: params[:level_id])
+        submission = @submission.update(video_upload: cloud_video['secure_url'],status: params[:status],name: params[:name],level_id: params[:level_id])
       rescue => e
         render json: {errors: e}, status: 422
         return
@@ -70,7 +76,7 @@ class Api::SubmissionsController < ApplicationController
   private
 
   def submission_params
-    params.require(:submission).permit(:completed, :name, :video_upload, :level_id, :user_id)
+    params.require(:submission).permit(:completed, :name, :video_upload, :level_id, :user_id, :status, :id, :created_at, :updated_at)
   end
 
   def set_level
