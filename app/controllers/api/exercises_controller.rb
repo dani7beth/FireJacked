@@ -4,8 +4,6 @@ class Api::ExercisesController < ApplicationController
   before_action :set_exercise, only: [:update, :destroy]
   before_action :set_page
 
- 
-
   def index
     # binding.pry
     exercises = current_admin.exercises.page(@page).exercise_levels_by_admin(current_admin.id, params[:SearchText], params[:category])
@@ -17,8 +15,11 @@ class Api::ExercisesController < ApplicationController
 
   def all_exercises
   
-    exercises = Exercise.page(@page).exercise_levels
-    render json: {data: Exercise.page(@page).exercise_levels, total_pages: exercises.total_pages, total_length: Exercise.exercise_levels.distinct.pluck(:exercise_id).length}
+    exercises = Exercise.page(@page).exercise_levels(params[:SearchText], params[:category])
+    render json: {
+      data: Exercise.page(@page).exercise_levels(params[:SearchText], params[:category]), 
+      total_pages: exercises.total_pages, 
+      total_length: Exercise.exercise_levels(params[:SearchText], params[:category]).distinct.pluck(:exercise_id).length}
   end
 
   def show

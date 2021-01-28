@@ -25,12 +25,10 @@ const Exercises = () => {
   }, []);
 
   const getExercises = async (searchText, currentCategory) => {
-    // debugger
     try {
       let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
-      // debugger
       setExercises(exercisesX)
       setTotalPages(res.data.total_pages)
       setDataLength(res.data.total_length)
@@ -42,8 +40,13 @@ const Exercises = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setPage(1)
-    getExercises(searchText)
+    getExercises(searchText,currentCategory)
     // renderExercisesWithLevels()
+  }
+
+  const handleClearSearch = () => {
+    setSearchText("")
+    getExercises("", currentCategory)
   }
 
   const loadMore = async () => {
@@ -60,18 +63,10 @@ const Exercises = () => {
     }
   }
 
-  // We want this to setFilteredExercises according to the category 
   const dataByCategory = (category) => {
     if (exercises) {
       setCurrentCategory(category)
       getExercises(searchText, category)
-      if (category === 'All') {
-        setCurrentCategory('')
-        getExercises(searchText, '')
-        //console.log(filteredExercises)
-      }
-      setCurrentCategory(category)
-      //console.log(filteredExercises)
     }
   }
 
@@ -136,6 +131,7 @@ const Exercises = () => {
         </Modal.Header>
         <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
       </Modal>
+
       <Form onSubmit={handleSubmit}>
         <Form.Label>Search for an Exercise</Form.Label>
         <Form.Control
@@ -144,7 +140,7 @@ const Exercises = () => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)} />
         <Button type="submit">Search</Button>
-        <Button onClick={() => setSearchText("")}>Clear Search</Button>
+        <Button onClick={handleClearSearch}>Clear Search</Button>
       </Form>
 
       <FilterByCategory dataByCategory={dataByCategory} />

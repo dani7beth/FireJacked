@@ -1,5 +1,5 @@
 import {ButtonGroup, Button} from 'react-bootstrap';
-const FilterByCategory = ({dataByCategory}) => {
+const UserFilterByCategory = ({dataByCategory}) => {
 
   return (
     <>
@@ -11,10 +11,10 @@ const FilterByCategory = ({dataByCategory}) => {
         <Button onClick={() => dataByCategory('Power/Strength Endurance')}>Power/Strength Endurance</Button>
         <Button onClick={() => dataByCategory('Power Endurance')}>Power Endurance</Button>
         <Button onClick={() => dataByCategory('GYM Endurance')}>GYM Endurance</Button>
-        <Button onClick={() => dataByCategory('')}>All</Button>
+        <Button onClick={() => dataByCategory('All')}>All</Button>
       </ButtonGroup>
     </>
   )
 }
 
-export default FilterByCategory;
+export default UserFilterByCategory;
