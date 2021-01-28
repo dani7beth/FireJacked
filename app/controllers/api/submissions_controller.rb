@@ -1,7 +1,7 @@
 class Api::SubmissionsController < ApplicationController
-  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user, :update_status, :update]
+  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user, :update_status, :update, :user_see_history]
   before_action :authenticate_admin!, only: [:update]
-  before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user, :update_status]
+  before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user, :update_status, :user_see_history]
   before_action :set_submission, only: [:update, :destroy, :show]
   before_action :set_user, only: [:all_submissions_of_user, :update_status]
   # before_action :set_test_user
@@ -25,6 +25,12 @@ class Api::SubmissionsController < ApplicationController
     @submissions = Submission.submissions_by_exercise(sub_exercise.id)
     render json: @submissions
   end 
+
+  def user_see_history
+    sub_exercise = Exercise.find(params[:exercise_id])
+    submissions = current_user.submissions.user_see_history(sub_exercise.id)
+    render json: submissions
+  end
 
   def show
     render json: @submission
