@@ -73,6 +73,7 @@ const ExerciseForm = ({
     imageData.append("how_to_video", exercise.how_to_video);
     imageData.append("category", exercise.category);
     imageData.append("activity", exercise.activity);
+    imageData.append('description', exercise.description);
 
     console.log(imageData);
     try {
@@ -148,13 +149,8 @@ const ExerciseForm = ({
           <ul>{files}</ul>
         </aside>
         <Form.Label>Category</Form.Label>
-        {/* <Form.Control
-          name="category"
-          placeholder='e.g. Barbell Strength/Power, Cardio-Respiratory Power, etc.'
-          value={exercise.category}
-          onChange={handleChange}
-        /> */}
         <Form.Control as='select' name='category' value={exercise.category} onChange={handleChange}>
+          <option>Choose a category...</option>
           <option>Barbell Strength/Power</option>
           <option>KettleBell Strength/Power</option>
           <option>Cardio-Respiratory Power</option>
@@ -165,7 +161,9 @@ const ExerciseForm = ({
           placeholder='e.g. Deadlift, BenchPress, etc.'
           value={exercise.activity}
           onChange={handleChange}
-        />
+          />
+        <Form.Label>Description</Form.Label>
+        <Form.Control as='textarea' name='description' value={exercise.description} onChange={handleChange}/>
         <Button variant="primary" type="submit">
           submit
         </Button>
