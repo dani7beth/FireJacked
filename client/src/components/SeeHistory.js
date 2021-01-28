@@ -15,7 +15,7 @@ const SeeHistory = () => {
 
   useEffect(() => {
     getExercise()
-    exerciseSubmissions()
+    userHistorySubmissions()
   }, []);
 
   const getExercise = async () => {
@@ -23,15 +23,17 @@ const SeeHistory = () => {
       let res = await Axios.get(`/api/exercises/${exercise_id}`)
       console.log(res.data)
       setExercise(res.data)
+      
     } catch (error) {
       console.log(error)
     }
   }
 
-  const exerciseSubmissions = () => {
-    Axios.get(`/api/exercise_subs/?exercise_id=${exercise_id}`)
+  const userHistorySubmissions = () => {
+    Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
     .then((response) => {
-      console.log(response.data)
+      console.log(`User ${user.id}'s submissions:`, response.data)
+      // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
       setSubmissions(response.data)
       setSubmission(response.data[0])
     })
@@ -39,6 +41,7 @@ const SeeHistory = () => {
       console.log(err)
     })
   }
+
 
   const renderSubmissions = () => {
     return submissions.map((submission)=>{
@@ -54,13 +57,13 @@ const SeeHistory = () => {
   }
 
   const renderVideo = () => {
+    console.log(submission.id, ':', submission.video)
     return (
-      <video 
-          className='d-block w-100'
-          src={submission.video}
-          alt="Submission video"
-          style={{height:'450px', width:'500px'}}
-        />
+      <div key={submission.video}>
+        <video style={{height:'450px', width:'500px'}} controls={true} class="embed-responsive-item">
+          <source src={submission.video} type="video/mp4" />
+        </video>
+      </div>
     )
   }
 
