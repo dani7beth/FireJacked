@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const UserIndex = () => {
   const [users, setUsers] = useState([])
   const [searchText, setSearchText] = useState("")
+  const [usersDefault, setUsersDefault] = useState([])
 
   useEffect(() => {
     getUsers();
@@ -16,6 +17,8 @@ const UserIndex = () => {
       let res = await axios.get('/api/user_index/');
       console.log(res.data);
       setUsers(res.data);
+      setUsersDefault(res.data)
+      
     } catch {
     }
   }
@@ -29,8 +32,9 @@ const UserIndex = () => {
   const searchFor = (searchText) => {
     console.log("Searched")
     // getUsers()
-    const filteredUsers = users.filter((str) => str.first_name.indexOf(searchText) > -1)
+    const filteredUsers = usersDefault.filter((str) => str.last_name.indexOf(searchText) > -1)
     setUsers(filteredUsers)
+    setSearchText(searchText)
     
     console.log(searchText)
   }
@@ -46,7 +50,6 @@ const UserIndex = () => {
           value={searchText} 
           onChange={(e)=>{
               searchFor(e.target.value)
-              setSearchText(e.target.value)
             }
           }/>
           <button type="submit">Search</button>

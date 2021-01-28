@@ -18,9 +18,6 @@ export default (props) => {
           {" "}
           Logout
         </li>
-        <Link to="/all_exercises">
-          <li>All Exercises</li>
-        </Link>
         <Link to="/user_dash">
           <li>User Dashboard</li>
         </Link>
