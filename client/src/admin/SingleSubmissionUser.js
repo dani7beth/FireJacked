@@ -16,7 +16,7 @@ const SingleSubmissionUser = ({submission}) =>{
       getLevel()
     }
   }, [submission])
-
+ 
   useEffect(() => {
     if (level) {
       getExercise() 

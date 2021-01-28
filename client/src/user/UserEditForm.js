@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React,{useState,useContext} from 'react'
 import { Form, Button, Col } from "react-bootstrap";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -71,7 +71,7 @@ const UserEditForm = ({ hide }) => {
           />
         </Form.Group>
       </Form.Row>
-      
+
       <Form.Label>Height</Form.Label>
       <Form.Control
         name="height"
