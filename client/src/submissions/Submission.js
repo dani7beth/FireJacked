@@ -22,13 +22,10 @@ const Submission = ({
       <div>
         <h3>{submissionProp.name}</h3>
         <p>{submissionProp.complete ? "completed" : "not completed"}</p>
-          <div class="embed-responsive embed-responsive-16by9">
+          <div>
           <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
             <source src={submissionProp.video_upload} type="video/mp4" />
           </video>
-          <h3>{submissionProp.video_upload}</h3>
-          {/* <iframe src=“/default.asp” width=“100%” height=“300” style={{border:"1px solid black}}>
-          </iframe> */}
         </div>
 
         <Button variant="primary" onClick={handleEditShow}>Edit</Button>
