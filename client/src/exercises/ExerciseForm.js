@@ -148,12 +148,17 @@ const ExerciseForm = ({
           <ul>{files}</ul>
         </aside>
         <Form.Label>Category</Form.Label>
-        <Form.Control
+        {/* <Form.Control
           name="category"
           placeholder='e.g. Barbell Strength/Power, Cardio-Respiratory Power, etc.'
           value={exercise.category}
           onChange={handleChange}
-        />
+        /> */}
+        <Form.Control as='select' name='category' value={exercise.category} onChange={handleChange}>
+          <option>Barbell Strength/Power</option>
+          <option>KettleBell Strength/Power</option>
+          <option>Cardio-Respiratory Power</option>
+        </Form.Control>
         <Form.Label>Activity</Form.Label>
         <Form.Control
           name="activity"
