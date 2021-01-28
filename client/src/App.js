@@ -23,6 +23,7 @@ import ShowExerciseAdmin from "./exercises/ShowExerciseAdmin";
 import { Container } from "./components/Styles";
 import Trainer from "./user/Trainer";
 import UserSubmissions from "./admin/UserSubmissions";
+import SeeHistory from "./components/SeeHistory";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route exact path="/add_exercise" component={ExerciseForm} />
           <Route exact path="/all_exercises" component={AllExercises} />
           <Route exact path="/showexercise/:exercise_id" component={ShowExercise} />
+          <Route exact path="/:exercise_id/see_history" component={SeeHistory} />
           <Route exact path="/submissions/:level_id" component={Submissions} />
           <Route exact path="/user_dash" component={UserDash} />
           <Route exact path='/edit_profile' component={UserEditForm} />

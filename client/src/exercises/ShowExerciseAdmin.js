@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { Button, Carousel, Col, Modal, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import ExerciseForm from "./ExerciseForm";
 
@@ -86,7 +86,7 @@ const ShowExerciseAdmin = () => {
               has been the industry's standard dummy text ever since the 1500s when an unknown printer 
               took a galley of type and scrambled it to make a type specimen book it has?
             </p>
-            <Button size='sm' variant='secondary' onClick={handleEditShow} >Edit Exercise</Button>
+            {/* <Button size='sm' variant='secondary' onClick={handleEditShow} >Edit Exercise</Button> */}
           </div>
           <div>
             <p>See History</p>
