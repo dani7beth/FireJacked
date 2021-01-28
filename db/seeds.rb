@@ -1,7 +1,7 @@
 
 require 'faker'
 
-categories = ['Barbell Strength/Power, KettleBell Strength/Power, Cardio-Respiratory Power, Power/Strength Endurance, Power Endurance, GYM Endurance']
+categories = ['Barbell Strength/Power', 'KettleBell Strength/Power', 'Cardio-Respiratory Power', 'Power/Strength Endurance', 'Power Endurance', 'GYM Endurance']
 #admins 
 
 Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456", image:"https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg")
