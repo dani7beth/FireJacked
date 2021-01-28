@@ -41,6 +41,7 @@ const SeeHistory = () => {
       // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
       setSubmissions(response.data)
       setSubmission(response.data[0])
+      console.log()
     })
     .catch((err) => {
       console.log(err)
