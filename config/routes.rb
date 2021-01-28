@@ -38,4 +38,5 @@ Rails.application.routes.draw do
     end
     # resources :comments
   end
+  get '*other', to: 'static#index'
 end
