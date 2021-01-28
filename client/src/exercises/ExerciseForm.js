@@ -22,6 +22,7 @@ const ExerciseForm = ({
           how_to_video: exerciseProp.how_to_video,
           category: exerciseProp.category,
           activity: exerciseProp.activity,
+          description: exerciseProp.description
         }
       : {
           name: "",
@@ -29,6 +30,7 @@ const ExerciseForm = ({
           how_to_video: "",
           category: "",
           activity: "",
+          description: "",
         }
   );
 
@@ -51,6 +53,7 @@ const ExerciseForm = ({
     imageData.append("how_to_video", exercise.how_to_video);
     imageData.append("category", exercise.category);
     imageData.append("activity", exercise.activity);
+    imageData.append("description", exercise.description);
 
     try {
       let res = await axios.put(`/api/exercises/${exerciseProp.id}`, imageData);

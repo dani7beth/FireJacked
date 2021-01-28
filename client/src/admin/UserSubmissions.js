@@ -17,19 +17,24 @@ const UserSubmissions = () => {
   const getSubmissions = async () => {
     try {
       let res = await axios.get(`/api/all_submissions/${user_id}`)
-      console.log(res.data);
-      setAllSubmissions(res.data)
+      console.log(res.data.filter(s => s.status === "Pending"));
+      setAllSubmissions(res.data.filter(s => s.status === "Pending"))
     } catch (error) {
       console.log(error)
     }
   }
 
+  const editedSubmission = (editedObject) => {
+    let newSubmissions = allSubmissions.filter(x => x.id !== editedObject.id )
+    setAllSubmissions(newSubmissions)
+    alert(`You've modified Submission ${editedObject.id}`)
+  }
 
   const renderUserSubmissions = () => {
     // debugger
     if (allSubmissions) {
       return allSubmissions.map((submission) => (
-        <SingleSubmissionUser key={submission.id} submission={submission}/>
+        <SingleSubmissionUser key={submission.id} submission={submission} editedSubmission={editedSubmission}/>
       ))
     }
   }

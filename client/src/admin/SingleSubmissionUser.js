@@ -3,7 +3,7 @@ import {Form, Button} from 'react-bootstrap'
 import axios from 'axios';
 import Comments from '../components/Comments';
 
-const SingleSubmissionUser = ({submission}) =>{
+const SingleSubmissionUser = ({submission, editedSubmission}) =>{
   const [submissionState, setSubmissionState] = useState(submission)
   const [level, setLevel] = useState(null)
   const [exercise, setExercise] = useState(null)
@@ -30,11 +30,11 @@ const SingleSubmissionUser = ({submission}) =>{
   }
 
   const handleSubmit = async (e) => {
-    debugger
     e.preventDefault();
     // console.log(submission);
     try {
       let res = await axios.put(`/api/update_submission_status/${submission.id}/${submission.user_id}`, submissionState);
+      editedSubmission(res.data)
       // console.log(submissionState) 
       console.log(res.data);
       // setSubmissionState(res);
