@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Exercise from './Exercise';
 import ExerciseForm from './ExerciseForm';
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
 import { BoxAdminExercises } from "../components/Styles";
+import FilterByCategory from "./FilterByCategory";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -14,6 +15,7 @@ const Exercises = () => {
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
   const [searchText, setSearchText] = useState("")
+  const [currentCategory, setCurrentCategory] = useState("")
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
@@ -22,10 +24,10 @@ const Exercises = () => {
     getExercises();
   }, []);
 
-  const getExercises = async (searchText) => {
+  const getExercises = async (searchText, currentCategory) => {
     // debugger
     try {
-      let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}`)
+      let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
       // debugger
@@ -48,7 +50,7 @@ const Exercises = () => {
     const pageX = page + 1
     console.log(pageX)
     try {
-      let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}`)
+      let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
       let exercisesX = normalizeData(res.data.data)
       setExercises([...exercises,...exercisesX])
       // setExercises([...exercises, ...res.data.data])
@@ -58,39 +60,53 @@ const Exercises = () => {
     }
   }
 
+  // We want this to setFilteredExercises according to the category 
+  const dataByCategory = (category) => {
+    if (exercises) {
+      setCurrentCategory(category)
+      getExercises(searchText, category)
+      if (category === 'All') {
+        setCurrentCategory('')
+        getExercises(searchText, '')
+        //console.log(filteredExercises)
+      }
+      setCurrentCategory(category)
+      //console.log(filteredExercises)
+    }
+  }
+
   const normalizeData = (arrayOfObjects) => {
     let key = "exercise_id"
-  
-    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], {category: item.category, activity:item.activity, exercise_id:item.exercise_id}])).values()]
-  
+
+    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id }])).values()]
+
     const formattedExercises = exercises.map((x) => {
-      return {...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id)}
+      return { ...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
     })
-  
+
     console.log(formattedExercises)
-    
+
     return formattedExercises
 
   }
 
   const renderExercisesWithLevels = () => {
-    // debugger
     return exercises.map(x => {
-        return (
-               <Exercise key={x.id} exerciseProp={x} deleteExercise={deleteExercise} editExercises={editExercises} {...x} />
-            )
-        })
-      }
+      return (
+        <Exercise key={x.id} exerciseProp={x} deleteExercise={deleteExercise} editExercises={editExercises} {...x} />
+      )
+    })
+  }
 
   const addExercise = (exercise) => {
     setExercises([exercise, ...exercises])
     console.log(exercise);
-};
+  };
 
   const deleteExercise = (id) => {
     axios.delete(`/api/exercises/${id}`)
       .then((res) => {
-        const newExercises = exercises.filter((exercise)=> exercise.exercise_id !== id)
+        const newExercises = exercises.filter((exercise) => exercise.exercise_id !== id)
         setExercises(newExercises)
         console.log(res.data);
       })
@@ -100,13 +116,13 @@ const Exercises = () => {
       })
   }
 
-const editExercises = (exercise) => {
-  let newExercises = exercises.map((e)=> e.id !== exercise.id ? e : exercise )
-  setExercises(newExercises);
-}
+  const editExercises = (exercise) => {
+    let newExercises = exercises.map((e) => e.id !== exercise.id ? e : exercise)
+    setExercises(newExercises);
+  }
 
-  
-  
+
+
   return (
     <>
       <h1>Exercises</h1>
@@ -120,33 +136,33 @@ const editExercises = (exercise) => {
         </Modal.Header>
         <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
       </Modal>
-      <br/>
-      <br/>
-      <form onSubmit={handleSubmit}>
-        <input 
-          label = "Search for an Exercise" 
-          placeholder="Search Here" 
-          type="text" 
-          value={searchText} 
-          onChange={(e)=>setSearchText(e.target.value)}/>
-          <button type="submit">Search</button>
-          <button onClick={()=>setSearchText("")}>Clear Search</button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>Search for an Exercise</Form.Label>
+        <Form.Control
+          placeholder="Search Here"
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)} />
+        <Button type="submit">Search</Button>
+        <Button onClick={() => setSearchText("")}>Clear Search</Button>
+      </Form>
+
+      <FilterByCategory dataByCategory={dataByCategory} />
 
       <BoxAdminExercises>
         <InfiniteScroll
-            dataLength={exercises.length}
-            next={()=>loadMore()}
-            hasMore={exercises.length === dataLength ? false : true }
-            loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
-            height={450}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>exercises.length = {exercises.length} dataLength= {dataLength}</b>
-              </p>
-            }
-          >
-        {renderExercisesWithLevels()}
+          dataLength={exercises.length}
+          next={() => loadMore()}
+          hasMore={exercises.length === dataLength ? false : true}
+          loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
+          height={450}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>exercises.length = {exercises.length} dataLength= {dataLength}</b>
+            </p>
+          }
+        >
+          {renderExercisesWithLevels()}
         </InfiniteScroll>
       </BoxAdminExercises>
     </>
