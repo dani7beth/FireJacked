@@ -3,11 +3,14 @@ import { useContext, useEffect, useReducer, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import ShowLevel from "./ShowLevel";
 
 const SeeHistory = () => {
   const [exercise, setExercise] = useState({})
   const [submissions, setSubmissions] = useState([])
   const [submission, setSubmission] = useState([])
+  
+
 
   const { exercise_id } = useParams()
 
@@ -17,6 +20,8 @@ const SeeHistory = () => {
     getExercise()
     exerciseSubmissions()
   }, []);
+
+ 
 
   const getExercise = async () => {
     try {
@@ -40,27 +45,31 @@ const SeeHistory = () => {
     })
   }
 
+  
+
   const renderSubmissions = () => {
     return submissions.map((submission)=>{
       return (
-        <p onClick={()=>{renderClickedSubmission(submission)}}>{submission.created_at} | {exercise.activity} | lbs? | pending </p>
+        <>
+        {/* // <p onClick={()=>{renderClickedSubmission(submission)}}>{submission.created_at} | {exercise.activity} | lbs? | pending </p> */}
+        <ShowLevel key={`submission-${submission.id}`} {...submission} submission = {submission} renderClickedSubmission={renderClickedSubmission}/>
+        {/* // <Button onClick={()=>{renderClickedSubmission(submission)}}>View</Button> */}
+        </>
       )
     })
   }
 
   const renderClickedSubmission = (newSubmission) => {
-    setSubmission(newSubmission)
     renderVideo(newSubmission);
+    setSubmission(newSubmission)
   }
 
-  const renderVideo = () => {
+  const renderVideo = (x) => {
+    // debugger
     return (
-      <video 
-          className='d-block w-100'
-          src={submission.video}
-          alt="Submission video"
-          style={{height:'450px', width:'500px'}}
-        />
+      <video style={{height:'450px', width:'500px'}} controls="true" class="embed-responsive-item">
+        <source src={x ? x.video : submission.video} type="video/mp4" />
+      </video>
     )
   }
 
@@ -92,7 +101,7 @@ const SeeHistory = () => {
                   </div>
                   <div style={{paddingBottom:'60px', paddingTop:'20px'}}>
                     {renderInfo()}
-                    <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>Pending</h3>
+                    <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>{submission.status}</h3>
                     {/* 
                         <h3 style={{border:'2px solid green', borderRadius:'20%', width:'110px'}}>Completed</h3>
                         <h3 style={{border:'2px solid red', borderRadius:'20%', width:'110px'}}>Failed</h3> 
