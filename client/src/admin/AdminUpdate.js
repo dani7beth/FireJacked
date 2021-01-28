@@ -1,6 +1,6 @@
 import { useContext, useState, } from 'react';
 import { AuthContext, } from "../providers/AuthProvider";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 
 const UpdateAdmin = ({handleClose}) => {
   const {admin, updateAdminInfo} = useContext(AuthContext);
