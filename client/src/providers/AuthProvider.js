@@ -7,57 +7,166 @@ export const AuthConsumer = AuthContext.Consumer;
 
 export class AuthProvider extends React.Component {
   // init state
-  state = { user: null };
+  state = { 
+    user: null,
+    admin: null
+   };
+
 
   //handlers for different states in user auth
 
   //register
   handleRegister = (user, history) => {
-    Axios.post("/api/auth", user)
+    Axios.post("/api/auth/", user)
       .then((res) => {
-        // this.setState({ user: res.data.data });
+        this.setState({ user: res.data.data });
         console.log(res);
-        history.push("/");
+        history.push("/user_dash");
       })
       .catch((err) => {
-        alert(`Error in Registration: ${err.response.data}`);
+        alert(`Error in Registration`);
       });
   };
 
-  //login
-  handleLogin = (user, history) => {
-    Axios.post("/api/auth/sign_in", user)
+  handleAdminRegister = (admin, history) => {
+    // debugger;
+    Axios.post("/api/admin_auth/", admin)
       .then((res) => {
-        this.setState({ user: res.data.data });
-        history.push("/");
+        this.setState({ admin: res.data.data });
+        console.log(res);
+        history.push("/admin_dash");
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(`Error in Registration`);
+      });
+  };
+
+  handleUserEdit = (user) => {
+    // /api/users/:id
+    Axios.put(`/api/users/${user.id}`, user)
+    .then((res)=>{
+      this.setState({user: res.data});
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  //user login
+  handleUserLogin = (user, history) => {
+    Axios.post("/api/auth/sign_in", user)
+      .then((res) => {
+        // this.handleAdminLogout()
+        this.setState({ user: res.data.data });
+        console.log(this.state.user);
+        localStorage.setItem('member-type','user')
+        history.push("/user_dash");
+      })
+      .catch((err) => {
+        alert("Error loggin in user");
+      });
+  };
+
+  //admin login
+  handleAdminLogin = (admin, history) => {
+    Axios.post("/api/admin_auth/sign_in", admin)
+      .then((res) => {
+        // this.handleUserLogout()
+        this.setState({ admin: res.data.data });
+        console.log(this.state.admin);
+        localStorage.setItem('member-type','admin')
+        history.push("/admin_dash/");
+      })
+      .catch((err) => {
+        console.log("Error logging in admin");
       });
   };
 
   //logout
-  handleLogout = (history) => {
+  handleUserLogout = (history) => {
     Axios.delete("/api/auth/sign_out")
       .then((res) => {
         this.setState({ user: null });
+        localStorage.removeItem('member-type')
         history.push("/login");
       })
       .catch((err) => {
-        alert(`Error in Logout: ${err.response.data}`);
+        alert(`Error in Logout`);
       });
   };
+
+  handleAdminLogout = (history) => {
+    Axios.delete("/api/admin_auth/sign_out")
+      .then((res) => {
+        this.setState({ admin: null });
+        localStorage.removeItem('member-type')
+        history.push("/admin_login");
+      })
+      .catch((err) => {
+        alert(`Error in Logout`);
+      });
+  };
+
+
+  onDrop = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    // /api/update_user_image
+    Axios.put(`/api/update_user_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({user: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  onDropAdmin = (file) => {
+    const data = new FormData();
+    data.append("image", file[0]);
+    Axios.put(`/api/update_admin_image`, data)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({admin: res.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  updateAdminInfo = (admin) => {
+    Axios.put(`/api/admins/${admin.id}`, admin)
+      .then((res)=>{
+        console.log(res.data);
+        this.setState({admin: res.data});
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
       <AuthContext.Provider
         value={{
-          ...this.state.user,
-          authenticated: this.state.user !== null,
+          ...this.state,
+          userAuthenticated: this.state.user !== null,
+          adminAuthenticated: this.state.admin !== null,
+          handleUserEdit: this.handleUserEdit,
           handleRegister: this.handleRegister,
-          handleLogin: this.handleLogin,
-          handleLogout: this.handleLogout,
+          handleAdminRegister: this.handleAdminRegister,
+          handleUserLogin: this.handleUserLogin,
+          handleUserLogout: this.handleUserLogout,
+          handleAdminLogin: this.handleAdminLogin,
+          handleAdminLogout: this.handleAdminLogout,
+          onDrop: this.onDrop,
+          onDropAdmin: this.onDropAdmin,
+          updateAdminInfo: this.updateAdminInfo,
+          updateAdminImage: this.updateAdminImage,
           setUser: (user) => this.setState({ user }),
+          setAdmin: (admin) => this.setState({ admin }),
+          user: this.state.user,
+          admin: this.state.admin
         }}
       >
         {this.props.children}
