@@ -53,17 +53,17 @@ const SeeHistory = () => {
 
   const renderClickedSubmission = (newSubmission) => {
     setSubmission(newSubmission)
-    // renderVideo(newSubmission);
+    renderVideo(newSubmission);
   }
 
   const renderVideo = () => {
+    console.log(submission.id, ':', submission.video)
     return (
-      <video 
-          className='d-block w-100'
-          src={submission.video}
-          alt="Submission video"
-          style={{height:'450px', width:'500px'}}
-        />
+      <div key={submission.video}>
+        <video style={{height:'450px', width:'500px'}} controls={true} class="embed-responsive-item">
+          <source src={submission.video} type="video/mp4" />
+        </video>
+      </div>
     )
   }
 
