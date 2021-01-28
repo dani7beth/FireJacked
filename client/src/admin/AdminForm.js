@@ -46,6 +46,7 @@ const AdminForm = ({handleHide, editAdmin}) => {
             onChange={handleChange}/>
           <Form.Label>Speciality</Form.Label>
           <Form.Control
+            placeholder='e.g. Crossfit, Weightlifting, etc.'
             name='speciality'
             type='text'
             value={adminInfo.speciality}
