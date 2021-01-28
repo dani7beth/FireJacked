@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get "exercise_subs", to: "submissions#exercise_subs"
     get "user_index", to: "admins#user_index"
     get "all_submissions/:user_id", to: "submissions#all_submissions_of_user"
+    put "update_submission_status/:submission_id/:user_id", to: "submissions#update_status"
     resources :users
     resources :admins
     resources :exercises do

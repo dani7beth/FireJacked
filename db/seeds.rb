@@ -3,7 +3,7 @@ require 'faker'
 
 #admins 
 
-Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456")
+Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456", image:"https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg")
 admin = Admin.find(1)
 puts "created email: #{admin.email}"
     exercise1=admin.exercises.create(name: "", description: " ", category: "Barbell Strength/Power", activity: "Deadlift", image: "https://picsum.photos/200/300.jpg", how_to_video: "")
@@ -104,7 +104,7 @@ puts "created email: #{admin.email}"
   user = User.find(j+1)
     puts "created user email: #{user.email}"
     20.times do 
-      submit = user.submissions.create(completed:Faker::Boolean.boolean(true_ratio: 0.8), name: "", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: rand(1...57))
+      submit = user.submissions.create(completed:Faker::Boolean.boolean(true_ratio: 0.8), name: "", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: rand(1...57), status: 'Pending')
     end
 end
 
