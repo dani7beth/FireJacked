@@ -28,7 +28,7 @@ const AllExercises = () => {
       let res = await Axios.get(`/api/all_exercises?SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
       console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
-      setExercises([...exercises,...exercisesX])
+      setExercises(exercisesX)
       setTotalPages(res.data.total_pages)
       setDataLength(res.data.total_length)
     } catch (error) {
@@ -73,6 +73,11 @@ const AllExercises = () => {
     // renderExercisesWithLevels()
   }
 
+  const handleClearSearch = () => {
+    setSearchText("")
+    getAllExercises("", currentCategory)
+  }
+
   const renderExercisesWithLevels = () => {
     return exercises.map(x => {
       return (
@@ -107,7 +112,7 @@ const AllExercises = () => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)} />
         <Button type="submit">Search</Button>
-        <Button onClick={() => setSearchText("")}>Clear Search</Button>
+        <Button onClick={handleClearSearch}>Clear Search</Button>
       </Form>
       
       <FilterByCategory dataByCategory={dataByCategory}/>
