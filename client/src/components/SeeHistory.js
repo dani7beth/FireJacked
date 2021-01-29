@@ -1,16 +1,25 @@
 import Axios from "axios";
 import { useContext, useEffect, useReducer, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import Levels from "./Levels";
 import ShowLevel from "./ShowLevel";
+import { BoxUserHistory } from '../components/Styles';
 
 const SeeHistory = () => {
   const [exercise, setExercise] = useState({})
+  const [levels, setLevels] = useState([])
   const [submissions, setSubmissions] = useState([])
   const [submission, setSubmission] = useState([])
-  
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
+  const [dataLength, setDataLength] = useState(0)
+  const [show, setShow] = useState(false);
 
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
 
   const { exercise_id } = useParams();
 
@@ -18,6 +27,7 @@ const SeeHistory = () => {
 
   useEffect(() => {
     getExercise()
+    getLevels()
     userHistorySubmissions()
   }, []);
 
@@ -28,27 +38,51 @@ const SeeHistory = () => {
       let res = await Axios.get(`/api/exercises/${exercise_id}`)
       console.log(res.data)
       setExercise(res.data)
-      
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getLevels = () => {
+    Axios.get(`/api/exercises/${exercise_id}/levels`)
+    .then((response)=>{
+      console.log(response.data)
+      setLevels(response.data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
 
   const userHistorySubmissions = () => {
     Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
     .then((response) => {
       console.log(`User ${user.id}'s submissions:`, response.data)
       // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
-      setSubmissions(response.data)
-      setSubmission(response.data[0])
+      setSubmissions(response.data.data)
+      setTotalPages(response.data.total_pages)
+      setDataLength(response.data.total_length)
+      setSubmission(response.data.data[0])
     })
     .catch((err) => {
       console.log(err)
     })
   }
 
+  const loadMore = () => {
+    const pageX = page + 1
+    Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}&page=${pageX}`)
+    .then((response) => {
+      console.log(`User ${user.id}'s submissions:`, response.data)
+      // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
+      setSubmissions(...submissions, ...response.data.data)
+      setPage(pageX)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
   
-
   const renderSubmissions = () => {
     return submissions.map((submission) => {
       return (
@@ -83,25 +117,42 @@ const SeeHistory = () => {
     );
   };
 
-  const saveTheRender = () => {
-    if (submissions.length === 0) {
+  const renderLevels = () => {
+    return levels.map((level)=>{
       return (
-        <>
-          <h1>
-            Oops! Looks like you haven’t made any submissions for this exercise.
-            Go make one and then come back!
-          </h1>
-          <h1 style={{ textAlign: "center" }}>
-            <a class="btn btn-primary" href={`/showexercise/${exercise_id}`}>
-              Go Back
-            </a>
-          </h1>
-        </>
-      );
+        <a href={`/submissions/${level.id}`}>
+          <h1>{level.name}</h1>
+        </a>
+      )
+    })
+  }
+  
+  const modal = () => {
+    return (
+      <Modal show={show} onHide={handleHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>What level would you like to go to?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{renderLevels()}</Modal.Body>
+      </Modal>
+    )
+  }
+
+  const saveTheRender = () => {
+    if(submissions.length === 0) {
+        return (
+          <>
+            <h1>Oops! Looks like you haven’t made any submissions for this exercise. Go make one and then come back!</h1>
+            <h1 style={{textAlign:'center'}}>
+              <a class='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
+              <Button variant='primary' onClick={handleShow}>Submissions</Button>
+            </h1>
+          {modal()}
+          </>
+        )
     } else {
         return (
           <>
-            <a class='btn btn-light'  href={`/showexercise/${exercise_id}`}>Back</a>
               <Row>
                 <Col>
                   <h1>VIDEO</h1>
@@ -121,18 +172,36 @@ const SeeHistory = () => {
                         how do I make this border stick just around 'Pending' or whatever will be written there?
                         We should make so if it's completed it's green, pending, is orange, and failed is red.
                     */}
-              </div>
-              <div style={{ border: "1px solid black" }}>
-                <h5>History</h5>
-                {renderSubmissions()}
-                <p>infinite scroll?</p>
-              </div>
-            </Col>
-          </Row>
-        </>
-      );
+                  </div>
+                  <div>
+                    <h5>History</h5>
+                    <BoxUserHistory>
+                      <InfiniteScroll
+                            dataLength={submissions.length}
+                            next={() => loadMore()}
+                            hasMore={submissions.length === dataLength ? false : true}
+                            loader={<h4>Loading... submissions.length = {submissions.length} dataLength= {dataLength} </h4>}
+                            height={300}
+                            endMessage={
+                          <p style={{ textAlign: "center" }}>
+                            <b>submissions.length = {submissions.length} dataLength= {dataLength}</b>
+                          </p>
+                            }
+                        >
+                            {renderSubmissions()}
+                      </InfiniteScroll>
+                    </BoxUserHistory>
+                  </div>
+                  <br />
+                  <a class='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
+                  <Button variant='primary' onClick={handleShow}>Submissions</Button>
+                </Col>
+              </Row>
+              {modal()}
+          </>
+        )
+      }
     }
-  };
   return saveTheRender();
 };
 

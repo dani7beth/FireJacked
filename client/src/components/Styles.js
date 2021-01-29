@@ -32,6 +32,16 @@ margin:auto;
 margin-top:50px;
 padding:10px
 `
+export const BoxUserHistory = styled.div`
+height: 300px;
+width: 100%;
+border: solid;
+overflow:auto;
+background:#f0f8ff;
+margin:auto;
+margin-top:50px;
+padding:10px
+`
 
 export const LevelsBox = styled.div`
 border: solid;

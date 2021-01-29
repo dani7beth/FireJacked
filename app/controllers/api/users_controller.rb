@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
   end
 
   def user_submissions
-    render json: User.user_submissions(User.first().id)
+    render json: User.user_submissions(current_user.id)
   end
 
   def update_user_image
@@ -18,7 +18,7 @@ class Api::UsersController < ApplicationController
     if file
       begin
       cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
-      current_user[:image] = cloud_image['secure_url']
+      current_user.update(image: cloud_image['secure_url'])
       rescue => e
         render json: {errors: e}, status: 422
       end
@@ -33,6 +33,7 @@ class Api::UsersController < ApplicationController
       render json: {errors: e}, status: 422
     end
   end
+  
 
   private
   def user_params

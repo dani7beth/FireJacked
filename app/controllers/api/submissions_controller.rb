@@ -4,6 +4,7 @@ class Api::SubmissionsController < ApplicationController
   before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user, :update_status, :user_see_history]
   before_action :set_submission, only: [:update, :destroy, :show]
   before_action :set_user, only: [:all_submissions_of_user, :update_status]
+  before_action :set_page, only: [:user_see_history]
   # before_action :set_test_user
 
   def index
@@ -28,8 +29,12 @@ class Api::SubmissionsController < ApplicationController
 
   def user_see_history
     sub_exercise = Exercise.find(params[:exercise_id])
-    submissions = current_user.submissions.user_see_history(sub_exercise.id)
-    render json: submissions
+    submissions = current_user.submissions.page(@page).user_see_history(sub_exercise.id)
+    render json: {
+      data: submissions,
+      total_pages: submissions.total_pages,
+      total_length: submissions.length
+    }
   end
 
   def show
@@ -41,7 +46,7 @@ class Api::SubmissionsController < ApplicationController
     if file
       begin
         cloud_video = Cloudinary::Uploader.upload_large(file, public_id: file.original_filename, secure: true, resource_type: :video)
-        submission = current_user.submissions.new(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id: params[:level_id])
+        submission = current_user.submissions.new(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id: params[:level_id], status: params[:status])
       rescue => e
         render json: {errors: e}, status: 422
         return
@@ -98,9 +103,11 @@ class Api::SubmissionsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
+  def set_page
+    @page = params[:page] || 1
+  end
+
   # def set_test_user 
   #   @level = User.first
   # end
-
-
 end

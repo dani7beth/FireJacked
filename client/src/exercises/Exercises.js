@@ -7,6 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
 import { BoxAdminExercises } from "../components/Styles";
 import FilterByCategory from "./FilterByCategory";
+import GlobalLevels from "../components/GlobalLevels";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -22,7 +23,12 @@ const Exercises = () => {
 
   useEffect(() => {
     getExercises();
+    getLevels()
   }, []);
+
+  const getLevels = () => {
+   return console.log(GlobalLevels.map((x) => x.level_name))
+  }
 
   const getExercises = async (searchText, currentCategory) => {
     try {

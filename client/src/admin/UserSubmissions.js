@@ -17,6 +17,7 @@ const UserSubmissions = () => {
   const getSubmissions = async () => {
     try {
       let res = await axios.get(`/api/all_submissions/${user_id}`)
+      console.log(res.data)
       console.log(res.data.filter(s => s.status === "Pending"));
       setAllSubmissions(res.data.filter(s => s.status === "Pending"))
     } catch (error) {
