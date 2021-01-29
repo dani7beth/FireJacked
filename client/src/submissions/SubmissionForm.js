@@ -14,7 +14,7 @@ const SubmissionForm = ({
 }) => {
   const { level_id } = useParams();
   const { id } = useContext(AuthContext);
-  const[loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submission, setSubmission] = useState(
     submissionProp
       ? {
@@ -74,6 +74,7 @@ const SubmissionForm = ({
       });
     } else {
       console.log(submission);
+      // console.log shows submission is pending.
       addCallSubmission();
       setSubmission({
         name: "",
