@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
   end
 
   def user_submissions
-    render json: User.user_submissions(User.first().id)
+    render json: User.user_submissions(current_user.id)
   end
 
   def update_user_image
@@ -33,6 +33,7 @@ class Api::UsersController < ApplicationController
       render json: {errors: e}, status: 422
     end
   end
+  
 
   private
   def user_params

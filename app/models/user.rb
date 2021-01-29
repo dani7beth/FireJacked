@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
       sets, 
       timeframe, 
       completed,
+      status,
       video_upload,
       s.created_at,
       s.updated_at

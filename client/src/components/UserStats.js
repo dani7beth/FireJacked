@@ -38,12 +38,12 @@ const UserStats = () => {
       s.created_at = new Date()
         return (
           <>
-            <p>{`${s.activity} Level: ${s.level_name} Created On: ${dayNames[s.created_at.getDay()] + " " + monthNames[s.created_at.getMonth()] + " " + s.created_at.getDate() }`}</p>
+            <p>{`${s.activity} Level: ${s.level_name} Created On: ${dayNames[s.created_at.getDay()] + " " + monthNames[s.created_at.getMonth()] + " " + s.created_at.getDate() }`} | {s.status}</p>
           </>
 
         )
       })
-  }
+    }
 
   const normalizeData = (arrayOfObjects) => {
     let key = "category"
@@ -61,11 +61,14 @@ const UserStats = () => {
   }
   
   const renderTopSubmissionByCategory = () => {
-    return normalizeData(stats).map(x => {
+    let normalizedData = normalizeData(stats)
+    let filteredData = normalizedData.filter(x => x.status !== "Approved")
+
+    return filteredData.map(x => {
         return (
             <>
             <h5>{x.category}</h5>
-            {x.submissions.map(x => <p>{x.activity} {x.goal} {x.metric} Level: {x.level_name}</p>)}
+            {x.submissions.map(x => <p>{x.activity} {x.goal} {x.metric} Level: {x.level_name} | {x.status}</p>)}
             </>
             )
         })
@@ -79,14 +82,11 @@ const UserStats = () => {
     <h1>Most 5 most Recent Submissions</h1>
     {renderMostRecent()}
     
-    <h1>Top Submissions by Category</h1>
+    <h1>Completed Submission by Category</h1>
     {renderTopSubmissionByCategory()}
       
-          {/* Category: Barbell Strength/Power */}
-            {/* Dead Lift 480 pounds Level:Initiated */}
-          {/* Category: KettleBell Strength/Power */}
-            {/* Dead Lift 480 pounds Level:Initiated */}
-    <h1>Percentage of total levels completed</h1>      
+    <h1>Percentage of total levels completed</h1>
+
       {/* what percent of the total levels the user has completed */}
         {/* Pie graph comparing levels completed to all levels */}
 
