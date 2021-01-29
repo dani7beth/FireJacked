@@ -21,9 +21,9 @@ const SeeHistory = () => {
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
 
-  const { exercise_id } = useParams()
+  const { exercise_id } = useParams();
 
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getExercise()
@@ -39,9 +39,9 @@ const SeeHistory = () => {
       console.log(res.data)
       setExercise(res.data)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const getLevels = () => {
     Axios.get(`/api/exercises/${exercise_id}/levels`)
@@ -84,7 +84,7 @@ const SeeHistory = () => {
   }
   
   const renderSubmissions = () => {
-    return submissions.map((submission)=>{
+    return submissions.map((submission) => {
       return (
         <>
         <ShowLevel key={`submission-${submission.id}`} {...submission} submission = {submission} renderClickedSubmission={renderClickedSubmission}/>
@@ -94,7 +94,7 @@ const SeeHistory = () => {
   }
 
   const renderClickedSubmission = (newSubmission) => {
-    renderVideo(newSubmission);
+    // renderVideo(newSubmission);
     setSubmission(newSubmission)
   }
 
@@ -110,8 +110,12 @@ const SeeHistory = () => {
   }
 
   const renderInfo = () => {
-      return <h3>Id: {submission.id} | {submission.created_at} | {user.weight}lbs</h3>
-  }
+    return (
+      <h3>
+        Id: {submission.id} | {submission.created_at} | {user.weight}lbs
+      </h3>
+    );
+  };
 
   const renderLevels = () => {
     return levels.map((level)=>{
@@ -198,7 +202,7 @@ const SeeHistory = () => {
         )
       }
     }
-    return saveTheRender()
-  }
+  return saveTheRender();
+};
 
 export default SeeHistory;

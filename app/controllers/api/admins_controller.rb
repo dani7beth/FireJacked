@@ -41,7 +41,7 @@ class Api::AdminsController < ApplicationController
     if file
       begin
         cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
-        current_admin[:image] = cloud_image['secure_url']
+        current_admin.update(image: cloud_image['secure_url'])
       rescue => e
         render json: {errors: e}, status: 422
         return

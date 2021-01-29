@@ -46,7 +46,7 @@ class Api::SubmissionsController < ApplicationController
     if file
       begin
         cloud_video = Cloudinary::Uploader.upload_large(file, public_id: file.original_filename, secure: true, resource_type: :video)
-        submission = current_user.submissions.new(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id: params[:level_id])
+        submission = current_user.submissions.new(video_upload: cloud_video['secure_url'],completed: params[:completed],name: params[:name],level_id: params[:level_id], status: params[:status])
       rescue => e
         render json: {errors: e}, status: 422
         return

@@ -11,7 +11,6 @@ const Submission = ({
 }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-
   const handleEditShow = () => setShowEdit(true);
   const handleEditHide = () => setShowEdit(false);
   const handleDeleteShow = () => setShowDelete(true);
@@ -21,7 +20,7 @@ const Submission = ({
     <>
       <div>
         <h3>{submissionProp.name}</h3>
-        <p>{submissionProp.complete ? "completed" : "not completed"}</p>
+        <p>{submissionProp.status}</p>
           <div>
           <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
             <source src={submissionProp.video_upload} type="video/mp4" />
