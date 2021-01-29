@@ -15,7 +15,7 @@ export default (props) => {
 
   //handle submit form
   const handleSubmit = (e) => {
-    
+    e.preventDefault()
     if (user.password === user.confirmPassword) {
       handleRegister(user, props.history);
     } else {
