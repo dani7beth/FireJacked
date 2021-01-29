@@ -15,4 +15,4 @@ const SubmissionAdmin = ({name, completed, id}) => {
   )
 }
 
-export default SubmissionAdmin
+export default SubmissionAdmin;

@@ -5,6 +5,7 @@ import Exercises from '../exercises/Exercises';
 import AdminUpdate from './AdminUpdate';
 import AdminUpdateImage from './AdminUpdateImage';
 import UsersIndex from "./UsersIndex";
+import SubmissionAdmin from "../submissions/SubmissionAdmin.js";
 
 const AdminDash = () =>{
   const {admin, updateAdminInfo, updateAdminImage } = useContext(AuthContext);
@@ -57,7 +58,7 @@ const AdminDash = () =>{
               </Modal>
             </Col>
             <Col>
-              <h1>connnected users</h1>
+              <SubmissionAdmin />
             </Col>
           </Row>
         </>
