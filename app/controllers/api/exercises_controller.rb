@@ -71,9 +71,11 @@ class Api::ExercisesController < ApplicationController
   end
 
   private
+
   def exercise_params
     params.permit(:name, :image, :how_to_video, :category, :activity, :description)
   end
+
   def set_exercise
     @exercise = current_admin.exercises.find(params[:id])
   end
@@ -81,6 +83,7 @@ class Api::ExercisesController < ApplicationController
   def set_page
     @page = params[:page] || 1
   end
+  
   # def set_admin
   #   # @admin = Admin.find(params[:admin_id])
   #   @admin = current_admin

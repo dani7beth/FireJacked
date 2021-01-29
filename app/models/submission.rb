@@ -12,7 +12,8 @@ class Submission < ApplicationRecord
             levels.id as level_id,
             exercises.id as exercise_id,
             users.id as user_id,
-            users.first_name as user_first_name
+            users.first_name as user_first_name,
+            submissions.status
           ")
         .joins("inner join levels on levels.id = submissions.level_id")
         .joins("inner join exercises on exercises.id = levels.exercise_id")
@@ -28,7 +29,8 @@ class Submission < ApplicationRecord
             levels.id as level_id,
             exercises.id as exercise_id,
             users.id as user_id,
-            users.first_name as user_first_name
+            users.first_name as user_first_name,
+            submissions.status
           ")
         .joins("inner join levels on levels.id = submissions.level_id")
         .joins("inner join exercises on exercises.id = levels.exercise_id")
