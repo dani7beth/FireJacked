@@ -30,11 +30,13 @@ const UserIndex = () => {
   // }
 
   const searchFor = (searchText) => {
+    // debugger
     console.log("Searched")
-    // getUsers()
-    const filteredUsers = usersDefault.filter((str) => str.last_name.indexOf(searchText) > -1)
-    setUsers(filteredUsers)
     setSearchText(searchText)
+    let filteredUsersOne = usersDefault.filter(x => x.first_name !== null)
+    let filteredUsers = filteredUsersOne.filter((str) => str.first_name.indexOf(searchText) > -1)
+    setUsers(filteredUsers)
+    
     
     console.log(searchText)
   }

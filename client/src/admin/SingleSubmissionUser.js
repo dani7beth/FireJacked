@@ -96,6 +96,7 @@ const SingleSubmissionUser = ({submission, editedSubmission}) =>{
           name="status"
           value ={submissionState.status}
           onChange={handleChange}>
+          <option>Choose an option...</option>
           <option>Pending</option>
           <option>Approved</option>
           <option >Not Approved</option>

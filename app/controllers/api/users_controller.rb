@@ -33,6 +33,7 @@ class Api::UsersController < ApplicationController
       render json: {errors: e}, status: 422
     end
   end
+  
 
   private
   def user_params
