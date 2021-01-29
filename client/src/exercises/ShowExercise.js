@@ -46,12 +46,18 @@ const ShowExercise = () => {
       // Carousel.Item onClick >> showSubmission ??
       return (
         <Carousel.Item>
-          <video
-            className="d-block w-100"
-            src={submission.video_upload}
-            alt="Submission video"
-            style={{ height: "450px", width: "500px" }}
-          />
+          {/* <video
+              className="d-block w-100"
+              src={submission.video_upload}
+              alt="Submission video"
+              style={{ height: "450px", width: "500px" }}
+            /> */}
+          <video controls="true">
+            <source
+              src={submission.video_upload}
+              style={{ height: "450px", width: "500px" }}
+            />
+          </video>
           <Carousel.Caption>
             <p>
               {submission.created_at} -{" "}
@@ -67,14 +73,19 @@ const ShowExercise = () => {
     <>
       <Row>
         <Col paddingLeft="500px">
-          <video
+          {/* <video
             style={{ width: "400px", height: "300px" }}
             controls="true"
             class="embed-responsive-item"
           >
-            <source src={exercise.how_to_video} type="video/mp4" />
-          </video>
-          <p>How to Video</p>
+            <source src={exercise.how_to_video} />
+          </video> */}
+          <div>
+            <video controls="true" style={{ width: "400px", height: "300px" }}>
+              <source src={exercise.how_to_video} />
+            </video>
+            <p>How to Video</p>
+          </div>
         </Col>
         <Col>
           <h5>{exercise.category}</h5>
