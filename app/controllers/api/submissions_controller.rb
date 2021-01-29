@@ -4,6 +4,7 @@ class Api::SubmissionsController < ApplicationController
   before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user, :update_status, :user_see_history]
   before_action :set_submission, only: [:update, :destroy, :show]
   before_action :set_user, only: [:all_submissions_of_user, :update_status]
+  before_action :set_page, only: [:user_see_history]
   # before_action :set_test_user
 
   def index
@@ -28,8 +29,12 @@ class Api::SubmissionsController < ApplicationController
 
   def user_see_history
     sub_exercise = Exercise.find(params[:exercise_id])
-    submissions = current_user.submissions.user_see_history(sub_exercise.id)
-    render json: submissions
+    submissions = current_user.submissions.page(@page).user_see_history(sub_exercise.id)
+    render json: {
+      data: submissions,
+      total_pages: submissions.total_pages,
+      total_length: submissions.length
+    }
   end
 
   def show
@@ -97,9 +102,11 @@ class Api::SubmissionsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
+  def set_page
+    @page = params[:page] || 1
+  end
+
   # def set_test_user 
   #   @level = User.first
   # end
-
-
 end

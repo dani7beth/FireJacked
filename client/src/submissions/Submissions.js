@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Submission from "./Submission";
 import SubmissionForm from "./SubmissionForm";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
 import { Button, Modal } from "react-bootstrap";
 
 const Submissions = () => {
   const [submissions, setSubmissions] = useState([]);
   const [show, setShow] = useState(false);
+  const [level, setLevel] = useState({});
+  const [exercise, setExercise] = useState({});
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
@@ -16,7 +18,20 @@ const Submissions = () => {
     getSubmissions();
   }, []);
 
+  useEffect(() => {
+    if(submissions){
+      getLevel()
+    }
+  },[submissions])
+
+  useEffect(() => {
+    if(level){
+      getExercise()
+    }
+  },[level])
+
   const { level_id } = useParams();
+
 
   const getSubmissions = async () => {
     try {
@@ -27,6 +42,24 @@ const Submissions = () => {
       console.log(err);
     }
   };
+
+  const getLevel = async () => {
+    try {
+      let res = await Axios.get(`/api/levels/${level_id}`)
+      setLevel(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getExercise = async () => {
+    try {
+      let res = await Axios.get(`/api/exercises/${level.exercise_id}`)
+      setExercise(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const addSubmission = (submission) => {
     setSubmissions([submission, ...submissions]);
@@ -81,6 +114,9 @@ const Submissions = () => {
       <Button variant="primary" onClick={handleShow}>
         Make a submission
       </Button>
+      <Link to={`/showexercise/${exercise.id}`}>
+        <Button variant="secondary">Go to exercise</Button>
+      </Link>
       <Modal show={show} onHide={handleHide}>
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>

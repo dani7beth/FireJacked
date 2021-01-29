@@ -14,7 +14,10 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
   const [showLevel, setShowLevel] = useState(true)
 
   const handleDeleteShow = () => setshowDelete(true);
-  const handleDeleteHide = () => setshowDelete(false);
+  const handleDeleteHide = () => {
+    console.log('made it here')
+    setshowDelete(false);
+  }
   const handleEditShow = () => setShowEdit(true);
   const handleEditHide = () => setShowEdit(false);
   
@@ -53,7 +56,7 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this exercise?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={()=>handleDeleteHide}>
+          <Button variant="secondary" onClick={()=>{handleDeleteHide()}}>
             No
           </Button>
           <Button variant="danger" onClick={()=> {
