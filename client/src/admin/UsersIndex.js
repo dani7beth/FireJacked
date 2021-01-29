@@ -31,8 +31,8 @@ const UserIndex = () => {
 
   const searchFor = (searchText) => {
     console.log("Searched")
-    // getUsers()
-    const filteredUsers = usersDefault.filter((str) => str.last_name.indexOf(searchText) > -1)
+      // getUsers()
+    let filteredUsers = usersDefault.filter((str) => str.last_name.indexOf(searchText) > -1)
     setUsers(filteredUsers)
     setSearchText(searchText)
     
@@ -66,8 +66,8 @@ const UserIndex = () => {
           {/* /show_user_submissions/:user_id */}
           <Link to={`/show_user_submissions/${user.id}/`}>  
             <h1 key={user.id}>{user.first_name} {user.last_name}</h1>
+            <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '200px' }} />
           </Link>
-          <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '200px' }} />
         </>
       )
     })
