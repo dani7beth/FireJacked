@@ -31,29 +31,28 @@ const UserIndex = () => {
 
   const searchFor = (searchText) => {
     console.log("Searched")
-      // getUsers()
-    let filteredUsers = usersDefault.filter((str) => str.last_name.indexOf(searchText) > -1)
+    let filteredUsersOne = usersDefault.filter(x => x.first_name !== null)
+    let filteredUsers = filteredUsersOne.filter((str) => str.first_name.indexOf(searchText) > -1)
     setUsers(filteredUsers)
     setSearchText(searchText)
-    
     console.log(searchText)
   }
 
   const searchBar = () => {
 
     return(
-    <form>
+      <form>
         <input 
           label = "Search for a User" 
           placeholder="Search Here" 
           type="text" 
           value={searchText} 
           onChange={(e)=>{
-              searchFor(e.target.value)
-            }
+            searchFor(e.target.value)
+          }
           }/>
-          <button type="submit">Search</button>
-          {/* <button onClick={()=>setSearchText("")}>Clear Search</button> */}
+        <button type="submit">Search</button>
+        {/* <button onClick={()=>setSearchText("")}>Clear Search</button> */}
       </form>
     )
   }
