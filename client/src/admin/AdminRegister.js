@@ -1,6 +1,7 @@
 import { Form, Button, } from 'react-bootstrap';
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { Link } from 'react-router-dom';
 
 export default (props) => {
   //init register values
@@ -26,6 +27,7 @@ export default (props) => {
 
   return (
     <>
+      <Link to='/admin_login'>Login</Link>
       <h1 as="h1">Register</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
