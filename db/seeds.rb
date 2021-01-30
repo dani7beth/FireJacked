@@ -48,63 +48,63 @@ puts "created email: #{admin.email}"
        category: categories.sample, activity: "Extra Activity to Show how infinitie Scroll works", image: "https://picsum.photos/200/300.jpg", how_to_video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
     end
 
-    exercise1.levels.create(name: "Initiated", multiplier:2, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise1.levels.create(name: "Committed", multiplier:2.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise1.levels.create(name: "Proven", multiplier:2.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise2.levels.create(name: "Initiated", multiplier:1.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise2.levels.create(name: "Committed", multiplier:2, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise2.levels.create(name: "Proven", multiplier:2.25, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise3.levels.create(name: "Initiated", multiplier:1.25, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise3.levels.create(name: "Committed", multiplier:1.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise3.levels.create(name: "Proven", multiplier:1.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise4.levels.create(name: "Initiated", multiplier:1.25, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise4.levels.create(name: "Committed", multiplier:1.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise4.levels.create(name: "Proven", multiplier:1.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise5.levels.create(name: "Initiated", multiplier:0.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise5.levels.create(name: "Committed", multiplier:0.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise5.levels.create(name: "Proven", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise6.levels.create(name: "Initiated", multiplier:0.4, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise6.levels.create(name: "Committed", multiplier:0.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise6.levels.create(name: "Proven", multiplier:0.7, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise7.levels.create(name: "Initiated", multiplier:0.4, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise7.levels.create(name: "Committed", multiplier:0.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise7.levels.create(name: "Proven", multiplier:0.7, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise8.levels.create(name: "Initiated", multiplier:0.3, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise8.levels.create(name: "Committed", multiplier:0.4, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise8.levels.create(name: "Proven", multiplier:0.6, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
-    exercise9.levels.create(name: "Initiated", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:105,sets:0)
-    exercise9.levels.create(name: "Committed", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:90,sets:0)
-    exercise9.levels.create(name: "Proven", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:85,sets:0)
-    exercise10.levels.create(name: "Initiated", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:105,sets:0)
-    exercise10.levels.create(name: "Committed", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:90,sets:0)
-    exercise10.levels.create(name: "Proven", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:85,sets:0)
-    exercise11.levels.create(name: "Initiated", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:105,sets:0)
-    exercise11.levels.create(name: "Committed", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:90,sets:0)
-    exercise11.levels.create(name: "Proven", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:85,sets:0)
-    exercise12.levels.create(name: "Initiated", multiplier:2, metric:"Each Movement",measurement: "-", reps: 0,timeframe:0,sets:0)
-    exercise12.levels.create(name: "Committed", multiplier:4, metric:"Each Movement",measurement: "-", reps: 0,timeframe:0,sets:0)
-    exercise12.levels.create(name: "Proven", multiplier:6, metric:"Each Movement",measurement: "-", reps: 0,timeframe:0,sets:0)
-    exercise13.levels.create(name: "Initiated", multiplier:0.2, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 100,timeframe:300,sets:0)
-    exercise13.levels.create(name: "Committed", multiplier:0.3, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 100,timeframe:300,sets:0)
-    exercise13.levels.create(name: "Proven", multiplier:0.4, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 100,timeframe:300,sets:0)
-    exercise14.levels.create(name: "Initiated", multiplier:0, metric:"Each",measurement: "", reps: 10,timeframe:0,sets:0)
-    exercise14.levels.create(name: "Committed", multiplier:0, metric:"Each",measurement: "", reps: 15,timeframe:0,sets:0)
-    exercise14.levels.create(name: "Proven", multiplier:0, metric:"Each",measurement: "", reps: 20,timeframe:0,sets:0)
-    exercise15.levels.create(name: "Initiated", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 25,timeframe:0,sets:0)
-    exercise15.levels.create(name: "Committed", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 50,timeframe:0,sets:0)
-    exercise15.levels.create(name: "Proven", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 75,timeframe:0,sets:0)
-    exercise16.levels.create(name: "Initiated", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 10,timeframe:0,sets:0)
-    exercise16.levels.create(name: "Committed", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 15,timeframe:0,sets:0)
-    exercise16.levels.create(name: "Proven", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 20,timeframe:0,sets:0)
-    exercise17.levels.create(name: "Initiated", multiplier:0.5, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 25,timeframe:0,sets:0)
-    exercise17.levels.create(name: "Committed", multiplier:0.5, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 50,timeframe:0,sets:0)
-    exercise17.levels.create(name: "Proven", multiplier:0.5, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 75,timeframe:0,sets:0)
-    exercise18.levels.create(name: "Initiated", multiplier:1, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:660,sets:0)
-    exercise18.levels.create(name: "Committed", multiplier:1, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:600,sets:0)
-    exercise18.levels.create(name: "Proven", multiplier:1, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:540,sets:0)
-    exercise19.levels.create(name: "Initiated", multiplier:4, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:3600,sets:0)
-    exercise19.levels.create(name: "Committed", multiplier:4.5, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:3600,sets:0)
-    exercise19.levels.create(name: "Proven", multiplier:5, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:3600,sets:0)
+    level1_e1 = exercise1.levels.create(name: "Initiated", multiplier:2, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e1 = exercise1.levels.create(name: "Committed", multiplier:2.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e1 = exercise1.levels.create(name: "Proven", multiplier:2.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e2 = exercise2.levels.create(name: "Initiated", multiplier:1.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e2 = exercise2.levels.create(name: "Committed", multiplier:2, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e2 = exercise2.levels.create(name: "Proven", multiplier:2.25, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e3 = exercise3.levels.create(name: "Initiated", multiplier:1.25, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e3 = exercise3.levels.create(name: "Committed", multiplier:1.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e3 = exercise3.levels.create(name: "Proven", multiplier:1.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e4 = exercise4.levels.create(name: "Initiated", multiplier:1.25, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e4 = exercise4.levels.create(name: "Committed", multiplier:1.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e4 = exercise4.levels.create(name: "Proven", multiplier:1.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e5 = exercise5.levels.create(name: "Initiated", multiplier:0.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e5 = exercise5.levels.create(name: "Committed", multiplier:0.75, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e5 = exercise5.levels.create(name: "Proven", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e6 = exercise6.levels.create(name: "Initiated", multiplier:0.4, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e6 = exercise6.levels.create(name: "Committed", multiplier:0.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e6 = exercise6.levels.create(name: "Proven", multiplier:0.7, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e7 = exercise7.levels.create(name: "Initiated", multiplier:0.4, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e7 = exercise7.levels.create(name: "Committed", multiplier:0.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e7 = exercise7.levels.create(name: "Proven", multiplier:0.7, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e8 = exercise8.levels.create(name: "Initiated", multiplier:0.3, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level2_e8 = exercise8.levels.create(name: "Committed", multiplier:0.4, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level3_e8 = exercise8.levels.create(name: "Proven", multiplier:0.6, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
+    level1_e9 = exercise9.levels.create(name: "Initiated", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:105,sets:0)
+    level2_e9 = exercise9.levels.create(name: "Committed", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:90,sets:0)
+    level3_e9 = exercise9.levels.create(name: "Proven", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:85,sets:0)
+    level1_e10 = exercise10.levels.create(name: "Initiated", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:105,sets:0)
+    level2_e10 = exercise10.levels.create(name: "Committed", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:90,sets:0)
+    level3_e10 = exercise10.levels.create(name: "Proven", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:85,sets:0)
+    level1_e11 = exercise11.levels.create(name: "Initiated", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:105,sets:0)
+    level2_e11 = exercise11.levels.create(name: "Committed", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:90,sets:0)
+    level3_e11 = exercise11.levels.create(name: "Proven", multiplier:0.25, metric:"calories",measurement: "Bodyweight", reps: 0,timeframe:85,sets:0)
+    level1_e12 = exercise12.levels.create(name: "Initiated", multiplier:2, metric:"Each Movement",measurement: "-", reps: 0,timeframe:0,sets:0)
+    level2_e12 = exercise12.levels.create(name: "Committed", multiplier:4, metric:"Each Movement",measurement: "-", reps: 0,timeframe:0,sets:0)
+    level3_e12 = exercise12.levels.create(name: "Proven", multiplier:6, metric:"Each Movement",measurement: "-", reps: 0,timeframe:0,sets:0)
+    level1_e13 = exercise13.levels.create(name: "Initiated", multiplier:0.2, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 100,timeframe:300,sets:0)
+    level2_e13 = exercise13.levels.create(name: "Committed", multiplier:0.3, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 100,timeframe:300,sets:0)
+    level3_e13 = exercise13.levels.create(name: "Proven", multiplier:0.4, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 100,timeframe:300,sets:0)
+    level1_e14 = exercise14.levels.create(name: "Initiated", multiplier:0, metric:"Each",measurement: "-", reps: 10,timeframe:0,sets:0)
+    level2_e14 = exercise14.levels.create(name: "Committed", multiplier:0, metric:"Each",measurement: "-", reps: 15,timeframe:0,sets:0)
+    level3_e14 = exercise14.levels.create(name: "Proven", multiplier:0, metric:"Each",measurement: "-", reps: 20,timeframe:0,sets:0)
+    level1_e15 = exercise15.levels.create(name: "Initiated", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 25,timeframe:0,sets:0)
+    level2_e15 = exercise15.levels.create(name: "Committed", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 50,timeframe:0,sets:0)
+    level3_e15 = exercise15.levels.create(name: "Proven", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 75,timeframe:0,sets:0)
+    level1_e16 = exercise16.levels.create(name: "Initiated", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 10,timeframe:0,sets:0)
+    level2_e16 = exercise16.levels.create(name: "Committed", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 15,timeframe:0,sets:0)
+    level3_e16 = exercise16.levels.create(name: "Proven", multiplier:1, metric:"Pounds",measurement: "Bodyweight", reps: 20,timeframe:0,sets:0)
+    level1_e17 = exercise17.levels.create(name: "Initiated", multiplier:0.5, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 25,timeframe:0,sets:0)
+    level2_e17 = exercise17.levels.create(name: "Committed", multiplier:0.5, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 50,timeframe:0,sets:0)
+    level3_e17 = exercise17.levels.create(name: "Proven", multiplier:0.5, metric:"KettleBall Weight",measurement: "Bodyweight", reps: 75,timeframe:0,sets:0)
+    level1_e18 = exercise18.levels.create(name: "Initiated", multiplier:1, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:660,sets:0)
+    level2_e18 = exercise18.levels.create(name: "Committed", multiplier:1, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:600,sets:0)
+    level3_e18 = exercise18.levels.create(name: "Proven", multiplier:1, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:540,sets:0)
+    level1_e19 = exercise19.levels.create(name: "Initiated", multiplier:4, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:3600,sets:0)
+    level2_e19 = exercise19.levels.create(name: "Committed", multiplier:4.5, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:3600,sets:0)
+    level3_e19 = exercise19.levels.create(name: "Proven", multiplier:5, metric:"Calories",measurement: "Bodyweight", reps: 0,timeframe:3600,sets:0)
 
 #users
 
@@ -122,9 +122,71 @@ puts "created email: #{admin.email}"
     password: '123456')
   user = User.find(j+1)
     puts "created user email: #{user.email}"
-    20.times do 
-      submit = user.submissions.create(completed:Faker::Boolean.boolean(true_ratio: 0.8), name: "", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: rand(1...57), status: 'Pending')
-    end
+    # 20.times do 
+
+    #LEVEL 1
+    #level 1 - Approved
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e1.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e2.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e3.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e4.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e5.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e6.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e7.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e8.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e9.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e10.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e11.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e12.id, status: 'Approved')
+
+    #level 1 - Pending
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e13.id, status: 'Pending')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e14.id, status: 'Pending')
+
+    #level 1 - Not Approved
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e15.id, status: 'Not Approved')
+
+
+    #LEVEL 2
+
+    #level 2 - Approved
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e1.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e2.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e3.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e4.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e5.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e6.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e7.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e8.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e9.id, status: 'Approved')
+
+    #level 2 - Pending
+
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e10.id, status: 'Pending')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e11.id, status: 'Pending')
+
+    #level 2 - Not Approved
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e12.id, status: 'Not Approved')
+
+    #LEVEL 3
+    #level 3 - Approved
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e1.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e2.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e3.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e4.id, status: 'Approved')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e5.id, status: 'Approved')
+    
+
+    #level 3 - Pending
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e6.id, status: 'Pending')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e7.id, status: 'Pending')
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e8.id, status: 'Pending')
+
+    #level 3 - Not Approved
+    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e9.id, status: 'Approved')
+
+    # end
+
 end
 
 15.times do

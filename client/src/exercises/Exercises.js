@@ -79,7 +79,7 @@ const Exercises = () => {
   const normalizeData = (arrayOfObjects) => {
     let key = "exercise_id"
 
-    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id }])).values()]
+    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id, level_id: item.level_id }])).values()]
 
     const formattedExercises = exercises.map((x) => {
       return { ...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
