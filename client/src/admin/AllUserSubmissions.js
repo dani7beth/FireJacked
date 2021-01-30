@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import SubmissionAdmin from "./SubmissionAdmin";
+import AUserSubmission from "./AUserSubmission";
 import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Box } from "../components/Styles";
+import axios from 'axios';
 
-const SubmissionsAdmin = () => {
+const AllUserSubmissions = () => {
   const [submissions, setSubmissions] = useState([]);
-  const [filter, setFilter] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -24,7 +23,7 @@ const SubmissionsAdmin = () => {
       setTotalPages(res.data.total_pages);
     } catch (error) {
       console.log(error);
-      return <h1>It would appear there has been a grave error. </h1>;
+      return <h1>It would appear there has been a grave error.</h1>;
     }
   };
   
@@ -40,22 +39,14 @@ const SubmissionsAdmin = () => {
   };
 
   const renderSubmissions = () => {
-    if (filter) {
-      console.log(submissions.filter((s) => s.completed !== true));
-      return submissions
-        .filter((s) => s.completed !== true)
-        .map((s) => <SubmissionAdmin key={s.id} {...s} />);
-    }
-
-    return submissions.map((s) => <SubmissionAdmin key={s.id} {...s} />);
+    return submissions
+      .filter((s) => s.status == "Pending")
+      .map((s) => <AUserSubmission key={s.id} {...s} />);
   };
 
   return (
     <>
       <h1>Select a Submssion</h1>
-      <Button variant="secondary" onClick={() => setFilter(!filter)}>
-        Click to Filter Out completed
-      </Button>
       <Box>
         <InfiniteScroll
           dataLength={submissions.length}
@@ -76,4 +67,4 @@ const SubmissionsAdmin = () => {
   );
 };
 
-export default SubmissionsAdmin;
+export default AllUserSubmissions;
