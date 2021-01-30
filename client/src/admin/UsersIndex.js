@@ -70,6 +70,7 @@ const UserIndex = () => {
             <h1 key={user.id}>{user.first_name} {user.last_name}</h1>
             <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '200px' }} />
           </Link>
+
         </>
       )
     })

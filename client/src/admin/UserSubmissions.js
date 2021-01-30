@@ -46,7 +46,6 @@ const UserSubmissions = () => {
       {renderUserSubmissions()}
     </>
   )
-
 }
 
 export default UserSubmissions;

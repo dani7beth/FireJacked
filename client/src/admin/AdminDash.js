@@ -5,17 +5,22 @@ import Exercises from '../exercises/Exercises';
 import AdminUpdate from './AdminUpdate';
 import AdminUpdateImage from './AdminUpdateImage';
 import UsersIndex from "./UsersIndex";
-import SubmissionAdmin from "../submissions/SubmissionAdmin.js";
+import AllUserSubmissions from "./AllUserSubmissions";
 
 const AdminDash = () =>{
   const {admin, updateAdminInfo, updateAdminImage } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [imageShow, setImageShow] = useState(false);
-
+  const [selectedUser, setSelectedUser] = useState({});
   const handleImageShow = () => setImageShow(true);
   const handleImageHide = () => setImageShow(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const filterBySelectedUser = () => {
+    // this will need to set selectedUser according to some sort of state passed up from UserIndex
+    // then this function will be taken into AllUserSubmissions to filter which submissions are rendered
+  }
 
   const renderAdmin = () => {
     if (admin) {
@@ -23,7 +28,7 @@ const AdminDash = () =>{
         <>
           <Row>
             <Col xs={2}>
-              <UsersIndex />
+              <UsersIndex selectedUser={selectedUser}/>
             </Col>
             <Col xs={8}>
               <Exercises />
@@ -58,7 +63,7 @@ const AdminDash = () =>{
               </Modal>
             </Col>
             <Col>
-              <SubmissionAdmin />
+              <AllUserSubmissions filterBySelectedUser={filterBySelectedUser}/>
             </Col>
           </Row>
         </>
