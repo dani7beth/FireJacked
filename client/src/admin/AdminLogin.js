@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const AdminLogin = (props) =>{
@@ -15,9 +16,8 @@ const [password, setPassword] = useState('');
   return (
     <>
       <div>
-        <h1>
-          Admin Login
-        </h1>
+        <Link to='/admin_register'>Register</Link>
+        <h1>Admin Login</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Label>Email</Form.Label>
             <Form.Control name='email' type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
