@@ -40,7 +40,6 @@ const UserLogin = (props) => {
             <Button type="submit">login</Button>
           </div>
         </Form>
-        <Link to='/admin_login'>Admin Login</Link>
       </div>
     </>
   );
