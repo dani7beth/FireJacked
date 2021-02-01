@@ -33,7 +33,8 @@ const SubmissionsFormAdmin = () => {
     // console.log(submission);
     try {
       let res = await Axios.put(`/api/update_submission_status/${submission.id}/${submission.user_id}`, submissionState);
-      // console.log(submissionState) 
+      // console.log(submissionState)
+      alert(`You have changed this submission to ${submissionState.status}`)
       console.log(res.data);
       // setSubmissionState(res);
     } catch (error) {

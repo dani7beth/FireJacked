@@ -5,6 +5,7 @@ import Exercises from '../exercises/Exercises';
 import AdminUpdate from './AdminUpdate';
 import AdminUpdateImage from './AdminUpdateImage';
 import UsersIndex from "./UsersIndex";
+import UserSelection from "./UserSelection";
 import AllUserSubmissions from "./AllUserSubmissions";
 
 const AdminDash = () =>{
@@ -12,15 +13,11 @@ const AdminDash = () =>{
   const [show, setShow] = useState(false);
   const [imageShow, setImageShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
+  const [currentDisplayExercises, setCurrentDisplayExercises] = useState(false)
   const handleImageShow = () => setImageShow(true);
   const handleImageHide = () => setImageShow(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const filterBySelectedUser = () => {
-    // this will need to set selectedUser according to some sort of state passed up from UserIndex
-    // then this function will be taken into AllUserSubmissions to filter which submissions are rendered
-  }
 
   const renderAdmin = () => {
     if (admin) {
@@ -28,10 +25,14 @@ const AdminDash = () =>{
         <>
           <Row>
             <Col xs={2}>
-              <UsersIndex selectedUser={selectedUser}/>
+              {/*<UsersIndex/>*/}
+              <UserSelection selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
             </Col>
             <Col xs={8}>
-              <Exercises />
+              <Button onClick={() => setCurrentDisplayExercises(!currentDisplayExercises)}>
+                {currentDisplayExercises ? 'Display Submissions' : 'Display Exercises'}
+              </Button>
+              {currentDisplayExercises? <Exercises /> : <AllUserSubmissions selectedUser={selectedUser}/>}
             </Col>
             <Col xs={2}>
               <img src={admin.image} style={{ borderRadius: "50%", width: '200px' }} />
@@ -62,19 +63,16 @@ const AdminDash = () =>{
                 </Modal.Footer>
               </Modal>
             </Col>
-            <Col>
-              <AllUserSubmissions filterBySelectedUser={filterBySelectedUser}/>
-            </Col>
           </Row>
         </>
       )
-    }
   }
+}
 
-  return (
-    <>
-      {renderAdmin()}
-    </>
-  )
+return (
+  <>
+    {renderAdmin()}
+  </>
+)
 }
 export default AdminDash;

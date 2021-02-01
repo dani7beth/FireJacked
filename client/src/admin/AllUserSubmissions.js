@@ -5,10 +5,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Box } from "../components/Styles";
 import axios from 'axios';
 
-const AllUserSubmissions = () => {
+const AllUserSubmissions = ({selectedUser}) => {
   const [submissions, setSubmissions] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [filter, setFilter] = useState(false);
 
   useEffect(() => {
     getAllSubmissions();
@@ -39,14 +40,24 @@ const AllUserSubmissions = () => {
   };
 
   const renderSubmissions = () => {
+    if (filter) {
+      console.log(submissions)
+      return submissions
+        .filter((s) => s.user_id === selectedUser.id)
+        .filter((s) => s.status === "Pending")
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    }
     return submissions
-      .filter((s) => s.status == "Pending")
+      .filter((s) => s.user_id === selectedUser.id)
       .map((s) => <AUserSubmission key={s.id} {...s} />);
   };
 
   return (
     <>
-      <h1>Select a Submssion</h1>
+      <h1>Select a Submission</h1>
+      <Button variant="secondary" onClick={() => setFilter(!filter)}>
+        {filter ? 'Show Pending' : 'Show All'}
+      </Button>
       <Box>
         <InfiniteScroll
           dataLength={submissions.length}
