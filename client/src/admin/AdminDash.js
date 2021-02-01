@@ -13,7 +13,7 @@ const AdminDash = () =>{
   const [show, setShow] = useState(false);
   const [imageShow, setImageShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
-  const [currentDisplayExercises, setCurrentDisplayExercises] = useState(false)
+  const [currentDisplayExercises, setCurrentDisplayExercises] = useState(true)
   const handleImageShow = () => setImageShow(true);
   const handleImageHide = () => setImageShow(false);
   const handleClose = () => setShow(false);
