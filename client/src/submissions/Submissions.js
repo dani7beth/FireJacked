@@ -10,12 +10,9 @@ const Submissions = () => {
   const [show, setShow] = useState(false);
   const [level, setLevel] = useState({});
   const [exercise, setExercise] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
-  const handleLoading = () => setLoading(true);
-  const handleNotLoading = () => setLoading(false);
 
   useEffect(() => {
     getSubmissions();
@@ -73,7 +70,6 @@ const Submissions = () => {
     videoData.append("name", submission.name);
     videoData.append("video_upload", submission.video_upload);
     videoData.append("level_id", submission.level_id);
-    handleLoading();
     Axios.put(`/api/levels/${level_id}/submissions/${id}`, videoData)
       .then((res) => {
         console.log(res.data);
@@ -81,7 +77,6 @@ const Submissions = () => {
           s.id !== id ? s : res.data
         );
         setSubmissions(newSubmissions);
-        handleNotLoading();
       })
       .catch((err) => {
         console.log(err);
@@ -128,8 +123,6 @@ const Submissions = () => {
           <SubmissionForm
             addSubmission={addSubmission}
             handleHide={handleHide}
-            handleLoading={handleLoading}
-            handleNotLoading={handleNotLoading}
           />
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
@@ -140,7 +133,6 @@ const Submissions = () => {
           : "Here are your submissions"}
       </h1>
       <hr />
-      {loading ? (<><Spinner animation="border"></Spinner> <p>Loading...</p></>): ''}
       {renderSubmissions()}
     </>
   );

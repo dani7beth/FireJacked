@@ -1,8 +1,7 @@
-import { useContext, useReducer, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
-import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from "react-router-dom";
-import { Button, Form, Spinner } from "react-bootstrap";
+import { Button, Form, Spinner, Alert } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 
 const SubmissionForm = ({
@@ -11,11 +10,12 @@ const SubmissionForm = ({
   editCalledSubmission,
   handleHide,
   handleEditHide,
-  handleLoading,
-  handleNotLoading,
 }) => {
   const { level_id } = useParams();
-  const { id } = useContext(AuthContext);
+  const [alert, setAlert] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errMsg, setMsg] = useState("");
   const [submission, setSubmission] = useState(
     submissionProp
       ? {
@@ -29,7 +29,7 @@ const SubmissionForm = ({
           name: "",
           status: "Pending",
           completed: false,
-          video_upload: "test url video",
+          video_upload: null,
           level_id: parseInt(level_id),
         }
   );
@@ -38,10 +38,6 @@ const SubmissionForm = ({
   }, []);
 
   const addCallSubmission = async () => {
-    if (submission.video_upload == null) {
-      alert("cant be blank");
-      return;
-    }
     console.log(submission);
     let videoData = new FormData();
     videoData.append("completed", submission.completed);
@@ -50,15 +46,20 @@ const SubmissionForm = ({
     videoData.append("video_upload", submission.video_upload);
     videoData.append("level_id", submission.level_id);
 
+    handleNoVideo();
+
     try {
-      handleLoading();
+      setLoading(true);
       let res = await axios.post(
         `/api/levels/${level_id}/submissions`,
         videoData
       );
       addSubmission(res.data);
-      handleNotLoading();
+      setLoading(false);
+      whichHide();
     } catch (err) {
+      handleError(err.response.data.errors);
+      setLoading(false);
       console.log(err);
     }
   };
@@ -90,7 +91,26 @@ const SubmissionForm = ({
         level_id: level_id,
       });
     }
-    whichHide();
+  };
+
+  const handleError = (err) => {
+    setError(true);
+    setMsg(err);
+    console.log(submission.video_upload);
+    setTimeout(() => {
+      setError(false);
+      return;
+    }, 5000);
+  };
+  const handleNoVideo = () => {
+    console.log(submission.video_upload)
+    if (submission.video_upload == null) {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+        return;
+      }, 5000);
+    }
   };
 
   const {
@@ -115,6 +135,16 @@ const SubmissionForm = ({
   return (
     <>
       <Form onSubmit={handleSubmit}>
+      {loading ? (
+          <>
+            <Spinner animation="border"></Spinner>{" "}
+            <p>Adding Your Submission...</p>
+          </>
+        ) : (
+          ""
+        )}
+        {alert && <Alert variant={"danger"}>You must upload a video.</Alert>}
+        {error && <Alert variant={"danger"}>{errMsg}</Alert>}
         <p>Video</p>
         <div {...getRootProps()}>
           <Form.Control {...getInputProps()} />
@@ -123,16 +153,8 @@ const SubmissionForm = ({
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-          <Form.Control
-            name="video_upload"
-            value={submission.video_upload}
-            onChange={handleChange}
-          />
         </div>
-        <aside>
-          <h4>Files</h4>
-          <ul>{files}</ul>
-        </aside>
+
         <Form.Label>Name</Form.Label>
         <Form.Control
           name="name"

@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useContext, useCallback } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
-import { AuthContext } from "../providers/AuthProvider";
 import Dropzone, { useDropzone } from "react-dropzone";
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
 
