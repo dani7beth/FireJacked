@@ -2,7 +2,7 @@ import { useContext, useReducer, useState, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import { useParams } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 
 const SubmissionForm = ({
@@ -11,10 +11,11 @@ const SubmissionForm = ({
   editCalledSubmission,
   handleHide,
   handleEditHide,
+  handleLoading,
+  handleNotLoading,
 }) => {
   const { level_id } = useParams();
   const { id } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
   const [submission, setSubmission] = useState(
     submissionProp
       ? {
@@ -26,7 +27,7 @@ const SubmissionForm = ({
         }
       : {
           name: "",
-          status: 'Pending',
+          status: "Pending",
           completed: false,
           video_upload: "test url video",
           level_id: parseInt(level_id),
@@ -41,17 +42,22 @@ const SubmissionForm = ({
       alert("cant be blank");
       return;
     }
-    console.log(submission)
+    console.log(submission);
     let videoData = new FormData();
-    videoData.append('completed', submission.completed);
-    videoData.append('status', submission.status);
+    videoData.append("completed", submission.completed);
+    videoData.append("status", submission.status);
     videoData.append("name", submission.name);
     videoData.append("video_upload", submission.video_upload);
     videoData.append("level_id", submission.level_id);
-    
+
     try {
-      let res = await axios.post(`/api/levels/${level_id}/submissions`, videoData);
+      handleLoading();
+      let res = await axios.post(
+        `/api/levels/${level_id}/submissions`,
+        videoData
+      );
       addSubmission(res.data);
+      handleNotLoading();
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +84,7 @@ const SubmissionForm = ({
       addCallSubmission();
       setSubmission({
         name: "",
-        status: 'Pending',
+        status: "Pending",
         completed: false,
         video_upload: "",
         level_id: level_id,
@@ -128,7 +134,11 @@ const SubmissionForm = ({
           <ul>{files}</ul>
         </aside>
         <Form.Label>Name</Form.Label>
-        <Form.Control name="name" value={submission.name} onChange={handleChange} />
+        <Form.Control
+          name="name"
+          value={submission.name}
+          onChange={handleChange}
+        />
         <Button type="submit">submit</Button>
         <Button variant="danger" onClick={whichHide}>
           cancel
