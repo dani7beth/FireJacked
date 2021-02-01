@@ -3,35 +3,37 @@ import Submission from "./Submission";
 import SubmissionForm from "./SubmissionForm";
 import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 
 const Submissions = () => {
   const [submissions, setSubmissions] = useState([]);
   const [show, setShow] = useState(false);
   const [level, setLevel] = useState({});
   const [exercise, setExercise] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
+  const handleLoading = () => setLoading(true);
+  const handleNotLoading = () => setLoading(false);
 
   useEffect(() => {
     getSubmissions();
   }, []);
 
   useEffect(() => {
-    if(submissions){
-      getLevel()
+    if (submissions) {
+      getLevel();
     }
-  },[submissions])
+  }, [submissions]);
 
   useEffect(() => {
-    if(level){
-      getExercise()
+    if (level) {
+      getExercise();
     }
-  },[level])
+  }, [level]);
 
   const { level_id } = useParams();
-
 
   const getSubmissions = async () => {
     try {
@@ -45,21 +47,21 @@ const Submissions = () => {
 
   const getLevel = async () => {
     try {
-      let res = await Axios.get(`/api/levels/${level_id}`)
-      setLevel(res.data)
+      let res = await Axios.get(`/api/levels/${level_id}`);
+      setLevel(res.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const getExercise = async () => {
     try {
-      let res = await Axios.get(`/api/exercises/${level.exercise_id}`)
-      setExercise(res.data)
+      let res = await Axios.get(`/api/exercises/${level.exercise_id}`);
+      setExercise(res.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const addSubmission = (submission) => {
     setSubmissions([submission, ...submissions]);
@@ -71,7 +73,7 @@ const Submissions = () => {
     videoData.append("name", submission.name);
     videoData.append("video_upload", submission.video_upload);
     videoData.append("level_id", submission.level_id);
-
+    handleLoading();
     Axios.put(`/api/levels/${level_id}/submissions/${id}`, videoData)
       .then((res) => {
         console.log(res.data);
@@ -79,6 +81,7 @@ const Submissions = () => {
           s.id !== id ? s : res.data
         );
         setSubmissions(newSubmissions);
+        handleNotLoading();
       })
       .catch((err) => {
         console.log(err);
@@ -108,7 +111,7 @@ const Submissions = () => {
       />
     ));
   };
-
+  
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -125,6 +128,8 @@ const Submissions = () => {
           <SubmissionForm
             addSubmission={addSubmission}
             handleHide={handleHide}
+            handleLoading={handleLoading}
+            handleNotLoading={handleNotLoading}
           />
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
@@ -135,6 +140,7 @@ const Submissions = () => {
           : "Here are your submissions"}
       </h1>
       <hr />
+      {loading ? (<><Spinner animation="border"></Spinner> <p>Loading...</p></>): ''}
       {renderSubmissions()}
     </>
   );
