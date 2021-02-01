@@ -5,11 +5,10 @@ import Comments from "../components/Comments"
 import { Button, Form } from "react-bootstrap"
 
 const SubmissionsFormAdmin = () => {
-
   const { submission_id } = useParams()
-
   const [submission, setSubmission] = useState({})
   const [checked, setChecked] = useState(false)
+  const [submissionState, setSubmissionState] = useState(submission)
 
   useEffect(()=>{
     getSubmission()
@@ -30,46 +29,48 @@ const SubmissionsFormAdmin = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    // console.log(submission);
     try {
-      // debugger
-      let res = await Axios.put(`/api/update_submission/${submission_id}/${submission.user_id}`,{
-        name:submission.name, 
-        video_upload:submission.video_upload, 
-        completed:checked, 
-        level_id:submission.level_id
-      })
-      console.log(res.data)
-      setSubmission({
-        name:submission.name, 
-        video_upload:submission.video_upload, 
-        completed:res.data, 
-        level_id:submission.level_id
-      })
+      let res = await Axios.put(`/api/update_submission_status/${submission.id}/${submission.user_id}`, submissionState);
+      // console.log(submissionState) 
+      console.log(res.data);
+      // setSubmissionState(res);
     } catch (error) {
       console.log(error)
-      return (
-        <h1>It would appear there has been a grave error. </h1>
-      )
     }
   }
 
-   
+  const handleChange = (e) =>{
+    setSubmissionState({
+      ...submissionState, [e.target.name]: e.target.value
+    })
+  }
+
   return (
-  <>
-  <h1>Submission Id: {submission_id}</h1>
-  <h2>Name: {submission.name}</h2>
-  <h2>video upload: {submission.video_upload}</h2>
-  <Form onSubmit={handleSubmit}>
-  <Form.Control type="checkbox" defaultChecked={submission.completed} onChange={()=> setChecked(submission.completed ? false : true)}/>
-  <Button type="submit" size='sm'>Submit</Button>
-  </Form>
-  <Comments submission_id = {submission_id}/>
+    <>
+      <h1>Submission Id: {submission_id}</h1>
+      <video style={{ width: '400px', height: '300px' }} controls="true" class="embed-responsive-item">
+        <source src={submissionState.video_upload} type="video/mp4" />
+      </video>
+      <Form onSubmit={handleSubmit}>
+        <Comments submission_id = {submission_id}/>
+      </Form>
 
-  </>
-
-
-  
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>Status</Form.Label>
+        <Form.Control as='select' 
+          name="status"
+          value ={submissionState.status}
+          onChange={handleChange}>
+          <option>Choose an option...</option>
+          <option>Pending</option>
+          <option>Approved</option>
+          <option >Not Approved</option>
+        </Form.Control>
+        <Button type='submit'>Submit</Button>
+      </Form>
+    </>
   )
 }
 

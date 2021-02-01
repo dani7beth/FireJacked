@@ -84,6 +84,7 @@ class Api::SubmissionsController < ApplicationController
     render json: @submission
   end
 
+
   private
 
   def submission_params

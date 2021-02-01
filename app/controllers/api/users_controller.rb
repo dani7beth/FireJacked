@@ -1,5 +1,10 @@
 class Api::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:categories, :user_submissions,:update,:update_user_image]
+  before_action :authenticate_user!, except: [:categories, :user_submissions,:update,:update_user_image, :show]
+  before_action :set_user, only: [:show]
+
+  def show
+    render json: @user
+  end
 
   def admin_index
     render json: Admin.all
@@ -38,5 +43,9 @@ class Api::UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:first_name,:last_name,:weight, :height, :email, :gender, :about, :age, :image)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

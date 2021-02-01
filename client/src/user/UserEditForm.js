@@ -64,11 +64,17 @@ const UserEditForm = ({ hide }) => {
         <Form.Group as={Col}>
           <Form.Label>Gender</Form.Label>
           <Form.Control
+            as='select'
             name="gender"
             type="text"
             value={userState.gender}
             onChange={handleChange}
-          />
+          >
+            <option>Choose a gender...</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>I do not want to disclose</option>
+          </Form.Control>
         </Form.Group>
       </Form.Row>
 
