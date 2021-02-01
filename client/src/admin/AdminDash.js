@@ -25,8 +25,7 @@ const AdminDash = () =>{
         <>
           <Row>
             <Col xs={2}>
-              {/*<UsersIndex/>*/}
-              <UserSelection selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+              {currentDisplayExercises ? <UsersIndex/> : <UserSelection selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>}
             </Col>
             <Col xs={8}>
               <Button onClick={() => setCurrentDisplayExercises(!currentDisplayExercises)}>
