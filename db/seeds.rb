@@ -43,10 +43,10 @@ puts "created email: #{admin.email}"
      category: "Power Endurance", activity: "BW CAL ROW", image: "https://picsum.photos/200/300.jpg", how_to_video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
     exercise19=admin.exercises.create(name: "", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?",
      category: "GYM Endurance", activity: "60 Min Row", image: "https://picsum.photos/200/300.jpg", how_to_video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
-    100.times do 
-      exercise20=admin.exercises.create(name: "", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?",
-       category: categories.sample, activity: "Extra Activity to Show how infinitie Scroll works", image: "https://picsum.photos/200/300.jpg", how_to_video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
-    end
+    # 100.times do 
+    #   exercise20=admin.exercises.create(name: "", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?",
+    #    category: categories.sample, activity: "Extra Activity to Show how infinitie Scroll works", image: "https://picsum.photos/200/300.jpg", how_to_video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+    # end
 
     level1_e1 = exercise1.levels.create(name: "Initiated", multiplier:2, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
     level2_e1 = exercise1.levels.create(name: "Committed", multiplier:2.5, metric:"Pounds",measurement: "Bodyweight", reps: 0,timeframe:0,sets:0)
