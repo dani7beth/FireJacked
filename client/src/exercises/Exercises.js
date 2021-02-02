@@ -76,13 +76,26 @@ const Exercises = () => {
     }
   }
 
+  // loop through an array of levels 
+  // if (level.level_name === "initiated" && submission.status !== "Approved") {
+  //   return (level) 
+  // }
+  // if (level.level_name === "committed" && submission.status !== "Approved"){
+  //   return level
+  // }
+  // if (level.level_name === "proven" && submission.status !== "Approved"){
+  //   return level
+  // }
+  // return
+
   const normalizeData = (arrayOfObjects) => {
     let key = "exercise_id"
 
-    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id }])).values()]
+    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id, level_id: item.level_id }])).values()]
 
     const formattedExercises = exercises.map((x) => {
-      return { ...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
+      // return { ...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
+      return {levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
     })
 
     console.log(formattedExercises)

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Axios from "axios"
-import { useParams } from "react-router-dom"
 import Comment from "./Comment"
 import { Button, Form, Modal } from "react-bootstrap"
 

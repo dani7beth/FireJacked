@@ -11,9 +11,10 @@ class Api::CommentsController < ApplicationController
   end
 
   def see_comments
+    # binding.pry
     # @submission = Submission.find(39)
-    @submission = Submission.find(params[:submission_id])
-    render json: Comment.comments_by_submission(@submission.id)
+    submission = Submission.find(params[:submission_id])
+    render json: Comment.comments_by_submission(submission.id)
   end
 
   def show

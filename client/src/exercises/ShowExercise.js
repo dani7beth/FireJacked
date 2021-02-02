@@ -1,9 +1,7 @@
 import Axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState} from "react";
 import { Carousel, Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
-import { Player } from "video-react";
 
 const ShowExercise = () => {
   const [exercise, setExercise] = useState({});
@@ -11,7 +9,7 @@ const ShowExercise = () => {
 
   const { exercise_id } = useParams();
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getExercise();
@@ -94,7 +92,7 @@ const ShowExercise = () => {
             <p>{exercise.description}</p>
           </div>
           <div>
-            <Link to={`/${exercise_id}/user_see_history`}>See History</Link>
+            <Link to={`/${exercise_id}/user_see_history/level_id`}>See History</Link>
           </div>
         </Col>
       </Row>

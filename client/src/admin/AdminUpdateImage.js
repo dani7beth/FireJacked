@@ -1,11 +1,11 @@
 import { Form } from "react-bootstrap";
-import { useContext, useState, useCallback, } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Button } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 
 const AdminUpdateImage = ({handleImageHide}) => {
-  const { admin, onDropAdmin } = useContext(AuthContext);
+  const {onDropAdmin } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();

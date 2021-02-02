@@ -1,5 +1,5 @@
 class Api::SubmissionsController < ApplicationController
-  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user, :update, :user_see_history]
+  before_action :authenticate_user!, except: [:exercise_subs, :all_submissions_of_user, :update, :user_see_history, :update_status]
   before_action :authenticate_admin!, only: [:update_status]
   before_action :set_level, except: [:all_users_submissions, :exercise_subs, :all_users_submissions, :all_submissions_of_user, :update_status, :user_see_history]
   before_action :set_submission, only: [:update, :destroy, :show]

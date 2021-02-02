@@ -4,7 +4,7 @@ import {Modal, Button} from 'react-bootstrap'
 
 const Comment = ({body, editSingleComment, id, submission_id, removeComment}) => {
 
-  const [editComment, setEditComment] = useState(false)
+  // const [editComment, setEditComment] = useState(false)
   const [newBody, setNewBody] = useState(body)
   const [show, setShow] = useState(false);
   const [editShow, setEditShow] = useState(false);

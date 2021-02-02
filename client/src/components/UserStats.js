@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 const UserStats = () => {
 
   const [stats, setStats] = useState([])
-  const [categories, setCategories] = useState([])
+  // const [categories, setCategories] = useState([])
 
   useEffect(()=>{
     getSubmissions()

@@ -88,6 +88,7 @@ export class AuthProvider extends React.Component {
       .then((res) => {
         this.setState({ user: null });
         localStorage.removeItem('member-type')
+        localStorage.clear()
         history.push("/login");
       })
       .catch((err) => {
@@ -100,6 +101,7 @@ export class AuthProvider extends React.Component {
       .then((res) => {
         this.setState({ admin: null });
         localStorage.removeItem('member-type')
+        localStorage.clear()
         history.push("/admin_login");
       })
       .catch((err) => {
