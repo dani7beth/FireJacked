@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import { AuthContext, AuthProvider } from '../providers/AuthProvider';
+import { AuthContext} from '../providers/AuthProvider';
 import { Button, Form } from 'react-bootstrap';
 
-const AdminForm = ({handleHide, editAdmin}) => {
+const AdminForm = ({handleHide}) => {
   const { admin, updateAdminInfo, } = useContext(AuthContext)
   const [adminInfo, setAdminInfo] = useState(admin)
 

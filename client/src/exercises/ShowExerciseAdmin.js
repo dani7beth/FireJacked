@@ -1,9 +1,7 @@
 import Axios from "axios";
-import { useEffect, useState, useContext } from "react";
-import { Button, Carousel, Col, Modal, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
-import { Player } from "video-react";
+import { useEffect, useState } from "react";
+import { Carousel, Col, Modal, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 const ShowExerciseAdmin = () => {
   const [exercise, setExercise] = useState({});
@@ -12,7 +10,7 @@ const ShowExerciseAdmin = () => {
 
   const { exercise_id } = useParams();
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const handleEditShow = () => setEditShow(true);
   const handleEditHide = () => setEditShow(false);

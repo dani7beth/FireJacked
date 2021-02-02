@@ -3,7 +3,7 @@ import Submission from "./Submission";
 import SubmissionForm from "./SubmissionForm";
 import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
-import { Button, Col, Modal, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Modal, Row} from "react-bootstrap";
 
 const Submissions = () => {
   const [submissions, setSubmissions] = useState([]);

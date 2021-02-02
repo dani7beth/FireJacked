@@ -8,7 +8,6 @@ import styled from 'styled-components'
 import { BoxAdminExercises } from "../components/Styles";
 import FilterByCategory from "./FilterByCategory";
 import GlobalLevels from "../components/GlobalLevels";
-import SingleSubmissionUser from "../admin/SingleSubmissionUser";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([]);
