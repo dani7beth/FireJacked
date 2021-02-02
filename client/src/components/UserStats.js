@@ -36,9 +36,11 @@ const UserStats = () => {
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" , "Saturday"]
     return sortedStats.slice(0,5).map(s => {
       s.created_at = new Date()
+      let date = new Date(s.created_at)
         return (
           <>
             <p>{`${s.activity} Level: ${s.level_name} Created On: ${dayNames[s.created_at.getDay()] + " " + monthNames[s.created_at.getMonth()] + " " + s.created_at.getDate() }`} | {s.status}</p>
+            {/* <p>{date.toLocaleDateString("en-US")}</p> */}
           </>
 
         )

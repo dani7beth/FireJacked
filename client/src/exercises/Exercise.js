@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
 import { AdminExerciseContainerRight, LevelsBox, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle } from "../components/Styles";
-
+import {MdEdit, MdDelete, MdUnfoldMore, MdUnfoldLess} from 'react-icons/md'
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
   const [ exercise, setExercise] = useState()
@@ -41,19 +41,16 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
 
          {/* Child 2 */}
         <AdminExerciseContainerMiddle>
-          <Button variant="primary" onClick={handleEditShow}>
-          Edit Exercise
-          </Button>
-          <Button variant="danger" onClick={handleDeleteShow}>
-            Delete Exercise
-          </Button>
+          <MdEdit onClick={handleEditShow} style={{fontSize: "24px"}}/>
+          <MdDelete onClick={handleDeleteShow} style={{fontSize: "24px"}}/>
         </AdminExerciseContainerMiddle>
 
         {/* Childe 3 */}
         <AdminExerciseContainerRight>
-          <button onClick={() => setShowLevel(!showLevel)}>{showLevel ? "Expand" : "Collapse"}</button>
-          <br />
-          <br />
+
+          <MdUnfoldMore onClick={() => setShowLevel(!showLevel)} style={{fontSize: "24px"}}/>
+          {/* {showLevel ? {MdUnfoldMore} : {MdUnfoldLess}} */}
+          
           {showLevel ? "" : <Levels exerciseID={exerciseProp.exercise_id} />}
         </AdminExerciseContainerRight>
 
