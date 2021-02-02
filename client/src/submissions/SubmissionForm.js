@@ -71,6 +71,7 @@ const SubmissionForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (submissionProp) {
       editCalledSubmission(submissionProp.id, {
         name: submission.name,
@@ -79,6 +80,8 @@ const SubmissionForm = ({
         video_upload: submission.video_upload,
         level_id: level_id,
       });
+      whichHide();
+      setLoading(false);
     } else {
       console.log(submission);
       // console.log shows submission is pending.

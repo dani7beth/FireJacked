@@ -54,12 +54,18 @@ const ExerciseForm = ({
     imageData.append("activity", exercise.activity);
     imageData.append("description", exercise.description);
 
+    handleNoVideo();
+
     try {
-      let res = await axios.put(`/api/exercises/${exerciseProp.id}`, imageData);
+      setLoading(true);
+      let res = await axios.put(`/api/exercises/${exerciseProp.exercise_id}`, imageData);
       editExercise(res.data);
       editExercises(res.data);
+      whichClose();
+      setLoading(false);
     } catch (err) {
-      console.log(err);
+      handleError(err.response.data.errors);
+      console.log(err.response.data.errors);
     }
   };
 
