@@ -23,13 +23,21 @@ margin-top:50px;
 padding:10px
 `
 
-export const BoxCustomAllExercises = styled.div`
-height: 600px;
+export const BoxMain = styled.div`
 width: 100%;
 overflow:auto;
 margin:auto;
 margin-top:10px;
 padding:10px
+`
+
+export const BoxCustomAllExercises = styled(BoxMain)`
+height: 600px;
+`
+
+export const NatesBox = styled(BoxMain)`
+height 300px;
+border
 `
 
 export const BoxAdminExercises = styled.div`
@@ -131,6 +139,17 @@ ${CategoryButton}:hover & {
   Background-color: black;
   Color: White
 }
+`
+
+export const ButtonMain = styled.div`
+border: solid 1px black;
+min-width: 80px;
+min-height: 60px;
+padding: 5px;
+`
+
+export const ButtonSeeExercise = styled(ButtonMain)`
+
 `
 
 
