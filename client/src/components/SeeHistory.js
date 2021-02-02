@@ -9,6 +9,10 @@ import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
 
 const SeeHistory = () => {
+
+  const { exercise_id } = useParams();
+  const { level_id } = useParams()
+
   const [exercise, setExercise] = useState({})
   const [levels, setLevels] = useState([])
   const [submissions, setSubmissions] = useState([])
@@ -17,11 +21,12 @@ const SeeHistory = () => {
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
 
-  const { exercise_id } = useParams();
+  
 
   const { user } = useContext(AuthContext);
 
@@ -31,7 +36,21 @@ const SeeHistory = () => {
     userHistorySubmissions()
   }, []);
 
- 
+  // useEffect(()=>{
+  //   if (submissions) {
+  //     seeSubmission()
+  //   }
+  //   setLoading(false)
+  // },[submissions])
+
+  const seeSubmission = () => {
+    // debugger
+    let x = submissions.filter((x)=>x.level_id === parseInt(level_id))
+    console.log(level_id)
+    console.log(x)
+    // setSubmission(x)
+    // setLoading(false)
+  }
 
   const getExercise = async () => {
     try {
@@ -55,14 +74,18 @@ const SeeHistory = () => {
   }
 
   const userHistorySubmissions = () => {
+    
     Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
     .then((response) => {
       console.log(`User ${user.id}'s submissions:`, response.data)
       // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
+      // debugger
       setSubmissions(response.data.data)
       setTotalPages(response.data.total_pages)
       setDataLength(response.data.total_length)
       setSubmission(response.data.data[0])
+      setLoading(false)
+      console.log(submission)
     })
     .catch((err) => {
       console.log(err)
@@ -110,6 +133,10 @@ const SeeHistory = () => {
   }
 
   const renderInfo = () => {
+    if (loading) {
+      return <p>Loading...</p>
+    }
+  
     return (
       <h3>
         Id: {submission.id} | {submission.created_at} | {user.weight}lbs
@@ -202,7 +229,12 @@ const SeeHistory = () => {
         )
       }
     }
+  if(loading){
+    <h1>loading...</h1>
+  }
+
   return saveTheRender();
+  
 };
 
 export default SeeHistory;

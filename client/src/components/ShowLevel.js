@@ -33,7 +33,7 @@ const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission}) 
   let minute = Math.floor(level.timeframe/60)
   let seconds = level.timeframe%60 < 10 ? "0" + level.timeframe%60 : level.timeframe%60
   let duration = minute + ":" + seconds
-  console.log(submission)
+  // console.log(submission)
   return(
     <div onClick={()=>{renderClickedSubmission(submission)}}>
       <hr />
