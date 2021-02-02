@@ -46,7 +46,6 @@ const SubmissionsAdmin = () => {
         .filter((s) => s.completed !== true)
         .map((s) => <SubmissionAdmin key={s.id} {...s} />);
     }
-
     return submissions.map((s) => <SubmissionAdmin key={s.id} {...s} />);
   };
 
