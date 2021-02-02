@@ -27,7 +27,7 @@ export default (props) => {
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand />
+              <NavbarBrand href='/'/>
             </BrandLogo>
               <Nav.Link href="/user_dash">
                 <h4>PROFILE</h4>

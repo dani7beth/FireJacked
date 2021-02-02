@@ -142,12 +142,53 @@ const SeeHistory = () => {
       console.log(err)
     })
   }
+
+  const deleteSubmission = (id) => {
+    Axios.delete(`/api/levels/${level_id}/submissions/${id}`)
+      .then((res) => {
+        // setSubmissions(
+        //   submissions.filter((submission) => submission.id !== id)
+      // )
+        userHistorySubmissions()
+        ;
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const editCalledSubmission = (id, submission) => {
+    let videoData = new FormData();
+    videoData.append("completed", submission.completed);
+    videoData.append("name", submission.name);
+    videoData.append("video_upload", submission.video_upload);
+    videoData.append("level_id", submission.level_id);
+    videoData.append("status", submission.status)
+    Axios.put(`/api/levels/${level_id}/submissions/${id}`, videoData)
+      .then((res) => {
+        console.log(res.data);
+        // let newSubmissions = submissions.map((s) =>
+        //   s.id !== id ? s : res.data
+        // );
+        // setSubmissions(newSubmissions);
+        userHistorySubmissions()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   
   const renderSubmissions = () => {
     return submissions.map((submission) => {
       return (
         <>
-        <ShowLevel key={`submission-${submission.id}`} {...submission} submission = {submission} renderClickedSubmission={renderClickedSubmission}/>
+        <ShowLevel 
+          key={`submission-${submission.id}`} {...submission} 
+          submission = {submission} 
+          renderClickedSubmission={renderClickedSubmission} 
+          deleteSubmission={deleteSubmission} 
+          editCalledSubmission={editCalledSubmission}/>
         </>
       )
     })
