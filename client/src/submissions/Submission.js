@@ -1,6 +1,6 @@
 import SubmissionForm from "./SubmissionForm";
 import { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -11,24 +11,37 @@ const Submission = ({
 }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [comments, setComments] = useState([]);
   const handleEditShow = () => setShowEdit(true);
   const handleEditHide = () => setShowEdit(false);
   const handleDeleteShow = () => setShowDelete(true);
   const handleDeleteHide = () => setShowDelete(false);
 
+  
+
   return (
     <>
-      <div>
-        <h3>{submissionProp.name}</h3>
-        <p>{submissionProp.status}</p>
+      <Row>
+        <Col>
           <div>
-          <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
-            <source src={submissionProp.video_upload} type="video/mp4" />
-          </video>
+            <video style={{width:'400px', height:'300px'}} controls="true" class="embed-responsive-item">
+              <source src={submissionProp.video_upload} type="video/mp4" />
+            </video>
+          </div>
+          <h3>{submissionProp.name}</h3>
+          <p>{submissionProp.status}</p>
+          <Button variant="primary" onClick={handleEditShow}>Edit</Button>
+          <Button variant="danger" onClick={handleDeleteShow}>Delete</Button>
+        </Col>
+        <Col>
+        <br /><br />
+        <div style={{border:'2px solid', paddingTop:'15px', height:'230px'}}>
+          {/* {renderComments()} */}
         </div>
+        </Col>
+      </Row>
+        
 
-        <Button variant="primary" onClick={handleEditShow}>Edit</Button>
-        <Button variant="danger" onClick={handleDeleteShow}>Delete</Button>
 
         <Modal show={showEdit} onHide={handleEditHide}>
           <Modal.Header closeButton>
@@ -61,7 +74,6 @@ const Submission = ({
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
     </>
   );
 };

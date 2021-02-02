@@ -1,5 +1,5 @@
 class Api::CommentsController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, except: [:see_comments]
   # before_action :set_test_admin
   before_action :set_comment, only: [:update, :destroy, :show]
   
@@ -8,6 +8,12 @@ class Api::CommentsController < ApplicationController
     # binding.pry
     submission = Submission.find(params[:submission_id]).id
     render json: current_admin.comments.where(submission_id:submission)
+  end
+
+  def see_comments
+    # @submission = Submission.find(39)
+    @submission = Submission.find(params[:submission_id])
+    render json: Comment.comments_by_submission(@submission.id)
   end
 
   def show

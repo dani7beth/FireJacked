@@ -29,9 +29,9 @@ function App() {
 
   return (
     <>
-      <NavBar />
       <Container>
       <FetchUserAdmin>
+      <NavBar />
         <Switch>
           <Route exact path='/' component={UserLogin} />
           <Route exact path='/login' component={UserLogin} />
