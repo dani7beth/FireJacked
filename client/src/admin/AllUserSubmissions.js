@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AUserSubmission from "./AUserSubmission";
 import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Box } from "../components/Styles";
+import { BoxAdminExercises } from "../components/Styles";
 import axios from 'axios';
 
 const AllUserSubmissions = ({selectedUser}) => {
@@ -56,9 +56,9 @@ const AllUserSubmissions = ({selectedUser}) => {
     <>
       <h1>Select a Submission</h1>
       <Button variant="secondary" onClick={() => setFilter(!filter)}>
-        {filter ? 'Show Pending' : 'Show All'}
+        {filter ? 'Show All' : 'Show Only Pending'}
       </Button>
-      <Box>
+      <BoxAdminExercises>
         <InfiniteScroll
           dataLength={submissions.length}
           next={() => loadMore()}
@@ -73,7 +73,7 @@ const AllUserSubmissions = ({selectedUser}) => {
         >
           {renderSubmissions()}
         </InfiniteScroll>
-      </Box>
+      </BoxAdminExercises>
     </>
   );
 };
