@@ -36,7 +36,7 @@ const Submission = ({
         <Col>
         <br /><br />
         <div style={{border:'2px solid', paddingTop:'15px', height:'230px'}}>
-          {renderComments()}
+          {/* {renderComments()} */}
         </div>
         </Col>
       </Row>
