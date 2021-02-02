@@ -1,8 +1,6 @@
 import SubmissionForm from "./SubmissionForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap";
-import Axios from "axios";
-import { useParams } from "react-router-dom";
 
 const Submission = ({
   submissionProp,
