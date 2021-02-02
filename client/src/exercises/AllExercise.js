@@ -1,10 +1,16 @@
-import { useContext } from "react"
+import { useState ,useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider"
-import { Button } from "react-bootstrap"
+import { Button, Modal } from "react-bootstrap"
+import SubmissionForm from "../submissions/SubmissionForm"
+import { UserExerciseLevelContainer, UserExerciseLevelLeft, UserExerciseLevelRight, UserExerciseLevelButtons } from "../components/Styles"
 
 const AllExercise = ({activity, exercise_id, category, measurement, multiplier,timeframe,metric,reps,sets,user_status,level_name, level_id}) => {
-  // const [showLevel, setShowLevel] = useState(true)
+  const [showLevel, setShowLevel] = useState(true)
+  const [show, setShow] = useState(false)
+
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
 
   const { user } = useContext(AuthContext)
 
@@ -15,7 +21,8 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
 
   return(
     <>
-      <span>
+      <UserExerciseLevelContainer>
+      <UserExerciseLevelLeft>
         <Link to={`showexercise/${exercise_id}`}>  
           <h3>{activity}</h3>
         </Link>
@@ -26,13 +33,28 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
           Reps: {reps}{" | "}
           Sets: {sets}{" | "}
           status: {user_status}</p>
-        <Link to={`/${exercise_id}/user_see_history/${level_id}`}>
-          <Button>View Submission</Button>
-        </Link>
-          <Button>Upload</Button>
+        </UserExerciseLevelLeft>
+        <UserExerciseLevelRight>
+            <Link to={`/${exercise_id}/user_see_history/${level_id}`}>
+              <UserExerciseLevelButtons>View</UserExerciseLevelButtons>
+            </Link>
+            <UserExerciseLevelButtons onClick={handleShow}>Upload</UserExerciseLevelButtons>
+        </UserExerciseLevelRight>
+      </UserExerciseLevelContainer>
 
-        
-      </span>
+
+      <Modal show={show} onHide={handleHide}>
+          <Modal.Header closeButton>
+            <Modal.Title>New Submission</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <SubmissionForm
+              handleHide={handleHide}
+              level_id={level_id}
+            />
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
     </>
   )
 }

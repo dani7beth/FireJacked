@@ -1,18 +1,22 @@
 import Axios from "axios"
 import { useEffect, useState } from "react"
 // import InfiniteScroll from 'react-infinite-scroller';
-import { BoxCustom } from "../components/Styles";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import styled from 'styled-components'
+import { Box, BoxCustom, BoxCustomAllExercises } from "../components/Styles";
 import AllExercise from "./AllExercise";
 import FilterByCategory from './FilterByCategory';
 import { Button, Form } from "react-bootstrap";
 
 const AllExercises = () => {
   const [exercises, setExercises] = useState([])
+  const [defaultExercises, setDefaultExercises] = useState([])
   const [page, setPage] = useState(1)
   // const [totalPages, setTotalPages] = useState(0)
   // const [dataLength, setDataLength] = useState(0)
   const [searchText, setSearchText] = useState("")
   const [currentCategory, setCurrentCategory] = useState("")
+  const [category, setCategory] = useState("")
 
   useEffect(()=>{
     getAllExercises()
@@ -25,35 +29,11 @@ const AllExercises = () => {
       console.log(res.data)
       let exercisesX = normalizeData(res.data)
       setExercises(exercisesX)
-      // setTotalPages(res.data.total_pages)
-      // setDataLength(res.data.total_length)
+      setDefaultExercises(exercisesX)
     } catch (error) {
       console.log(error)
     }
   };
-
-  // const loadMore = async () => {
-  //   const pageX = page + 1
-  //   try {
-  //     let res = await Axios.get(`/api/all_exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
-  //     let exercisesX = normalizeData(res.data.data)
-  //     setExercises([...exercises,...exercisesX])
-  //     // setExercises([...exercises, ...res.data.data])
-  //     setPage(pageX)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // const normalizeData = (arrayOfObjects) => {
-  //   let key = "exercise_id"
-  //   const exercises = [...new Map(arrayOfObjects.map(item => [item[key], {category: item.category, activity:item.activity, exercise_id:item.exercise_id}])).values()]
-  //   const formattedExercises = exercises.map((x) => {
-  //     return {...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id)}
-  //   })
-  //   console.log(formattedExercises)
-  //   return formattedExercises
-  // }
 
   const normalizeData = (arrayOfObjects) => {
     let key = "exercise_id"
@@ -84,29 +64,9 @@ const AllExercises = () => {
           console.log(x.levels[0].status)   
         }
     })
-
-    // console.log(finalArray)
     return finalArray
   }
 
-  const dataByCategory = (category) => {
-    if (exercises) {
-      setCurrentCategory(category)
-      getAllExercises(searchText, category)
-    }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setPage(1)
-    getAllExercises(searchText,currentCategory)
-    // renderExercisesWithLevels()
-  }
-
-  const handleClearSearch = () => {
-    setSearchText("")
-    getAllExercises("", currentCategory)
-  }
 
   const renderExercisesWithLevels = () => {
     return exercises.map(x => {
@@ -116,52 +76,43 @@ const AllExercises = () => {
     })
   }
 
-  // const renderAllExercises = () => {
-  //   return exercises.map((exercise) => {
-  //     return (
-  //       <div key={exercise.id}>
-  //         <Link to={`showexercise/${exercise.id}`}>
-  //           <h1>{exercise.activity}</h1>
-  //           <p>{exercise.id}</p>
-  //         </Link>
-  //         <p>{exercise.description}</p>
-  //       </div>
-  //     )
-  //   })
-  // }
+  const searchFor = (searchText) => {
+    // debugger
+    console.log("Searched")
+    setSearchText(searchText)
+    let filteredExerOne = defaultExercises.filter(x => x.activity !== null)
+    let filteredExers = filteredExerOne.filter((str) => str.activity.indexOf(searchText) > -1)
+    setExercises(filteredExers)
+    console.log(searchText)
+  }
+
+  const dataByCategory = (category) => {
+    // debugger
+    console.log("Searched")
+    setCategory(category)
+    let filteredExerOne = defaultExercises.filter(x => x.category !== null)
+    let filteredExers = filteredExerOne.filter((str) => str.category.indexOf(category) > -1)
+    setExercises(filteredExers)
+    console.log(searchText)
+  }
+
 
   return (
     <>
-      <h1>Choose an exercise</h1>
-
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Label>Search for an Exercise</Form.Label>
         <Form.Control
           placeholder="Search Here"
           type="text"
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)} />
-        <Button type="submit">Search</Button>
-        <Button onClick={handleClearSearch}>Clear Search</Button>
+          onChange={(e) => searchFor(e.target.value)} />
       </Form>
       
       <FilterByCategory dataByCategory={dataByCategory}/>
-      <BoxCustom>
-        {/* <InfiniteScroll
-          dataLength={exercises.length}
-          next={()=>loadMore()}
-          hasMore={exercises.length === dataLength ? false : true }
-          loader={<h4>Loading...{exercises.length} {dataLength}</h4>}
-          height={300}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>End of Exercises</b>
-            </p>
-          }
-        > */}
+
+      <BoxCustomAllExercises>
           {renderExercisesWithLevels()}
-        {/* </InfiniteScroll> */}
-      </BoxCustom>
+      </BoxCustomAllExercises>
     </>
   )
 }
