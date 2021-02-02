@@ -20,6 +20,7 @@ const AUserSubmission = ({name, status, id, created_at, user_id}) => {
       console.log(error)
     }
   }
+
   return (
     <>
       <div>
