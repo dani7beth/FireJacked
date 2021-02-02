@@ -12,7 +12,8 @@ const SeeHistory = () => {
   const [exercise, setExercise] = useState({})
   const [levels, setLevels] = useState([])
   const [submissions, setSubmissions] = useState([])
-  const [submission, setSubmission] = useState([])
+  const [submission, setSubmission] = useState({})
+  const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
@@ -30,6 +31,12 @@ const SeeHistory = () => {
     getLevels()
     userHistorySubmissions()
   }, []);
+
+  useEffect(() => {
+    if (submission){
+      getComments()
+    }
+  }, [submission])
 
  
 
@@ -69,6 +76,24 @@ const SeeHistory = () => {
     })
   }
 
+  const getComments = () => {
+    Axios.get(`/api/${submission.id}/see_comments`)
+    .then((response) => {
+      console.log('COMMENTS')
+      console.log(submission.id, response.data)
+      setComments(response.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  const renderComments = () => {
+    return comments.map((comment) => {
+      return <h4>{comment.admin_name}: {comment.body}</h4>
+    })
+  }
+
   const loadMore = () => {
     const pageX = page + 1
     Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}&page=${pageX}`)
@@ -102,7 +127,7 @@ const SeeHistory = () => {
     console.log(submission.id, ':', submission.video)
     return (
       <div key={submission.video}>
-        <video style={{height:'450px', width:'500px'}} controls={true} class="embed-responsive-item">
+        <video style={{height:'450px', width:'620px'}} controls={true} class="embed-responsive-item">
           <source src={submission.video} type="video/mp4" />
         </video>
       </div>
@@ -155,8 +180,9 @@ const SeeHistory = () => {
           <>
               <Row>
                 <Col>
-                  <h1>VIDEO</h1>
                   {renderVideo()}
+                  <h1>comments</h1>
+                  {renderComments()}
                 </Col>
                 <Col>
                   <div>
@@ -184,7 +210,7 @@ const SeeHistory = () => {
                             height={300}
                             endMessage={
                           <p style={{ textAlign: "center" }}>
-                            <b>submissions.length = {submissions.length} dataLength= {dataLength}</b>
+                            {/* <b>submissions.length = {submissions.length} dataLength= {dataLength}</b> */}
                           </p>
                             }
                         >
