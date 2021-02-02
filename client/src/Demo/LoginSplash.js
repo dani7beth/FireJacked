@@ -1,18 +1,16 @@
-import { Route, Switch } from "react-router-dom"
-import AdminLogin from "../admin/AdminLogin"
-import UserLogin from "../user/UserLogin"
-import NoMatch from '../components/NoMatch';
-
+import styled from "styled-components";
+import backgroundPhoto from "../Photos : Images/jonathan-borba-zfPOelmDc-M-unsplash.jpg";
 const LoginSplash = () => {
   return (
     <>
-      <Switch>
-        <Route exact path='/' component={UserLogin} />
-        <Route exact path='/login' component={UserLogin} />
-        <Route exact path='/admin_login' component={AdminLogin} />
-        <Route component={NoMatch} />
-      </Switch>
+      <Background></Background>
     </>
   );
 };
+export const Background = styled.div`
+  background-image: url(${backgroundPhoto});
+  background-size: cover;
+  width: 1080px;
+  height: 1920px;
+`;
 export default LoginSplash;

@@ -19,35 +19,39 @@ export default (props) => {
   const userNavBar = () => {
     return (
       <div style={{ paddingBottom: "20px" }}>
-        <StyledNavbar>
-          <Navbar collapseOnSelect expand="lg" variant="dark">
-            <Nav>
-              <BrandLogo>
-                <NavbarBrand />
-              </BrandLogo>
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          style={{ backgroundColor: "#000000" }}
+        >
+          <Nav>
+            <BrandLogo>
+              <NavbarBrand />
+            </BrandLogo>
               <Nav.Link href="/user_dash">
                 <h4>PROFILE</h4>
-              </Nav.Link>
-              <Nav.Link href="/user_stats">
-                <h4>STATS</h4>
-              </Nav.Link>
-            </Nav>
-            <Nav className="ml-auto">
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <StyledImage src={user.image} />
-                <StyledDrop
-                  title={`${user.first_name} ${user.last_name}`}
-                  id="collapsible-nav-dropdown"
-                >
-                  <NavDropdown.Item onClick={() => handleUserLogout(history)}>
-                    LOGOUT
-                  </NavDropdown.Item>
-                </StyledDrop>
-              </Navbar.Collapse>
-            </Nav>
-          </Navbar>
-        </StyledNavbar>
+            </Nav.Link>
+            <Nav.Link href="/user_stats">
+              <h4>STATS</h4>
+            </Nav.Link>
+          </Nav>
+
+          <Nav className="ml-auto">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <StyledImage src={user.image} />
+              <StyledDrop
+                title={`${user.first_name} ${user.last_name}`}
+                id="collapsible-nav-dropdown"
+              >
+                <NavDropdown.Item onClick={() => handleUserLogout(history)}>
+                  LOGOUT
+                </NavDropdown.Item>
+              </StyledDrop>
+            </Navbar.Collapse>
+          </Nav>
+        </Navbar>
       </div>
     );
   };
@@ -55,35 +59,38 @@ export default (props) => {
   const adminNavBar = () => {
     return (
       <div style={{ paddingBottom: "20px" }}>
-        <StyledNavbar>
-          <Navbar collapseOnSelect expand="lg" variant="dark">
-            <Nav>
-              <BrandLogo>
-                <NavbarBrand />
-              </BrandLogo>
-              <Nav.Link href="/admin_dash">
-                <h4>Dashboard</h4>
-              </Nav.Link>
-              <Nav.Link href="/admin-submissions">
-                <h4>User Submissions</h4>
-              </Nav.Link>
-            </Nav>
-            <Nav className="ml-auto">
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <StyledImage src={admin.image} />
-                <StyledDrop
-                  title={`${admin.first_name} ${admin.last_name}`}
-                  id="collapsible-nav-dropdown"
-                >
-                  <NavDropdown.Item onClick={() => handleAdminLogout(history)}>
-                    Logout
-                  </NavDropdown.Item>
-                </StyledDrop>
-              </Navbar.Collapse>
-            </Nav>
-          </Navbar>
-        </StyledNavbar>
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          style={{ backgroundColor: "#000000" }}
+        >
+          <Nav>
+            <BrandLogo>
+              <NavbarBrand />
+            </BrandLogo>
+            <Nav.Link href="/admin_dash">
+              <h4>Dashboard</h4>
+            </Nav.Link>
+            <Nav.Link href="/admin-submissions">
+              <h4>User Submissions</h4>
+            </Nav.Link>
+          </Nav>
+          <Nav className="ml-auto">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <StyledImage src={admin.image} />
+              <StyledDrop
+                title={`${admin.first_name} ${admin.last_name}`}
+                id="collapsible-nav-dropdown"
+              >
+                <NavDropdown.Item onClick={() => handleAdminLogout(history)}>
+                  Logout
+                </NavDropdown.Item>
+              </StyledDrop>
+            </Navbar.Collapse>
+          </Nav>
+        </Navbar>
       </div>
     );
   };
@@ -91,29 +98,32 @@ export default (props) => {
   const noLogin = () => {
     return (
       <div style={{ paddingBottom: "20px" }}>
-        <StyledNavbar>
-          <Navbar collapseOnSelect expand="lg" variant="dark">
-            <Nav>
-              <BrandLogo>
-                <NavbarBrand />
-              </BrandLogo>
-              <Nav.Link href="/login">
-                <h4>LOGIN</h4>
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0)'}}
+        >
+          <Nav>
+            <BrandLogo>
+              <NavbarBrand />
+            </BrandLogo>
+            <Nav.Link href="/login">
+              <h4>LOGIN</h4>
+            </Nav.Link>
+            <Nav.Link href="/user_register">
+              <h4>REGISTER</h4>
+            </Nav.Link>
+          </Nav>
+          <Nav className="ml-auto">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav.Link href="/admin_login">
+                <h4>ADMIN</h4>
               </Nav.Link>
-              <Nav.Link href="/user_register">
-                <h4>REGISTER</h4>
-              </Nav.Link>
-            </Nav>
-            <Nav className="ml-auto">
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav.Link href="/admin_login">
-                  <h4>ADMIN</h4>
-                </Nav.Link>
-              </Navbar.Collapse>
-            </Nav>
-          </Navbar>
-        </StyledNavbar>
+            </Navbar.Collapse>
+          </Nav>
+        </Navbar>
       </div>
     );
   };
@@ -165,15 +175,14 @@ export const FireLogo = styled.div`
 
 export const BrandLogo = styled(NavbarBrand)`
   background-image: url(${brandLogo});
-  background-size: 200px;
-  background-position: 0 -75px;
+  background-size: 300px;
+  background-position: -40px -125px;
   background-repeat: no-repeat;
   width: 200px;
   height: 50px;
 `;
 
-export const StyledNavbar = styled(Navbar)`
-  background-color: #000000;
+export const StyledNav = styled(Nav.Link)`
+  font-size: 6rem !important;
 `;
-
 // how do I make this so the dropdown menu is shorter?

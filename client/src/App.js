@@ -24,6 +24,7 @@ import { Container } from "./components/Styles";
 import Trainer from "./user/Trainer";
 import UserSubmissions from "./admin/UserSubmissions";
 import SeeHistory from "./components/SeeHistory";
+import LoginSplash from "./Demo/LoginSplash";
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
       <FetchUserAdmin>
       <NavBar />
         <Switch>
-          <Route exact path='/' component={UserLogin} />
+          <Route exact path ='/' component={LoginSplash} />
           <Route exact path='/login' component={UserLogin} />
           <Route exact path='/user_register' component={UserRegister} />
           <Route exact path='/admin_login' component={AdminLogin} />
