@@ -10,7 +10,8 @@ const SubmissionForm = ({
   editCalledSubmission,
   handleHide,
   handleEditHide,
-  level_id
+  level_id,
+  handleUserDashHide,
 }) => {
   // const { level_id } = useParams();
   const [alert, setAlert] = useState(false);
@@ -60,6 +61,7 @@ const SubmissionForm = ({
       whichHide();
     } catch (err) {
       handleError(err.response.data.errors);
+      console.log(err)
       setLoading(false);
       console.log(err);
     }
@@ -76,7 +78,7 @@ const SubmissionForm = ({
     if (submissionProp) {
       editCalledSubmission(submissionProp.id, {
         name: submission.name,
-        status: submission.status,
+        status: submissionProp.status,
         completed: submission.completed,
         video_upload: submission.video_upload,
         level_id: level_id,
@@ -133,7 +135,9 @@ const SubmissionForm = ({
     if (submissionProp) {
       handleEditHide();
     } else {
-      handleHide();
+      // handleHide();
+      handleUserDashHide()
+
     }
   };
   return (
