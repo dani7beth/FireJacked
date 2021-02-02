@@ -31,5 +31,6 @@ export const Logo = styled.div`
   color: #ffffff;
   width: 50%;
   height: auto;
+  padding: 20px;
 `;
 export default LoginSplash;
