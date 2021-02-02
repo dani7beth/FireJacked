@@ -1,10 +1,9 @@
 import Axios from "axios";
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import Levels from "./Levels";
 import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
 import Submission from "../submissions/Submission";
