@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get "user_see_history", to: "submissions#user_see_history"
     get "user_index", to: "admins#user_index"
     get "all_submissions/:user_id", to: "submissions#all_submissions_of_user"
+    get "/:submission_id/see_comments", to: 'comments#see_comments'
     put "update_submission_status/:submission_id/:user_id", to: "submissions#update_status"
     resources :users
     resources :admins

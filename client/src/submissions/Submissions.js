@@ -3,7 +3,7 @@ import Submission from "./Submission";
 import SubmissionForm from "./SubmissionForm";
 import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
-import { Button, Modal, Spinner } from "react-bootstrap";
+import { Button, Col, Modal, Row, Spinner } from "react-bootstrap";
 
 const Submissions = () => {
   const [submissions, setSubmissions] = useState([]);
@@ -41,6 +41,8 @@ const Submissions = () => {
       console.log(err);
     }
   };
+
+ 
 
   const getLevel = async () => {
     try {
@@ -106,15 +108,40 @@ const Submissions = () => {
       />
     ));
   };
+
+    // const renderComments = () => {
+    //   console.log(singleSubmission.id)
+    //   return comments.map((comment) => {
+    //     return <p>{comment.body}</p>
+    //   })
+    // }
   
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Make a submission
-      </Button>
-      <Link to={`/showexercise/${exercise.id}`}>
-        <Button variant="secondary">Go to exercise</Button>
-      </Link>
+      <Row>
+        <Col>
+          <Button variant="primary" onClick={handleShow}>
+            Make a submission
+          </Button>
+          <Link to={`/showexercise/${exercise.id}`}>
+            <Button variant="secondary">Go to exercise</Button>
+          </Link>
+              <h1>
+                {submissions.length === 0
+                  ? "Please add a submission"
+                  : "Here are your submissions"}
+              </h1>
+             
+          </Col>
+          <Col>
+            <h1 style={{paddingTop:'40px'}}>Comments</h1>
+          </Col>
+          <hr />
+      </Row>  
+          {loading ? (<><Spinner animation="border"></Spinner> <p>Loading...</p></>): ''}
+          {renderSubmissions()}
+
+
       <Modal show={show} onHide={handleHide}>
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>

@@ -9,19 +9,25 @@ import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
 
 const SeeHistory = () => {
+
+  const { exercise_id } = useParams();
+  const { level_id } = useParams()
+
   const [exercise, setExercise] = useState({})
   const [levels, setLevels] = useState([])
   const [submissions, setSubmissions] = useState([])
-  const [submission, setSubmission] = useState([])
+  const [submission, setSubmission] = useState({})
+  const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
 
-  const { exercise_id } = useParams();
+  
 
   const { user } = useContext(AuthContext);
 
@@ -30,6 +36,27 @@ const SeeHistory = () => {
     getLevels()
     userHistorySubmissions()
   }, []);
+
+  // useEffect(()=>{
+  //   if (submissions) {
+  //     seeSubmission()
+  //   }
+  //   setLoading(false)
+  // },[submissions])
+
+  const seeSubmission = () => {
+    // debugger
+    let x = submissions.filter((x)=>x.level_id === parseInt(level_id))
+    console.log(level_id)
+    console.log(x)
+    // setSubmission(x)
+    // setLoading(false)
+  }
+  useEffect(() => {
+    if (submission){
+      getComments()
+    }
+  }, [submission])
 
  
 
@@ -55,17 +82,39 @@ const SeeHistory = () => {
   }
 
   const userHistorySubmissions = () => {
+    
     Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
     .then((response) => {
       console.log(`User ${user.id}'s submissions:`, response.data)
       // setSubmissions(response.data.filter((submission) => submission.user_id !== user.id))
+      // debugger
       setSubmissions(response.data.data)
       setTotalPages(response.data.total_pages)
       setDataLength(response.data.total_length)
       setSubmission(response.data.data[0])
+      setLoading(false)
+      console.log(submission)
     })
     .catch((err) => {
       console.log(err)
+    })
+  }
+
+  const getComments = () => {
+    Axios.get(`/api/${submission.id}/see_comments`)
+    .then((response) => {
+      console.log('COMMENTS')
+      console.log(submission.id, response.data)
+      setComments(response.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  const renderComments = () => {
+    return comments.map((comment) => {
+      return <h4>{comment.admin_name}: {comment.body}</h4>
     })
   }
 
@@ -102,7 +151,7 @@ const SeeHistory = () => {
     console.log(submission.id, ':', submission.video)
     return (
       <div key={submission.video}>
-        <video style={{height:'450px', width:'500px'}} controls={true} class="embed-responsive-item">
+        <video style={{height:'450px', width:'620px'}} controls={true} class="embed-responsive-item">
           <source src={submission.video} type="video/mp4" />
         </video>
       </div>
@@ -110,6 +159,10 @@ const SeeHistory = () => {
   }
 
   const renderInfo = () => {
+    if (loading) {
+      return <p>Loading...</p>
+    }
+  
     return (
       <h3>
         Id: {submission.id} | {submission.created_at} | {user.weight}lbs
@@ -155,8 +208,9 @@ const SeeHistory = () => {
           <>
               <Row>
                 <Col>
-                  <h1>VIDEO</h1>
                   {renderVideo()}
+                  <h1>comments</h1>
+                  {renderComments()}
                 </Col>
                 <Col>
                   <div>
@@ -184,7 +238,7 @@ const SeeHistory = () => {
                             height={300}
                             endMessage={
                           <p style={{ textAlign: "center" }}>
-                            <b>submissions.length = {submissions.length} dataLength= {dataLength}</b>
+                            {/* <b>submissions.length = {submissions.length} dataLength= {dataLength}</b> */}
                           </p>
                             }
                         >
@@ -202,7 +256,12 @@ const SeeHistory = () => {
         )
       }
     }
+  if(loading){
+    <h1>loading...</h1>
+  }
+
   return saveTheRender();
+  
 };
 
 export default SeeHistory;
