@@ -100,3 +100,37 @@ color: white;
 background-color:black
 `
 
+export const CategoryButtonGroup = styled.div`
+display:flex;
+flex-direction:row;
+flex-wrap:no-wrap;
+border: solid 1px black;
+align-items: center;
+margin-top: 15px;
+
+`
+
+export const CategoryButton = styled.div`
+flex-grow: 1;
+
+`
+export const YO = styled.button`
+
+border: solid 1px black;
+min-width: 80px;
+min-height: 60px;
+padding: 5px;
+Background-color: ${props => props.active ? "black" : "white"};
+Color: ${props => props.active ? "white" : "black"};
+text-align: center;
+justify-self: center;
+cursor: pointer;
+
+
+${CategoryButton}:hover & {
+  Background-color: black;
+  Color: White
+}
+`
+
+
