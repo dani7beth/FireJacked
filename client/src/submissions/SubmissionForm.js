@@ -10,8 +10,9 @@ const SubmissionForm = ({
   editCalledSubmission,
   handleHide,
   handleEditHide,
+  level_id
 }) => {
-  const { level_id } = useParams();
+  // const { level_id } = useParams();
   const [alert, setAlert] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -158,11 +159,12 @@ const SubmissionForm = ({
           )}
         </div>
 
-        <Form.Label>Name</Form.Label>
+        <Form.Label>Notes</Form.Label>
         <Form.Control
           name="name"
           value={submission.name}
           onChange={handleChange}
+          as="textarea"
         />
         <Button type="submit">submit</Button>
         <Button variant="danger" onClick={whichHide}>

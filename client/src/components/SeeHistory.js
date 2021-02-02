@@ -7,6 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import Levels from "./Levels";
 import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
+import Submission from "../submissions/Submission";
 
 const SeeHistory = () => {
 
@@ -16,13 +17,14 @@ const SeeHistory = () => {
   const [exercise, setExercise] = useState({})
   const [levels, setLevels] = useState([])
   const [submissions, setSubmissions] = useState([])
-  const [submission, setSubmission] = useState({})
+  const [submission, setSubmission] = useState({value:"empty"})
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [dataLength, setDataLength] = useState(0)
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true)
+  const [loadingComments, setLoadingComments] = useState(true)
 
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
@@ -38,25 +40,26 @@ const SeeHistory = () => {
   }, []);
 
   // useEffect(()=>{
-  //   if (submissions) {
+  //   if (submission && level_id) {
   //     seeSubmission()
   //   }
   //   setLoading(false)
-  // },[submissions])
+  // },[level_id && submission])
 
-  const seeSubmission = () => {
-    // debugger
-    let x = submissions.filter((x)=>x.level_id === parseInt(level_id))
-    console.log(level_id)
-    console.log(x)
-    // setSubmission(x)
-    // setLoading(false)
-  }
+  // const seeSubmission = () => {
+  //   // debugger
+  //   let x = submissions.filter((x)=>x.level_id === parseInt(level_id))
+  //   console.log(level_id)
+  //   console.log(x)
+  //   setSubmission(x)
+  //   // setLoading(false)
+  // }
+  
   useEffect(() => {
-    if (submission){
+    if (submissions.length > 0){
       getComments()
     }
-  }, [submission])
+  }, [submissions])
 
  
 
@@ -82,7 +85,7 @@ const SeeHistory = () => {
   }
 
   const userHistorySubmissions = () => {
-    
+    // debugger
     Axios.get(`/api/user_see_history/?exercise_id=${exercise_id}`)
     .then((response) => {
       console.log(`User ${user.id}'s submissions:`, response.data)
@@ -101,11 +104,13 @@ const SeeHistory = () => {
   }
 
   const getComments = () => {
-    Axios.get(`/api/${submission.id}/see_comments`)
+    // debugger
+    Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission}/see_comments`)
     .then((response) => {
       console.log('COMMENTS')
       console.log(submission.id, response.data)
       setComments(response.data)
+      setLoadingComments(false)
     })
     .catch((err) => {
       console.log(err)
@@ -113,6 +118,10 @@ const SeeHistory = () => {
   }
 
   const renderComments = () => {
+    if (loadingComments) {
+      <h1>Loading...</h1>
+    }
+    
     return comments.map((comment) => {
       return <h4>{comment.admin_name}: {comment.body}</h4>
     })
@@ -151,7 +160,7 @@ const SeeHistory = () => {
     console.log(submission.id, ':', submission.video)
     return (
       <div key={submission.video}>
-        <video style={{height:'450px', width:'620px'}} controls={true} class="embed-responsive-item">
+        <video style={{height:'450px', width:'620px'}} controls={true} className="embed-responsive-item">
           <source src={submission.video} type="video/mp4" />
         </video>
       </div>
@@ -197,7 +206,7 @@ const SeeHistory = () => {
           <>
             <h1>Oops! Looks like you haven’t made any submissions for this exercise. Go make one and then come back!</h1>
             <h1 style={{textAlign:'center'}}>
-              <a class='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
+              <a className='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
               <Button variant='primary' onClick={handleShow}>Submissions</Button>
             </h1>
           {modal()}
@@ -247,7 +256,7 @@ const SeeHistory = () => {
                     </BoxUserHistory>
                   </div>
                   <br />
-                  <a class='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
+                  <a className='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
                   <Button variant='primary' onClick={handleShow}>Submissions</Button>
                 </Col>
               </Row>
