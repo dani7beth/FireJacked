@@ -28,8 +28,7 @@ import SeeHistory from "./components/SeeHistory";
 function App() {
 
   return (
-    <>
-      <Container>
+    <div className='App'>
       <FetchUserAdmin>
       <NavBar />
         <Switch>
@@ -57,8 +56,7 @@ function App() {
           <Route component={NoMatch} />
         </Switch>
       </FetchUserAdmin>
-      </Container>
-    </>
+    </div>
   );
 }
 
