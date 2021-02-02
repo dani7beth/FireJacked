@@ -5,6 +5,7 @@ import { CategoryButton, CategoryButtonGroup, YO } from '../components/Styles';
 const FilterByCategory = ({dataByCategory}) => {
   const [categories, setCategories] = useState([])
   const [active, setActive] = useState(true)
+  const [selectedCat, setSelectedCat] = useState({})
 
   useEffect(() => {
     getCategories()
@@ -21,12 +22,30 @@ const FilterByCategory = ({dataByCategory}) => {
   }
 
   const renderCategories = () => {
+
     return categories.map(c => {
-      return <CategoryComp c= {c} dataByCategory={dataByCategory}/>
-    })
+
+      // return <CategoryComp c = {c} dataByCategory={dataByCategory} setSelectedCat={setSelectedCat} selectedCat={selectedCat} categories={categories}/>
+      return (
+        <CategoryButton 
+        onClick={() => 
+          {
+            dataByCategory(`${c}`)
+            setSelectedCat(c)
+          }
+          }
+          >
+            <YO 
+            selected = {selectedCat}
+            category = {c}
+            >{c}</YO>
+        </CategoryButton>
+        )
+      }
+    )
   }
 
-  return (
+  {return (
     <>
       <CategoryButtonGroup size="sm" className="mb-2">
         {renderCategories()}
@@ -35,26 +54,8 @@ const FilterByCategory = ({dataByCategory}) => {
         </CategoryButton>
       </CategoryButtonGroup>
     </>
-  )
+  )}
 }
 
 export default FilterByCategory;
 
-const CategoryComp = ({c, dataByCategory}) => {
-  const [selected, setSelected] = useState(false)
-
-
-  return (
-    <CategoryButton onClick={() => 
-      {
-        dataByCategory(`${c}`)
-        setSelected(!selected)
-      }
-      }
-      >
-        <YO 
-        active = {selected}
-        >{c}</YO>
-      </CategoryButton>
-  )
-}
