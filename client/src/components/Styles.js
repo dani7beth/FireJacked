@@ -40,15 +40,8 @@ height 300px;
 border
 `
 
-export const BoxAdminExercises = styled.div`
+export const BoxAdminExercises = styled(BoxMain)`
 height: 500px;
-width: 100%;
-border: solid;
-overflow:auto;
-background:#f0f8ff;
-margin:auto;
-margin-top:50px;
-padding:10px
 `
 export const BoxUserHistory = styled.div`
 height: 300px;
@@ -86,6 +79,8 @@ margin-bottom: 10px;
 border-radius: 8px;
 padding: 10px;
 `
+
+
 
 export const UserExerciseLevelLeft = styled.div`
 order: 1;
@@ -150,6 +145,26 @@ padding: 5px;
 
 export const ButtonSeeExercise = styled(ButtonMain)`
 
+`
+
+export const AdminExerciseContainerLeft = styled.div`
+order: 1;
+flex-grow: 6;
+`
+
+export const AdminExerciseContainerMiddle = styled.div`
+order: 2;
+flex-grow: 2;
+align-self:center;
+display:flex;
+flex-direction: column;
+flex-wrap: wrap;
+align-items: stretch;
+`
+
+export const AdminExerciseContainerRight = styled.div`
+order: 3;
+flex-grow: 1;
 `
 
 

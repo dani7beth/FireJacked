@@ -3,7 +3,8 @@ import { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
-import { LevelsBox } from "../components/Styles";
+import { AdminExerciseContainerRight, LevelsBox, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle } from "../components/Styles";
+
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
   const [ exercise, setExercise] = useState()
@@ -29,26 +30,44 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
 
   return (
     <div>
-      <LevelsBox>
-        <Link to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
-          <h5>{exerciseProp.activity} - {exerciseProp.exercise_id}</h5>
-        </Link>
+      <UserExerciseLevelContainer>
 
-        <Button variant="primary" onClick={handleEditShow}>
-        Edit Exercise
-      </Button>
-      <Modal show={showEdit} onHide={handleEditHide}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit this exericise</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp} handleEditHide={handleEditHide} editExercises={editExercises} />
-        </Modal.Body>
-      </Modal>
+        {/* Child1 */}
+        <AdminExerciseContainerLeft>
+          <Link to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
+            <h5>{exerciseProp.activity} - {exerciseProp.exercise_id}</h5>
+          </Link>
+        </AdminExerciseContainerLeft>
 
-      <Button variant="danger" onClick={handleDeleteShow}>
-        Delete Exercise
-      </Button>
+         {/* Child 2 */}
+        <AdminExerciseContainerMiddle>
+          <Button variant="primary" onClick={handleEditShow}>
+          Edit Exercise
+          </Button>
+          <Button variant="danger" onClick={handleDeleteShow}>
+            Delete Exercise
+          </Button>
+        </AdminExerciseContainerMiddle>
+
+        {/* Childe 3 */}
+        <AdminExerciseContainerRight>
+          <button onClick={() => setShowLevel(!showLevel)}>{showLevel ? "Expand" : "Collapse"}</button>
+          <br />
+          <br />
+          {showLevel ? "" : <Levels exerciseID={exerciseProp.exercise_id} />}
+        </AdminExerciseContainerRight>
+
+        {/* Modals */}
+        <Modal show={showEdit} onHide={handleEditHide}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit this exericise</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp} handleEditHide={handleEditHide} editExercises={editExercises} />
+          </Modal.Body>
+        </Modal>
+
+     
       <Modal show={showDelete} onHide={handleDeleteHide}>
         <Modal.Header closeButton>
           <Modal.Title>Delete this exericise</Modal.Title>
@@ -66,19 +85,13 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
           </Button>
         </Modal.Footer>
       </Modal>
+      
       <br/>
       <br/>
       {/* <Levels /> */}
-      <button onClick={()=>setShowLevel(!showLevel)}>{showLevel ? "Expand" : "Collapse"}</button>
-        <br/>
-        <br/>
-      {showLevel ? "" : <Levels exerciseID = {exerciseProp.exercise_id}/>}
       
-
-      
-      
-      
-      </LevelsBox>
+    
+      </UserExerciseLevelContainer>
     </div>
   )
 }

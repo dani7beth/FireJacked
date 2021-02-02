@@ -20,10 +20,12 @@ const AUserSubmission = ({name, status, id, created_at, user_id}) => {
       console.log(error)
     }
   }
+
   return (
     <>
       <div>
         <h1>{name}</h1>
+        <img src={user.image} />
         <p>Submitted by {user.first_name} {user.last_name}</p>
         <p>Submitted at {created_at}</p>
         <p>{status}</p>
