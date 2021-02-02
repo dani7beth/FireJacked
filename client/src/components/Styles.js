@@ -45,14 +45,14 @@ margin-top: 23px;
 margin-bottom: 65px;
 height: 200px;
 width: 90%;
-border: 2px solid black;
+border: 2px solid #d6d6d6;
 border-radius: 8px;
 `
 
 export const NateSeeHistorySubsContainer = styled.div`
 height: 300px;
 width: 90%;
-border: 2px solid black;
+border: 2px solid #d6d6d6;
 border-radius: 8px;
 `
 export const BoxCustomAllExercises = styled(BoxMain)`

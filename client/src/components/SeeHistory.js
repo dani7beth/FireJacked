@@ -2,7 +2,7 @@ import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
@@ -105,6 +105,11 @@ const SeeHistory = () => {
     })
   }
 
+  const submissionTimeStamp = () => {
+    let date = new Date(submission.created_at);
+    return <>{submission && date.toLocaleDateString("en-US")}</>;
+  };
+
   const getComments = () => {
     // debugger
     Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission.id}/see_comments`)
@@ -183,29 +188,30 @@ const SeeHistory = () => {
     return submissions.map((submission) => {
       return (
         <>
-        <ShowLevel 
-          key={`submission-${submission.id}`} {...submission} 
-          submission = {submission} 
-          renderClickedSubmission={renderClickedSubmission} 
-          deleteSubmission={deleteSubmission} 
-          editCalledSubmission={editCalledSubmission}/>
+          <ShowLevel 
+            key={`submission-${submission.id}`} {...submission} 
+            submission = {submission} 
+            renderClickedSubmission={renderClickedSubmission} 
+            deleteSubmission={deleteSubmission} 
+            editCalledSubmission={editCalledSubmission}
+            submissionTimeStamp={submissionTimeStamp}
+          />
         </>
       )
     })
   }
 
   const renderClickedSubmission = (newSubmission) => {
-    // renderVideo(newSubmission);
+    console.log(newSubmission);
     setSubmission(newSubmission)
   }
 
   const renderVideo = () => {
-    console.log(submission.id, ':', submission.video)
     return (
       <div key={submission.video}>
-        <video style={{ width:'720px', marginLeft:'45px', marginTop:'23px', borderRadius:'8px'}} controls={true} className="embed-responsive-item">
+        <Video controls={true} className="embed-responsive-item">
           <source src={submission.video} type="video/mp4" />
-        </video>
+        </Video>
       </div>
     )
   }
@@ -217,7 +223,7 @@ const SeeHistory = () => {
   
     return (
       <Info>
-        01-02-date | {user.weight}lbs | {submission.id}
+        {submissionTimeStamp()} | {exercise.category}
       </Info>
     );
   };
@@ -241,6 +247,30 @@ const SeeHistory = () => {
         <Modal.Body>{renderLevels()}</Modal.Body>
       </Modal>
     )
+  }
+
+  
+
+  const renderStatus = () => {
+    if (submission.status === 'Approved'){
+      return (
+        <StatusContainerApproved>
+          <Status>{submission.status}</Status>
+        </StatusContainerApproved>
+      )
+    } if(submission.status === 'Pending'){
+      return (
+        <StatusContainerPending>
+          <Status>{submission.status}</Status>
+         </StatusContainerPending>
+      )
+    }else {
+      return (
+        <StatusContainerFailed>
+          <Status>{submission.status}</Status>
+        </StatusContainerFailed>
+      )
+    }
   }
 
   const saveTheRender = () => {
@@ -271,9 +301,11 @@ const SeeHistory = () => {
                 </Col>
                 <Col>
                 <NateSeeHistoryContainer>
-                  <ExerciseTitle>{exercise.activity}</ExerciseTitle>
+                    <TitleLink to={`/showexercise/${exercise_id}`}>
+                      <ExerciseTitle>{exercise.activity}</ExerciseTitle>
+                    </TitleLink>
                   {renderInfo()}
-                  <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>{submission.status}</h3>
+                  {renderStatus()}
                 </NateSeeHistoryContainer>
                   <NateSeeHistorySubsContainer>
                     <h5 style={{padding:'20px', textDecoration:'underline'}}>History</h5>
@@ -281,9 +313,6 @@ const SeeHistory = () => {
                           {renderSubmissions()}
                       </NateSeeHistorySubs>
                   </NateSeeHistorySubsContainer>
-                  <br />
-                  <a className='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
-                  <Button variant='primary' onClick={handleShow}>Submissions</Button>
                 </Col>
               </Row>
               {modal()}
@@ -305,11 +334,58 @@ export const Title = styled.h1`
   text-align:center;
   font-family: Roboto;
 `
+export const TitleLink = styled(Link)`
+  color:black;
+`
 
 export const ExerciseTitle = styled.h1`
-  padding:10px;
+  padding-top:20px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:10px;
 `
 
 export const Info = styled.h4`
   padding-left:10px;
+`
+
+export const Status = styled.p`
+  padding-top:12px;
+  padding-bottom:0px;
+`
+export const StatusContainerApproved = styled.div`
+  border:1px solid #00A86B;
+  border-radius:10px;
+  background-color: #00A86B;
+  margin-left: 8px;
+  text-align: center;
+  width: 25%;
+  color: #FFFFFF;
+`
+
+export const StatusContainerPending = styled.div`
+  border:1px solid #FEBD4A;
+  border-radius:10px;
+  background-color: #FEBD4A;
+  margin-left: 8px;
+  text-align: center;
+  width: 25%;
+  color: #FFFFFF;
+`
+
+export const StatusContainerFailed = styled.div`
+  border:1px solid #F08080;
+  border-radius:10px;
+  background-color: #F08080;
+  margin-left: 8px;
+  text-align: center;
+  width: 25%;
+  color: #FFFFFF;
+`
+
+export const Video = styled.video`
+  width:720px;
+  margin-left:45px; 
+  margin-top:23px;
+  border-radius:8px;
 `

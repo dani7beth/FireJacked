@@ -6,7 +6,18 @@ import { Modal, Button } from "react-bootstrap";
 import styled from 'styled-components';
 
 
-const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission, editCalledSubmission, deleteSubmission}) => {
+const ShowLevel = (
+      {
+        id, 
+        level_id, 
+        status, 
+        submission, 
+        renderClickedSubmission, 
+        editCalledSubmission, 
+        deleteSubmission,
+        submissionTimeStamp
+      }
+  ) => {
 
   const [level, setLevel] = useState({})
   const [levelLoading, setLevelLoading] = useState(true)
@@ -46,7 +57,7 @@ const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission, e
     <>
     <StyledSub onClick={()=>{renderClickedSubmission(submission)}}>
       <p>
-         01-23-date | {level.name} | {level.measurement ==="Bodyweight" ? `${outcome} ${level.metric}` : ""} | {submission.status}
+         {submissionTimeStamp()} | {level.name} | {level.measurement ==="Bodyweight" ? `${outcome} ${level.metric}` : ""} | {submission.status}
       </p>
       <p>
         Timeframe: {duration}{" | "}
@@ -96,5 +107,11 @@ const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission, e
 export default ShowLevel;
 
 export const StyledSub = styled.div`
-  padding-bottom:20px;
+  padding-top:10px;
+  padding-bottom:10px;
+  &:hover {
+    font-size:1.02rem;
+    transition:0.2s;
+    cursor:pointer;
+  }
 `
