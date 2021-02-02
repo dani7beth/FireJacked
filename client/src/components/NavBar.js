@@ -101,7 +101,7 @@ export default (props) => {
 export const BigText = styled.div`
 color:white;
 font-size:1.4em;
-font-family:Impact, fantasy
+font-family:Roboto, "medium capped"
 `
 
 
@@ -121,9 +121,10 @@ border-radius:50%;
 
 
 export const StyledDrop = styled(NavDropdown)`
+.dropdown-menu{
+  max-width: 10px;
+}
 .dropdown-menu.show{
-  padding:0px;
-  width: 100px;
 }
 .dropdown-item{
   stuff here

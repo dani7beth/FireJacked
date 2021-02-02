@@ -7,6 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import Levels from "./Levels";
 import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
+import styled from 'styled-components'
 
 const SeeHistory = () => {
   const [exercise, setExercise] = useState({})
@@ -202,7 +203,7 @@ const SeeHistory = () => {
                   <div>
                     <h5>History</h5>
                     <BoxUserHistory>
-                      <InfiniteScroll
+                      <StyledScroll
                             dataLength={submissions.length}
                             next={() => loadMore()}
                             hasMore={submissions.length === dataLength ? false : true}
@@ -215,7 +216,7 @@ const SeeHistory = () => {
                             }
                         >
                             {renderSubmissions()}
-                      </InfiniteScroll>
+                      </StyledScroll>
                     </BoxUserHistory>
                   </div>
                   <br />
@@ -232,3 +233,9 @@ const SeeHistory = () => {
 };
 
 export default SeeHistory;
+
+export const StyledScroll = styled(InfiniteScroll)`
+  .infinite-scroll-component.sc-cxFLnm.gLcLRL{
+  border: 10px solid red,
+  }
+`
