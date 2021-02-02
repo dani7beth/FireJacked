@@ -1,10 +1,10 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider"
 import { Button } from "react-bootstrap"
 
 const AllExercise = ({activity, exercise_id, category, measurement, multiplier,timeframe,metric,reps,sets,user_status,level_name, level_id}) => {
-  const [showLevel, setShowLevel] = useState(true)
+  // const [showLevel, setShowLevel] = useState(true)
 
   const { user } = useContext(AuthContext)
 

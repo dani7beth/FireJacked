@@ -3,9 +3,9 @@ import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import axios from 'axios';
 
-const AUserSubmission = ({name, status, id, created_at, user_id, level_id}) => {
+const AUserSubmission = ({name, status, id, created_at, user_id}) => {
   const [user, setUser] = useState({})
-  const [level, setLevel] = useState({})
+  // const [level, setLevel] = useState({})
   
   useEffect(() => {
     getUser()

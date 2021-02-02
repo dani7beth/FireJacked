@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from 'styled-components'
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";

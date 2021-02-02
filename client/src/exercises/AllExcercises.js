@@ -1,14 +1,10 @@
 import Axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
 // import InfiniteScroll from 'react-infinite-scroller';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import styled from 'styled-components'
-import { Box, BoxCustom } from "../components/Styles";
+import { BoxCustom } from "../components/Styles";
 import AllExercise from "./AllExercise";
-import Exercises from "./Exercises";
 import FilterByCategory from './FilterByCategory';
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const AllExercises = () => {
   const [exercises, setExercises] = useState([])
