@@ -27,13 +27,12 @@ const Exercises = () => {
   }, []);
 
   const getLevels = () => {
-   return console.log(GlobalLevels.map((x) => x.level_name))
+    return console.log(GlobalLevels.map((x) => x.level_name))
   }
 
   const getExercises = async (searchText, currentCategory) => {
     try {
       let res = await axios.get(`/api/exercises/?SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
-      console.log(res.data)
       let exercisesX = normalizeData(res.data.data)
       setExercises(exercisesX)
       setTotalPages(res.data.total_pages)
@@ -46,8 +45,7 @@ const Exercises = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setPage(1)
-    getExercises(searchText,currentCategory)
-    // renderExercisesWithLevels()
+    getExercises(searchText, currentCategory)
   }
 
   const handleClearSearch = () => {
@@ -61,8 +59,7 @@ const Exercises = () => {
     try {
       let res = await axios.get(`/api/exercises?page=${pageX}&SearchText=${searchText ? searchText : ""}&category=${currentCategory ? currentCategory : ""}`)
       let exercisesX = normalizeData(res.data.data)
-      setExercises([...exercises,...exercisesX])
-      // setExercises([...exercises, ...res.data.data])
+      setExercises([...exercises, ...exercisesX])
       setPage(pageX)
     } catch (error) {
       console.log(error)
@@ -76,26 +73,14 @@ const Exercises = () => {
     }
   }
 
-  // loop through an array of levels 
-  // if (level.level_name === "initiated" && submission.status !== "Approved") {
-  //   return (level) 
-  // }
-  // if (level.level_name === "committed" && submission.status !== "Approved"){
-  //   return level
-  // }
-  // if (level.level_name === "proven" && submission.status !== "Approved"){
-  //   return level
-  // }
-  // return
 
   const normalizeData = (arrayOfObjects) => {
     let key = "exercise_id"
 
-    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id, level_id: item.level_id }])).values()]
+    const exercises = [...new Map(arrayOfObjects.map(item => [item[key], { category: item.category, activity: item.activity, exercise_id: item.exercise_id }])).values()]
 
     const formattedExercises = exercises.map((x) => {
-      // return { ...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
-      return {levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
+      return { ...x, levels: arrayOfObjects.filter(y => y.exercise_id === x.exercise_id) }
     })
 
     console.log(formattedExercises)
