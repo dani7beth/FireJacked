@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
 import { Nav, Navbar, NavbarBrand, NavDropdown } from "react-bootstrap";
-import brandLogo from "/Users/danidona/Desktop/DPL/MAP/client/src/Logos/TransparentBackground/FirejackedFeelTheBurnTransparentBackground1x/WhiteTextBlackBackground.png";
+import brandLogo from "../Logos/TransparentBackground/FirejackedFeelTheBurnTransparentBackground1x/WhiteTextBlackBackground.png";
 
 export default (props) => {
   const history = useHistory();
