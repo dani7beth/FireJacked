@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import InfiniteScroll from 'react-infinite-scroller';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components'
-import { Box, BoxCustom } from "../components/Styles";
+import { Box, BoxCustom, BoxCustomAllExercises } from "../components/Styles";
 import AllExercise from "./AllExercise";
 import Exercises from "./Exercises";
 import FilterByCategory from './FilterByCategory';
@@ -150,7 +150,7 @@ const AllExercises = () => {
       </Form>
       
       <FilterByCategory dataByCategory={dataByCategory}/>
-      <BoxCustom>
+      <BoxCustomAllExercises>
         {/* <InfiniteScroll
           dataLength={exercises.length}
           next={()=>loadMore()}
@@ -165,7 +165,7 @@ const AllExercises = () => {
         > */}
           {renderExercisesWithLevels()}
         {/* </InfiniteScroll> */}
-      </BoxCustom>
+      </BoxCustomAllExercises>
     </>
   )
 }
