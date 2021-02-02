@@ -138,7 +138,6 @@ const Submissions = () => {
           </Col>
           <hr />
       </Row>  
-          {loading ? (<><Spinner animation="border"></Spinner> <p>Loading...</p></>): ''}
           {renderSubmissions()}
 
 
