@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
@@ -8,6 +8,8 @@ import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
 import styled from 'styled-components'
 import Submission from "../submissions/Submission";
+import { NateSeeHistorySubs, NateSeeHistoryContainer, NateSeeHistorySubsContainer } from "../components/Styles";
+
 
 const SeeHistory = () => {
 
@@ -105,7 +107,7 @@ const SeeHistory = () => {
 
   const getComments = () => {
     // debugger
-    Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission}/see_comments`)
+    Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission.id}/see_comments`)
     .then((response) => {
       console.log('COMMENTS')
       console.log(submission.id, response.data)
@@ -160,7 +162,7 @@ const SeeHistory = () => {
     console.log(submission.id, ':', submission.video)
     return (
       <div key={submission.video}>
-        <video style={{height:'450px', width:'620px'}} controls={true} className="embed-responsive-item">
+        <video style={{ width:'720px', marginLeft:'45px', marginTop:'23px', borderRadius:'8px'}} controls={true} className="embed-responsive-item">
           <source src={submission.video} type="video/mp4" />
         </video>
       </div>
@@ -173,9 +175,9 @@ const SeeHistory = () => {
     }
   
     return (
-      <h3>
-        Id: {submission.id} | {submission.created_at} | {user.weight}lbs
-      </h3>
+      <Info>
+        01-02-date | {user.weight}lbs | {submission.id}
+      </Info>
     );
   };
 
@@ -214,7 +216,12 @@ const SeeHistory = () => {
         )
     } else {
         return (
-          <>
+          <div>
+            <Row>
+              <Col>
+                <Title>{user.first_name} {user.last_name}</Title>
+              </Col>
+            </Row>
               <Row>
                 <Col>
                   {renderVideo()}
@@ -222,46 +229,24 @@ const SeeHistory = () => {
                   {renderComments()}
                 </Col>
                 <Col>
-                  <div>
-                    <h1>{exercise.activity}</h1>
-                    {/* <p>level?</p> */} 
-                  </div>
-                  <div style={{paddingBottom:'60px', paddingTop:'20px'}}>
-                    {renderInfo()}
-                    <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>{submission.status}</h3>
-                    {/* 
-                        <h3 style={{border:'2px solid green', borderRadius:'20%', width:'110px'}}>Completed</h3>
-                        <h3 style={{border:'2px solid red', borderRadius:'20%', width:'110px'}}>Failed</h3> 
-                        how do I make this border stick just around 'Pending' or whatever will be written there?
-                        We should make so if it's completed it's green, pending, is orange, and failed is red.
-                    */}
-                  </div>
-                  <div>
-                    <h5>History</h5>
-                    <BoxUserHistory>
-                      <StyledScroll
-                            dataLength={submissions.length}
-                            next={() => loadMore()}
-                            hasMore={submissions.length === dataLength ? false : true}
-                            loader={<h4>Loading... submissions.length = {submissions.length} dataLength= {dataLength} </h4>}
-                            height={300}
-                            endMessage={
-                          <p style={{ textAlign: "center" }}>
-                            {/* <b>submissions.length = {submissions.length} dataLength= {dataLength}</b> */}
-                          </p>
-                            }
-                        >
-                            {renderSubmissions()}
-                      </StyledScroll>
-                    </BoxUserHistory>
-                  </div>
+                <NateSeeHistoryContainer>
+                  <ExerciseTitle>{exercise.activity}</ExerciseTitle>
+                  {renderInfo()}
+                  <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>{submission.status}</h3>
+                </NateSeeHistoryContainer>
+                  <NateSeeHistorySubsContainer>
+                    <h5 style={{padding:'20px', textDecoration:'underline'}}>History</h5>
+                      <NateSeeHistorySubs>
+                          {renderSubmissions()}
+                      </NateSeeHistorySubs>
+                  </NateSeeHistorySubsContainer>
                   <br />
                   <a className='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
                   <Button variant='primary' onClick={handleShow}>Submissions</Button>
                 </Col>
               </Row>
               {modal()}
-          </>
+          </div>
         )
       }
     }
@@ -275,8 +260,15 @@ const SeeHistory = () => {
 
 export default SeeHistory;
 
-export const StyledScroll = styled(InfiniteScroll)`
-  .infinite-scroll-component.sc-cxFLnm.gLcLRL{
-  border: 10px solid red,
-  }
+export const Title = styled.h1`
+  text-align:center;
+  font-family: Roboto;
+`
+
+export const ExerciseTitle = styled.h1`
+  padding:10px;
+`
+
+export const Info = styled.h4`
+  padding-left:10px;
 `

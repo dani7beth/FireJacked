@@ -32,6 +32,31 @@ margin-top:10px;
 padding:10px
 `
 
+export const NateSeeHistorySubs = styled.div`
+height: 226px;
+width: 100%;
+overflow:auto;
+margin:auto;
+margin-top:10px;
+padding:10px
+`
+
+export const NateSeeHistoryContainer = styled.div`
+margin-top: 23px;
+margin-bottom: 65px;
+height: 200px;
+width: 90%;
+border: 2px solid black;
+border-radius: 8px;
+`
+
+export const NateSeeHistorySubsContainer = styled.div`
+height: 300px;
+width: 90%;
+border: 2px solid black;
+border-radius: 8px;
+`
+
 export const BoxAdminExercises = styled.div`
 height: 500px;
 width: 100%;
@@ -120,8 +145,8 @@ border: solid 1px black;
 min-width: 80px;
 min-height: 60px;
 padding: 5px;
-Background-color: ${props => props.active ? "black" : "white"};
-Color: ${props => props.active ? "white" : "black"};
+Background-color: ${props => props.selected === props.category ? "black" : "white"};
+Color: ${props => props.selected === props.category ? "white" : "black"};
 text-align: center;
 justify-self: center;
 cursor: pointer;
