@@ -8,8 +8,8 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :exercises
-  has_many :comments
+  has_many :exercises, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :submissions, through: :comments
 
  

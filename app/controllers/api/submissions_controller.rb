@@ -42,6 +42,7 @@ class Api::SubmissionsController < ApplicationController
   end
 
   def create 
+    # binding.pry
     file = params[:video_upload]
     if file
       begin

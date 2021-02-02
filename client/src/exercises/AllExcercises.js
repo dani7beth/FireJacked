@@ -71,7 +71,7 @@ const AllExercises = () => {
   const renderExercisesWithLevels = () => {
     return exercises.map(x => {
       return (
-        <AllExercise key={x.level_id} {...x}/>
+        <AllExercise key={x.level_id} {...x} addSubmission={addSubmission}/>
       )
     })
   }
@@ -94,6 +94,10 @@ const AllExercises = () => {
     let filteredExers = filteredExerOne.filter((str) => str.category.indexOf(category) > -1)
     setExercises(filteredExers)
     console.log(searchText)
+  }
+
+  const addSubmission=(x)=>{
+    getAllExercises()
   }
 
 
