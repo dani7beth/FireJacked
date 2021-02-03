@@ -5,6 +5,8 @@ import AllExercises from "../exercises/AllExcercises";
 import UserEditForm from "./UserEditForm";
 import UserImageForm from "./UserImageForm";
 import TrainerIndex from "./TrainerIndex";
+import { UserInfoDiv, Dashboard, DashboardCenter, DashboardRightSideBar, DashboardLeftSideBar } from "../components/Styles";
+import { MdEdit } from "react-icons/md";
 
 const UserDash = () => {
   const { user } = useContext(AuthContext);
@@ -16,6 +18,24 @@ const UserDash = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const userInfo = () => {
+    return(
+    <UserInfoDiv> 
+      <img src={user.image} onClick={handleImage} style={{ borderRadius: "50%", width: '150px', margin:"auto" }} />
+      <br></br>
+      <div>
+        <h2>
+          {user.first_name} {user.last_name}
+        </h2>
+        <h4>Weight: {user.weight} lbs</h4>
+        <h4>Height: {user.height}"</h4>
+        <p>Bio: {user.about}</p>
+        <MdEdit variant="primary" onClick={handleShow} style={{fontSize:"24px"}}/>
+      </div>
+    </UserInfoDiv>
+    )
+  }
+
   
   const renderUserInfo = () => {
     if (user) {
@@ -23,34 +43,22 @@ const UserDash = () => {
         <>
         {(user.first_name == null || user.last_name == null || user.height == null || user.weight == null || user.age == null) ?
             <Alert variant='danger'>Fill out information</Alert> : ''}
-          <Row>
-            <Col xs={2}>
-              <img src={user.image} style={{ borderRadius: "50%", width: '200px' }} />
-              <Button onClick={handleImage}>Update Image</Button>
-              <div>
-                <h4>
-                  Name: {user.first_name} {user.last_name}
-                </h4>
-                <h4>Weight: {user.weight}</h4>
-                <h4>Height: {user.height}</h4>
-                <h4>Bio: {user.about}</h4>
-                <Button variant="primary" onClick={handleShow}>
-                  Update User Info
-                </Button>
-              </div>
-            </Col>
-            <Col xs={8}>
+          <Dashboard>
+            <DashboardLeftSideBar>
+              {userInfo()}
+            </DashboardLeftSideBar>
+            <DashboardCenter>
               <AllExercises />
-            </Col>
-            <Col xs={2}>
+            </DashboardCenter>
+            <DashboardRightSideBar>
               <TrainerIndex />
-            </Col>
-          </Row>
+            </DashboardRightSideBar>
+          </Dashboard>
 
 
           <Modal show={showImage} onHide={handleImageClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Update your Picture </Modal.Title>
+              <Modal.Title> Update your Picture </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <UserImageForm handleImageHide={handleImageClose} />
@@ -64,7 +72,7 @@ const UserDash = () => {
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Edit </Modal.Title>
+              <Modal.Title> Edit </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <UserEditForm hide={handleClose} />
