@@ -66,8 +66,12 @@ border
 
 export const BoxAdminExercises = styled(BoxMain)`
 height: 450px;
-
 `
+
+export const BoxAdminSubmissions = styled(BoxMain)`
+height: 600px;
+`
+
 export const BoxUserHistory = styled.div`
 height: 300px;
 width: 100%;
@@ -199,10 +203,12 @@ flex-direction: row;
 flex-wrap: wrap;
 justify-content: flex-start;
 align-items: center;
-border: solid 1px black;
+border: solid 1px #D6D6D6;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 margin-bottom: 10px;
 border-radius: 15px;
 padding: 0px;
+margin: 15px auto;
 `
 export const SubmissionContainerLeft = styled.div`
 background: black;
