@@ -47,8 +47,8 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
 
         {/* Childe 3 */}
         <AdminExerciseContainerRight>
-          <MdEdit onClick={handleEditShow} style={{fontSize: "24px"}}/>
-          <MdDelete onClick={handleDeleteShow} style={{fontSize: "24px"}}/>
+          <MdEdit onClick={handleEditShow} style={{fontSize: "24px",cursor: "pointer"}}/>
+          <MdDelete onClick={handleDeleteShow} style={{fontSize: "24px", cursor: "pointer"}}/>
           <MdUnfoldMore onClick={() => setShowLevel(!showLevel)} style={{fontSize: "24px"}}/>
           {/* {showLevel ? {MdUnfoldMore} : {MdUnfoldLess}} */}
           

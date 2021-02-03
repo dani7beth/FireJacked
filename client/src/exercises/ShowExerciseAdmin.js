@@ -17,8 +17,13 @@ const ShowExerciseAdmin = () => {
 
   useEffect(() => {
     getExercise();
-    exerciseSubmissions();
   }, []);
+
+  useEffect(()=>{
+    if(exercise) {
+      exerciseSubmissions();
+    }
+  }, [exercise])
 
   const getExercise = async () => {
     try {
@@ -31,9 +36,9 @@ const ShowExerciseAdmin = () => {
   };
 
   const exerciseSubmissions = () => {
-    Axios.get(`/api/exercise_subs/?exercise_id=${exercise_id}`)
+    Axios.get(`/api/exercise_subs/${exercise_id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log('subs', response.data);
         setSubmissions(response.data);
       })
       .catch((err) => {
@@ -56,7 +61,7 @@ const ShowExerciseAdmin = () => {
             <p>{submission.user_first_name}</p>
             <p>
               {submission.created_at} -{" "}
-              {submission.completed ? "approved" : "not approved"}
+              {submission.status}
             </p>
             {/* <p>updated at: {submission.updated_at}</p> */}
             <p></p>

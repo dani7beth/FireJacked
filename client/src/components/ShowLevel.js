@@ -23,7 +23,6 @@ const ShowLevel = (
   const [level, setLevel] = useState({})
   const [levelLoading, setLevelLoading] = useState(true)
   const { user } = useContext(AuthContext)
-
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const handleEditShow = () => setShowEdit(true);

@@ -402,7 +402,7 @@ export const CommentsContainer = styled.div`
   height: 182px;
   width: 720px;
   border: 2px solid #d6d6d6;
-  border-radius: 8px;
+  border-radius: 10px;
 `
 
 export const CommentTitle = styled.h5`

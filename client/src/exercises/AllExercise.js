@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider"
 import { Button, Modal } from "react-bootstrap"
 import SubmissionForm from "../submissions/SubmissionForm"
-import { UserExerciseLevelContainer, UserExerciseLevelLeft, UserExerciseLevelRight, UserExerciseLevelButtons } from "../components/Styles"
+import { UserExerciseLevelContainer, UserExerciseLevelLeft, UserExerciseLevelRight, UserExerciseLevelButtons, StyledLink } from "../components/Styles"
 
 const AllExercise = ({activity, exercise_id, category, measurement, multiplier,timeframe,metric,reps,sets,user_status,level_name, level_id, addSubmission}) => {
   const [showLevel, setShowLevel] = useState(true)
@@ -23,9 +23,9 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
     <>
       <UserExerciseLevelContainer>
       <UserExerciseLevelLeft>
-        <Link to={`showexercise/${exercise_id}`}>  
+        <StyledLink to={`showexercise/${exercise_id}`}>  
           <h3>{activity}</h3>
-        </Link>
+        </StyledLink>
           <h5>Movement Type: {category}</h5>
           <p>Level Name: {level_name}{" | "}
           {measurement ==="Bodyweight" ? `${outcome} ${metric}` : ""}</p>
