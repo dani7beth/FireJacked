@@ -206,7 +206,7 @@ order: 3;
 flex-grow: 1;
 `
 
-export const SubmissionsContainer = styled.span`
+export const SubmissionsContainer = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -223,16 +223,17 @@ export const SubmissionContainerLeft = styled.div`
 background: black;
 border-radius: 15px;
 flex-grow: 1;
+margin: 0px;
 `
 
 export const SubmissionContainerMiddle = styled.div`
 padding-left: 10px;
 margin: auto;
-flex-grow: 6;
+flex-grow: 200;
 `
 
 export const SubmissionContainerRight = styled.div`
-flex-grow: 2;
+flex-grow: 40;
 `
 
 export const Dashboard = styled.div`

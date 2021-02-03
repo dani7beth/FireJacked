@@ -4,41 +4,74 @@ import { Link } from "react-router-dom"
 import axios from 'axios';
 import { SubmissionsContainer, SubmissionContainerLeft, SubmissionContainerMiddle, SubmissionContainerRight, StyledLink, SubmissionVerification } from "../components/Styles";
 
-const AUserSubmission = ({name, status, id, created_at, user_id}) => {
+const AUserSubmission = ({name, status, id, created_at, user_id, level_id}) => {
   const [user, setUser] = useState({})
+  const [level, setLevel] = useState({})
+  const [exercise, setExercise] = useState({})
   // const [level, setLevel] = useState({})
   
   useEffect(() => {
     getUser()
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      getLevel();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (level) {
+      getExercise();
+    }
+  }, [level]);
+
   const getUser = async () => {
     try {
       let res = await axios.get(`/api/users/${user_id}`)
-      console.log(res.data)
       setUser(res.data)
     } catch (error) {
       console.log(error)
     }
   }
 
+  const getLevel = async () => {
+    try {
+      let res = await axios.get(`/api/levels/${level_id}`);
+      setLevel(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getExercise = async () => {
+    try {
+      let res = await axios.get(`/api/exercises/${level.exercise_id}`);
+      setExercise(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <SubmissionsContainer>
-      <SubmissionContainerLeft>
-        <img src={user.image} style={{ borderRadius: "50%", height: "99%", width: "99%"}}/>
-      </SubmissionContainerLeft>
-      <SubmissionContainerMiddle>
-        <h4>{user.first_name} {user.last_name}</h4>
-        <p>Movement type</p>
-        <p>Submitted at {created_at}</p>
-        <p>{status}</p>
-      </SubmissionContainerMiddle>
-      <SubmissionContainerRight>
-        <SubmissionVerification to={`/admin-submissions/${id}`}>
-          Verify
-        </SubmissionVerification>
-      </SubmissionContainerRight>
-    </SubmissionsContainer>
+    <div>
+      <SubmissionsContainer>
+        <SubmissionContainerLeft>
+          <img src={user.image} style={{ borderRadius: "50%", width: "150px", margin: "auto"}}/>
+        </SubmissionContainerLeft>
+        <SubmissionContainerMiddle>
+          <h3>{user.first_name} {user.last_name}</h3>
+          <h5>{exercise.activity}</h5>
+          <h5>{level.name}</h5>
+          <h5>{status}</h5>
+        </SubmissionContainerMiddle>
+        <SubmissionContainerRight>
+          <SubmissionVerification to={`/admin-submissions/${id}`}>
+            Verify
+          </SubmissionVerification>
+        </SubmissionContainerRight>
+      </SubmissionsContainer>
+    </div>
   )
 }
 
