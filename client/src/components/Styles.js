@@ -32,7 +32,7 @@ padding:10px
 `
 
 export const NateSeeHistorySubs = styled.div`
-height: 251px;
+height: 252px;
 width: 100%;
 overflow:auto;
 margin:auto;

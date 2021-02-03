@@ -4,6 +4,7 @@ import Axios from "axios";
 import SubmissionForm from "../submissions/SubmissionForm";
 import { Modal, Button } from "react-bootstrap";
 import styled from 'styled-components';
+import { MdDelete, MdEdit } from "react-icons/md";
 
 
 const ShowLevel = (
@@ -63,8 +64,8 @@ const ShowLevel = (
         Timeframe: {duration}{" | "}
         Reps: {level.reps}{" | "}
         Sets: {level.sets}{" | "}
-      <Button variant="primary" size='sm' onClick={handleEditShow}>Edit</Button>
-      <Button variant="danger" size='sm' onClick={handleDeleteShow}>Delete</Button>
+      <EditIcon onClick={handleEditShow}/>
+      <DeleteIcon onClick={handleDeleteShow} />
       </p>
     </StyledSub>
 
@@ -110,8 +111,21 @@ export const StyledSub = styled.div`
   padding-top:10px;
   padding-bottom:10px;
   &:hover {
-    font-size:1.02rem;
+    font-size:1.01rem;
     transition:0.2s;
     cursor:pointer;
+  }
+`
+export const EditIcon = styled(MdEdit)`
+  font-size:20px;
+  &:hover {
+    font-size:21px;
+  }
+`
+
+export const DeleteIcon = styled(MdDelete)`
+  font-size:22px;
+  &:hover {
+    font-size:23px;
   }
 `
