@@ -1,10 +1,9 @@
 import { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
-import { Modal, Nav, Navbar, NavbarBrand, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar, NavbarBrand, NavDropdown } from "react-bootstrap";
 import brandLogo from "../Logos/TransparentBackground/FirejackedFeelTheBurnTransparentBackground1x/WhiteTextBlackBackground.png";
-import UserRegister from "../user/UserRegister";
 
 export default (props) => {
   const history = useHistory();
@@ -32,7 +31,7 @@ export default (props) => {
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand />
+              <Navbar.Brand href='/'/>
             </BrandLogo>
               <Nav.Link href="/user_dash">
                 <h4>PROFILE</h4>
@@ -72,7 +71,7 @@ export default (props) => {
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand href='/'/>
+              <Navbar.Brand href='/'/>
             </BrandLogo>
             <Nav.Link href="/admin_dash">
               <h4>Dashboard</h4>
@@ -112,7 +111,7 @@ export default (props) => {
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand href='/'/>
+              <Navbar.Brand href='/'/>
             </BrandLogo>
             <Nav.Link href="/login">
               <h4>LOGIN</h4>
@@ -179,7 +178,7 @@ export const FireLogo = styled.div`
   font-size: 2em;
 `;
 
-export const BrandLogo = styled(NavbarBrand)`
+export const BrandLogo = styled(Navbar.Brand)`
   background-image: url(${brandLogo});
   background-size: 300px;
   background-position: -40px -125px;
