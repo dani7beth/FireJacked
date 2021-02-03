@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 // import InfiniteScroll from 'react-infinite-scroller';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components'
-import { Box, BoxCustom, BoxCustomAllExercises } from "../components/Styles";
+import { Box, BoxCustom, BoxCustomAllExercises, AllExercisesContainer } from "../components/Styles";
 import AllExercise from "./AllExercise";
 import FilterByCategory from './FilterByCategory';
 import { Button, Form } from "react-bootstrap";
@@ -102,7 +102,8 @@ const AllExercises = () => {
 
 
   return (
-    <>
+
+    <AllExercisesContainer>
       <Form>
         <Form.Label>Search for an Exercise</Form.Label>
         <Form.Control
@@ -117,7 +118,7 @@ const AllExercises = () => {
       <BoxCustomAllExercises>
           {renderExercisesWithLevels()}
       </BoxCustomAllExercises>
-    </>
+    </AllExercisesContainer>
   )
 }
 

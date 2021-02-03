@@ -3,9 +3,21 @@ import { useContext, useState, useEffect } from "react";
 import Axios from "axios";
 import SubmissionForm from "../submissions/SubmissionForm";
 import { Modal, Button } from "react-bootstrap";
+import styled from 'styled-components';
 
 
-const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission, editCalledSubmission, deleteSubmission}) => {
+const ShowLevel = (
+      {
+        id, 
+        level_id, 
+        status, 
+        submission, 
+        renderClickedSubmission, 
+        editCalledSubmission, 
+        deleteSubmission,
+        submissionTimeStamp
+      }
+  ) => {
 
   const [level, setLevel] = useState({})
   const [levelLoading, setLevelLoading] = useState(true)
@@ -43,20 +55,18 @@ const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission, e
   // console.log(submission)
   return(
     <>
-    <div onClick={()=>{renderClickedSubmission(submission)}}>
-      <hr />
-      <p>Level Name: {level.name}{" | "}
-       {/* - SubmissionID: {id} LevelID: {level_id} */}
-      {level.measurement ==="Bodyweight" ? `${outcome} ${level.metric}` : ""}</p>
-      <p>Timeframe: {duration}{" | "}
-      Reps: {level.reps}{" | "}
-      Sets: {level.sets}{" | "}
-      status: {submission.status}</p>
-
-      <Button variant="primary" onClick={handleEditShow}>Edit</Button>
-      <Button variant="danger" onClick={handleDeleteShow}>Delete</Button>
-        <hr />   
-    </div>
+    <StyledSub onClick={()=>{renderClickedSubmission(submission)}}>
+      <p>
+         {submissionTimeStamp()} | {level.name} | {level.measurement ==="Bodyweight" ? `${outcome} ${level.metric}` : ""} | {submission.status}
+      </p>
+      <p>
+        Timeframe: {duration}{" | "}
+        Reps: {level.reps}{" | "}
+        Sets: {level.sets}{" | "}
+      <Button variant="primary" size='sm' onClick={handleEditShow}>Edit</Button>
+      <Button variant="danger" size='sm' onClick={handleDeleteShow}>Delete</Button>
+      </p>
+    </StyledSub>
 
         <Modal show={showEdit} onHide={handleEditHide}>
         <Modal.Header closeButton>
@@ -95,3 +105,13 @@ const ShowLevel = ({id, level_id, status, submission, renderClickedSubmission, e
 }
 
 export default ShowLevel;
+
+export const StyledSub = styled.div`
+  padding-top:10px;
+  padding-bottom:10px;
+  &:hover {
+    font-size:1.02rem;
+    transition:0.2s;
+    cursor:pointer;
+  }
+`

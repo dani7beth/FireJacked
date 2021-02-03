@@ -92,7 +92,8 @@ const UserEditForm = ({ hide }) => {
         value={userState.weight}
         onChange={handleChange}
       />
-      <Button type="submit">Edit</Button>
+      <br></br>
+      <Button type="submit"> Submit </Button>
     </Form>
   );
 };

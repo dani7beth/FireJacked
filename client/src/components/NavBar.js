@@ -143,10 +143,11 @@ export default (props) => {
 };
 
 export const BigText = styled.div`
-  color: white;
-  font-size: 1.4em;
-  font-family: Impact, fantasy;
-`;
+color:white;
+font-size:1.4em;
+font-family:Roboto, "medium capped"
+`
+
 
 export const Sources = styled.div`
   display: flex;
@@ -163,9 +164,10 @@ export const StyledImage = styled.img`
 `;
 
 export const StyledDrop = styled(NavDropdown)`
+.dropdown-menu{
+  max-width: 10px;
+}
 .dropdown-menu.show{
-  padding:0px;
-  width: 100px;
 }
 .dropdown-item{
   stuff here
@@ -190,4 +192,3 @@ export const BrandLogo = styled(Navbar.Brand)`
 export const StyledNav = styled(Nav.Link)`
   font-size: 6rem !important;
 `;
-
