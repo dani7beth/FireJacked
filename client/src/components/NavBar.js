@@ -1,9 +1,10 @@
-import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
-import { Nav, Navbar, NavbarBrand, NavDropdown } from "react-bootstrap";
+import { Modal, Nav, Navbar, NavbarBrand, NavDropdown } from "react-bootstrap";
 import brandLogo from "../Logos/TransparentBackground/FirejackedFeelTheBurnTransparentBackground1x/WhiteTextBlackBackground.png";
+import UserRegister from "../user/UserRegister";
 
 export default (props) => {
   const history = useHistory();
@@ -15,9 +16,13 @@ export default (props) => {
     user,
     admin,
   } = useContext(AuthContext);
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
 
   const userNavBar = () => {
     return (
+      
       <div style={{ paddingBottom: "20px" }}>
         <Navbar
           collapseOnSelect
@@ -27,7 +32,7 @@ export default (props) => {
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand href='/'/>
+              <NavbarBrand />
             </BrandLogo>
               <Nav.Link href="/user_dash">
                 <h4>PROFILE</h4>
@@ -67,7 +72,7 @@ export default (props) => {
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand />
+              <NavbarBrand href='/'/>
             </BrandLogo>
             <Nav.Link href="/admin_dash">
               <h4>Dashboard</h4>
@@ -95,6 +100,7 @@ export default (props) => {
     );
   };
 
+
   const noLogin = () => {
     return (
       <div style={{ paddingBottom: "20px" }}>
@@ -102,16 +108,16 @@ export default (props) => {
           collapseOnSelect
           expand="lg"
           variant="dark"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0)'}}
+          style={{ backgroundColor: "none" }}
         >
           <Nav>
             <BrandLogo>
-              <NavbarBrand />
+              <NavbarBrand href='/'/>
             </BrandLogo>
             <Nav.Link href="/login">
               <h4>LOGIN</h4>
             </Nav.Link>
-            <Nav.Link href="/user_register">
+            <Nav.Link href='/user_register'>
               <h4>REGISTER</h4>
             </Nav.Link>
           </Nav>
@@ -187,4 +193,3 @@ export const BrandLogo = styled(NavbarBrand)`
 export const StyledNav = styled(Nav.Link)`
   font-size: 6rem !important;
 `;
-// how do I make this so the dropdown menu is shorter?

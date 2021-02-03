@@ -35,19 +35,20 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
         {/* Child1 */}
         <AdminExerciseContainerLeft>
           <Link to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
-            <h5>{exerciseProp.activity} - {exerciseProp.exercise_id}</h5>
+            <h3>{exerciseProp.activity}</h3>
           </Link>
+            <h5>{exerciseProp.category}</h5>
         </AdminExerciseContainerLeft>
 
          {/* Child 2 */}
         <AdminExerciseContainerMiddle>
-          <MdEdit onClick={handleEditShow} style={{fontSize: "24px"}}/>
-          <MdDelete onClick={handleDeleteShow} style={{fontSize: "24px"}}/>
+          
         </AdminExerciseContainerMiddle>
 
         {/* Childe 3 */}
         <AdminExerciseContainerRight>
-
+          <MdEdit onClick={handleEditShow} style={{fontSize: "24px"}}/>
+          <MdDelete onClick={handleDeleteShow} style={{fontSize: "24px"}}/>
           <MdUnfoldMore onClick={() => setShowLevel(!showLevel)} style={{fontSize: "24px"}}/>
           {/* {showLevel ? {MdUnfoldMore} : {MdUnfoldLess}} */}
           
