@@ -130,7 +130,7 @@ display: flex;
 align-items: flex-start;
 justify-content: center;
 align-content: center;
-flex-grow: 1
+flex-grow: 12;
 `
 
 const AdminFeedback = styled.div`
@@ -139,7 +139,7 @@ flex-direction: column;
 align-items: start;
 justify-content: center;
 align-content: center;
-flex-grow: 1;
+flex-grow: 11;
 `
 
 export default SubmissionsFormAdmin
