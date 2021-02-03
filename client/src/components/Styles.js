@@ -210,20 +210,22 @@ export const SubmissionsContainer = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-justify-content: flex-start;
+justify-content: space-between;
 align-items: center;
 border: solid 1px #D6D6D6;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 margin-bottom: 10px;
-border-radius: 15px;
+border-radius: 10px;
+width:98%;
 padding: 0px;
 margin: 15px auto;
 `
 export const SubmissionContainerLeft = styled.div`
 background: black;
-border-radius: 15px;
+border-radius: 10px 0 0 10px;
 flex-grow: 1;
-margin: 0px;
+margin-right: 10px;
+width:150px;
 `
 
 export const SubmissionContainerMiddle = styled.div`
@@ -265,6 +267,7 @@ max-width:250px;
 
 export const DashboardCenter = styled.div`
 order: 2;
+min-width: 851px;
 // flex-grow: 2;
 `
 
@@ -331,4 +334,22 @@ ${CategoryButton}:hover & {
   Background-color: black;
   Color: White
 }
+`
+export const SearchBarParent = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+`
+
+export const SearchBarChild1 = styled.div`
+min-width: 400px;
+`
+
+export const SearchBarChild2 = styled.div`
+margin-left: -70px;
+`
+
+export const SearchBarChild3 = styled.div`
+align-self:right;
 `
