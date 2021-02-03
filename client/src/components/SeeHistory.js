@@ -130,7 +130,15 @@ const SeeHistory = () => {
     }
     
     return comments.map((comment) => {
-      return <h4>{comment.admin_name}: {comment.body}</h4>
+      return (
+        <>
+          <CommentAdminName>
+            <CommentAdminImage src={comment.admin_image} />
+            {comment.admin_first} {comment.admin_last}
+          </CommentAdminName>
+          <p>{comment.body}</p>
+        </>
+      )
     })
   }
 
@@ -296,8 +304,10 @@ const SeeHistory = () => {
               <Row>
                 <Col>
                   {renderVideo()}
-                  <h1>comments</h1>
-                  {renderComments()}
+                  <CommentsContainer>
+                    <CommentTitle>Comments</CommentTitle>
+                      <Comments>{renderComments()}</Comments>
+                  </CommentsContainer>
                 </Col>
                 <Col>
                 <NateSeeHistoryContainer>
@@ -308,7 +318,7 @@ const SeeHistory = () => {
                   {renderStatus()}
                 </NateSeeHistoryContainer>
                   <NateSeeHistorySubsContainer>
-                    <h5 style={{padding:'20px', textDecoration:'underline'}}>History</h5>
+                    <HistoryTitle>History</HistoryTitle>
                       <NateSeeHistorySubs>
                           {renderSubmissions()}
                       </NateSeeHistorySubs>
@@ -332,7 +342,6 @@ export default SeeHistory;
 
 export const Title = styled.h1`
   text-align:center;
-  font-family: Roboto;
 `
 export const TitleLink = styled(Link)`
   color:black;
@@ -388,4 +397,40 @@ export const Video = styled.video`
   margin-left:45px; 
   margin-top:23px;
   border-radius:8px;
+`
+export const CommentsContainer = styled.div`
+  margin-left: 45px;
+  height: 182px;
+  width: 720px;
+  border: 2px solid #d6d6d6;
+  border-radius: 8px;
+`
+
+export const CommentTitle = styled.h5`
+  text-align: center;
+  text-decoration:underline;
+`
+
+export const Comments = styled.div`
+  height: 137px;
+  margin-left: 20px;
+  overflow: auto;
+`
+
+export const CommentAdminName = styled.p`
+  font-size:1.05rem;
+  width: 20%;
+  text-align:center;
+  background-color: lightgrey;
+  border-radius:8px;
+`
+
+export const CommentAdminImage = styled.img`
+  width:20px;
+  border-radius:50%;
+`
+
+export const HistoryTitle = styled.h5`
+  padding:20px; 
+  text-decoration:underline;
 `
