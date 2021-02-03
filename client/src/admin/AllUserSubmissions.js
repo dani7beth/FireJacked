@@ -41,7 +41,6 @@ const AllUserSubmissions = ({selectedUser}) => {
 
   const renderSubmissions = () => {
     if (filter && selectedUser) {
-      console.log(submissions)
       return submissions
         .filter((s) => s.status === "Pending")
         .filter((s) => s.user_id === selectedUser.id)
