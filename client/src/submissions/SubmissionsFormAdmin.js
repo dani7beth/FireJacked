@@ -108,8 +108,10 @@ justify-content: space-evenly;
 align-self: center;
 border: 2px solid #D6D6D6;
 height: 50%;
+overflow: auto;
 width: 90%;
 margin: 25px;
+padding: 25px;
 border-radius: 10px;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
