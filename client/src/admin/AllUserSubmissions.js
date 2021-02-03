@@ -40,17 +40,25 @@ const AllUserSubmissions = ({selectedUser}) => {
   };
 
   const renderSubmissions = () => {
-    if (filter) {
+    if (filter && selectedUser) {
       console.log(submissions)
       return submissions
+        .filter((s) => s.status === "Pending")
         .filter((s) => s.user_id === selectedUser.id)
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    } else if (filter && !selectedUser) {
+      return submissions
         .filter((s) => s.status === "Pending")
         .map((s) => <AUserSubmission key={s.id} {...s} />);
-    }
-    return submissions
-      .filter((s) => s.user_id === selectedUser.id)
-      .map((s) => <AUserSubmission key={s.id} {...s} />);
-  };
+    } else if (!filter && selectedUser) {
+      return submissions
+        .filter((s) => s.user_id === selectedUser.id)
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    } else {
+      return submissions
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    };
+  }
 
   return (
     <>
@@ -63,7 +71,7 @@ const AllUserSubmissions = ({selectedUser}) => {
           dataLength={submissions.length}
           next={() => loadMore()}
           hasMore={submissions.length + 1 < totalPages * 10 ? true : false}
-          loader={<h4>Loading...</h4>}
+          loader={<h4>Select a User from the left.</h4>}
           height={900}
           endMessage={
             <p style={{ textAlign: "center" }}>

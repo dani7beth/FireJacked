@@ -158,6 +158,7 @@ border-radius:8px;
 export const CategoryButton = styled.div`
 // min-width: 130px;
 `
+
 export const YO = styled.button`
 font-size: 12px;
 border: solid 2px black;
@@ -168,8 +169,6 @@ Color: ${props => props.selected === props.category ? "white" : "black"};
 text-align: center;
 cursor: pointer;
 // border-radius:8px;
-
-
 ${CategoryButton}:hover & {
   Background-color: black;
   Color: White
@@ -227,6 +226,7 @@ flex-grow: 1;
 `
 
 export const SubmissionContainerMiddle = styled.div`
+padding-left: 10px;
 margin: auto;
 flex-grow: 6;
 `
@@ -292,4 +292,21 @@ padding: 20px;
 export const StyledLink = styled(Link)`
 // color: #F4731F;
 color:black;
+`
+
+export const SubmissionVerification = styled(Link)`
+font-size: 18px;
+border: solid 2px black;
+border-radius: 8px;
+min-height: 30px;
+padding: 5px;
+Background-color: ${props => props.selected === props.category ? "black" : "white"};
+Color: ${props => props.selected === props.category ? "white" : "black"};
+text-align: center;
+cursor: pointer;
+// border-radius:8px;
+${CategoryButton}:hover & {
+  Background-color: black;
+  Color: White
+}
 `
