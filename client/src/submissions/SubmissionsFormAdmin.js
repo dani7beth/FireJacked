@@ -70,7 +70,7 @@ const SubmissionsFormAdmin = () => {
       <UserName>
         <h1>{user.first_name} {user.last_name}</h1>
       </UserName>
-      <div style={{display: "flex", justifyContent: "space-around"}}>
+      <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-around"}}>
         <Video>
           <video style={{ width: '400px', height: '300px' }} controls="true" class="embed-responsive-item">
             <source src={submissionState.video_upload} type="video/mp4" />
