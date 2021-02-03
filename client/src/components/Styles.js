@@ -16,8 +16,8 @@ export const BoxCustom = styled.div`
 height: 300px;
 width: 100%;
 border: solid;
-overflow:auto;
-background:#f0f8ff;
+overflow: auto;
+background: #f0f8ff;
 margin:auto;
 margin-top:50px;
 padding:10px
@@ -41,7 +41,8 @@ border
 `
 
 export const BoxAdminExercises = styled(BoxMain)`
-height: 500px;
+height: 450px;
+
 `
 export const BoxUserHistory = styled.div`
 height: 300px;
@@ -74,10 +75,13 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 justify-content: space-between;
-border: solid 1px black;
+border: solid 1px #D6D6D6;
 margin-bottom: 10px;
 border-radius: 8px;
 padding: 10px;
+width: 98%;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin: 15px auto;
 `
 
 export const UserExerciseLevelLeft = styled.div`

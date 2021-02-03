@@ -154,13 +154,13 @@ const Exercises = () => {
           dataLength={exercises.length}
           next={() => loadMore()}
           hasMore={exercises.length === dataLength ? false : true}
-          loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
+          // loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
           height={450}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>exercises.length = {exercises.length} dataLength= {dataLength}</b>
-            </p>
-          }
+          // endMessage={
+          //   <p style={{ textAlign: "center" }}>
+          //     {/* <b>exercises.length = {exercises.length} dataLength= {dataLength}</b> */}
+          //   </p>
+          // }
         >
           {renderExercisesWithLevels()}
         </InfiniteScroll>
