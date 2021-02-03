@@ -84,8 +84,6 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 margin: 15px auto;
 `
 
-
-
 export const UserExerciseLevelLeft = styled.div`
 order: 1;
 flex-grow: 4;
@@ -170,5 +168,32 @@ export const AdminExerciseContainerRight = styled.div`
 order: 3;
 flex-grow: 1;
 `
+
+export const SubmissionsContainer = styled.span`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+border: solid 1px black;
+margin-bottom: 10px;
+border-radius: 15px;
+padding: 0px;
+`
+export const SubmissionContainerLeft = styled.div`
+background: black;
+border-radius: 15px;
+flex-grow: 1;
+`
+
+export const SubmissionContainerMiddle = styled.div`
+margin: auto;
+flex-grow: 6;
+`
+
+export const SubmissionContainerRight = styled.div`
+flex-grow: 2;
+`
+
 
 
