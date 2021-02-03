@@ -110,7 +110,7 @@ flex-wrap: wrap;
 justify-content: space-between;
 border: solid 1px #D6D6D6;
 margin-bottom: 10px;
-border-radius: 8px;
+border-radius: 10px;
 padding: 10px;
 width: 98%;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -295,6 +295,27 @@ export const StyledLink = styled(Link)`
 color:black;
 `
 
+export const UserIndexDiv = styled.div`
+
+margin-top:10px;
+
+border: solid 1px #D6D6D6;
+border-radius: 8px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+background-color: #FEBD4A;
+padding: 10px;
+`
+export const UserIndexTop = styled.div`
+
+`
+
+export const UserIndexBottom = styled.div`
+width: 100%;
+overflow:auto;
+margin:auto;
+max-height: 500px;
+margin-top: 20px;
+`
 export const SubmissionVerification = styled(Link)`
 font-size: 18px;
 border: solid 2px black;
