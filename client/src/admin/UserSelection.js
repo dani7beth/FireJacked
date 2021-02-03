@@ -58,15 +58,14 @@ const UserSelection = ({selectedUser, setSelectedUser}) => {
   }
 
   const renderUsers = () => {
-
     return users.map((user) => {
       if (selectedUser !== user) {
         return (
           <>
             {/* /show_user_submissions/:user_id */}
             <div onClick={() => setSelectedUser(user)}>  
-              <h1 key={user.id}>{user.first_name} {user.last_name}</h1>
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '200px' }} />
+              <h1 key={user.id}>{user.first_name} {user.last_name}</h1>
             </div>
           </>
         ) 
@@ -76,8 +75,8 @@ const UserSelection = ({selectedUser, setSelectedUser}) => {
             {/* /show_user_submissions/:user_id */}
             <div onClick={() => setSelectedUser(user)}>  
               <h7>SELECTED USER BELOW (I need help highlighting)</h7>
-              <h1 key={user.id}>{user.first_name} {user.last_name}</h1>
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '200px' }} />
+              <h1 key={user.id}>{user.first_name} {user.last_name}</h1>
               <h7>SELECTED USER ABOVE (I need help highlighting)</h7>
             </div>
           </>

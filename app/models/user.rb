@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
   
-  has_many :submissions
+  has_many :submissions, dependent: :destroy
   has_many :levels, through: :submissions
 
   def self.user_submissions(userID)

@@ -1,10 +1,13 @@
 require 'faker'
 
+Admin.destroy_all
+User.destroy_all
+
 categories = ['Barbell Strength/Power', 'KettleBell Strength/Power', 'Cardio-Respiratory Power', 'Power/Strength Endurance', 'Power Endurance', 'GYM Endurance']
 #admins 
 
 Admin.create(name:"admin1", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin1@test.com", password:"123456", image:"https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg")
-admin = Admin.find(1)
+admin = Admin.first()
 puts "created email: #{admin.email}"
     exercise1=admin.exercises.create(name: "", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?", 
     category: "Barbell Strength/Power", activity: "Deadlift", image: "https://picsum.photos/200/300.jpg", how_to_video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
@@ -109,7 +112,7 @@ puts "created email: #{admin.email}"
 #users
 
 5.times do |j|
-  User.create(
+  user = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     weight: rand(100..300),
@@ -120,78 +123,137 @@ puts "created email: #{admin.email}"
     image: 'https://picsum.photos/200',
     email: "user#{j}@test.com", 
     password: '123456')
-  user = User.find(j+1)
+    # user = User.find(j+1)
     puts "created user email: #{user.email}"
     # 20.times do 
 
     #LEVEL 1
     #level 1 - Approved
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e1.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e2.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e3.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e4.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e5.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e6.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e7.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e8.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e9.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e10.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e11.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e12.id, status: 'Approved')
+    sub1 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e1.id, status: 'Approved')
+      2.times do sub1.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    sub2 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e2.id, status: 'Approved')
+      2.times do sub2.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    sub3 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e3.id, status: 'Approved')
+      2.times do sub3.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    sub4 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e4.id, status: 'Approved')
+      2.times do sub4.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+
+    sub5 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e5.id, status: 'Approved')
+      2.times do sub5.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub6 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e6.id, status: 'Approved')
+      2.times do sub6.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub7 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e7.id, status: 'Approved')
+      2.times do sub7.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub8 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e8.id, status: 'Approved')
+      2.times do sub8.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub9 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e9.id, status: 'Approved')
+      2.times do sub9.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub10 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e10.id, status: 'Approved')
+      2.times do sub10.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub11 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e11.id, status: 'Approved')
+      2.times do sub11.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub12 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e12.id, status: 'Approved')
+      2.times do sub12.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end  
 
     #level 1 - Pending
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e13.id, status: 'Pending')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e14.id, status: 'Pending')
+    sub13 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e13.id, status: 'Pending')
+      2.times do sub13.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub14 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e14.id, status: 'Pending')
+      2.times do sub14.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
     #level 1 - Not Approved
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e15.id, status: 'Not Approved')
+    sub15 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level1_e15.id, status: 'Not Approved')
+      2.times do sub15.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
 
     #LEVEL 2
 
     #level 2 - Approved
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e1.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e2.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e3.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e4.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e5.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e6.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e7.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e8.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e9.id, status: 'Approved')
+    sub16 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e1.id, status: 'Approved')
+      2.times do sub16.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub17 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e2.id, status: 'Approved')
+      2.times do sub17.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub18 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e3.id, status: 'Approved')
+      2.times do sub18.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub19 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e4.id, status: 'Approved')
+      2.times do sub19.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub20 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e5.id, status: 'Approved')
+      2.times do sub20.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub21 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e6.id, status: 'Approved')
+      2.times do sub21.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub22 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e7.id, status: 'Approved')
+      2.times do sub22.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub23 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e8.id, status: 'Approved')
+      2.times do sub23.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub24 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e9.id, status: 'Approved')
+      2.times do sub24.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
     #level 2 - Pending
 
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e10.id, status: 'Pending')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e11.id, status: 'Pending')
+    sub25 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e10.id, status: 'Pending')
+      2.times do sub25.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub26 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e11.id, status: 'Pending')
+      2.times do sub26.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
     #level 2 - Not Approved
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e12.id, status: 'Not Approved')
+    sub27 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level2_e12.id, status: 'Not Approved')
+      2.times do sub27.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
     #LEVEL 3
     #level 3 - Approved
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e1.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e2.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e3.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e4.id, status: 'Approved')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e5.id, status: 'Approved')
+    sub28 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e1.id, status: 'Approved')
+      2.times do sub28.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub29 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e2.id, status: 'Approved')
+      2.times do sub29.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub30 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e3.id, status: 'Approved')
+      2.times do sub30.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub31 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e4.id, status: 'Approved')
+      2.times do sub31.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub32 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e5.id, status: 'Approved')
+      2.times do sub32.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
     
 
     #level 3 - Pending
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e6.id, status: 'Pending')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e7.id, status: 'Pending')
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e8.id, status: 'Pending')
+    sub33 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e6.id, status: 'Pending')
+      2.times do sub33.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+
+    sub34 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e7.id, status: 'Pending')
+      2.times do sub34.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
+    
+    sub35 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e8.id, status: 'Pending')
+      2.times do sub35.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
     #level 3 - Not Approved
-    user.submissions.create(completed:false, name: "Faker::Movies::PrincessBride.quote", video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e9.id, status: 'Approved')
+    sub36 = user.submissions.create(completed:false, name: Faker::Movies::PrincessBride.quote, video_upload: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", level_id: level3_e9.id, status: 'Approved')
+      2.times do sub36.comments.create(admin_id:Admin.first().id, body:Faker::Movies::PrincessBride.quote) end
 
     # end
 
 end
 
-15.times do
-  Comment.create(submission_id:rand(1..15), admin_id:1, body:Faker::Movies::PrincessBride.quote )
-end
+
+
 
 #submissions
 #comments

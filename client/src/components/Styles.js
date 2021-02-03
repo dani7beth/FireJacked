@@ -16,15 +16,14 @@ export const BoxCustom = styled.div`
 height: 300px;
 width: 100%;
 border: solid;
-overflow:auto;
-background:#f0f8ff;
+overflow: auto;
+background: #f0f8ff;
 margin:auto;
 margin-top:50px;
 padding:10px
 `
 
-export const BoxCustomAllExercises = styled.div`
-height: 600px;
+export const BoxMain = styled.div`
 width: 100%;
 overflow:auto;
 margin:auto;
@@ -32,15 +31,18 @@ margin-top:10px;
 padding:10px
 `
 
-export const BoxAdminExercises = styled.div`
-height: 500px;
-width: 100%;
-border: solid;
-overflow:auto;
-background:#f0f8ff;
-margin:auto;
-margin-top:50px;
-padding:10px
+export const BoxCustomAllExercises = styled(BoxMain)`
+height: 600px;
+`
+
+export const NatesBox = styled(BoxMain)`
+height 300px;
+border
+`
+
+export const BoxAdminExercises = styled(BoxMain)`
+height: 450px;
+
 `
 export const BoxUserHistory = styled.div`
 height: 300px;
@@ -73,10 +75,13 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 justify-content: space-between;
-border: solid 1px black;
+border: solid 1px #D6D6D6;
 margin-bottom: 10px;
 border-radius: 8px;
 padding: 10px;
+width: 98%;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin: 15px auto;
 `
 
 export const UserExerciseLevelLeft = styled.div`
@@ -132,5 +137,63 @@ ${CategoryButton}:hover & {
   Color: White
 }
 `
+
+export const ButtonMain = styled.div`
+border: solid 1px black;
+min-width: 80px;
+min-height: 60px;
+padding: 5px;
+`
+
+export const ButtonSeeExercise = styled(ButtonMain)`
+
+`
+
+export const AdminExerciseContainerLeft = styled.div`
+order: 1;
+flex-grow: 6;
+`
+
+export const AdminExerciseContainerMiddle = styled.div`
+order: 2;
+flex-grow: 2;
+align-self:center;
+display:flex;
+flex-direction: column;
+flex-wrap: wrap;
+align-items: stretch;
+`
+
+export const AdminExerciseContainerRight = styled.div`
+order: 3;
+flex-grow: 1;
+`
+
+export const SubmissionsContainer = styled.span`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+border: solid 1px black;
+margin-bottom: 10px;
+border-radius: 15px;
+padding: 0px;
+`
+export const SubmissionContainerLeft = styled.div`
+background: black;
+border-radius: 15px;
+flex-grow: 1;
+`
+
+export const SubmissionContainerMiddle = styled.div`
+margin: auto;
+flex-grow: 6;
+`
+
+export const SubmissionContainerRight = styled.div`
+flex-grow: 2;
+`
+
 
 

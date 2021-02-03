@@ -26,9 +26,9 @@ class Exercise < ApplicationRecord
               else CONCAT_WS(' ',(select STRING_AGG(status, '|') from Submissions s where s.level_id = l.id and user_id = #{user_id}),l.name)
               end as status,
           case 
-              when (select STRING_AGG(status, '|') from Submissions s where s.level_id = l.id and user_id = #{user_id}) isnull 
+              when (select STRING_AGG(status, ' | ') from Submissions s where s.level_id = l.id and user_id = #{user_id}) isnull 
           then concat('No Submission') 
-              else (select STRING_AGG(status, '|') from Submissions s where s.level_id = l.id and user_id = #{user_id})
+              else (select STRING_AGG(status, ' | ') from Submissions s where s.level_id = l.id and user_id = #{user_id})
               end as user_status,
           category, 
           activity, 

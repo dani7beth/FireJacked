@@ -5,7 +5,7 @@ import { Button, Modal } from "react-bootstrap"
 import SubmissionForm from "../submissions/SubmissionForm"
 import { UserExerciseLevelContainer, UserExerciseLevelLeft, UserExerciseLevelRight, UserExerciseLevelButtons } from "../components/Styles"
 
-const AllExercise = ({activity, exercise_id, category, measurement, multiplier,timeframe,metric,reps,sets,user_status,level_name, level_id}) => {
+const AllExercise = ({activity, exercise_id, category, measurement, multiplier,timeframe,metric,reps,sets,user_status,level_name, level_id, addSubmission}) => {
   const [showLevel, setShowLevel] = useState(true)
   const [show, setShow] = useState(false)
 
@@ -49,8 +49,9 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
           </Modal.Header>
           <Modal.Body>
             <SubmissionForm
-              handleHide={handleHide}
+              handleUserDashHide={handleHide}
               level_id={level_id}
+              addSubmission={addSubmission}
             />
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
