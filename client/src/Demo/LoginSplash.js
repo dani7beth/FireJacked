@@ -26,7 +26,7 @@ const LoginSplash = () => {
 };
 export default LoginSplash;
 export const Background = styled.div`
-  background: url(${backgroundPhoto}) no-repeat;
+  background: #000000 url(${backgroundPhoto}) no-repeat;
   background-size: cover;
   position: fixed;
   width: 100%;
