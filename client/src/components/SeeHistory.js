@@ -1,12 +1,15 @@
 import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import ShowLevel from "./ShowLevel";
 import { BoxUserHistory } from '../components/Styles';
+import styled from 'styled-components'
 import Submission from "../submissions/Submission";
+import { NateSeeHistorySubs, NateSeeHistoryContainer, NateSeeHistorySubsContainer } from "../components/Styles";
+
 
 const SeeHistory = () => {
 
@@ -102,9 +105,14 @@ const SeeHistory = () => {
     })
   }
 
+  const submissionTimeStamp = () => {
+    let date = new Date(submission.created_at);
+    return <>{submission && date.toLocaleDateString("en-US")}</>;
+  };
+
   const getComments = () => {
     // debugger
-    Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission}/see_comments`)
+    Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission.id}/see_comments`)
     .then((response) => {
       console.log('COMMENTS')
       console.log(submission.id, response.data)
@@ -122,7 +130,15 @@ const SeeHistory = () => {
     }
     
     return comments.map((comment) => {
-      return <h4>{comment.admin_name}: {comment.body}</h4>
+      return (
+        <>
+          <CommentAdminName>
+            <CommentAdminImage src={comment.admin_image} />
+            {comment.admin_first} {comment.admin_last}
+          </CommentAdminName>
+          <p>{comment.body}</p>
+        </>
+      )
     })
   }
 
@@ -180,29 +196,30 @@ const SeeHistory = () => {
     return submissions.map((submission) => {
       return (
         <>
-        <ShowLevel 
-          key={`submission-${submission.id}`} {...submission} 
-          submission = {submission} 
-          renderClickedSubmission={renderClickedSubmission} 
-          deleteSubmission={deleteSubmission} 
-          editCalledSubmission={editCalledSubmission}/>
+          <ShowLevel 
+            key={`submission-${submission.id}`} {...submission} 
+            submission = {submission} 
+            renderClickedSubmission={renderClickedSubmission} 
+            deleteSubmission={deleteSubmission} 
+            editCalledSubmission={editCalledSubmission}
+            submissionTimeStamp={submissionTimeStamp}
+          />
         </>
       )
     })
   }
 
   const renderClickedSubmission = (newSubmission) => {
-    // renderVideo(newSubmission);
+    console.log(newSubmission);
     setSubmission(newSubmission)
   }
 
   const renderVideo = () => {
-    console.log(submission.id, ':', submission.video)
     return (
       <div key={submission.video}>
-        <video style={{height:'450px', width:'620px'}} controls={true} className="embed-responsive-item">
+        <Video controls={true} className="embed-responsive-item">
           <source src={submission.video} type="video/mp4" />
-        </video>
+        </Video>
       </div>
     )
   }
@@ -213,9 +230,9 @@ const SeeHistory = () => {
     }
   
     return (
-      <h3>
-        Id: {submission.id} | {submission.created_at} | {user.weight}lbs
-      </h3>
+      <Info>
+        {submissionTimeStamp()} | {exercise.category}
+      </Info>
     );
   };
 
@@ -240,6 +257,30 @@ const SeeHistory = () => {
     )
   }
 
+  
+
+  const renderStatus = () => {
+    if (submission.status === 'Approved'){
+      return (
+        <StatusContainerApproved>
+          <Status>{submission.status}</Status>
+        </StatusContainerApproved>
+      )
+    } if(submission.status === 'Pending'){
+      return (
+        <StatusContainerPending>
+          <Status>{submission.status}</Status>
+         </StatusContainerPending>
+      )
+    }else {
+      return (
+        <StatusContainerFailed>
+          <Status>{submission.status}</Status>
+        </StatusContainerFailed>
+      )
+    }
+  }
+
   const saveTheRender = () => {
     if(submissions.length === 0) {
         return (
@@ -254,54 +295,38 @@ const SeeHistory = () => {
         )
     } else {
         return (
-          <>
+          <div>
+            <Row>
+              <Col>
+                <Title>{user.first_name} {user.last_name}</Title>
+              </Col>
+            </Row>
               <Row>
                 <Col>
                   {renderVideo()}
-                  <h1>comments</h1>
-                  {renderComments()}
+                  <CommentsContainer>
+                    <CommentTitle>Comments</CommentTitle>
+                      <Comments>{renderComments()}</Comments>
+                  </CommentsContainer>
                 </Col>
                 <Col>
-                  <div>
-                    <h1>{exercise.activity}</h1>
-                    {/* <p>level?</p> */} 
-                  </div>
-                  <div style={{paddingBottom:'60px', paddingTop:'20px'}}>
-                    {renderInfo()}
-                    <h3 style={{border:'2px solid orange', borderRadius:'20%', width:'110px'}}>{submission.status}</h3>
-                    {/* 
-                        <h3 style={{border:'2px solid green', borderRadius:'20%', width:'110px'}}>Completed</h3>
-                        <h3 style={{border:'2px solid red', borderRadius:'20%', width:'110px'}}>Failed</h3> 
-                        how do I make this border stick just around 'Pending' or whatever will be written there?
-                        We should make so if it's completed it's green, pending, is orange, and failed is red.
-                    */}
-                  </div>
-                  <div>
-                    <h5>History</h5>
-                    <BoxUserHistory>
-                      <InfiniteScroll
-                            dataLength={submissions.length}
-                            next={() => loadMore()}
-                            hasMore={submissions.length === dataLength ? false : true}
-                            loader={<h4>Loading... submissions.length = {submissions.length} dataLength= {dataLength} </h4>}
-                            height={300}
-                            endMessage={
-                          <p style={{ textAlign: "center" }}>
-                            {/* <b>submissions.length = {submissions.length} dataLength= {dataLength}</b> */}
-                          </p>
-                            }
-                        >
-                            {renderSubmissions()}
-                      </InfiniteScroll>
-                    </BoxUserHistory>
-                  </div>
-                  <br />
-                  <a className='btn btn-secondary'  href={`/showexercise/${exercise_id}`}>Back</a>
-                  <Button variant='primary' onClick={handleShow}>Submissions</Button>
+                <NateSeeHistoryContainer>
+                    <TitleLink to={`/showexercise/${exercise_id}`}>
+                      <ExerciseTitle>{exercise.activity}</ExerciseTitle>
+                    </TitleLink>
+                  {renderInfo()}
+                  {renderStatus()}
+                </NateSeeHistoryContainer>
+                  <NateSeeHistorySubsContainer>
+                    <HistoryTitle>History</HistoryTitle>
+                      <NateSeeHistorySubs>
+                          {renderSubmissions()}
+                      </NateSeeHistorySubs>
+                  </NateSeeHistorySubsContainer>
                 </Col>
               </Row>
               {modal()}
-          </>
+          </div>
         )
       }
     }
@@ -314,3 +339,98 @@ const SeeHistory = () => {
 };
 
 export default SeeHistory;
+
+export const Title = styled.h1`
+  text-align:center;
+`
+export const TitleLink = styled(Link)`
+  color:black;
+`
+
+export const ExerciseTitle = styled.h1`
+  padding-top:20px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+`
+
+export const Info = styled.h4`
+  padding-left:10px;
+`
+
+export const Status = styled.p`
+  padding-top:12px;
+  padding-bottom:0px;
+`
+export const StatusContainerApproved = styled.div`
+  border:1px solid #00A86B;
+  border-radius:10px;
+  background-color: #00A86B;
+  margin-left: 8px;
+  text-align: center;
+  width: 25%;
+  color: #FFFFFF;
+`
+
+export const StatusContainerPending = styled.div`
+  border:1px solid #FEBD4A;
+  border-radius:10px;
+  background-color: #FEBD4A;
+  margin-left: 8px;
+  text-align: center;
+  width: 25%;
+  color: #FFFFFF;
+`
+
+export const StatusContainerFailed = styled.div`
+  border:1px solid #F08080;
+  border-radius:10px;
+  background-color: #F08080;
+  margin-left: 8px;
+  text-align: center;
+  width: 25%;
+  color: #FFFFFF;
+`
+
+export const Video = styled.video`
+  width:720px;
+  margin-left:45px; 
+  margin-top:23px;
+  border-radius:8px;
+`
+export const CommentsContainer = styled.div`
+  margin-left: 45px;
+  height: 182px;
+  width: 720px;
+  border: 2px solid #d6d6d6;
+  border-radius: 8px;
+`
+
+export const CommentTitle = styled.h5`
+  text-align: center;
+  text-decoration:underline;
+`
+
+export const Comments = styled.div`
+  height: 137px;
+  margin-left: 20px;
+  overflow: auto;
+`
+
+export const CommentAdminName = styled.p`
+  font-size:1.05rem;
+  width: 20%;
+  text-align:center;
+  background-color: lightgrey;
+  border-radius:8px;
+`
+
+export const CommentAdminImage = styled.img`
+  width:20px;
+  border-radius:50%;
+`
+
+export const HistoryTitle = styled.h5`
+  padding:20px; 
+  text-decoration:underline;
+`

@@ -27,20 +27,6 @@ const UserDash = () => {
             <Col xs={2}>
               <img src={user.image} style={{ borderRadius: "50%", width: '200px' }} />
               <Button onClick={handleImage}>Update Image</Button>
-              <Modal show={showImage} onHide={handleImageClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Update your Picture </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <UserImageForm handleImageHide={handleImageClose} />
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleImageClose}>
-                    Cancel
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-
               <div>
                 <h4>
                   Name: {user.first_name} {user.last_name}
@@ -48,23 +34,9 @@ const UserDash = () => {
                 <h4>Weight: {user.weight}</h4>
                 <h4>Height: {user.height}</h4>
                 <h4>Bio: {user.about}</h4>
-
                 <Button variant="primary" onClick={handleShow}>
                   Update User Info
                 </Button>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Edit </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <UserEditForm hide={handleClose} />
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Cancel
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
               </div>
             </Col>
             <Col xs={8}>
@@ -74,6 +46,35 @@ const UserDash = () => {
               <TrainerIndex />
             </Col>
           </Row>
+
+
+          <Modal show={showImage} onHide={handleImageClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Update your Picture </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <UserImageForm handleImageHide={handleImageClose} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleImageClose}>
+                Cancel
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <UserEditForm hide={handleClose} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
       );
     }
