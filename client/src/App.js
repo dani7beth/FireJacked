@@ -32,6 +32,7 @@ function App() {
     <div className='App'>
       <FetchUserAdmin>
       <NavBar />
+
         <Switch>
           <Route exact path ='/' component={LoginSplash} />
           <Route exact path='/login' component={UserLogin} />
