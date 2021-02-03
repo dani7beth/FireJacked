@@ -347,10 +347,10 @@ export const TitleLink = styled(Link)`
 `
 
 export const ExerciseTitle = styled.h1`
-  padding-top:20px;
-  padding-left:10px;
-  padding-right:10px;
-  padding-bottom:10px;
+padding-top:20px;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:10px;
 `
 
 export const Info = styled.h4`
