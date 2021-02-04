@@ -3,11 +3,25 @@ require 'faker'
 Admin.destroy_all
 User.destroy_all
 
+userImages = [
+"https://tetontrees.com/wp-content/uploads/2019/04/IMG_8443.jpg",
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7798.jpg",
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7685.jpg",
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7683.jpg",
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7679.jpg"
+]
+
+adminImages = [
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7678.jpg",
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7677.jpg",
+"https://tetontrees.com/wp-content/uploads/2019/03/IMG_7674.jpg"
+]
+
 categories = ['Barbell Strength/Power', 'KettleBell Strength/Power', 'Cardio-Respiratory Power', 'Power/Strength Endurance', 'Power Endurance', 'GYM Endurance']
 #admins 
 
 3.times do |n|
-  admin = Admin.create(name:"admin#{n}", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin#{n}@test.com", password:"123456", image:"https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg")
+  admin = Admin.create(name:"admin#{n}", first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, phone:Faker::PhoneNumber.cell_phone, speciality:Faker::Job.key_skill, email: "admin#{n}@test.com", password:"123456", image:adminImages[n])
   puts "created email: #{admin.email}"
 end
 
@@ -125,7 +139,7 @@ level3_e19 = exercise19.levels.create(name: "Proven", multiplier:5, metric:"Calo
     gender: Faker::Gender.binary_type,
     about: Faker::Movies::PrincessBride.quote,
     age: rand(18..65),
-    image: 'https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg',
+    image: userImages[j],
     email: "user#{j}@test.com", 
     password: '123456')
   # user = User.find(j+1)

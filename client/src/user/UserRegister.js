@@ -3,14 +3,14 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import backgroundPhoto from "../Photos : Images/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg";
+import fireJackedLogo from "../Logos/fireJackedUser.svg"
 
 export default (props) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    image:
-      "https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg",
+    image:fireJackedLogo,
   });
 
   const { handleRegister } = useContext(AuthContext);
