@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     put 'update_user_image', to: "users#update_user_image"
     put "update_admin_image", to: "admins#update_admin_image"
     get "admin_index", to: "users#admin_index"
-    get "exercise_subs", to: "submissions#exercise_subs"
+    get "exercise_subs/:exercise_id", to: "submissions#exercise_subs"
     get "user_see_history", to: "submissions#user_see_history"
     get "user_index", to: "admins#user_index"
     get "all_submissions/:user_id", to: "submissions#all_submissions_of_user"

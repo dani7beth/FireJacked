@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :submission
 
   def self.comments_by_submission(submission_id)
-    select('comments.id,
+      select('comments.id,
             comments.body,
             comments.created_at,
             comments.updated_at,
