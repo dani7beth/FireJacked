@@ -61,7 +61,7 @@ const AllUserSubmissions = ({selectedUser}) => {
 
   return (
     <>
-      <h1>Select a Submission</h1>
+      <h1>Submissions</h1>
       <Button variant="secondary" onClick={() => setFilter(!filter)}>
         {filter ? 'Show All' : 'Show Only Pending'}
       </Button>
@@ -71,7 +71,7 @@ const AllUserSubmissions = ({selectedUser}) => {
           next={() => loadMore()}
           hasMore={submissions.length + 1 < totalPages * 10 ? true : false}
           loader={<h4>Select a User from the left.</h4>}
-          height={900}
+          height={600}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>End of Submissions</b>
