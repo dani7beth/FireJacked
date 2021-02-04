@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import landonPhoto from "../Photos : Images/Landon_about_me_Main.jpg";
 import joshuaPhoto from "../Photos : Images/Joshua_about_me_Main.jpg";
+import daniellePhoto from '../Photos : Images/Dani_about_me.jpg';
 import { GoMarkGithub } from "react-icons/go";
 import {SiLinkedin} from "react-icons/si"
 
@@ -38,7 +39,7 @@ const TeamPage = () => {
   }
 
   let landon_description = "I'm a new developer trying to make my way in this world. I like to code, ski and play with my family. I hope to become filthy rich in my coding endevours and make whoever goes on the journey with me just as wealthy."
-
+  let dani_description = "Human Sponge. Soaking up new ideas and technologies and using them to develop modern and creative apps.";
   let joshua_description = "Help! I'm stuck in a black and white photo in an html element! Use flexbox to help me escape!"
 
   return (
@@ -48,7 +49,7 @@ const TeamPage = () => {
       </div>
       <TeamContainer>
         {renderTeamMember(landonPhoto, "Landon Whitesides", "https://github.com/white731", "https://www.linkedin.com/in/landon-whitesides/", landon_description)}
-        {renderTeamMember("IMAGE_LINK_HERE", "NAME_HERE", "GITHUBLINK_HERE", "LINKEDINLINK_HERE", "DESCRIPTION_HERE")}
+        {renderTeamMember(daniellePhoto, "Danielle Dona", "https://github.com/dani7beth", "https://www.linkedin.com/in/danielledona/", dani_description)}
         {renderTeamMember("IMAGE_LINK_HERE", "NAME_HERE", "GITHUBLINK_HERE", "LINKEDINLINK_HERE", "DESCRIPTION_HERE")}
         {renderTeamMember(joshuaPhoto, "Joshua Parco", "https://github.com/Joshua-Parco", "https://www.linkedin.com/in/joshua-parco/", joshua_description)}
       </TeamContainer>
