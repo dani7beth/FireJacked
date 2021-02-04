@@ -81,8 +81,8 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
             {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
             <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}> 
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
-            </div>
               <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
+            </div>
           </>
         )
       }
