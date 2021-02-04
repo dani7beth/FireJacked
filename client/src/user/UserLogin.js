@@ -3,6 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Button, Form } from "react-bootstrap";
 import styled from "styled-components";
 import backgroundPhoto from "../Photos : Images/jonathan-borba-zfPOelmDc-M-unsplash.jpg";
+import {YellowButton} from '../components/Styles';
 
 const UserLogin = (props) => {
   //init email and password for login
@@ -36,7 +37,7 @@ const UserLogin = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div>
-            <StyledButton type="submit">login</StyledButton>
+            <YellowButton type="submit" style={{marginTop: '20px'}}>login</YellowButton>
           </div>
         </Form>
       </StyledContainer>
@@ -68,13 +69,4 @@ export const StyledContainer = styled.div`
   align-items: center;
   flex-direction: column;
 `;
-export const StyledButton = styled(Button)`
-  background-color: #febd4a;
-  border-color: #febd4a;
-  margin-top: 15px;
-  width: 100px;
-  &:hover {
-    background-color: #fab232;
-    border-color: #fab232;
-  }
-`;
+

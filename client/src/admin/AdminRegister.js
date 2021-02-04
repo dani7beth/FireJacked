@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import backgroundPhoto from "../Photos : Images/scott-webb-_PdZdW7fiDc-unsplash.jpg";
+import {YellowButton} from '../components/Styles';
 
 export default (props) => {
   //init register values
@@ -79,9 +80,9 @@ export default (props) => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <StyledButton variant="primary" type="submit">
+            <YellowButton type="submit" style={{marginTop: '20px'}}>
               Register Trainer
-            </StyledButton>
+            </YellowButton>
           </Form.Group>
         </Form>
       </StyledContainer>
@@ -111,24 +112,4 @@ export const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
-export const StyledButton = styled(Button)`
-  background-color: #febd4a;
-  border-color: #febd4a;
-  margin-top: 15px;
-  width: 150px;
-  &:hover {
-    background-color: #fab232;
-    border-color: #fab232;
-  }
-`;
-export const StyledButton2 = styled(Button)`
-  background-color: #f4731f;
-  border-color: #f4731f;
-  margin-top: 20px;
-  width: 100px;
-  &:hover {
-    background-color: #f2670c;
-    border-color: #f2670c;
-  }
 `;

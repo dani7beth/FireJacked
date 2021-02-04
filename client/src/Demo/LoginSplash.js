@@ -2,6 +2,7 @@ import styled from "styled-components";
 import backgroundPhoto from "../Photos : Images/jonathan-borba-zfPOelmDc-M-unsplash.jpg";
 import logo from "../Logos/TransparentBackground/FirejackedFeelTheBurnTransparentBackground1x/White Text.png";
 import { Button } from "react-bootstrap";
+import { YellowButton, OrangeButton } from "../components/Styles";
 const LoginSplash = () => {
   return (
     <Background>
@@ -18,15 +19,15 @@ const LoginSplash = () => {
         <h3 style={{ fontStyle: "italic" }}>SET/TRACK/SUCCEED</h3>
       </Logo>
       <div>
-        <StyledButton href="/login">Login</StyledButton>
-        <StyledButton2 href="/user_register">Register</StyledButton2>
+        <YellowButton href="/login" style={{marginRight: '20px'}}>Login</YellowButton>
+        <OrangeButton href="/user_register" style={{marginLeft: '20px'}}>Register</OrangeButton>
       </div>
     </Background>
   );
 };
 export default LoginSplash;
 export const Background = styled.div`
-  background: url(${backgroundPhoto}) no-repeat;
+  background: #000000 url(${backgroundPhoto}) no-repeat;
   background-size: cover;
   position: fixed;
   width: 100%;
@@ -48,25 +49,5 @@ export const Logo = styled.div`
   height: auto;
   padding: 20px;
 `;
-export const StyledButton = styled(Button)`
-  background-color: #febd4a;
-  border-color: #febd4a;
-  margin-top: 15px;
-  width: 100px;
-  margin-right: 20px;
-  &:hover {
-    background-color: #fab232;
-    border-color: #fab232;
-  }
-`;
-export const StyledButton2 = styled(Button)`
-  background-color: #f4731f;
-  border-color: #f4731f;
-  margin-top: 15px;
-  width: 100px;
-  margin-left: 20px;
-  &:hover {
-    background-color: #f2670c;
-    border-color: #f2670c;
-  }
-`;
+
+
