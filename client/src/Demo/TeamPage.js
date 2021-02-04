@@ -14,17 +14,17 @@ const TeamPage = () => {
           {
           display:"flex",
           flexDirection:"column",
-          margin: "auto", 
-          
-          height: "600px", 
-          width: "600px", 
+          margin: "25px", 
+          padding: "25px",
+          height: "auto", 
+          width: "400px", 
           border: "2px solid #d6d6d6",
           borderRadius: "10px",
           justifyContent:"center",
           alignItems:"center",
           marginBottom: "20px",
           backgroundColor:'white',
-          flex: '0 50%'
+          flex: '0 40%'
           }}>
         <img src={imagelink} alt={name} width="300px" style={{margin:"20px", borderRadius: "10px"}} />
         <h3>{name}</h3>
