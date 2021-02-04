@@ -67,7 +67,7 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
           <>
             {/* /show_user_submissions/:user_id */}
             {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
-            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center" }}>
+            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}>
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
               <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
             </div> 
@@ -79,19 +79,15 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
           <>
             {/* /show_user_submissions/:user_id */}
             {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
-            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center" }}>
-              <h7>SELECTED USER BELOW (I need help highlighting)</h7>             
+            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}> 
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
-              <h7>SELECTED USER BELOW (I need help highlighting)</h7>
+            </div>
               <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
-            </div> 
-            {/* </StyledLink> */}
           </>
         )
       }
-
     })
-  }
+    }
 
   return (
     <UserIndexDiv>

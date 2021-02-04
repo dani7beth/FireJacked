@@ -201,29 +201,35 @@ export const AdminExerciseContainerMiddle = styled.div`
 `;
 
 export const AdminExerciseContainerRight = styled.div`
-  order: 3;
-  flex-grow: 1;
-`;
+order: 3;
+flex-grow: 1;
+align-self:center;
+float: right;
+justify-content:flex-end;
+display: flex;
+`
 
 export const SubmissionsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  border: solid 1px #d6d6d6;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 10px;
-  border-radius: 15px;
-  padding: 0px;
-  margin: 15px auto;
-`;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+border: solid 1px #D6D6D6;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin-bottom: 10px;
+border-radius: 10px;
+width:98%;
+padding: 0px;
+margin: 15px auto;
+`
 export const SubmissionContainerLeft = styled.div`
-  background: black;
-  border-radius: 15px;
-  flex-grow: 1;
-  margin: 0px;
-`;
+background: black;
+border-radius: 10px 0 0 10px;
+flex-grow: 1;
+margin-right: 10px;
+width:150px;
+`
 
 export const SubmissionContainerMiddle = styled.div`
   padding-left: 10px;
@@ -262,9 +268,10 @@ export const DashboardRightSideBar = styled.div`
 `;
 
 export const DashboardCenter = styled.div`
-  order: 2;
-  // flex-grow: 2;
-`;
+order: 2;
+min-width: 851px;
+// flex-grow: 2;
+`
 
 export const UserInfoDiv = styled.div`
   display: flex;
@@ -311,23 +318,44 @@ export const UserIndexBottom = styled.div`
   max-height: 500px;
   margin-top: 20px;
 `;
+
 export const SubmissionVerification = styled(Link)`
-  font-size: 18px;
-  border: solid 2px black;
-  border-radius: 8px;
-  min-height: 30px;
-  padding: 5px;
-  background-color: ${(props) =>
-    props.selected === props.category ? "black" : "white"};
-  color: ${(props) => (props.selected === props.category ? "white" : "black")};
-  text-align: center;
-  cursor: pointer;
-  // border-radius:8px;
-  ${CategoryButton}:hover & {
-    background-color: black;
-    color: White;
-  }
+font-size: 18px;
+border: solid 2px black;
+border-radius: 8px;
+min-height: 30px;
+padding: 5px;
+background-color: ${(props) =>
+  props.selected === props.category ? "black" : "white"};
+color: ${(props) => (props.selected === props.category ? "white" : "black")};
+text-align: center;
+cursor: pointer;
+// border-radius:8px;
+${CategoryButton}:hover & {
+  background-color: black;
+  color: White;
+}
 `;
+
+export const SearchBarParent = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+`
+
+export const SearchBarChild1 = styled.div`
+min-width: 400px;
+`
+
+export const SearchBarChild2 = styled.div`
+margin-left: -70px;
+`
+
+export const SearchBarChild3 = styled.div`
+align-self:right;
+`
+
 
 export const OrangeButton = styled(Button)`
   background-color: #f4731f;

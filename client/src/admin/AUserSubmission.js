@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import axios from 'axios';
-import { SubmissionsContainer, SubmissionContainerLeft, SubmissionContainerMiddle, SubmissionContainerRight, StyledLink, SubmissionVerification } from "../components/Styles";
+import { SubmissionsContainer, SubmissionContainerLeft, SubmissionContainerMiddle, SubmissionContainerRight, StyledLink, SubmissionVerification, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle, AdminExerciseContainerRight } from "../components/Styles";
 
 const AUserSubmission = ({name, status, id, created_at, user_id, level_id}) => {
   const [user, setUser] = useState({})
@@ -56,21 +56,29 @@ const AUserSubmission = ({name, status, id, created_at, user_id, level_id}) => {
   return (
     <div>
       <SubmissionsContainer>
+      {/* <UserExerciseLevelContainer> */}
         <SubmissionContainerLeft>
+        {/* <AdminExerciseContainerLeft> */}
           <img src={user.image} style={{ borderRadius: "50%", width: "150px", margin: "auto"}}/>
         </SubmissionContainerLeft>
+        {/* </AdminExerciseContainerLeft> */}
         <SubmissionContainerMiddle>
+        {/* <AdminExerciseContainerMiddle> */}
           <h3>{user.first_name} {user.last_name}</h3>
-          <h5>{exercise.activity}</h5>
-          <h5>{level.name}</h5>
-          <h5>{status}</h5>
+          <h5>Exercise: {exercise.activity}</h5>
+          <h5>Level: {level.name}</h5>
+          <h5>Status: {status}</h5>
         </SubmissionContainerMiddle>
+        {/* </AdminExerciseContainerMiddle> */}
         <SubmissionContainerRight>
+        {/* <AdminExerciseContainerRight> */}
           <SubmissionVerification to={`/admin-submissions/${id}`}>
             Verify
           </SubmissionVerification>
         </SubmissionContainerRight>
+        {/* </AdminExerciseContainerRight> */}
       </SubmissionsContainer>
+      {/* </UserExerciseLevelContainer> */}
     </div>
   )
 }
