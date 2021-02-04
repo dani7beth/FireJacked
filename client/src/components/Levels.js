@@ -59,15 +59,17 @@ const Levels = ({exerciseID}) => {
   
   return (
     <>
-      <Button variant="primary" onClick={addModalShow}>
+      {/* <Button variant="primary" onClick={addModalShow}>
         Add a new level
-      </Button>
+      </Button> */}
       <Modal show={addModal} onHide={addModalHide}>
         <Modal.Header closeButton>
           <Modal.Title>Enter new level info here</Modal.Title>
         </Modal.Header>
         <Modal.Body><LevelForm exerciseID={exerciseID} addLevel={addLevel} addModalHide={addModalHide} /></Modal.Body>
       </Modal>
+      <hr></hr>
+      <h5>Levels:</h5>
       {renderLevels()}
     </>
   );

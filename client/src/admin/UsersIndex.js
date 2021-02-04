@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { UserInfoDiv, StyledLink, UserIndexDiv, UserIndexTop, UserIndexBottom } from '../components/Styles';
+import { UserInfoDiv, StyledLink, UserIndexDiv, UserIndexTop, UserIndexBottom, UserFromList, UserSelected, UserFromListSelected } from '../components/Styles';
 import { Form } from 'react-bootstrap';
 
-const UserIndex = ({selectedUser, setSelectedUser}) => {
+const UserIndex = ({selectedUser, setSelectedUser, setCurrentDisplayExercises}) => {
   const [users, setUsers] = useState([])
   const [searchText, setSearchText] = useState("")
   const [usersDefault, setUsersDefault] = useState([])
@@ -65,24 +65,25 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
       if (selectedUser !== user){
         return (
           <>
-            {/* /show_user_submissions/:user_id */}
-            {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
-            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}>
-              <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
-              <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
-            </div> 
-            {/* </StyledLink> */}
+            <UserFromList onClick={() => {
+              setCurrentDisplayExercises(false)
+              setSelectedUser(user)
+              
+              }}>
+              <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px', alignSelf:"center"}}/>
+              <h3  key={user.id} style={{alignSelf:"center"}}>{user.first_name}</h3>
+              <h3  key={user.id} style={{alignSelf:"center"}}>{user.last_name}</h3>
+            </UserFromList> 
           </>
         )
       } else {
         return (
           <>
-            {/* /show_user_submissions/:user_id */}
-            {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
-            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}> 
-              <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
-            </div>
-              <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
+            <UserFromListSelected onClick={() => setSelectedUser(user)}>
+              <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px', alignSelf:"center"}}/>
+              <UserSelected key={user.id} >{user.first_name}</UserSelected>
+              <UserSelected key={user.id} >{user.last_name}</UserSelected>
+            </UserFromListSelected> 
           </>
         )
       }
