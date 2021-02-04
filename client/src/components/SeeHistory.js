@@ -367,7 +367,7 @@ export const StatusContainerApproved = styled.div`
   background-color: #00A86B;
   margin-left: 8px;
   text-align: center;
-  width: 25%;
+  width: 110px;
   color: #FFFFFF;
 `
 
@@ -377,7 +377,7 @@ export const StatusContainerPending = styled.div`
   background-color: #FEBD4A;
   margin-left: 8px;
   text-align: center;
-  width: 25%;
+  width: 110px;
   color: #FFFFFF;
 `
 
@@ -387,7 +387,7 @@ export const StatusContainerFailed = styled.div`
   background-color: #F08080;
   margin-left: 8px;
   text-align: center;
-  width: 25%;
+  width: 110px;
   color: #FFFFFF;
 `
 

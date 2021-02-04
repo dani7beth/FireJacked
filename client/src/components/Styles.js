@@ -44,6 +44,7 @@ padding:10px
 export const NateSeeHistoryContainer = styled.div`
 margin-top: 23px;
 margin-bottom: 65px;
+overflow:auto;
 height: 200px;
 width: 90%;
 border: 2px solid #d6d6d6;
