@@ -102,17 +102,18 @@ const UserStats = () => {
     return filteredData.map((x) => {
       return (
         <>
-          <tr>
-            <h5>{x.category}</h5>
-          </tr>
-          {x.submissions.map((x) => (
-            <StyledLink to={`/${x.exercise_id}/user_see_history/blank`}>
-              <p>
-                {x.activity} {x.goal} {x.metric} Level: {x.level_name} |{" "}
-                {x.status}
-              </p>
-            </StyledLink>
-          ))}
+          <thead>
+            <tr>
+              <h5>{x.category}</h5>
+            </tr>
+          </thead>
+          <tbody>
+            {x.submissions.map((x) => (
+              <StyledLink to={`/${x.exercise_id}/user_see_history/blank`}>
+                {x.activity} {x.goal} {x.metric} Level: {x.level_name} | {x.status}
+              </StyledLink>
+            ))}
+          </tbody>
         </>
       );
     });
@@ -125,8 +126,9 @@ const UserStats = () => {
 
       <h1>Completed Submission by Category</h1>
       <Table striped bordered hover>
-        <thead>{renderTopSubmissionByCategory()}</thead>
-        {/* <tbody>
+        {renderTopSubmissionByCategory()}
+      </Table>
+      {/* <tbody>
           <tr>
             <td>1</td>
             <td>Mark</td>
@@ -145,7 +147,6 @@ const UserStats = () => {
             <td>@twitter</td>
           </tr>
         </tbody> */}
-      </Table>
 
       {/* <h1>Percentage of total levels completed</h1>
 
