@@ -204,6 +204,10 @@ align-items: stretch;
 export const AdminExerciseContainerRight = styled.div`
 order: 3;
 flex-grow: 1;
+align-self:center;
+float: right;
+justify-content:flex-end;
+display: flex;
 `
 
 export const SubmissionsContainer = styled.div`
