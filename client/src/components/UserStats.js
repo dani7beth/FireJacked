@@ -123,11 +123,11 @@ const UserStats = () => {
 
     return filteredData.map((x) => {
       return (
-        <div style={{ padding: "100px 400px" }}>
+        <div style={{ padding: "100px 400px" , backgroundColor: '#fffff !important'}}>
           <h5 style={{ textAlign: "center" }}>{x.category}</h5>
-          <Table striped bordered hover>
+          <Table striped bordered>
             <thead>
-              <tr>
+              <tr style={{backgroundColor: '#f4f4f4'}}>
                 <th>Activity</th>
                 <th>Goal</th>
                 <th>Metric</th>
@@ -137,7 +137,7 @@ const UserStats = () => {
             </thead>
             <tbody>
               {x.submissions.map((x) => (
-                <tr>
+                <tr style={{backgroundColor: '#f4f4f4'}}>
                   <td>
                     <StyledLink to={`/${x.exercise_id}/user_see_history/blank`}>
                       {/* {x.activity} {x.goal} {x.metric} Level: {x.level_name} |{" "}

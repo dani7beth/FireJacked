@@ -14,10 +14,10 @@ const TeamPage = () => {
           {
           display:"flex",
           flexDirection:"column",
-          margin: "auto", 
-          
-          height: "600px", 
-          width: "600px", 
+          margin: "1px", 
+          padding: "25px",
+          height: "500px", 
+          width: "500px", 
           border: "2px solid #d6d6d6",
           borderRadius: "10px",
           justifyContent:"center",
