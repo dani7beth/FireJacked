@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
 import backgroundPhoto from "../Photos : Images/anastase-maragos-7kEpUPB8vNk-unsplash.jpg";
+import {YellowButton, OrangeButton} from '../components/Styles';
 
 
 const AdminLogin = (props) => {
@@ -35,11 +36,11 @@ const AdminLogin = (props) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div>
-          <StyledButton type="submit">login</StyledButton>
+          <YellowButton type="submit" style={{marginTop: '20px'}}>login</YellowButton>
         </div>
       </Form>
       </StyledContainer>
-      <StyledButton2 href="/admin_register">Register</StyledButton2>
+      <OrangeButton href="/admin_register" style={{marginTop: '20px'}}>Register</OrangeButton>
     </Background>
   );
 };
@@ -68,24 +69,4 @@ export const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
-export const StyledButton = styled(Button)`
-  background-color: #febd4a;
-  border-color: #febd4a;
-  margin-top: 15px;
-  width: 100px;
-  &:hover {
-    background-color: #fab232;
-    border-color: #fab232;
-  }
-`;
-export const StyledButton2 = styled(Button)`
-  background-color: #f4731f;
-  border-color: #f4731f;
-  margin-top: 15px;
-  width: 100px;
-  &:hover {
-    background-color: #f2670c;
-    border-color: #f2670c;
-  }
 `;
