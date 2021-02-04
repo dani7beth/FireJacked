@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BoxAdminSubmissions, ButtonMain, YO } from "../components/Styles";
 import axios from 'axios';
+import FilterByCategory from "../exercises/FilterByCategory";
 
 const AllUserSubmissions = ({selectedUser}) => {
   const [submissions, setSubmissions] = useState([]);

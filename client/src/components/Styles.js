@@ -268,7 +268,7 @@ export const Dashboard = styled.div`
   margin: auto;
   margin-top: 10px;
   padding: 10px;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
 export const DashboardLeftSideBar = styled.div`
@@ -286,10 +286,11 @@ export const DashboardRightSideBar = styled.div`
 `;
 
 export const DashboardCenter = styled.div`
-  order: 2;
-  align-self: stretch;
-  // flex-grow: 2;
-`;
+order: 2;
+align-self: stretch;
+min-width:851px;
+// flex-grow: 2;
+`
 
 export const UserInfoDiv = styled.div`
   display: flex;

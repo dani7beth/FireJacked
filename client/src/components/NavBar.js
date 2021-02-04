@@ -39,6 +39,9 @@ export default (props) => {
             <Nav.Link href="/user_stats">
               <h4>STATS</h4>
             </Nav.Link>
+            <Nav.Link href="/team_page">
+              <h4>ABOUT US</h4>
+            </Nav.Link>
           </Nav>
 
           <Nav className="ml-auto">
