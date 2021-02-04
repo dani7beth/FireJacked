@@ -53,7 +53,6 @@ export const Background = styled.div`
   height: 100%;
   top: 0px;
   left: 0px;
-  z-index: -1;
   display: flex;
   justify-content: center;
   align-items: center;

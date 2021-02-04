@@ -293,7 +293,7 @@ const SeeHistory = () => {
         )
     } else {
         return (
-          <div>
+          <MainContainer>
             <Row>
               <Col>
                 <Title>{user.first_name} {user.last_name}</Title>
@@ -324,7 +324,7 @@ const SeeHistory = () => {
                 </Col>
               </Row>
               {modal()}
-          </div>
+          </MainContainer>
         )
       }
     }
@@ -367,7 +367,7 @@ export const StatusContainerApproved = styled.div`
   background-color: #00A86B;
   margin-left: 8px;
   text-align: center;
-  width: 25%;
+  width: 110px;
   color: #FFFFFF;
 `
 
@@ -377,7 +377,7 @@ export const StatusContainerPending = styled.div`
   background-color: #FEBD4A;
   margin-left: 8px;
   text-align: center;
-  width: 25%;
+  width: 110px;
   color: #FFFFFF;
 `
 
@@ -387,7 +387,7 @@ export const StatusContainerFailed = styled.div`
   background-color: #F08080;
   margin-left: 8px;
   text-align: center;
-  width: 25%;
+  width: 110px;
   color: #FFFFFF;
 `
 
@@ -403,6 +403,7 @@ export const CommentsContainer = styled.div`
   width: 720px;
   border: 2px solid #d6d6d6;
   border-radius: 10px;
+  background-color: white;
 `
 
 export const CommentTitle = styled.h5`
@@ -432,4 +433,8 @@ export const CommentAdminImage = styled.img`
 export const HistoryTitle = styled.h5`
   padding:20px; 
   text-decoration:underline;
+`
+
+export const MainContainer = styled.div`
+  height:100%;
 `
