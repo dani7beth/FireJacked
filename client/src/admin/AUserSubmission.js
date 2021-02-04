@@ -6,12 +6,13 @@ import { SubmissionsContainer, SubmissionContainerLeft, SubmissionContainerMiddl
 
 const AUserSubmission = ({name, status, id, created_at, user_id, level_id}) => {
   const [user, setUser] = useState({})
-  const [level, setLevel] = useState({})
+  const [level, setLevel] = useState(null)
   const [exercise, setExercise] = useState({})
   // const [level, setLevel] = useState({})
   
   useEffect(() => {
     getUser()
+    
   }, []);
 
   useEffect(() => {
@@ -59,14 +60,14 @@ const AUserSubmission = ({name, status, id, created_at, user_id, level_id}) => {
       {/* <UserExerciseLevelContainer> */}
         <SubmissionContainerLeft>
         {/* <AdminExerciseContainerLeft> */}
-          <img src={user.image} style={{ borderRadius: "50%", width: "150px", margin: "auto"}}/>
+          <img src={user?.image} style={{ borderRadius: "50%", width: "150px", margin: "auto"}}/>
         </SubmissionContainerLeft>
         {/* </AdminExerciseContainerLeft> */}
         <SubmissionContainerMiddle>
         {/* <AdminExerciseContainerMiddle> */}
-          <h3>{user.first_name} {user.last_name}</h3>
-          <h5>Exercise: {exercise.activity}</h5>
-          <h5>Level: {level.name}</h5>
+          <h3>{user?.first_name} {user?.last_name}</h3>
+          <h5>Exercise: {exercise?.activity}</h5>
+          <h5>Level: {level?.name}</h5>
           <h5>Status: {status}</h5>
         </SubmissionContainerMiddle>
         {/* </AdminExerciseContainerMiddle> */}

@@ -25,8 +25,8 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
       <>
         <div>
           <p>{body}</p>
-          <MdEdit onClick={handleEditShow} style={{fontSize:"24px"}}/>
-          <MdDelete onClick={handleShow} style={{fontSize:"24px"}}/>
+          <MdEdit onClick={handleEditShow} style={{fontSize:"24px", cursor:"pointer"}}/>
+          <MdDelete onClick={handleShow} style={{fontSize:"24px", cursor:"pointer"}}/>
 
           <Modal show={editShow} onHide={handleEditClose}>
             <Modal.Header closeButton>

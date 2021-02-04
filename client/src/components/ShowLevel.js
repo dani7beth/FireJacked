@@ -117,6 +117,7 @@ export const StyledSub = styled.div`
 `
 export const EditIcon = styled(MdEdit)`
   font-size:20px;
+  cursor:"pointer";
   &:hover {
     font-size:21px;
   }
@@ -124,6 +125,7 @@ export const EditIcon = styled(MdEdit)`
 
 export const DeleteIcon = styled(MdDelete)`
   font-size:22px;
+  cursor:pointer;
   &:hover {
     font-size:23px;
   }
