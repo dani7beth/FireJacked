@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import backgroundPhoto from "../Photos : Images/scott-webb-_PdZdW7fiDc-unsplash.jpg";
+import fireJackedLogo from "../Logos/fireJackedUser.svg"
 import {YellowButton} from '../components/Styles';
 
 export default (props) => {
@@ -15,6 +16,7 @@ export default (props) => {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [speciality, setSpeciality] = useState("");
+  const [image, setImage] = useState(fireJackedLogo)
 
   const { handleAdminRegister } = useContext(AuthContext);
 
@@ -23,7 +25,7 @@ export default (props) => {
     e.preventDefault();
     if (password === confirmPassword) {
       handleAdminRegister(
-        { email, firstName, lastName, phone, speciality, password },
+        { email, firstName, lastName, phone, speciality, password, image },
         props.history
       );
     } else {
