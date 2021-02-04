@@ -57,7 +57,7 @@ const ShowLevel = (
     <>
     <StyledSub onClick={()=>{renderClickedSubmission(submission)}}>
       <p>
-         {submissionTimeStamp()} | {level.name} | {level.measurement ==="Bodyweight" ? `${outcome} ${level.metric}` : ""} | {submission.status}
+         {submissionTimeStamp()} | {level.name} | {level.measurement ==="Bodyweight" ? `${outcome.toFixed()} ${level.metric}` : ""} | {submission.status}
       </p>
       <p>
         Timeframe: {duration}{" | "}

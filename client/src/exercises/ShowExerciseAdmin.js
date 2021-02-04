@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Carousel, Col, Modal, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from 'styled-components';
 
 const ShowExerciseAdmin = () => {
@@ -49,7 +49,6 @@ const ShowExerciseAdmin = () => {
 
   // set carousel limit to one at a time?
   const renderSubmissions = () => {
-    if(submissions.length !== 0) {
     return submissions.map((submission) => {
       const submissionTimeStamp = () => {
         let date = new Date(submission.created_at);
@@ -59,19 +58,26 @@ const ShowExerciseAdmin = () => {
         <Carousel.Item>
           <CarouselVids controls={true} src={submission.video} />
           <SubInfo>
-            <p>{submission.user_first_name}</p>
-            <p>
-              {submissionTimeStamp()} -{" "}
-              {submission.status}
-            </p>
+            <SubLink to={`/admin-submissions/${submission.id}`}>
+              <h5>{submission.user_first_name}</h5>
+              <p>
+                {submissionTimeStamp()} -{" "}
+                {submission.status}
+              </p>
+            </SubLink>
           </SubInfo>
         </Carousel.Item>
       );
     });
-   } else {
-     return <NoSubs>No Submissions</NoSubs>
-   }
   };
+
+  const renderCarousel = () => {
+    if(submissions.length !== 0){
+      return <MyCarousel>{renderSubmissions()}</MyCarousel>
+    } else {
+      return <NoSubs>NO SUBMISSIONS</NoSubs>
+    }
+  }
 
   return (
     <>
@@ -94,7 +100,7 @@ const ShowExerciseAdmin = () => {
           <Recordings>
             USERS' SUBMISSIONS
           </Recordings>
-          <MyCarousel>{renderSubmissions()}</MyCarousel>
+          {renderCarousel()}
         </CarouselContainer>
       </FlexRow>
     </>
@@ -177,6 +183,12 @@ export const Header = styled.h1`
   margin-top:0px;
 `
 
-export const NoSubs = styled.h1`
+export const NoSubs = styled.h2`
+  margin-top:50px;
   font-weight: 900;
+  text-align:center;
+`
+
+export const SubLink = styled(Link)`
+  color:black;
 `

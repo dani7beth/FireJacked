@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider"
 import { Button, Modal } from "react-bootstrap"
 import SubmissionForm from "../submissions/SubmissionForm"
+import styled from 'styled-components';
 import { UserExerciseLevelContainer, UserExerciseLevelLeft, UserExerciseLevelRight, UserExerciseLevelButtons, StyledLink } from "../components/Styles"
 
 const AllExercise = ({activity, exercise_id, category, measurement, multiplier,timeframe,metric,reps,sets,user_status,level_name, level_id, addSubmission}) => {
@@ -36,7 +37,7 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
         </UserExerciseLevelLeft>
         <UserExerciseLevelRight>
             <Link to={`/${exercise_id}/user_see_history/${level_id}`}>
-              <UserExerciseLevelButtons>View</UserExerciseLevelButtons>
+              <ViewButton>View</ViewButton>
             </Link>
             <UserExerciseLevelButtons onClick={handleShow}>Upload</UserExerciseLevelButtons>
         </UserExerciseLevelRight>
@@ -61,3 +62,16 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
 }
 
 export default AllExercise
+
+export const ViewButton = styled(Button)`
+  margin: 5px;
+  width: 7em;
+  color: white;
+  background-color: black;
+  border-color: black;
+  &:hover {
+    color: white;
+    background-color: #febd4a;
+    border-color: #d6d6d6;
+  }
+`

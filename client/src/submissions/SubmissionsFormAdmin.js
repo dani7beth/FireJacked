@@ -118,7 +118,7 @@ const SubmissionsFormAdmin = () => {
             <HowToVideo controls={true} src={submission.video_upload}/>
           </AdminFeedbackForm>
           <AdminFeedbackForm>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} style={{borderRadius:'10px', width:'182px'}}>
               <Form.Label as="h1">{exercise.activity}</Form.Label>
               <Form.Label as="h3">{date}</Form.Label>
               <Form.Label as="p"> 
@@ -137,7 +137,7 @@ const SubmissionsFormAdmin = () => {
                 <option>Approved</option>
                 <option >Not Approved</option>
               </Form.Control>
-              <Button type='submit' style={{marginTop:"10px"}}>Submit</Button>
+              <Button type='submit' style={{marginTop:"10px", backgroundColor:'#f4731f', border:'1px solid #f4731f'}}>Submit</Button>
             </Form>
           </AdminFeedbackForm>
           

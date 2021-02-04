@@ -43,20 +43,23 @@ export const NateSeeHistorySubs = styled.div`
 `;
 
 export const NateSeeHistoryContainer = styled.div`
-  margin-top: 23px;
-  margin-bottom: 65px;
-  height: 200px;
-  width: 90%;
-  border: 2px solid #d6d6d6;
-  border-radius: 10px;
-`;
+margin-top: 23px;
+margin-bottom: 65px;
+overflow:auto;
+height: 200px;
+width: 90%;
+border: 2px solid #d6d6d6;
+border-radius: 10px;
+background-color:white;
+`
 
 export const NateSeeHistorySubsContainer = styled.div`
-  height: 330px;
-  width: 90%;
-  border: 2px solid #d6d6d6;
-  border-radius: 10px;
-`;
+height: 330px;
+width: 90%;
+border: 2px solid #d6d6d6;
+border-radius: 10px;
+background-color:white;
+`
 export const BoxCustomAllExercises = styled(BoxMain)`
   height: 620px;
 `;
@@ -116,6 +119,7 @@ export const UserExerciseLevelContainer = styled.span`
   width: 98%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 15px auto;
+  background-color:white;
 `;
 
 export const UserExerciseLevelLeft = styled.div`
@@ -228,19 +232,20 @@ export const AdminExerciseContainerRight = styled.div`
 `;
 
 export const SubmissionsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  border: solid 1px #d6d6d6;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 10px;
-  border-radius: 10px;
-  width: 98%;
-  padding: 0px;
-  margin: 15px auto;
-`;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+border: solid 1px #D6D6D6;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin-bottom: 10px;
+border-radius: 10px;
+width:98%;
+padding: 0px;
+margin: 15px auto;
+background-color:white;
+`
 export const SubmissionContainerLeft = styled.div`
   background: black;
   border-radius: 10px 0 0 10px;
@@ -339,21 +344,24 @@ export const UserIndexBottom = styled.div`
 `;
 
 export const SubmissionVerification = styled(Link)`
-  font-size: 18px;
-  border: solid 2px black;
-  border-radius: 8px;
-  min-height: 30px;
-  padding: 5px;
-  background-color: ${(props) =>
-    props.selected === props.category ? "black" : "white"};
-  color: ${(props) => (props.selected === props.category ? "white" : "black")};
-  text-align: center;
-  cursor: pointer;
-  // border-radius:8px;
-  ${CategoryButton}:hover & {
-    background-color: black;
-    color: White;
-  }
+font-size: 18px;
+border: solid 2px black;
+border-radius: 8px;
+min-height: 30px;
+padding: 5px;
+background-color: ${(props) =>
+  props.selected === props.category ? "black" : "white"};
+color: ${(props) => (props.selected === props.category ? "white" : "black")};
+text-align: center;
+cursor: pointer;
+// border-radius:8px;
+  &:hover  {
+  background-color: black;
+  color: white;
+  text-decoration:none;
+  font-size:116%;
+  transition:0.25s;
+}
 `;
 
 export const SearchBarParent = styled.div`
