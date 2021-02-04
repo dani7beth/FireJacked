@@ -22,15 +22,14 @@ const Trainer = () => {
 
   return (
     <Background>
-      <h1>TRAINERS</h1>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "center",
         }}
       >
-        <div style={{ alignSelf: "flex-start" }}>
+        <div style={{ alignSelf: "flex-start"}}>
           <h2>
             {admin.first_name} {admin.last_name}
           </h2>
@@ -42,7 +41,7 @@ const Trainer = () => {
           </ul>
         </div>
 
-        <TrainerPhoto photo={admin.image}></TrainerPhoto>
+        <TrainerPhoto photo={admin.image} style={{marginLeft:"20px"}}></TrainerPhoto>
       </div>
     </Background>
   );
@@ -78,7 +77,7 @@ export const TrainerPhoto = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 10px;
-  width: 600px;
+  width: 400px;
   height: 400px;
   align-self: flex-end;
 `;
