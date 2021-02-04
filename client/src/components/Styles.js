@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 export const Box = styled.div`
   height: 700px;
@@ -49,6 +50,7 @@ height: 200px;
 width: 90%;
 border: 2px solid #d6d6d6;
 border-radius: 10px;
+background-color:white;
 `
 
 export const NateSeeHistorySubsContainer = styled.div`
@@ -56,9 +58,10 @@ height: 330px;
 width: 90%;
 border: 2px solid #d6d6d6;
 border-radius: 10px;
+background-color:white;
 `
 export const BoxCustomAllExercises = styled(BoxMain)`
-  height: 600px;
+  height: 620px;
 `;
 
 export const AllExercisesContainer = styled(BoxMain)`
@@ -71,7 +74,7 @@ border
 `;
 
 export const BoxAdminExercises = styled(BoxMain)`
-  height: 450px;
+  height: 600px;
 `;
 
 export const BoxAdminSubmissions = styled(BoxMain)`
@@ -116,6 +119,7 @@ export const UserExerciseLevelContainer = styled.span`
   width: 98%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 15px auto;
+  background-color:white;
 `;
 
 export const UserExerciseLevelLeft = styled.div`
@@ -189,7 +193,31 @@ export const ButtonSeeExercise = styled(ButtonMain)``;
 export const AdminExerciseContainerLeft = styled.div`
   order: 1;
   flex-grow: 6;
+  // display:flex;
+  // flex-wrap: row;
 `;
+
+export const OnTop = styled.div`
+
+`
+
+export const OnBottom = styled.div`
+
+`
+
+export const LevelsParent = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+
+`
+
+export const LevelChildContent = styled.div`
+font-size: 16px;
+
+`
+
 
 export const AdminExerciseContainerMiddle = styled.div`
   order: 2;
@@ -204,7 +232,7 @@ export const AdminExerciseContainerMiddle = styled.div`
 export const AdminExerciseContainerRight = styled.div`
 order: 3;
 flex-grow: 1;
-align-self:center;
+align-self:start;
 float: right;
 justify-content:flex-end;
 display: flex;
@@ -223,6 +251,7 @@ border-radius: 10px;
 width:98%;
 padding: 0px;
 margin: 15px auto;
+background-color:white;
 `
 export const SubmissionContainerLeft = styled.div`
 background: black;
@@ -230,6 +259,7 @@ border-radius: 10px 0 0 10px;
 flex-grow: 1;
 margin-right: 10px;
 width:150px;
+
 `
 
 export const SubmissionContainerMiddle = styled.div`
@@ -251,7 +281,7 @@ export const Dashboard = styled.div`
   margin: auto;
   margin-top: 10px;
   padding: 10px;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
 export const DashboardLeftSideBar = styled.div`
@@ -270,7 +300,8 @@ export const DashboardRightSideBar = styled.div`
 
 export const DashboardCenter = styled.div`
 order: 2;
-min-width: 851px;
+align-self: stretch;
+min-width:851px;
 // flex-grow: 2;
 `
 
@@ -332,9 +363,12 @@ color: ${(props) => (props.selected === props.category ? "white" : "black")};
 text-align: center;
 cursor: pointer;
 // border-radius:8px;
-${CategoryButton}:hover & {
+  &:hover  {
   background-color: black;
-  color: White;
+  color: white;
+  text-decoration:none;
+  font-size:116%;
+  transition:0.25s;
 }
 `;
 
@@ -342,19 +376,20 @@ export const SearchBarParent = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-justify-content: space-between;
 `
 
 export const SearchBarChild1 = styled.div`
-min-width: 400px;
+align-self:stretch;
+flex-grow:2;
 `
 
 export const SearchBarChild2 = styled.div`
-margin-left: -70px;
+margin-left: 10px;
+flex-grow: 1;
 `
 
 export const SearchBarChild3 = styled.div`
-align-self:right;
+margin-left: auto;
 `
 
 
@@ -375,3 +410,26 @@ export const YellowButton = styled(Button)`
     border-color: #fab232;
   }
 `;
+
+export const UserFromList=styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+cursor:pointer;
+padding: 10px;
+`
+
+export const UserFromListSelected=styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+cursor:pointer;
+border-radius: 8px;
+margin-bottom: 20px;
+background-color: #F4731F;
+padding: 10px;
+`
+
+export const UserSelected=styled.h3`
+align-self: center;
+`

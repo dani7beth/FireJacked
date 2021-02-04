@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {Modal, Button} from 'react-bootstrap'
+import { MdEdit, MdDelete } from "react-icons/md";
 
 
 const Comment = ({body, editSingleComment, id, submission_id, removeComment}) => {
@@ -23,10 +24,10 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
     return(
       <>
         <div>
-            <h4>{body}</h4>
-             <Button variant="primary" size='sm' onClick={handleEditShow}>
-            Edit
-          </Button>
+          <p>{body}</p>
+          <MdEdit onClick={handleEditShow} style={{fontSize:"24px"}}/>
+          <MdDelete onClick={handleShow} style={{fontSize:"24px"}}/>
+
           <Modal show={editShow} onHide={handleEditClose}>
             <Modal.Header closeButton>
               <Modal.Title>Edit</Modal.Title>
@@ -36,31 +37,23 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
                 <form onSubmit={handleSubmit}>
                   <textarea value={newBody} onChange={(e)=>setNewBody(e.target.value)}/> 
                   <br />
-                  <Button type='submit' variant='primary' size='sm'>submit changes</Button>
-                  <Button variant="secondary" size='sm' onClick={handleEditClose}>Go back</Button>
+                  <Button type='submit' variant='primary' >Submit Changes</Button>
+                  <Button variant="secondary"  onClick={handleEditClose}>Cancel</Button>
                 </form>
             </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="danger" onClick={handleEditClose}>
-                Go back
-              </Button>
-            </Modal.Footer>
           </Modal>
 
-            <Button variant="danger" size='sm' onClick={handleShow}>
-            Delete
-          </Button>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Delete</Modal.Title>
             </Modal.Header>
             <Modal.Body>Are you sure you want to Delete?</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" size='sm' onClick={handleClose}>
+              <Button variant="secondary"  onClick={handleClose}>
                 No
               </Button>
-              <Button variant="danger" size='sm' onClick={()=> removeComment(id)}>
+              <Button variant="danger" onClick={()=> removeComment(id)}>
                 Yes, delete.
               </Button>
             </Modal.Footer>

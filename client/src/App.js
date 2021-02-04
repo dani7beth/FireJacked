@@ -25,14 +25,14 @@ import Trainer from "./user/Trainer";
 import UserSubmissions from "./admin/UserSubmissions";
 import SeeHistory from "./components/SeeHistory";
 import LoginSplash from "./Demo/LoginSplash";
+import TeamPage from "./Demo/TeamPage";
 
 function App() {
 
   return (
     <div className='App'>
       <FetchUserAdmin>
-      <NavBar />
-
+        <NavBar />
         <Switch>
           <Route exact path ='/' component={LoginSplash} />
           <Route exact path='/login' component={UserLogin} />
@@ -55,6 +55,7 @@ function App() {
           <Route exact path="/show-exercises-for-admin/:exercise_id" component={ShowExerciseAdmin} />
           <Route exact path="/show_admin/:admin_id" component={Trainer} />
           <Route exact path="/show_user_submissions/:user_id" component={UserSubmissions} />
+          <Route exact path="/team_page" component={TeamPage} />
           <Route component={NoMatch} />
         </Switch>
       </FetchUserAdmin>

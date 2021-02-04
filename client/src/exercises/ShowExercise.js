@@ -58,6 +58,14 @@ const ShowExercise = () => {
     });
   };
 
+  const renderCarousel = () => {
+    if(submissions.length !== 0){
+      return <MyCarousel>{renderSubmissions()}</MyCarousel>
+    } else {
+      return <NoSubs>NO SUBMISSIONS RECORDED</NoSubs>
+    }
+  }
+
   return (
     <>
       <FlexRow>
@@ -84,7 +92,7 @@ const ShowExercise = () => {
         <Recordings>
           MY RECORDINGS
         </Recordings>
-        <MyCarousel>{renderSubmissions()}</MyCarousel>
+        {renderCarousel()}
       </CarouselContainer>
       </FlexRow>
     </>
@@ -171,4 +179,10 @@ export const ExerciseDesc = styled.div`
 
 export const Header = styled.h1`
   margin-top:0px;
+`
+
+export const NoSubs = styled.h2`
+  margin-top:50px;
+  font-weight: 900;
+  text-align:center;
 `

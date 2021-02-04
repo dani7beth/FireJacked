@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Axios from "axios"
 import Comment from "./Comment"
 import { Button, Form, Modal } from "react-bootstrap"
+import styled from 'styled-components';
 
 const Comments = ({submission_id}) => {
   // const { submission_id } = useParams()
@@ -73,11 +74,16 @@ const Comments = ({submission_id}) => {
   }
 
   return (
-    <>
-      <h3>Comments</h3>
-      <Button variant="primary" size='sm' onClick={handleAddShow}>
+    <div style={{padding: "30px", backgroundColor:'white', height:'300px', borderRadius:'10px'}}>
+      <h3>
+        Comments
+      <Button onClick={handleAddShow} style={{marginBottom: "0px", marginLeft:'30px', backgroundColor:'#f4731f', border:'1px solid #f4731f' }}>
         Add comment
       </Button>
+      </h3>
+      <CommentsContainer>
+        {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
+      </CommentsContainer>
       <Modal show={addShow} onHide={handleAddClose}>
         <Modal.Header closeButton>
           <Modal.Title>What would you like to say?</Modal.Title>
@@ -86,15 +92,20 @@ const Comments = ({submission_id}) => {
           <div>
             <Form onSubmit={handleSubmit}>
               <Form.Control value={comment} as="textarea" onChange={(e)=>setComment(e.target.value)}/>  
-              <Button type='submit' variant='primary' size='sm'>submit changes</Button>
-              <Button variant="secondary" size='sm' onClick={handleAddClose}>Go back</Button>
+              <Button type='submit' variant='primary'>Submit</Button>
+              <Button variant="secondary" onClick={handleAddClose}>Cancel</Button>
             </Form>
           </div>
         </Modal.Body>
       </Modal>
-      {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
-    </>
+    </div>
   )
 }
 
 export default Comments;
+
+export const CommentsContainer = styled.div`
+  height:224px;
+  overflow:auto;
+  border-radius:10px;
+`

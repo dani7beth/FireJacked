@@ -1,6 +1,8 @@
 import LevelForm from "./LevelForm";
 import {Modal, Button} from 'react-bootstrap'
 import { useState, } from 'react';
+import { MdEdit, MdDelete } from "react-icons/md";
+import { LevelsParent, LevelChildContent } from "./Styles";
 
 const Level = ({ levelProp, deleteLevel, exerciseID, editLevels}) => {
   const [ level, setLevel] = useState()
@@ -22,13 +24,28 @@ const Level = ({ levelProp, deleteLevel, exerciseID, editLevels}) => {
     else return levelProp
   }
 
+  // let outcome = levelProp.multiplier * user.weight
+  let minute = Math.floor(levelProp.timeframe/60)
+  let seconds = levelProp.timeframe%60 < 10 ? "0" + levelProp.timeframe%60 : levelProp.timeframe%60
+  let duration = minute + ":" + seconds
  
   return (
     <>
-      <p>{levelProp.name}</p>
-      <Button variant="primary" onClick={handleEditShow}>
-        Edit
-      </Button>
+      <LevelsParent>
+        <MdEdit variant="primary" onClick={handleEditShow} style={{fontSize:"24px"}}/>
+        <MdDelete variant="danger" onClick={handleShow} style={{fontSize:"24px"}}/>
+        <LevelChildContent>
+          {levelProp.name} -> {" "}
+          {levelProp.multiplier === 0 ? "" : `${levelProp.multiplier} X ${levelProp.measurement === "-" ? "" : levelProp.measurement} `} 
+          {" "}{levelProp.metric}
+          {" "}{duration === "0:00" ? "" : ` | ${duration}`} 
+          {" "}{levelProp.reps === 0 ? "" : `| Reps: ${levelProp.reps} `} 
+          {levelProp.sets === 0 ? "" : ` | Sets: ${levelProp.sets}`} 
+        </LevelChildContent>
+      </LevelsParent>
+        
+
+
       <Modal show={editShow} onHide={handleEditClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>
@@ -38,9 +55,6 @@ const Level = ({ levelProp, deleteLevel, exerciseID, editLevels}) => {
         </Modal.Footer>
       </Modal>
 
-      <Button variant="danger" onClick={handleShow}>
-        Delete
-      </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete this level</Modal.Title>

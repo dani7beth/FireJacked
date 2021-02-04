@@ -293,7 +293,7 @@ const SeeHistory = () => {
         )
     } else {
         return (
-          <div>
+          <MainContainer>
             <Row>
               <Col>
                 <Title>{user.first_name} {user.last_name}</Title>
@@ -324,7 +324,7 @@ const SeeHistory = () => {
                 </Col>
               </Row>
               {modal()}
-          </div>
+          </MainContainer>
         )
       }
     }
@@ -403,6 +403,7 @@ export const CommentsContainer = styled.div`
   width: 720px;
   border: 2px solid #d6d6d6;
   border-radius: 10px;
+  background-color: white;
 `
 
 export const CommentTitle = styled.h5`
@@ -432,4 +433,8 @@ export const CommentAdminImage = styled.img`
 export const HistoryTitle = styled.h5`
   padding:20px; 
   text-decoration:underline;
+`
+
+export const MainContainer = styled.div`
+  height:100%;
 `
