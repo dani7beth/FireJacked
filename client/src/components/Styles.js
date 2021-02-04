@@ -58,7 +58,7 @@ border: 2px solid #d6d6d6;
 border-radius: 10px;
 `
 export const BoxCustomAllExercises = styled(BoxMain)`
-  height: 600px;
+  height: 620px;
 `;
 
 export const AllExercisesContainer = styled(BoxMain)`
@@ -71,7 +71,7 @@ border
 `;
 
 export const BoxAdminExercises = styled(BoxMain)`
-  height: 450px;
+  height: 600px;
 `;
 
 export const BoxAdminSubmissions = styled(BoxMain)`
@@ -294,7 +294,7 @@ export const DashboardRightSideBar = styled.div`
 
 export const DashboardCenter = styled.div`
 order: 2;
-min-width: 851px;
+align-self: stretch
 // flex-grow: 2;
 `
 
@@ -366,19 +366,20 @@ export const SearchBarParent = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-justify-content: space-between;
 `
 
 export const SearchBarChild1 = styled.div`
-min-width: 400px;
+align-self:stretch;
+flex-grow:2;
 `
 
 export const SearchBarChild2 = styled.div`
-margin-left: -70px;
+margin-left: 10px;
+flex-grow: 1;
 `
 
 export const SearchBarChild3 = styled.div`
-align-self:right;
+margin-left: auto;
 `
 
 
@@ -400,3 +401,25 @@ export const YellowButton = styled(Button)`
   }
 `;
 
+export const UserFromList=styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+cursor:pointer;
+padding: 10px;
+`
+
+export const UserFromListSelected=styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+cursor:pointer;
+border-radius: 25%;
+margin-bottom: 20px;
+background-color: #F4731F;
+padding: 10px;
+`
+
+export const UserSelected=styled.h3`
+align-self: center;
+`
