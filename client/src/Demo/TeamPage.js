@@ -24,8 +24,12 @@ const TeamPage = () => {
         <img src={imagelink} alt={name} width="300px" style={{margin:"20px", borderRadius: "10px"}} />
         <h3>{name}</h3>
         <div style={{display:"flex", flexDirection: "row", margin: "5px"}}>
-          <GoMarkGithub href={githublink} fontSize="24px" style={{marginRight: "10px", cursor:"pointer"}}/>
-          <SiLinkedin href={linkedinlink} fontSize="24px" style={{marginLeft: "10px", cursor:"pointer"}} />
+          <a href={githublink} style={{color:"black"}}>
+            <GoMarkGithub fontSize="24px" style={{marginRight: "10px", cursor:"pointer"}}/>
+          </a>
+          <a href={linkedinlink} style={{color:"black"}}>
+          <SiLinkedin  fontSize="24px" style={{marginLeft: "10px", cursor:"pointer"}} />
+          </a>
         </div>
         <p style={{textAlign: "center", marginTop: "5px"}}>{description}</p>
       </div>
