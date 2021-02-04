@@ -110,7 +110,7 @@ export default (props) => {
           collapseOnSelect
           expand="lg"
           variant="dark"
-          style={{ backgroundColor: "none" }}
+          style={{ backgroundColor: "none"}}
         >
           <Nav>
             <BrandLogo>
