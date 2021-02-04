@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {Modal, Button} from 'react-bootstrap'
+import { MdEdit, MdDelete } from "react-icons/md";
 
 
 const Comment = ({body, editSingleComment, id, submission_id, removeComment}) => {
@@ -23,10 +24,10 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
     return(
       <>
         <div>
-            <h4>{body}</h4>
-             <Button variant="primary" size='sm' onClick={handleEditShow}>
-            Edit
-          </Button>
+          <p>{body}</p>
+          <MdEdit onClick={handleEditShow} style={{fontSize:"24px"}}/>
+          <MdDelete onClick={handleShow} style={{fontSize:"24px"}}/>
+
           <Modal show={editShow} onHide={handleEditClose}>
             <Modal.Header closeButton>
               <Modal.Title>Edit</Modal.Title>
@@ -48,9 +49,6 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
             </Modal.Footer>
           </Modal>
 
-            <Button variant="danger" size='sm' onClick={handleShow}>
-            Delete
-          </Button>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Delete</Modal.Title>

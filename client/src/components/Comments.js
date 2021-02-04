@@ -73,11 +73,15 @@ const Comments = ({submission_id}) => {
   }
 
   return (
-    <>
+    <div style={{padding: "30px"}}>
+       <hr />
       <h3>Comments</h3>
-      <Button variant="primary" size='sm' onClick={handleAddShow}>
+      <Button variant="primary" size='sm' onClick={handleAddShow} style={{marginBottom: "10px"}}>
         Add comment
       </Button>
+      
+      {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
+    
       <Modal show={addShow} onHide={handleAddClose}>
         <Modal.Header closeButton>
           <Modal.Title>What would you like to say?</Modal.Title>
@@ -92,8 +96,7 @@ const Comments = ({submission_id}) => {
           </div>
         </Modal.Body>
       </Modal>
-      {comments.map(c => <Comment key={c.id}{...c} submission_id={submission_id} editSingleComment={editSingleComment} removeComment={removeComment}/>)}
-    </>
+    </div>
   )
 }
 
