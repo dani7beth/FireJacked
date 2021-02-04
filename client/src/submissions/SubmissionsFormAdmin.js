@@ -11,6 +11,8 @@ const SubmissionsFormAdmin = () => {
   const [checked, setChecked] = useState(false)
   const [submissionState, setSubmissionState] = useState(submission)
   const [user, setUser] = useState({})
+  const [level, setLevel] = useState({})
+  const [exercise, setExercise] = useState({})
 
   useEffect(()=>{
     getSubmission()
@@ -21,6 +23,36 @@ const SubmissionsFormAdmin = () => {
       getUser()
     }
   }, [submission])
+
+  useEffect(() => {
+    if (submission) {
+      getLevel() 
+    }
+  }, [submission])
+
+  useEffect(() => {
+    if (level) {
+      getExercise();
+    }
+  }, [level]);
+
+  const getExercise = async () => {
+    try {
+      let res = await Axios.get(`/api/exercises/${level.exercise_id}`);
+      setExercise(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getLevel = async () => {
+    try {
+      let res = await Axios.get(`/api/levels/${submission.level_id}`);
+      setLevel(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getUser = async () => {
     try {
@@ -79,7 +111,8 @@ const SubmissionsFormAdmin = () => {
         <AdminFeedback>
           <AdminFeedbackForm>
             <Form onSubmit={handleSubmit}>
-              <Form.Label>Status</Form.Label>
+              <Form.Label as="h3">{exercise.activity}</Form.Label>
+              <Form.Label as="h3">{submission.created_at}</Form.Label>
               <Form.Control as='select' 
                 name="status"
                 value ={submissionState.status}
