@@ -26,6 +26,7 @@ const LoginSplash = () => {
   );
 };
 export default LoginSplash;
+
 export const Background = styled.div`
   background: #000000 url(${backgroundPhoto}) no-repeat;
   background-size: cover;
@@ -34,13 +35,13 @@ export const Background = styled.div`
   height: 100%;
   top: 0px;
   left: 0px;
-  z-index: -1;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: column;
 `;
+
 export const Logo = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   border: 4px solid rgba(255, 255, 255, 0.5);
@@ -50,4 +51,5 @@ export const Logo = styled.div`
   padding: 20px;
 `;
 
+//  z-index: -1;
 

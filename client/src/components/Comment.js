@@ -37,16 +37,11 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
                 <form onSubmit={handleSubmit}>
                   <textarea value={newBody} onChange={(e)=>setNewBody(e.target.value)}/> 
                   <br />
-                  <Button type='submit' variant='primary' size='sm'>submit changes</Button>
-                  <Button variant="secondary" size='sm' onClick={handleEditClose}>Go back</Button>
+                  <Button type='submit' variant='primary' >Submit Changes</Button>
+                  <Button variant="secondary"  onClick={handleEditClose}>Cancel</Button>
                 </form>
             </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="danger" onClick={handleEditClose}>
-                Go back
-              </Button>
-            </Modal.Footer>
           </Modal>
 
           <Modal show={show} onHide={handleClose}>
@@ -55,10 +50,10 @@ const Comment = ({body, editSingleComment, id, submission_id, removeComment}) =>
             </Modal.Header>
             <Modal.Body>Are you sure you want to Delete?</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" size='sm' onClick={handleClose}>
+              <Button variant="secondary"  onClick={handleClose}>
                 No
               </Button>
-              <Button variant="danger" size='sm' onClick={()=> removeComment(id)}>
+              <Button variant="danger" onClick={()=> removeComment(id)}>
                 Yes, delete.
               </Button>
             </Modal.Footer>

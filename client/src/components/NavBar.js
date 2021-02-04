@@ -105,12 +105,12 @@ export default (props) => {
 
   const noLogin = () => {
     return (
-      <div style={{ paddingBottom: "20px" }}>
+      <div style={{ paddingBottom: "20px"}}>
         <Navbar
           collapseOnSelect
           expand="lg"
           variant="dark"
-          style={{ backgroundColor: "none"}}
+          style={{ backgroundColor: "none", zIndex:1 }}
         >
           <Nav>
             <BrandLogo>
