@@ -9,7 +9,7 @@
   pointer-events: none;
 }
 
-.btn-primary{
+/* .btn-primary{
   color: white !important;
   background-color:black !important;
   border-color:black !important;
@@ -19,7 +19,7 @@
   color:white !important;
   background-color:#fab232 !important;
   border-color:#D6D6D6 !important;
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
