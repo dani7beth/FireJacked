@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AUserSubmission from "./AUserSubmission";
 import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { BoxAdminSubmissions } from "../components/Styles";
+import { BoxAdminSubmissions, ButtonMain, YO } from "../components/Styles";
 import axios from 'axios';
 import FilterByCategory from "../exercises/FilterByCategory";
 
@@ -63,10 +63,9 @@ const AllUserSubmissions = ({selectedUser}) => {
   return (
     <>
       <h1>Submissions</h1>
-      {/* <FilterByCategory style={{display:"none"}}/> */}
-      <Button variant="secondary" onClick={() => setFilter(!filter)}>
+      <YO variant="secondary" onClick={() => setFilter(!filter)} style={{borderRadius: '5px'}}>
         {filter ? 'Show All' : 'Show Only Pending'}
-      </Button> 
+      </YO>
       <BoxAdminSubmissions>
         <InfiniteScroll
           dataLength={submissions.length}

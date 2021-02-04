@@ -34,13 +34,13 @@ export const BoxMain = styled.div`
 `;
 
 export const NateSeeHistorySubs = styled.div`
-height: 252px;
-width: 100%;
-overflow:auto;
-margin:auto;
-margin-top:10px;
-padding:10px
-`
+  height: 252px;
+  width: 100%;
+  overflow: auto;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+`;
 
 export const NateSeeHistoryContainer = styled.div`
 margin-top: 23px;
@@ -197,27 +197,20 @@ export const AdminExerciseContainerLeft = styled.div`
   // flex-wrap: row;
 `;
 
-export const OnTop = styled.div`
+export const OnTop = styled.div``;
 
-`
-
-export const OnBottom = styled.div`
-
-`
+export const OnBottom = styled.div``;
 
 export const LevelsParent = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-align-items: center;
-
-`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+`;
 
 export const LevelChildContent = styled.div`
-font-size: 16px;
-
-`
-
+  font-size: 16px;
+`;
 
 export const AdminExerciseContainerMiddle = styled.div`
   order: 2;
@@ -230,13 +223,13 @@ export const AdminExerciseContainerMiddle = styled.div`
 `;
 
 export const AdminExerciseContainerRight = styled.div`
-order: 3;
-flex-grow: 1;
-align-self:start;
-float: right;
-justify-content:flex-end;
-display: flex;
-`
+  order: 3;
+  flex-grow: 1;
+  align-self: start;
+  float: right;
+  justify-content: flex-end;
+  display: flex;
+`;
 
 export const SubmissionsContainer = styled.div`
 display: flex;
@@ -254,13 +247,12 @@ margin: 15px auto;
 background-color:white;
 `
 export const SubmissionContainerLeft = styled.div`
-background: black;
-border-radius: 10px 0 0 10px;
-flex-grow: 1;
-margin-right: 10px;
-width:150px;
-
-`
+  background: black;
+  border-radius: 10px 0 0 10px;
+  flex-grow: 1;
+  margin-right: 10px;
+  width: 150px;
+`;
 
 export const SubmissionContainerMiddle = styled.div`
   padding-left: 10px;
@@ -373,25 +365,24 @@ cursor: pointer;
 `;
 
 export const SearchBarParent = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 export const SearchBarChild1 = styled.div`
-align-self:stretch;
-flex-grow:2;
-`
+  align-self: stretch;
+  flex-grow: 2;
+`;
 
 export const SearchBarChild2 = styled.div`
-margin-left: 10px;
-flex-grow: 1;
-`
+  margin-left: 10px;
+  flex-grow: 1;
+`;
 
 export const SearchBarChild3 = styled.div`
-margin-left: auto;
-`
-
+  margin-left: auto;
+`;
 
 export const OrangeButton = styled(Button)`
   background-color: #f4731f;
@@ -411,25 +402,27 @@ export const YellowButton = styled(Button)`
   }
 `;
 
-export const UserFromList=styled.div`
-display:flex;
-flex-direction: column;
-justify-content: center;
-cursor:pointer;
-padding: 10px;
-`
+export const UserFromList = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px;
+`;
 
-export const UserFromListSelected=styled.div`
-display:flex;
-flex-direction: column;
-justify-content: center;
-cursor:pointer;
-border-radius: 8px;
-margin-bottom: 20px;
-background-color: #F4731F;
-padding: 10px;
-`
+export const UserFromListSelected = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 25%;
+  margin-bottom: 20px;
+  padding: 10px;
+  &:active{
+    background-color: #f4731f;
+  }
+`;
 
-export const UserSelected=styled.h3`
-align-self: center;
-`
+export const UserSelected = styled.h3`
+  align-self: center;
+`;

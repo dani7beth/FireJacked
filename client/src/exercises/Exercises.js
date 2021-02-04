@@ -5,7 +5,7 @@ import ExerciseForm from './ExerciseForm';
 import { Button, Modal, Form } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
-import { BoxAdminExercises, SearchBarParent, SearchBarChild1, SearchBarChild2, SearchBarChild3 } from "../components/Styles";
+import { BoxAdminExercises, SearchBarParent, SearchBarChild1, SearchBarChild2, SearchBarChild3, YO, YellowButton } from "../components/Styles";
 import FilterByCategory from "./FilterByCategory";
 import GlobalLevels from "../components/GlobalLevels";
 
@@ -137,13 +137,13 @@ const Exercises = () => {
               />
           </SearchBarChild1>
             <SearchBarChild2>
-              <Button style={{marginRight:"5px"}}type="submit">Search</Button>
-              <Button onClick={handleClearSearch}>Clear Search</Button>
+              <YO style={{marginRight:"10px", borderRadius: '5px', padding: '8px'}}type="submit">Search</YO>
+              <YO onClick={handleClearSearch} style={{borderRadius: '5px', padding: '8px'}}>Clear Search</YO>
             </SearchBarChild2>
             <SearchBarChild3>
-              <Button variant="primary" onClick={handleShow}>
+              <YellowButton variant="primary" onClick={handleShow}>
                   Add a new exercise
-              </Button>
+              </YellowButton>
             </SearchBarChild3>
           </SearchBarParent>
       </Form>
