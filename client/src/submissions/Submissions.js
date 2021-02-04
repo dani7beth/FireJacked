@@ -42,8 +42,6 @@ const Submissions = () => {
     }
   };
 
- 
-
   const getLevel = async () => {
     try {
       let res = await Axios.get(`/api/levels/${level_id}`);

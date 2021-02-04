@@ -46,14 +46,9 @@ const ShowExercise = () => {
         let date = new Date(submission.created_at);
         return <>{submission && date.toLocaleDateString("en-US")}</>;
       };
-      // Carousel.Item onClick >> showSubmission ??
       return (
           <Carousel.Item>
-            <CarouselVids controls="true">
-              <source
-                src={submission.video_upload}
-              />
-            </CarouselVids>
+            <CarouselVids controls={true} src={submission.video_upload} />
               <SubInfo>
                   {submissionTimeStamp()} -{" "}
                   {submission.status}

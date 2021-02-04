@@ -1,5 +1,6 @@
 import Axios from "axios"
 import { useState, useEffect } from "react"
+import { StyledLink } from "./Styles"
 
 const UserStats = () => {
 
@@ -64,13 +65,13 @@ const UserStats = () => {
   
   const renderTopSubmissionByCategory = () => {
     let normalizedData = normalizeData(stats)
-    let filteredData = normalizedData.filter(x => x.status !== "Approved")
+    let filteredData = normalizedData.filter(x => x.submissions.status !== "Approved")
 
     return filteredData.map(x => {
         return (
             <>
             <h5>{x.category}</h5>
-            {x.submissions.map(x => <p>{x.activity} {x.goal} {x.metric} Level: {x.level_name} | {x.status}</p>)}
+            {x.submissions.map(x => <StyledLink to={`/${x.exercise_id}/user_see_history/blank`} ><p>{x.activity} {x.goal} {x.metric} Level: {x.level_name} | {x.status}</p></StyledLink>)}
             </>
             )
         })
