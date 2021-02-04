@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 export const Box = styled.div`
   height: 700px;
@@ -188,7 +189,31 @@ export const ButtonSeeExercise = styled(ButtonMain)``;
 export const AdminExerciseContainerLeft = styled.div`
   order: 1;
   flex-grow: 6;
+  // display:flex;
+  // flex-wrap: row;
 `;
+
+export const OnTop = styled.div`
+
+`
+
+export const OnBottom = styled.div`
+
+`
+
+export const LevelsParent = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+
+`
+
+export const LevelChildContent = styled.div`
+font-size: 16px;
+
+`
+
 
 export const AdminExerciseContainerMiddle = styled.div`
   order: 2;
@@ -203,7 +228,7 @@ export const AdminExerciseContainerMiddle = styled.div`
 export const AdminExerciseContainerRight = styled.div`
 order: 3;
 flex-grow: 1;
-align-self:center;
+align-self:start;
 float: right;
 justify-content:flex-end;
 display: flex;
@@ -374,3 +399,4 @@ export const YellowButton = styled(Button)`
     border-color: #fab232;
   }
 `;
+
