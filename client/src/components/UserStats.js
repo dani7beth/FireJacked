@@ -2,18 +2,39 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import { StyledLink } from "./Styles";
 import { Table } from "react-bootstrap";
+import FilterByCategory from "../exercises/FilterByCategory";
+import styled from "styled-components";
 
 const UserStats = () => {
   const [stats, setStats] = useState([]);
-  // const [categories, setCategories] = useState([])
+  const [defaultSubs, setDefaultSubs] = useState([]);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     getSubmissions();
   }, []);
 
-  const getCategories = async () => {
-    try {
-    } catch (error) {}
+  // const getCategories = async () => {
+  //   try {
+  //     let res = await Axios.get(`/api/categories/`);
+  //     setCategories(res.data);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const dataByCategory = (category) => {
+    // debugger
+    console.log("Searched");
+    setCategory(category);
+    let filteredSubOne = defaultSubs.filter((x) => x.category !== null);
+    let filteredSubs = filteredSubOne.filter(
+      (str) => str.category.indexOf(category) > -1
+    );
+    console.log("FILTERES SUBS");
+    console.log(filteredSubs);
+    setStats(filteredSubs);
+    // console.log(searchText);
   };
 
   const getSubmissions = async () => {
@@ -21,6 +42,7 @@ const UserStats = () => {
       let res = await Axios.get("/api/user_stats");
       console.log(res.data);
       setStats(res.data);
+      setDefaultSubs(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -101,52 +123,49 @@ const UserStats = () => {
 
     return filteredData.map((x) => {
       return (
-        <>
-          <thead>
-            <tr>
-              <h5>{x.category}</h5>
-            </tr>
-          </thead>
-          <tbody>
-            {x.submissions.map((x) => (
-              <StyledLink to={`/${x.exercise_id}/user_see_history/blank`}>
-                {x.activity} {x.goal} {x.metric} Level: {x.level_name} | {x.status}
-              </StyledLink>
-            ))}
-          </tbody>
-        </>
+        <div style={{ padding: "100px 400px" }}>
+          <h5 style={{ textAlign: "center" }}>{x.category}</h5>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Activity</th>
+                <th>Goal</th>
+                <th>Metric</th>
+                <th>Level</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {x.submissions.map((x) => (
+                <tr>
+                  <td>
+                    <StyledLink to={`/${x.exercise_id}/user_see_history/blank`}>
+                      {/* {x.activity} {x.goal} {x.metric} Level: {x.level_name} |{" "}
+                    {x.status} */}
+                      {x.activity}
+                    </StyledLink>
+                  </td>
+                  <td>{x.goal}</td>
+                  <td>{x.metric}</td>
+                  <td>{x.level_name}</td>
+                  <td>{x.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       );
     });
   };
 
   return (
     <>
-      <h1>Most 5 most Recent Submissions</h1>
-      {renderMostRecent()}
+      {/* <h1>Most 5 most Recent Submissions</h1>
+      {renderMostRecent()} */}
 
-      <h1>Completed Submission by Category</h1>
-      <Table striped bordered hover>
-        {renderTopSubmissionByCategory()}
-      </Table>
-      {/* <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody> */}
+      <h1 style={{ textAlign: "center" }}>Completed Submission by Category</h1>
+      <FilterByCategory dataByCategory={dataByCategory} />
+      {renderTopSubmissionByCategory()}
 
       {/* <h1>Percentage of total levels completed</h1>
 
@@ -160,3 +179,5 @@ const UserStats = () => {
 };
 
 export default UserStats;
+
+export const StyledTable = styled.div``;
