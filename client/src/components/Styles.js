@@ -254,6 +254,7 @@ border-radius: 10px 0 0 10px;
 flex-grow: 1;
 margin-right: 10px;
 width:150px;
+
 `
 
 export const SubmissionContainerMiddle = styled.div`
@@ -275,7 +276,7 @@ export const Dashboard = styled.div`
   margin: auto;
   margin-top: 10px;
   padding: 10px;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
 export const DashboardLeftSideBar = styled.div`
@@ -294,7 +295,8 @@ export const DashboardRightSideBar = styled.div`
 
 export const DashboardCenter = styled.div`
 order: 2;
-align-self: stretch
+align-self: stretch;
+min-width:851px;
 // flex-grow: 2;
 `
 
@@ -414,7 +416,7 @@ display:flex;
 flex-direction: column;
 justify-content: center;
 cursor:pointer;
-border-radius: 25%;
+border-radius: 8px;
 margin-bottom: 20px;
 background-color: #F4731F;
 padding: 10px;
