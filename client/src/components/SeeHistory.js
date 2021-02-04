@@ -56,12 +56,12 @@ const SeeHistory = () => {
   //   setSubmission(x)
   //   // setLoading(false)
   // }
-  
+
   useEffect(() => {
-    if (submissions.length > 0){
+    if (submission){
       getComments()
     }
-  }, [submissions])
+  }, [submission])
 
  
 
@@ -111,8 +111,7 @@ const SeeHistory = () => {
   };
 
   const getComments = () => {
-    // debugger
-    Axios.get(`/api/${submission.value === 'empty' ? submissions[0].id : submission.id}/see_comments`)
+    Axios.get(`/api/${submission.id}/see_comments`)
     .then((response) => {
       console.log('COMMENTS')
       console.log(submission.id, response.data)
@@ -128,13 +127,12 @@ const SeeHistory = () => {
     if (loadingComments) {
       <h1>Loading...</h1>
     }
-    
     return comments.map((comment) => {
       return (
         <>
           <CommentAdminName>
             <CommentAdminImage src={comment.admin_image} />
-            {comment.admin_first} {comment.admin_last}
+             {comment.admin_first} {comment.admin_last}
           </CommentAdminName>
           <p>{comment.body}</p>
         </>
@@ -340,6 +338,7 @@ const SeeHistory = () => {
 
 export default SeeHistory;
 
+// CSS
 export const Title = styled.h1`
   text-align:center;
 `
@@ -348,10 +347,10 @@ export const TitleLink = styled(Link)`
 `
 
 export const ExerciseTitle = styled.h1`
-  padding-top:20px;
-  padding-left:10px;
-  padding-right:10px;
-  padding-bottom:10px;
+padding-top:20px;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:10px;
 `
 
 export const Info = styled.h4`
@@ -403,7 +402,7 @@ export const CommentsContainer = styled.div`
   height: 182px;
   width: 720px;
   border: 2px solid #d6d6d6;
-  border-radius: 8px;
+  border-radius: 10px;
 `
 
 export const CommentTitle = styled.h5`
@@ -412,7 +411,7 @@ export const CommentTitle = styled.h5`
 `
 
 export const Comments = styled.div`
-  height: 137px;
+  height: 146px;
   margin-left: 20px;
   overflow: auto;
 `
