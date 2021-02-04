@@ -3,7 +3,7 @@ import { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
-import { AdminExerciseContainerRight, LevelsBox, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle, StyledLink } from "../components/Styles";
+import { AdminExerciseContainerRight, LevelsBox, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle, StyledLink, OnTop, OnBottom } from "../components/Styles";
 import {MdEdit, MdDelete, MdUnfoldMore, MdUnfoldLess} from 'react-icons/md'
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
@@ -34,26 +34,32 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
 
         {/* Child1 */}
         <AdminExerciseContainerLeft>
-          <StyledLink to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
-            <h3>{exerciseProp.activity}</h3>
-          </StyledLink>
-            <h5>{exerciseProp.category}</h5>
+          <OnTop>
+            <StyledLink to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
+              <h3>{exerciseProp.activity}</h3>
+            </StyledLink>
+              <h5>{exerciseProp.category}</h5>
+          </OnTop>
+          
+          <OnBottom>
+            <Levels exerciseID={exerciseProp.exercise_id} />
+          </OnBottom>
         </AdminExerciseContainerLeft>
 
          {/* Child 2 */}
         <AdminExerciseContainerMiddle>
-          
+         
         </AdminExerciseContainerMiddle>
 
         {/* Childe 3 */}
         <AdminExerciseContainerRight>
           <MdEdit onClick={handleEditShow} style={{fontSize: "24px",cursor: "pointer"}}/>
           <MdDelete onClick={handleDeleteShow} style={{fontSize: "24px", cursor: "pointer"}}/>
-          <MdUnfoldMore onClick={() => setShowLevel(!showLevel)} style={{fontSize: "24px"}}/>
-          {/* {showLevel ? {MdUnfoldMore} : {MdUnfoldLess}} */}
+          {/* <MdUnfoldMore onClick={() => setShowLevel(!showLevel)} style={{fontSize: "24px"}}/> */}
+          {/* {showLevel ? "" : <Levels exerciseID={exerciseProp.exercise_id} />} */}
           
-          {showLevel ? "" : <Levels exerciseID={exerciseProp.exercise_id} />}
         </AdminExerciseContainerRight>
+
 
         {/* Modals */}
         <Modal show={showEdit} onHide={handleEditHide}>

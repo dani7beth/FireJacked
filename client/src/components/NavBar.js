@@ -76,9 +76,9 @@ export default (props) => {
             <Nav.Link href="/admin_dash">
               <h4>Dashboard</h4>
             </Nav.Link>
-            <Nav.Link href="/admin-submissions">
+            {/* <Nav.Link href="/admin-submissions">
               <h4>User Submissions</h4>
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
           <Nav className="ml-auto">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

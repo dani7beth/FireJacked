@@ -45,7 +45,7 @@ const AdminDash = () =>{
           <Dashboard>
             <DashboardLeftSideBar>
               {/* {currentDisplayExercises ? <UsersIndex/> : <UserSelection selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>} */}
-              <UsersIndex selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+              <UsersIndex selectedUser={selectedUser} setSelectedUser={setSelectedUser} setCurrentDisplayExercises={setCurrentDisplayExercises}/>
             </DashboardLeftSideBar>
 
             <DashboardCenter>

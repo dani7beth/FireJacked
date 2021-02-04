@@ -159,7 +159,7 @@ const Exercises = () => {
           next={() => loadMore()}
           hasMore={exercises.length === dataLength ? false : true}
           // loader={<h4>Loading... exercises.length = {exercises.length} dataLength= {dataLength} </h4>}
-          height={450}
+          height={600}
           // endMessage={
           //   <p style={{ textAlign: "center" }}>
           //     {/* <b>exercises.length = {exercises.length} dataLength= {dataLength}</b> */}
