@@ -123,7 +123,7 @@ const SubmissionsFormAdmin = () => {
               <Form.Label as="h3">{date}</Form.Label>
               <Form.Label as="p"> 
                 {level.name} {" | "} 
-                {level.measurement ==="Bodyweight" ? `${outcome} ${level.metric}` : ""} {" | "}
+                {level.measurement ==="Bodyweight" ? `${outcome.toFixed()} ${level.metric}` : ""} {" | "}
                 Timeframe: {duration}{" | "}
                 Reps: {level.reps}{" | "}
                 Sets: {level.sets}{" | "}

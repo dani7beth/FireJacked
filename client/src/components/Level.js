@@ -32,8 +32,8 @@ const Level = ({ levelProp, deleteLevel, exerciseID, editLevels}) => {
   return (
     <>
       <LevelsParent>
-        <MdEdit variant="primary" onClick={handleEditShow} style={{fontSize:"24px"}}/>
-        <MdDelete variant="danger" onClick={handleShow} style={{fontSize:"24px"}}/>
+        <MdEdit variant="primary" onClick={handleEditShow} style={{fontSize:"24px",cursor:"pointer"}}/>
+        <MdDelete variant="danger" onClick={handleShow} style={{fontSize:"24px",cursor:"pointer"}}/>
         <LevelChildContent>
           {levelProp.name} -> {" "}
           {levelProp.multiplier === 0 ? "" : `${levelProp.multiplier} X ${levelProp.measurement === "-" ? "" : levelProp.measurement} `} 
