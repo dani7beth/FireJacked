@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AUserSubmission from "./AUserSubmission";
 import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { BoxAdminExercises } from "../components/Styles";
+import { BoxAdminSubmissions } from "../components/Styles";
 import axios from 'axios';
 
 const AllUserSubmissions = ({selectedUser}) => {
@@ -40,17 +40,24 @@ const AllUserSubmissions = ({selectedUser}) => {
   };
 
   const renderSubmissions = () => {
-    if (filter) {
-      console.log(submissions)
+    if (filter && selectedUser) {
       return submissions
+        .filter((s) => s.status === "Pending")
         .filter((s) => s.user_id === selectedUser.id)
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    } else if (filter && !selectedUser) {
+      return submissions
         .filter((s) => s.status === "Pending")
         .map((s) => <AUserSubmission key={s.id} {...s} />);
-    }
-    return submissions
-      .filter((s) => s.user_id === selectedUser.id)
-      .map((s) => <AUserSubmission key={s.id} {...s} />);
-  };
+    } else if (!filter && selectedUser) {
+      return submissions
+        .filter((s) => s.user_id === selectedUser.id)
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    } else {
+      return submissions
+        .map((s) => <AUserSubmission key={s.id} {...s} />);
+    };
+  }
 
   return (
     <>
@@ -58,13 +65,13 @@ const AllUserSubmissions = ({selectedUser}) => {
       <Button variant="secondary" onClick={() => setFilter(!filter)}>
         {filter ? 'Show All' : 'Show Only Pending'}
       </Button>
-      <BoxAdminExercises>
+      <BoxAdminSubmissions>
         <InfiniteScroll
           dataLength={submissions.length}
           next={() => loadMore()}
           hasMore={submissions.length + 1 < totalPages * 10 ? true : false}
-          loader={<h4>Loading...</h4>}
-          height={700}
+          loader={<h4>Select a User from the left.</h4>}
+          height={900}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>End of Submissions</b>
@@ -73,7 +80,7 @@ const AllUserSubmissions = ({selectedUser}) => {
         >
           {renderSubmissions()}
         </InfiniteScroll>
-      </BoxAdminExercises>
+      </BoxAdminSubmissions>
     </>
   );
 };
