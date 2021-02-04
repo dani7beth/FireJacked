@@ -123,7 +123,7 @@ const UserStats = () => {
 
     return filteredData.map((x) => {
       return (
-        <div style={{ padding: "100px 400px" , backgroundColor: '#fffff !important'}}>
+        <div style={{ padding: "100px 400px" }}>
           <h5 style={{ textAlign: "center" }}>{x.category}</h5>
           <Table striped bordered>
             <thead>
