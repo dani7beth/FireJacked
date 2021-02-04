@@ -5,7 +5,7 @@ import ExerciseForm from './ExerciseForm';
 import { Button, Modal, Form } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
-import { BoxAdminExercises } from "../components/Styles";
+import { BoxAdminExercises, SearchBarParent, SearchBarChild1, SearchBarChild2, SearchBarChild3 } from "../components/Styles";
 import FilterByCategory from "./FilterByCategory";
 import GlobalLevels from "../components/GlobalLevels";
 
@@ -125,29 +125,33 @@ const Exercises = () => {
   return (
     <>
       <h1>Exercises</h1>
-
-      <Button variant="primary" onClick={handleShow}>
-        Add a new exercise
-      </Button>
-      <Modal show={show} onHide={handleHide}>
-        <Modal.Header closeButton>
-          <Modal.Title>Enter exercise info here</Modal.Title>
-        </Modal.Header>
-        <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
-      </Modal>
-
       <Form onSubmit={handleSubmit}>
         <Form.Label>Search for an Exercise</Form.Label>
-        <Form.Control
-          placeholder="Search Here"
-          type="text"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)} />
-        <Button type="submit">Search</Button>
-        <Button onClick={handleClearSearch}>Clear Search</Button>
+        <SearchBarParent>
+          <SearchBarChild1>
+            <Form.Control
+              placeholder="Search Here"
+              type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)} 
+              />
+          </SearchBarChild1>
+            <SearchBarChild2>
+              <Button style={{marginRight:"5px"}}type="submit">Search</Button>
+              <Button onClick={handleClearSearch}>Clear Search</Button>
+            </SearchBarChild2>
+            <SearchBarChild3>
+              <Button variant="primary" onClick={handleShow}>
+                  Add a new exercise
+              </Button>
+            </SearchBarChild3>
+          </SearchBarParent>
       </Form>
 
+
       <FilterByCategory dataByCategory={dataByCategory} />
+
+      
 
       <BoxAdminExercises>
         <InfiniteScroll
@@ -165,6 +169,14 @@ const Exercises = () => {
           {renderExercisesWithLevels()}
         </InfiniteScroll>
       </BoxAdminExercises>
+
+
+      <Modal show={show} onHide={handleHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter exercise info here</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><ExerciseForm addExercise={addExercise} handleHide={handleHide} /></Modal.Body>
+      </Modal>
     </>
   );
 };

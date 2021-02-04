@@ -3,7 +3,7 @@ import { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Modal } from "react-bootstrap";
 import Levels from "../components/Levels";
-import { AdminExerciseContainerRight, LevelsBox, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle } from "../components/Styles";
+import { AdminExerciseContainerRight, LevelsBox, UserExerciseLevelContainer, AdminExerciseContainerLeft, AdminExerciseContainerMiddle, StyledLink } from "../components/Styles";
 import {MdEdit, MdDelete, MdUnfoldMore, MdUnfoldLess} from 'react-icons/md'
 
 const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exercise_id, levels }) => {
@@ -34,9 +34,9 @@ const Exercise = ({ exerciseProp, deleteExercise, editExercises, activity, exerc
 
         {/* Child1 */}
         <AdminExerciseContainerLeft>
-          <Link to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
+          <StyledLink to={`/show-exercises-for-admin/${exerciseProp.exercise_id}`}>  
             <h3>{exerciseProp.activity}</h3>
-          </Link>
+          </StyledLink>
             <h5>{exerciseProp.category}</h5>
         </AdminExerciseContainerLeft>
 

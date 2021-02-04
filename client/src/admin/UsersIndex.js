@@ -20,7 +20,7 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
       console.log(res.data);
       setUsers(res.data);
       setUsersDefault(res.data)
-      
+
     } catch {
     }
   }
@@ -38,8 +38,8 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
     let filteredUsersOne = usersDefault.filter(x => x.first_name !== null)
     let filteredUsers = filteredUsersOne.filter((str) => str.first_name.indexOf(searchText) > -1)
     setUsers(filteredUsers)
-    
-    
+
+
     console.log(searchText)
   }
 
@@ -67,10 +67,10 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
           <>
             {/* /show_user_submissions/:user_id */}
             {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
-            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center" }}>
+            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}>
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
-            </div> 
               <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
+            </div> 
             {/* </StyledLink> */}
           </>
         )
@@ -79,19 +79,15 @@ const UserIndex = ({selectedUser, setSelectedUser}) => {
           <>
             {/* /show_user_submissions/:user_id */}
             {/* <StyledLink to={`/show_user_submissions/${user.id}/`}>  */}
-            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center" }}>
-            <h7>SELECTED USER BELOW (I need help highlighting)</h7>             
+            <div onClick={() => setSelectedUser(user)} style={{ borderRadius: "50%", width: '100px', margin: "auto", textAlign: "center", cursor:"pointer" }}> 
               <img src={user.image} alt="blank profile" style={{ borderRadius: "50%", width: '100px'}}/>
-            </div> 
-            <h7>SELECTED USER BELOW (I need help highlighting)</h7>
+            </div>
               <h3 key={user.id} style={{textAlign:"center"}}>{user.first_name} {user.last_name}</h3>
-            {/* </StyledLink> */}
           </>
         )
       }
-      
     })
-  }
+    }
 
   return (
     <UserIndexDiv>

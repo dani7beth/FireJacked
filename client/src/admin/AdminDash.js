@@ -48,14 +48,14 @@ const AdminDash = () =>{
               <UsersIndex selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
             </DashboardLeftSideBar>
 
-            <DashboardCenter xs={8}>
-              <Button onClick={() => setCurrentDisplayExercises(!currentDisplayExercises)}>
+            <DashboardCenter>
+              <Button style={{marginBottom:"10px"}} onClick={() => setCurrentDisplayExercises(!currentDisplayExercises)}>
                 {currentDisplayExercises ? 'Display Submissions' : 'Display Exercises'}
               </Button>
-              {currentDisplayExercises? <Exercises /> : <AllUserSubmissions selectedUser={selectedUser}/>}
+              {currentDisplayExercises ? <Exercises /> : <AllUserSubmissions selectedUser={selectedUser}/>}
             </DashboardCenter>
 
-            <DashboardRightSideBar xs={2}>
+            <DashboardRightSideBar>
               {AdminInfo()}
               </DashboardRightSideBar>
             </Dashboard>
