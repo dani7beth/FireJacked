@@ -28,7 +28,7 @@ const AllExercise = ({activity, exercise_id, category, measurement, multiplier,t
         </StyledLink>
           <h5>Movement Type: {category}</h5>
           <p>Level Name: {level_name}{" | "}
-          {measurement ==="Bodyweight" ? `${outcome} ${metric}` : ""}</p>
+          {measurement ==="Bodyweight" ? `${outcome.toFixed()} ${metric}` : ""}</p>
           <p>Timeframe: {duration}{" | "}
           Reps: {reps}{" | "}
           Sets: {sets}{" | "}
