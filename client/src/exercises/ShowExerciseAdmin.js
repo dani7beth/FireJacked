@@ -2,6 +2,7 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import { Carousel, Col, Modal, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import styled from 'styled-components';
 
 const ShowExerciseAdmin = () => {
   const [exercise, setExercise] = useState({});
@@ -17,8 +18,13 @@ const ShowExerciseAdmin = () => {
 
   useEffect(() => {
     getExercise();
-    exerciseSubmissions();
   }, []);
+
+  useEffect(()=>{
+    if(exercise) {
+      exerciseSubmissions();
+    }
+  }, [exercise])
 
   const getExercise = async () => {
     try {
@@ -31,9 +37,9 @@ const ShowExerciseAdmin = () => {
   };
 
   const exerciseSubmissions = () => {
-    Axios.get(`/api/exercise_subs/?exercise_id=${exercise_id}`)
+    Axios.get(`/api/exercise_subs/${exercise_id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log('subs', response.data);
         setSubmissions(response.data);
       })
       .catch((err) => {
@@ -43,76 +49,134 @@ const ShowExerciseAdmin = () => {
 
   // set carousel limit to one at a time?
   const renderSubmissions = () => {
+    if(submissions.length !== 0) {
     return submissions.map((submission) => {
+      const submissionTimeStamp = () => {
+        let date = new Date(submission.created_at);
+        return <>{submission && date.toLocaleDateString("en-US")}</>;
+      };
       return (
         <Carousel.Item>
-          <video
-              className='d-block w-100'
-              src={submission.video}
-              alt="Submission video"
-              style={{height:'450px', width:'500px'}}
-            />
-          <Carousel.Caption>
+          <CarouselVids controls={true} src={submission.video} />
+          <SubInfo>
             <p>{submission.user_first_name}</p>
             <p>
-              {submission.created_at} -{" "}
-              {submission.completed ? "approved" : "not approved"}
+              {submissionTimeStamp()} -{" "}
+              {submission.status}
             </p>
-            {/* <p>updated at: {submission.updated_at}</p> */}
-            <p></p>
-          </Carousel.Caption>
+          </SubInfo>
         </Carousel.Item>
       );
     });
+   } else {
+     return <NoSubs>No Submissions</NoSubs>
+   }
   };
 
   return (
     <>
-      <Row>
-        <Col paddingLeft="500px">
-          <video
-            style={{ width: "400px", height: "300px" }}
-            controls="true"
-            class="embed-responsive-item"
-          >
-            <source src={exercise.how_to_video} type="video/mp4" />
-          </video>
-          <p>How to Video</p>
-        </Col>
-        <Col>
-          <h5>{exercise.category}</h5>
-          <h1>{exercise.activity}</h1>
-          <div>
-            <p>{exercise.description}</p>
-            <p>
-              (DESCRIPTION)
-              <br />
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s when an unknown printer took a galley of type
-              and scrambled it to make a type specimen book it has?
-            </p>
-            {/* <Button size='sm' variant='secondary' onClick={handleEditShow} >Edit Exercise</Button> */}
-          </div>
-          <div>
-            <p>See History</p>
-          </div>
-        </Col>
-      </Row>
-      <Carousel>{renderSubmissions()}</Carousel>
-
-      <Modal show={editShow} onHide={handleEditHide}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit exericise</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Figure out how to do the edit exercise form here. Maybe, like James
-          said, do a modal component.
-          {/* <ExerciseForm editExercise={editExercise} exerciseProp={exerciseProp} handleEditHide={handleEditHide} editExercises={editExercises} /> */}
-        </Modal.Body>
-      </Modal>
+      <FlexRow>
+        <FlexCol paddingLeft="500px">
+          <HowToVideo controls="true" src={exercise.how_to_video} type="video/mp4" />
+        </FlexCol>
+        <FlexCol>
+          <InfoContainer>
+            <Category>{exercise.category}</Category>
+            <Header>{exercise.activity}</Header>
+            <ExerciseDesc>
+              <p>{exercise.description}</p>
+            </ExerciseDesc>
+          </InfoContainer>
+        </FlexCol>
+      </FlexRow>
+      <FlexRow>
+        <CarouselContainer>
+          <Recordings>
+            USERS' SUBMISSIONS
+          </Recordings>
+          <MyCarousel>{renderSubmissions()}</MyCarousel>
+        </CarouselContainer>
+      </FlexRow>
     </>
   );
 };
 
 export default ShowExerciseAdmin;
+
+export const CarouselVids = styled.video`
+  height:450px;
+  border-radius:10px;
+`
+
+export const FlexRow = styled.div`
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width:100%;
+`
+
+export const FlexCol = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex-basis:100%;
+  flex:1;
+`
+
+export const HowToVideo = styled.video`
+  width:700px;
+  margin-left:20px;
+  border-radius:10px;
+`
+
+export const MyCarousel = styled(Carousel)`
+  text-align:center;
+  .carousel-control-next {
+     margin: 0;
+     top:210px;
+     height:30px;
+  }
+  .carousel-control-prev {
+    margin:0;
+    top:210px;
+    height: 30px;
+  }
+`
+
+export const SubInfo = styled.p`
+  padding-top:20px;
+  padding-bottom:30px;
+`
+
+export const Recordings = styled.h1`
+  text-align:center;
+  padding:35px;
+`
+
+export const CarouselContainer = styled.div`
+  margin: 0 auto;
+  width: 880px;
+`
+
+export const InfoContainer = styled.div`
+  width:77%;
+  margin-top:30px;
+  margin-left:50px;
+`
+
+export const Category = styled.p`
+  font-weight: 550;
+  margin-bottom:8px;
+`
+
+export const ExerciseDesc = styled.div`
+  margin-top: 15px;
+  margin-bottom: 15px;
+`
+
+export const Header = styled.h1`
+  margin-top:0px;
+`
+
+export const NoSubs = styled.h1`
+  font-weight: 900;
+`

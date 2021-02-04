@@ -2,6 +2,7 @@ import Axios from "axios";
 import { useEffect, useState} from "react";
 import { Carousel, Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
+import styled from 'styled-components';
 
 const ShowExercise = () => {
   const [exercise, setExercise] = useState({});
@@ -41,64 +42,133 @@ const ShowExercise = () => {
   // set carousel limit to one at a time?
   const renderSubmissions = () => {
     return submissions.map((submission) => {
-      // Carousel.Item onClick >> showSubmission ??
+      const submissionTimeStamp = () => {
+        let date = new Date(submission.created_at);
+        return <>{submission && date.toLocaleDateString("en-US")}</>;
+      };
       return (
-        <Carousel.Item>
-          {/* <video
-              className="d-block w-100"
-              src={submission.video_upload}
-              alt="Submission video"
-              style={{ height: "450px", width: "500px" }}
-            /> */}
-          <video controls="true">
-            <source
-              src={submission.video_upload}
-              style={{ height: "450px", width: "500px" }}
-            />
-          </video>
-          <Carousel.Caption>
-            <p>
-              {submission.created_at} -{" "}
-              {submission.completed ? "approved" : "not approved"}
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
+          <Carousel.Item>
+            <CarouselVids controls={true} src={submission.video_upload} />
+              <SubInfo>
+                  {submissionTimeStamp()} -{" "}
+                  {submission.status}
+              </SubInfo>
+          </Carousel.Item>
       );
     });
   };
 
   return (
     <>
-      <Row>
-        <Col paddingLeft="500px">
-          {/* <video
-            style={{ width: "400px", height: "300px" }}
-            controls="true"
-            class="embed-responsive-item"
-          >
-            <source src={exercise.how_to_video} />
-          </video> */}
+      <FlexRow>
+        <FlexCol paddingLeft="500px">
           <div>
-            <video controls="true" style={{ width: "400px", height: "300px" }}>
-              <source src={exercise.how_to_video} />
-            </video>
-            <p>How to Video</p>
+            <HowToVideo controls={true} src={exercise.how_to_video} />
           </div>
-        </Col>
-        <Col>
-          <h5>{exercise.category}</h5>
-          <h1>{exercise.activity}</h1>
-          <div>
-            <p>{exercise.description}</p>
-          </div>
-          <div>
-            <Link to={`/${exercise_id}/user_see_history/level_id`}>See History</Link>
-          </div>
-        </Col>
-      </Row>
-      <Carousel>{renderSubmissions()}</Carousel>
+        </FlexCol>
+        <FlexCol>
+          <InfoContainer>
+            <Category>{exercise.category}</Category>
+            <Header>{exercise.activity}</Header>
+            <ExerciseDesc>
+              <p>{exercise.description}</p>
+            </ExerciseDesc>
+            <div>
+              <HistoryLink to={`/${exercise_id}/user_see_history/level_id`}>See History</HistoryLink>
+            </div>
+          </InfoContainer>
+        </FlexCol>
+      </FlexRow>
+      <FlexRow>
+      <CarouselContainer>
+        <Recordings>
+          MY RECORDINGS
+        </Recordings>
+        <MyCarousel>{renderSubmissions()}</MyCarousel>
+      </CarouselContainer>
+      </FlexRow>
     </>
   );
 };
 
 export default ShowExercise;
+
+export const CarouselVids = styled.video`
+  height:450px;
+  border-radius:10px;
+`
+
+export const HistoryLink = styled(Link)`
+  color:black;
+  text-decoration:underline;
+  font-weight: 500;
+`
+
+export const FlexRow = styled.div`
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width:100%;
+`
+
+export const FlexCol = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex-basis:100%;
+  flex:1;
+`
+
+export const HowToVideo = styled.video`
+  width:700px;
+  margin-left:20px;
+  border-radius:10px;
+`
+
+export const MyCarousel = styled(Carousel)`
+  text-align:center;
+  .carousel-control-next {
+     margin: 0;
+     top:210px;
+     height:30px;
+  }
+  .carousel-control-prev {
+    margin:0;
+    top:210px;
+    height: 30px;
+  }
+`
+
+export const SubInfo = styled.p`
+  padding-top:20px;
+  padding-bottom:30px;
+`
+
+export const Recordings = styled.h1`
+  text-align:center;
+  padding:35px;
+`
+
+export const CarouselContainer = styled.div`
+  margin: 0 auto;
+  width: 880px;
+`
+
+export const InfoContainer = styled.div`
+  width:77%;
+  margin-top:30px;
+  margin-left:50px;
+`
+
+export const Category = styled.p`
+  font-weight: 550;
+  margin-bottom:8px;
+`
+
+export const ExerciseDesc = styled.div`
+  margin-top: 15px;
+  margin-bottom: 15px;
+`
+
+export const Header = styled.h1`
+  margin-top:0px;
+`

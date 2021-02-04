@@ -33,29 +33,29 @@ export const BoxMain = styled.div`
 `;
 
 export const NateSeeHistorySubs = styled.div`
-  height: 251px;
-  width: 100%;
-  overflow: auto;
-  margin: auto;
-  margin-top: 10px;
-  padding: 10px;
-`;
+height: 252px;
+width: 100%;
+overflow:auto;
+margin:auto;
+margin-top:10px;
+padding:10px
+`
 
 export const NateSeeHistoryContainer = styled.div`
-  margin-top: 23px;
-  margin-bottom: 65px;
-  height: 200px;
-  width: 90%;
-  border: 2px solid #d6d6d6;
-  border-radius: 8px;
-`;
+margin-top: 23px;
+margin-bottom: 65px;
+height: 200px;
+width: 90%;
+border: 2px solid #d6d6d6;
+border-radius: 10px;
+`
 
 export const NateSeeHistorySubsContainer = styled.div`
-  height: 330px;
-  width: 90%;
-  border: 2px solid #d6d6d6;
-  border-radius: 8px;
-`;
+height: 330px;
+width: 90%;
+border: 2px solid #d6d6d6;
+border-radius: 10px;
+`
 export const BoxCustomAllExercises = styled(BoxMain)`
   height: 600px;
 `;
