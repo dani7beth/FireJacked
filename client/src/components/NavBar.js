@@ -77,11 +77,11 @@ export default (props) => {
               <Navbar.Brand href='/'/>
             </BrandLogo>
             <Nav.Link href="/admin_dash">
-              <h4>Dashboard</h4>
+              <h4>DASHBOARD</h4>
             </Nav.Link>
-            {/* <Nav.Link href="/admin-submissions">
-              <h4>User Submissions</h4>
-            </Nav.Link> */}
+            <Nav.Link href="/team_page">
+              <h4>ABOUT US</h4>
+            </Nav.Link>
           </Nav>
           <Nav className="ml-auto">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -121,6 +121,9 @@ export default (props) => {
             </Nav.Link>
             <Nav.Link href='/user_register'>
               <h4>REGISTER</h4>
+            </Nav.Link>
+            <Nav.Link href="/team_page">
+              <h4>ABOUT US</h4>
             </Nav.Link>
           </Nav>
           <Nav className="ml-auto">
