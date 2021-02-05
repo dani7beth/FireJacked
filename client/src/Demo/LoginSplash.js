@@ -18,7 +18,7 @@ const LoginSplash = () => {
         />
         <h3 style={{ fontStyle: "italic" }}>SET/TRACK/SUCCEED</h3>
       </Logo>
-      <div>
+      <div style={{marginTop: '10px'}}>
         <YellowButton href="/login" style={{marginRight: '20px'}}>Login</YellowButton>
         <OrangeButton href="/user_register" style={{marginLeft: '20px'}}>Register</OrangeButton>
       </div>
